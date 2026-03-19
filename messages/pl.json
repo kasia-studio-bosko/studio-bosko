@@ -1,0 +1,123 @@
+{
+  "nav": {
+    "projects": "Projekty",
+    "studio": "Studio",
+    "offering": "Oferta",
+    "press": "Prasa",
+    "inquire": "Zapytanie",
+    "instagram": "Instagram",
+    "openMenu": "Otwórz menu",
+    "closeMenu": "Zamknij menu"
+  },
+  "home": {
+    "heroTagline": "Studio Projektowania Wnętrz",
+    "heroLocation": "Berlin i Warszawa",
+    "heroBody": "Tworzymy przemyślane wnętrza mieszkalne — przestrzenie, które są osobiste, trwałe i żywe.",
+    "heroCtaProjects": "Zobacz projekty",
+    "heroCtaInquire": "Zacznij projekt",
+    "featuredProjectsHeading": "Wybrane realizacje",
+    "featuredProjectsSubheading": "Ostatnie wnętrza",
+    "aboutHeading": "Studio dla przestrzeni, które czujesz jak dom",
+    "aboutBody": "Studio Bosko to pracownia Kasi Kronberger — projektantki wnętrz pracującej w Berlinie, Warszawie i Europie. Realizujemy projekty mieszkaniowe od koncepcji do wykończenia.",
+    "aboutCta": "O studio",
+    "offeringHeading": "Co robimy",
+    "offeringBody": "Kompleksowe projektowanie wnętrz mieszkalnych — od pierwszej koncepcji przez realizację po styling.",
+    "offeringCta": "Nasza oferta",
+    "pressHeading": "W prasie",
+    "pressIntro": "Studio Bosko zostało uwzględnione na liście AD100 na rok 2025.",
+    "pressCta": "Cała prasa",
+    "inquireHeading": "Zacznij projekt",
+    "inquireBody": "Przyjmujemy ograniczoną liczbę projektów rocznie, aby każdy klient otrzymał naszą pełną uwagę.",
+    "inquireCta": "Skontaktuj się"
+  },
+  "studio": {
+    "metaTitle": "O Studio Bosko — Projektantka wnętrz Kasia Kronberger, Berlin",
+    "metaDescription": "Studio Bosko to pracownia Kasi Kronberger — projektantki wnętrz z Berlina specjalizującej się w kompleksowych projektach mieszkaniowych w całej Europie.",
+    "heroHeading": "O studio",
+    "intro": "Studio Bosko to pracownia Kasi Kronberger — projektantki wnętrz z Berlina.",
+    "body1": "Realizujemy kompleksowe projekty mieszkaniowe w Berlinie, Warszawie i całej Europie — od pierwszej koncepcji przez nadzór budowlany po ostateczny styling.",
+    "body2": "Nasz proces oparty jest na uważnym słuchaniu. Każdy projekt zaczyna się od głębokiego zrozumienia tego, jak żyją nasi klienci, co kochają i do czego dążą. Na tej podstawie tworzymy przestrzenie osobiste, przemyślane i trwałe.",
+    "body3": "Kasia studiowała projektowanie wnętrz w Warszawie i pracowała w studiach w Paryżu i Berlinie, zanim w 2018 roku założyła Studio Bosko.",
+    "awardsHeading": "Wyróżnienia",
+    "award1": "AD100, Architectural Digest — 2025",
+    "award2": "Realizacje w Vogue, AD Germany, Domino, est living",
+    "collaborationsHeading": "Współprace i dostawcy"
+  },
+  "offering": {
+    "metaTitle": "Usługi projektowania wnętrz — kompleksowe projekty mieszkaniowe | Studio Bosko",
+    "metaDescription": "Studio Bosko oferuje kompleksowe usługi projektowania wnętrz w Berlinie, Warszawie i całej Europie. Od koncepcji do realizacji.",
+    "heroHeading": "Nasza oferta",
+    "heroSubheading": "Kompleksowe projektowanie wnętrz mieszkalnych",
+    "service1Title": "Koncepcja i wizja",
+    "service1Body": "Każdy projekt zaczyna się od szczegółowego procesu briefingu — rozumienia, jak żyjesz, co kochasz i jak chcesz, żeby czuło się Twoje mieszkanie. Na tej podstawie opracowujemy jasną koncepcję projektową: wizję przestrzeni, paletę materiałów i nastrój, które kierują wszystkimi decyzjami.",
+    "service2Title": "Rozwinięcie projektu",
+    "service2Body": "Opracowujemy szczegółowe plany, układy mebli, projekt oświetlenia, specyfikacje materiałów i rysunki stolarki na zamówienie. Każdy element jest rozpatrywany w odniesieniu do całości.",
+    "service3Title": "Zakupy i sourcing",
+    "service3Body": "Pozyskujemy meble, tkaniny, sztukę i przedmioty od naszej sieci europejskich dostawców i producentów — a także vintage i unikalne egzemplarze, które nadają każdemu projektowi charakter.",
+    "service4Title": "Realizacja i nadzór",
+    "service4Body": "Współpracujemy ze sprawdzonymi wykonawcami i rzemieślnikami, nadzorując wszystkie prace, aby zapewnić dokładną realizację wizji.",
+    "service5Title": "Styling i odbiór",
+    "service5Body": "Stylizujemy i urządzamy ukończoną przestrzeń — rozmieszczamy każdy przedmiot, dzieło sztuki i roślinę — i przekazujemy dom gotowy do zamieszkania od pierwszego dnia.",
+    "processHeading": "Jak pracujemy",
+    "processBody": "Każdy projekt jest wyjątkowy, ale nasz proces jest spójny: dokładny na początku, precyzyjny w środku, osobisty na końcu.",
+    "cta": "Zacznij swój projekt",
+    "ctaBody": "Przyjmujemy ograniczoną liczbę projektów rocznie."
+  },
+  "projects": {
+    "metaTitle": "Projekty wnętrz — Berlin, Warszawa i Europa | Studio Bosko",
+    "metaDescription": "Wybór projektów mieszkaniowych Studio Bosko w Berlinie, Warszawie i całej Europie.",
+    "heroHeading": "Projekty",
+    "heroSubheading": "Ostatnie wnętrza zaprojektowane przez Studio Bosko",
+    "filterAll": "Wszystkie",
+    "filterResidential": "Mieszkalne",
+    "filterApartment": "Apartament",
+    "filterHouse": "Dom",
+    "viewProject": "Zobacz projekt"
+  },
+  "press": {
+    "metaTitle": "Prasa i wyróżnienia | Studio Bosko",
+    "metaDescription": "Studio Bosko zostało uwzględnione na liście AD100 na rok 2025 i pojawiło się w Architectural Digest, Vogue, Domino i innych mediach.",
+    "heroHeading": "Prasa",
+    "heroBody": "Studio Bosko zostało uwzględnione na liście AD100 na rok 2025 i pojawiło się w druku i online w międzynarodowych publikacjach.",
+    "featuredIn": "W mediach",
+    "readArticle": "Czytaj"
+  },
+  "inquire": {
+    "metaTitle": "Rozpocznij projekt wnętrz | Studio Bosko",
+    "metaDescription": "Zapytaj o współpracę ze Studio Bosko przy Twoim projekcie mieszkaniowym w Berlinie, Warszawie lub Europie.",
+    "heroHeading": "Pracujmy razem",
+    "heroBody": "Przyjmujemy ograniczoną liczbę projektów rocznie, aby każdy klient otrzymał naszą pełną uwagę. Opowiedz nam o swoim projekcie.",
+    "formName": "Twoje imię i nazwisko",
+    "formEmail": "Adres e-mail",
+    "formPhone": "Numer telefonu",
+    "formBudget": "Budżet projektu",
+    "formTimeline": "Preferowany harmonogram",
+    "formLocation": "Lokalizacja projektu",
+    "formDescription": "Opowiedz nam o swoim projekcie",
+    "formDescriptionPlaceholder": "Opisz swoją przestrzeń, czego oczekujesz i wszystko inne, co wydaje Ci się istotne.",
+    "formSubmit": "Wyślij zapytanie",
+    "formSuccess": "Dziękujemy — wkrótce się odezwiemy.",
+    "formError": "Coś poszło nie tak. Spróbuj ponownie lub napisz do nas bezpośrednio."
+  },
+  "project": {
+    "backToProjects": "Wszystkie projekty",
+    "nextProject": "Następny projekt",
+    "location": "Lokalizacja",
+    "year": "Rok",
+    "scope": "Zakres",
+    "photographer": "Fotografia"
+  },
+  "footer": {
+    "tagline": "Studio Projektowania Wnętrz",
+    "location": "Berlin i Warszawa",
+    "instagram": "Instagram",
+    "inquire": "Zapytanie",
+    "copyright": "© Studio Bosko {year}",
+    "privacyPolicy": "Polityka prywatności"
+  },
+  "meta": {
+    "siteTitle": "Studio Bosko — Studio Projektowania Wnętrz Berlin i Warszawa",
+    "siteDescription": "Studio Bosko to berlińskie studio projektowania wnętrz specjalizujące się w kompleksowych projektach mieszkaniowych w całej Europie.",
+    "homeTitle": "Studio Bosko — Studio Projektowania Wnętrz Berlin i Warszawa"
+  }
+}

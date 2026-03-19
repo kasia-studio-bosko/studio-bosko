@@ -1,0 +1,123 @@
+{
+  "nav": {
+    "projects": "Projekte",
+    "studio": "Studio",
+    "offering": "Leistungen",
+    "press": "Presse",
+    "inquire": "Anfrage",
+    "instagram": "Instagram",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen"
+  },
+  "home": {
+    "heroTagline": "Innenarchitektur Studio",
+    "heroLocation": "Berlin & Warschau",
+    "heroBody": "Wir gestalten durchdachte Wohnräume — Räume, die persönlich, dauerhaft und lebendig wirken.",
+    "heroCtaProjects": "Projekte ansehen",
+    "heroCtaInquire": "Projekt starten",
+    "featuredProjectsHeading": "Ausgewählte Arbeiten",
+    "featuredProjectsSubheading": "Aktuelle Innenräume",
+    "aboutHeading": "Ein Studio für Räume, die sich wie Zuhause anfühlen",
+    "aboutBody": "Studio Bosko ist das Büro von Kasia Kronberger, einer Innenarchitektin, die in Berlin, Warschau und ganz Europa tätig ist. Wir arbeiten an Gesamtprojekten im Wohnbereich — von der Konzeption bis zur Fertigstellung.",
+    "aboutCta": "Über das Studio",
+    "offeringHeading": "Was wir tun",
+    "offeringBody": "Ganzheitliche Innenarchitektur für Wohnräume, vom ersten Konzept über Planung bis hin zur Bauleitung und Styling.",
+    "offeringCta": "Unsere Leistungen",
+    "pressHeading": "In der Presse",
+    "pressIntro": "Studio Bosko wurde 2025 in die AD100-Liste aufgenommen.",
+    "pressCta": "Alle Presse",
+    "inquireHeading": "Projekt starten",
+    "inquireBody": "Wir nehmen pro Jahr eine begrenzte Anzahl von Projekten an, um jedem Kunden unsere volle Aufmerksamkeit zu widmen.",
+    "inquireCta": "Kontakt aufnehmen"
+  },
+  "studio": {
+    "metaTitle": "Über Studio Bosko — Innenarchitektin Kasia Kronberger, Berlin",
+    "metaDescription": "Studio Bosko ist das Büro von Kasia Kronberger — in Berlin ansässige Innenarchitektin, spezialisiert auf Gesamtprojekte im Wohnbereich in ganz Europa.",
+    "heroHeading": "Über das Studio",
+    "intro": "Studio Bosko ist das Büro von Kasia Kronberger, einer in Berlin ansässigen Innenarchitektin.",
+    "body1": "Wir arbeiten an Gesamtprojekten im Wohnbereich in Berlin, Warschau und ganz Europa — von der ersten Konzeption über die Bauleitung bis hin zum finalen Styling.",
+    "body2": "Unser Ansatz basiert auf sorgfältigem Zuhören. Jedes Projekt beginnt mit einem tiefen Verständnis dafür, wie unsere Kunden leben, was sie lieben und wonach sie streben. Daraus entstehen Räume, die persönlich, durchdacht und dauerhaft sind.",
+    "body3": "Kasia studierte Innenarchitektur in Warschau und arbeitete in Studios in Paris und Berlin, bevor sie Studio Bosko 2018 gründete.",
+    "awardsHeading": "Auszeichnungen",
+    "award1": "AD100, Architectural Digest — 2025",
+    "award2": "Vorgestellt in Vogue, AD Germany, Domino, est living",
+    "collaborationsHeading": "Kooperationen & Lieferanten"
+  },
+  "offering": {
+    "metaTitle": "Innenarchitektur-Leistungen — Wohnprojekte aus einer Hand | Studio Bosko",
+    "metaDescription": "Studio Bosko bietet vollständige Innenarchitektur-Leistungen für Wohnprojekte in Berlin, Warschau und ganz Europa. Von der Konzeption bis zur Fertigstellung.",
+    "heroHeading": "Unsere Leistungen",
+    "heroSubheading": "Ganzheitliche Innenarchitektur für Wohnräume",
+    "service1Title": "Konzept & Vision",
+    "service1Body": "Wir beginnen jedes Projekt mit einem gründlichen Briefing-Prozess — um zu verstehen, wie Sie leben, was Sie lieben und wie sich Ihr Zuhause anfühlen soll. Daraus entwickeln wir ein klares Designkonzept: eine räumliche Vision, Materialpalette und Stimmung, die alle Entscheidungen leitet.",
+    "service2Title": "Designentwicklung",
+    "service2Body": "Wir entwickeln detaillierte Grundrisse, Möbellayouts, Lichtplanung, Materialspezifikationen und maßgefertigte Schreinerzeichnungen. Jedes Element wird im Verhältnis zum Ganzen betrachtet.",
+    "service3Title": "Beschaffung & Sourcing",
+    "service3Body": "Wir beschaffen Möbel, Textilien, Kunst und Objekte aus unserem Netzwerk europäischer Lieferanten und Hersteller — ergänzt durch Vintage- und Einzelstücke, die jedem Projekt seinen Charakter verleihen.",
+    "service4Title": "Bau & Bauleitung",
+    "service4Body": "Wir arbeiten mit bewährten Handwerkern und Bauunternehmen zusammen und überwachen alle Arbeiten, um die präzise Umsetzung der Vision sicherzustellen.",
+    "service5Title": "Styling & Übergabe",
+    "service5Body": "Wir stylen und richten den fertiggestellten Raum ein — platzieren jedes Objekt, Kunstwerk und jede Pflanze — und übergeben ein Zuhause, das vom ersten Tag an bewohnbar ist.",
+    "processHeading": "Wie wir arbeiten",
+    "processBody": "Jedes Projekt ist einzigartig, aber unser Prozess ist konsistent: gründlich am Anfang, präzise in der Mitte, persönlich am Ende.",
+    "cta": "Ihr Projekt beginnen",
+    "ctaBody": "Wir nehmen pro Jahr eine begrenzte Anzahl von Projekten an."
+  },
+  "projects": {
+    "metaTitle": "Innenarchitektur-Projekte — Berlin, Warschau & Europa | Studio Bosko",
+    "metaDescription": "Eine Auswahl von Wohnprojekten von Studio Bosko in Berlin, Warschau und ganz Europa.",
+    "heroHeading": "Projekte",
+    "heroSubheading": "Aktuelle Innenräume von Studio Bosko",
+    "filterAll": "Alle",
+    "filterResidential": "Wohnen",
+    "filterApartment": "Apartment",
+    "filterHouse": "Haus",
+    "viewProject": "Projekt ansehen"
+  },
+  "press": {
+    "metaTitle": "Presse & Auszeichnungen | Studio Bosko",
+    "metaDescription": "Studio Bosko wurde 2025 in die AD100-Liste aufgenommen und in Architectural Digest, Vogue, Domino und weiteren Medien vorgestellt.",
+    "heroHeading": "Presse",
+    "heroBody": "Studio Bosko wurde 2025 in die AD100-Liste aufgenommen und ist in nationalen und internationalen Print- und Online-Publikationen erschienen.",
+    "featuredIn": "Vorgestellt in",
+    "readArticle": "Lesen"
+  },
+  "inquire": {
+    "metaTitle": "Innenarchitektur-Projekt anfragen | Studio Bosko",
+    "metaDescription": "Fragen Sie nach einer Zusammenarbeit mit Studio Bosko für Ihr Wohnprojekt in Berlin, Warschau oder Europa.",
+    "heroHeading": "Lassen Sie uns zusammenarbeiten",
+    "heroBody": "Wir nehmen pro Jahr eine begrenzte Anzahl von Projekten an, um jedem Kunden unsere volle Aufmerksamkeit zu widmen. Erzählen Sie uns von Ihrem Projekt.",
+    "formName": "Ihr Name",
+    "formEmail": "E-Mail-Adresse",
+    "formPhone": "Telefonnummer",
+    "formBudget": "Projektbudget",
+    "formTimeline": "Gewünschter Zeitplan",
+    "formLocation": "Projektstandort",
+    "formDescription": "Erzählen Sie uns von Ihrem Projekt",
+    "formDescriptionPlaceholder": "Beschreiben Sie Ihren Raum, Ihre Wünsche und alles andere, was relevant erscheint.",
+    "formSubmit": "Anfrage senden",
+    "formSuccess": "Vielen Dank — wir melden uns in Kürze.",
+    "formError": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt."
+  },
+  "project": {
+    "backToProjects": "Alle Projekte",
+    "nextProject": "Nächstes Projekt",
+    "location": "Standort",
+    "year": "Jahr",
+    "scope": "Leistungsumfang",
+    "photographer": "Fotografie"
+  },
+  "footer": {
+    "tagline": "Innenarchitektur Studio",
+    "location": "Berlin & Warschau",
+    "instagram": "Instagram",
+    "inquire": "Anfrage",
+    "copyright": "© Studio Bosko {year}",
+    "privacyPolicy": "Datenschutz"
+  },
+  "meta": {
+    "siteTitle": "Studio Bosko — Innenarchitektur Studio Berlin & Warschau",
+    "siteDescription": "Studio Bosko ist ein in Berlin ansässiges Innenarchitektur-Studio, spezialisiert auf ganzheitliche Wohnprojekte in ganz Europa.",
+    "homeTitle": "Studio Bosko — Innenarchitektur Studio Berlin & Warschau"
+  }
+}

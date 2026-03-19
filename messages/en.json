@@ -1,0 +1,123 @@
+{
+  "nav": {
+    "projects": "Projects",
+    "studio": "Studio",
+    "offering": "Offering",
+    "press": "Press",
+    "inquire": "Inquire",
+    "instagram": "Instagram",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "home": {
+    "heroTagline": "Interior Design Studio",
+    "heroLocation": "Berlin & Warsaw",
+    "heroBody": "We create considered residential interiors — spaces that feel personal, enduring, and alive.",
+    "heroCtaProjects": "View projects",
+    "heroCtaInquire": "Start a project",
+    "featuredProjectsHeading": "Selected work",
+    "featuredProjectsSubheading": "Recent interiors",
+    "aboutHeading": "A studio for spaces that feel like home",
+    "aboutBody": "Studio Bosko is the practice of Kasia Kronberger, an interior designer working across Berlin, Warsaw, and Europe. We work on full-scope residential projects — from concept to completion.",
+    "aboutCta": "About the studio",
+    "offeringHeading": "What we do",
+    "offeringBody": "Full-scope residential interior design, from initial concept through to construction supervision and styling.",
+    "offeringCta": "Our offering",
+    "pressHeading": "In the press",
+    "pressIntro": "Studio Bosko has been named AD100 for 2025.",
+    "pressCta": "All press",
+    "inquireHeading": "Start a project",
+    "inquireBody": "We take on a small number of projects each year to ensure every client receives our full attention.",
+    "inquireCta": "Get in touch"
+  },
+  "studio": {
+    "metaTitle": "About Studio Bosko — Interior Designer Kasia Kronberger, Berlin",
+    "metaDescription": "Studio Bosko is the practice of Kasia Kronberger — Berlin-based interior designer specialising in full-scope residential projects across Europe.",
+    "heroHeading": "About the studio",
+    "intro": "Studio Bosko is the practice of Kasia Kronberger, an interior designer based in Berlin.",
+    "body1": "We work on full-scope residential projects across Berlin, Warsaw, and Europe — from initial concept through to construction supervision and final styling.",
+    "body2": "Our approach is rooted in careful listening. Every project begins with a deep understanding of how our clients live, what they love, and what they aspire to. From there, we build spaces that are personal, considered, and built to last.",
+    "body3": "Kasia studied interior design in Warsaw and has worked in studios in Paris and Berlin before founding Studio Bosko in 2018.",
+    "awardsHeading": "Recognition",
+    "award1": "AD100, Architectural Digest — 2025",
+    "award2": "Featured in Vogue, AD Germany, Domino, est living",
+    "collaborationsHeading": "Collaborations & suppliers"
+  },
+  "offering": {
+    "metaTitle": "Interior Design Services — Full-Scope Residential Projects | Studio Bosko",
+    "metaDescription": "Studio Bosko offers full-scope residential interior design services in Berlin, Warsaw, and across Europe. From concept to completion.",
+    "heroHeading": "Our offering",
+    "heroSubheading": "Full-scope residential interior design",
+    "service1Title": "Concept & Vision",
+    "service1Body": "We begin every project with a thorough briefing process — understanding how you live, what you love, and what you want your home to feel like. From this we develop a clear design concept: a spatial vision, material palette, and mood that guides all decisions.",
+    "service2Title": "Design Development",
+    "service2Body": "We develop detailed floor plans, furniture layouts, lighting design, material specifications, and bespoke joinery drawings. Every element is considered in relation to the whole.",
+    "service3Title": "Procurement & Sourcing",
+    "service3Body": "We source furniture, textiles, art, and objects from our network of European suppliers and makers — alongside vintage and one-of-a-kind pieces that give each project its character.",
+    "service4Title": "Construction & Supervision",
+    "service4Body": "We work with trusted contractors and craftspeople, overseeing all work to ensure the vision is realised precisely. We manage the process so you don't have to.",
+    "service5Title": "Styling & Handover",
+    "service5Body": "We style and dress the completed space — placing every object, artwork, and plant — and hand over a home that is ready to live in from day one.",
+    "processHeading": "How we work",
+    "processBody": "Every project is unique, but our process is consistent: thorough at the start, precise in the middle, personal at the end.",
+    "cta": "Begin your project",
+    "ctaBody": "We take on a small number of projects each year."
+  },
+  "projects": {
+    "metaTitle": "Interior Design Projects — Berlin, Warsaw & Europe | Studio Bosko",
+    "metaDescription": "A selection of residential interior design projects by Studio Bosko in Berlin, Warsaw, and across Europe.",
+    "heroHeading": "Projects",
+    "heroSubheading": "Recent interiors designed by Studio Bosko",
+    "filterAll": "All",
+    "filterResidential": "Residential",
+    "filterApartment": "Apartment",
+    "filterHouse": "House",
+    "viewProject": "View project"
+  },
+  "press": {
+    "metaTitle": "Press & Recognition | Studio Bosko",
+    "metaDescription": "Studio Bosko has been named AD100 for 2025 and featured in Architectural Digest, Vogue, Domino, and more.",
+    "heroHeading": "Press",
+    "heroBody": "Studio Bosko has been named AD100 for 2025 and featured in print and online across international publications and platforms.",
+    "featuredIn": "Featured in",
+    "readArticle": "Read"
+  },
+  "inquire": {
+    "metaTitle": "Start an Interior Design Project | Studio Bosko",
+    "metaDescription": "Inquire about working with Studio Bosko on your residential interior design project in Berlin, Warsaw, or Europe.",
+    "heroHeading": "Let's work together",
+    "heroBody": "We take on a small number of projects each year to ensure every client receives our full attention. Tell us about your project.",
+    "formName": "Your name",
+    "formEmail": "Email address",
+    "formPhone": "Phone number",
+    "formBudget": "Project budget",
+    "formTimeline": "Desired timeline",
+    "formLocation": "Project location",
+    "formDescription": "Tell us about your project",
+    "formDescriptionPlaceholder": "Describe your space, what you're hoping for, and anything else that feels relevant.",
+    "formSubmit": "Send enquiry",
+    "formSuccess": "Thank you — we'll be in touch shortly.",
+    "formError": "Something went wrong. Please try again or email us directly."
+  },
+  "project": {
+    "backToProjects": "All projects",
+    "nextProject": "Next project",
+    "location": "Location",
+    "year": "Year",
+    "scope": "Scope",
+    "photographer": "Photography"
+  },
+  "footer": {
+    "tagline": "Interior Design Studio",
+    "location": "Berlin & Warsaw",
+    "instagram": "Instagram",
+    "inquire": "Inquire",
+    "copyright": "© Studio Bosko {year}",
+    "privacyPolicy": "Privacy Policy"
+  },
+  "meta": {
+    "siteTitle": "Studio Bosko — Interior Design Studio Berlin & Warsaw",
+    "siteDescription": "Studio Bosko is a Berlin-based interior design studio specialising in full-scope residential projects across Europe.",
+    "homeTitle": "Studio Bosko — Interior Design Studio Berlin & Warsaw"
+  }
+}
