@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "sanity": "sanity dev --basePath /studio"
+    "sanity": "sanity dev --basePath /studio",
+    "seed": "node scripts/seed-sanity.mjs"
   },
   "dependencies": {
     "next": "14.2.29",

@@ -33,63 +33,24 @@ export async function generateMetadata({
   }
 }
 
-// Static fallback images
-const FALLBACK_GRID = [
-  {
-    slug: 'haus-giebelgarten',
-    title: 'Haus Giebelgarten',
-    location: 'Berlin',
-    year: '2024',
-    category: 'House',
-    coverImage: 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg',
-    coverImageAlt: 'Green tiled bathroom — Haus Giebelgarten',
-  },
-  {
-    slug: 'apartment-prenzlauer-berg',
-    title: 'Apartment Prenzlauer Berg',
-    location: 'Berlin',
-    year: '2024',
-    category: 'Apartment',
-    coverImage: 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg',
-    coverImageAlt: 'Living room — Apartment Prenzlauer Berg',
-  },
-  {
-    slug: 'villa-mokotow',
-    title: 'Villa Mokotów',
-    location: 'Warsaw',
-    year: '2023',
-    category: 'House',
-    coverImage: 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg',
-    coverImageAlt: 'Villa Mokotów living room',
-  },
-  {
-    slug: 'penthouse-mitte',
-    title: 'Penthouse Mitte',
-    location: 'Berlin',
-    year: '2023',
-    category: 'Apartment',
-    coverImage: 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg',
-    coverImageAlt: 'Penthouse Mitte — Berlin',
-  },
-  {
-    slug: 'apartment-zoliborz',
-    title: 'Apartment Żoliborz',
-    location: 'Warsaw',
-    year: '2022',
-    category: 'Apartment',
-    coverImage: 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg',
-    coverImageAlt: 'Żoliborz apartment Warsaw',
-  },
-  {
-    slug: 'haus-dahlem',
-    title: 'Haus Dahlem',
-    location: 'Berlin',
-    year: '2022',
-    category: 'House',
-    coverImage: 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg',
-    coverImageAlt: 'Haus Dahlem — Berlin',
-  },
-]
+// Cover images for each project (used in fallback grid before Sanity is seeded)
+const FALLBACK_COVER_IMAGES: Record<string, string> = {
+  'chroma-penthouse': 'https://framerusercontent.com/images/l1lysvdOseg1KyDSJxHjCPPJQo.jpg',
+  'zander-rooftop':   'https://framerusercontent.com/images/HtBz4JDvXubiEp6tEPI9Z4Cc.jpg',
+  'casa-norte':       'https://framerusercontent.com/images/UdwJZtpW3JOoD1xFzqm2j3MbP0.jpg',
+  'time-travel':      'https://framerusercontent.com/images/wxs1UdkYvpS4swIVRveRHqL8OBQ.jpg',
+}
+
+// Static fallback grid — real project names, shown when Sanity has no content
+const FALLBACK_GRID = FALLBACK_PROJECTS.map((p) => ({
+  slug: p.slug.current,
+  title: p.title,
+  location: p.location,
+  year: p.year ?? '',
+  category: p.category,
+  coverImage: FALLBACK_COVER_IMAGES[p.slug.current] ?? 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg',
+  coverImageAlt: p.coverImage.alt ?? p.title,
+}))
 
 export default async function ProjectsPage({
   params,
@@ -102,16 +63,18 @@ export default async function ProjectsPage({
 
   let projects = FALLBACK_GRID
   try {
-    const sanityProjects = await getAllProjects()
+    const sanityProjects = await getAllProjects(locale)
     if (sanityProjects.length > 0) {
       projects = sanityProjects.map((p) => ({
         slug: p.slug.current,
         title: p.title,
         location: p.location,
-        year: p.year,
+        year: p.year ?? '',
         category: p.category,
-        coverImage: urlFor(p.coverImage).width(960).height(1280).url(),
-        coverImageAlt: p.coverImage.alt ?? p.title,
+        coverImage: p.coverImage?.asset?._ref
+          ? urlFor(p.coverImage).width(960).height(1280).url()
+          : 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg',
+        coverImageAlt: p.coverImage?.alt ?? p.title,
       }))
     }
   } catch {
@@ -164,7 +127,8 @@ export default async function ProjectsPage({
                         {project.title}
                       </h2>
                       <p className="mt-1 text-sm font-cadiz text-[#120b09]/60">
-                        {project.location} · {project.year}
+                        {project.location}
+                        {project.year ? ` · ${project.year}` : ''}
                       </p>
                     </div>
                     <span className="text-xs font-cadiz tracking-widest uppercase text-[#120b09]/40 group-hover:text-[#f5500a] transition-colors duration-200 whitespace-nowrap mt-1">

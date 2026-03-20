@@ -42,39 +42,39 @@ const TESTIMONIAL_IMAGE = 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku
 
 const FEATURED_IMAGES = [
   {
-    slug: 'haus-giebelgarten',
-    title: 'Haus Giebelgarten',
-    location: 'Berlin',
+    slug: 'chroma-penthouse',
+    title: 'Chroma Penthouse',
+    location: 'Berlin Kreuzberg',
     year: '2024',
     coverImage: 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg',
-    coverImageAlt: 'Green tiled bathroom with marble sink — Haus Giebelgarten, Berlin',
-    category: 'House',
-  },
-  {
-    slug: 'apartment-prenzlauer-berg',
-    title: 'Apartment Prenzlauer Berg',
-    location: 'Berlin',
-    year: '2024',
-    coverImage: 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg',
-    coverImageAlt: 'Warm-toned living area — Apartment Prenzlauer Berg, Berlin',
+    coverImageAlt: 'Chroma Penthouse — colour-layered penthouse interior in Berlin Kreuzberg',
     category: 'Apartment',
   },
   {
-    slug: 'villa-mokotow',
-    title: 'Villa Mokotów',
-    location: 'Warsaw',
+    slug: 'zander-rooftop',
+    title: 'Zander Rooftop',
+    location: 'Berlin Mitte / Kreuzberg',
     year: '2023',
     coverImage: 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg',
-    coverImageAlt: 'Warsaw villa living room — Villa Mokotów',
-    category: 'House',
+    coverImageAlt: 'Zander Rooftop — rooftop apartment renovation in Berlin Mitte',
+    category: 'Apartment',
   },
   {
-    slug: 'penthouse-mitte',
-    title: 'Penthouse Mitte',
-    location: 'Berlin',
-    year: '2023',
-    coverImage: 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg',
-    coverImageAlt: 'Berlin penthouse with vibrant colour palette — Penthouse Mitte',
+    slug: 'casa-norte',
+    title: 'Casa Norte',
+    location: 'Szczecin, Poland',
+    year: '2024',
+    coverImage: 'https://framerusercontent.com/images/UdwJZtpW3JOoD1xFzqm2j3MbP0.jpg',
+    coverImageAlt: 'Earthy tones and tactile wood in Casa Norte, Szczecin',
+    category: 'Apartment',
+  },
+  {
+    slug: 'time-travel',
+    title: 'Time Travel',
+    location: 'Berlin Neukölln',
+    year: '2022',
+    coverImage: 'https://framerusercontent.com/images/wxs1UdkYvpS4swIVRveRHqL8OBQ.jpg',
+    coverImageAlt: 'Colour-drenched hallway corridor with Victorian floor tiles — Time Travel, Berlin',
     category: 'Apartment',
   },
 ]
@@ -93,7 +93,7 @@ export default async function HomePage({
   // Try to load from Sanity; fall back to static data
   let featuredProjects = FEATURED_IMAGES
   try {
-    const sanityProjects = await getFeaturedProjects()
+    const sanityProjects = await getFeaturedProjects(locale)
     if (sanityProjects.length > 0) {
       featuredProjects = sanityProjects.map((p) => ({
         slug: p.slug.current,

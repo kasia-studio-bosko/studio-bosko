@@ -1,20 +1,29 @@
 import { sanityClient } from './client'
 
-// ─── Types ───────────────────────────────────────────────────────────────────
+// ─── Types ────────────────────────────────────────────────────────────────────
+
+// Portable Text block shape (simplified — avoids hard dep on @portabletext/types)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type PortableTextContent = Record<string, any>[]
 
 export interface Project {
   _id: string
   title: string
   slug: { current: string }
   location: string
+  size?: number
   year: string
   category: string
   scope: string[]
   photographer: string
+  pressMentions?: string[]
   coverImage: { asset: { _ref: string }; alt?: string }
   gallery: Array<{ asset: { _ref: string }; alt?: string; caption?: string }>
-  description: string
-  shortDescription: string
+  /** Short plain-text intro for listings and meta description fallback */
+  seoIntro: string
+  description: PortableTextContent | null
+  metaTitle?: string
+  metaDescription?: string
   featured: boolean
   order: number
 }
@@ -30,43 +39,76 @@ export interface PressItem {
   featured: boolean
 }
 
-// ─── Queries ─────────────────────────────────────────────────────────────────
+export interface PageContent {
+  pageId: string
+  heading?: string
+  subheading?: string
+  body?: PortableTextContent
+  seoTitle?: string
+  seoDescription?: string
+}
 
-const projectFields = `
+// ─── GROQ Helpers ─────────────────────────────────────────────────────────────
+
+/**
+ * Builds a GROQ projection that returns the locale-appropriate value,
+ * falling back to English if the requested locale field is empty.
+ *
+ * e.g. localizedField('title') produces:
+ *   "title": select($locale == "de" => coalesce(titleDe, titleEn), $locale == "pl" => coalesce(titlePl, titleEn), titleEn)
+ */
+function localizedField(base: string): string {
+  return `"${base}": select(
+    $locale == "de" => coalesce(${base}De, ${base}En),
+    $locale == "pl" => coalesce(${base}Pl, ${base}En),
+    ${base}En
+  )`
+}
+
+const projectListFields = `
   _id,
-  title,
   slug,
   location,
+  size,
   year,
   category,
-  scope,
   photographer,
-  coverImage,
-  shortDescription,
+  pressMentions,
   featured,
-  order
+  order,
+  coverImage,
+  ${localizedField('title')},
+  ${localizedField('seoIntro')}
 `
 
-export async function getAllProjects(): Promise<Project[]> {
+const projectFullFields = `
+  ${projectListFields},
+  gallery,
+  ${localizedField('description')},
+  ${localizedField('metaTitle')},
+  ${localizedField('metaDescription')}
+`
+
+// ─── Project Queries ──────────────────────────────────────────────────────────
+
+export async function getAllProjects(locale = 'en'): Promise<Project[]> {
   return sanityClient.fetch(
-    `*[_type == "project"] | order(order asc, year desc) { ${projectFields} }`
+    `*[_type == "project"] | order(order asc, year desc) { ${projectListFields} }`,
+    { locale }
   )
 }
 
-export async function getFeaturedProjects(): Promise<Project[]> {
+export async function getFeaturedProjects(locale = 'en'): Promise<Project[]> {
   return sanityClient.fetch(
-    `*[_type == "project" && featured == true] | order(order asc) [0...6] { ${projectFields} }`
+    `*[_type == "project" && featured == true] | order(order asc) [0...6] { ${projectListFields} }`,
+    { locale }
   )
 }
 
-export async function getProjectBySlug(slug: string): Promise<Project | null> {
+export async function getProjectBySlug(slug: string, locale = 'en'): Promise<Project | null> {
   return sanityClient.fetch(
-    `*[_type == "project" && slug.current == $slug][0] {
-      ${projectFields},
-      description,
-      gallery
-    }`,
-    { slug }
+    `*[_type == "project" && slug.current == $slug][0] { ${projectFullFields} }`,
+    { slug, locale }
   )
 }
 
@@ -76,6 +118,8 @@ export async function getAllProjectSlugs(): Promise<string[]> {
   )
   return projects.map((p: { slug: string }) => p.slug)
 }
+
+// ─── Press Queries ────────────────────────────────────────────────────────────
 
 export async function getFeaturedPressItems(): Promise<PressItem[]> {
   return sanityClient.fetch(
@@ -92,44 +136,89 @@ export async function getFeaturedPressItems(): Promise<PressItem[]> {
   )
 }
 
-// ─── Static fallback data (used when Sanity has no content yet) ───────────────
+// ─── Page Content Queries ─────────────────────────────────────────────────────
 
-export const FALLBACK_PROJECTS: Omit<Project, '_id' | 'slug' | 'gallery' | 'scope' | 'description' | 'featured' | 'order'>[] = [
+export async function getPageContent(pageId: string, locale = 'en'): Promise<PageContent | null> {
+  return sanityClient.fetch(
+    `*[_type == "pageContent" && pageId == $pageId][0] {
+      pageId,
+      ${localizedField('heading')},
+      ${localizedField('subheading')},
+      ${localizedField('body')},
+      ${localizedField('seoTitle')},
+      ${localizedField('seoDescription')}
+    }`,
+    { pageId, locale }
+  )
+}
+
+// ─── Static fallback data ─────────────────────────────────────────────────────
+// Used for local dev when Sanity has no content yet, and as seed-script reference.
+
+export const FALLBACK_PROJECTS: Array<
+  Omit<Project, '_id' | 'gallery' | 'description' | 'featured' | 'order' | 'pressMentions' | 'metaTitle' | 'metaDescription'> & {
+    slug: { current: string }
+  }
+> = [
   {
-    title: 'Haus Giebelgarten',
-    location: 'Berlin, Germany',
-    year: '2024',
-    category: 'House',
-    photographer: '',
-    coverImage: {
-      asset: { _ref: '' },
-      alt: 'Green tiled bathroom with marble sink in Haus Giebelgarten',
-    },
-    shortDescription: 'A house renovation in Berlin blending midcentury modern with contemporary comfort.',
-  },
-  {
-    title: 'Apartment Prenzlauer Berg',
-    location: 'Berlin, Germany',
+    title: 'Chroma Penthouse',
+    slug: { current: 'chroma-penthouse' },
+    location: 'Berlin Kreuzberg',
+    size: 143,
     year: '2024',
     category: 'Apartment',
-    photographer: '',
+    scope: ['Interior Design', 'Curation'],
+    photographer: 'Giulia Maretti Studio',
     coverImage: {
       asset: { _ref: '' },
-      alt: 'Light-filled living room with warm tones',
+      alt: 'Vibrant living room in a Berlin penthouse — Chroma Penthouse',
     },
-    shortDescription: 'A Berlin penthouse using colour to create vibrant impact.',
+    seoIntro: 'A full-scope interior design and curation project for a newly built 143 m² penthouse in Berlin Kreuzberg — bold colour, bespoke joinery, and considered curation.',
   },
   {
-    title: 'Villa Mokotów',
-    location: 'Warsaw, Poland',
+    title: 'Zander Rooftop',
+    slug: { current: 'zander-rooftop' },
+    location: 'Berlin Kreuzberg',
+    size: 170,
     year: '2023',
-    category: 'House',
-    photographer: '',
+    category: 'Apartment',
+    scope: ['Complex Renovation', 'Curation'],
+    photographer: 'ONI Studio',
     coverImage: {
       asset: { _ref: '' },
-      alt: 'Elegant Warsaw villa interior',
+      alt: 'Red kitchen island in bespoke kitchen — Zander Rooftop, Berlin',
     },
-    shortDescription: 'Full-scope renovation of a Warsaw villa with a considered palette of warm materials.',
+    seoIntro: 'A complex full renovation and interior design project for a 170 m² rooftop apartment in Berlin, on the border of Mitte and Kreuzberg.',
+  },
+  {
+    title: 'Casa Norte',
+    slug: { current: 'casa-norte' },
+    location: 'Szczecin, Poland',
+    size: 90,
+    year: '2024',
+    category: 'Apartment',
+    scope: ['Interior Design', 'Curation'],
+    photographer: 'Giulia Maretti Studio',
+    coverImage: {
+      asset: { _ref: '' },
+      alt: 'Earthy tones and tactile wood in Casa Norte, Szczecin',
+    },
+    seoIntro: 'A full-scope interior design and curation of a high-end new-build 90 m² apartment in Szczecin, Poland — tactile richness with a quietly dramatic palette.',
+  },
+  {
+    title: 'Time Travel',
+    slug: { current: 'time-travel' },
+    location: 'Berlin Neukölln',
+    size: 95,
+    year: '2022',
+    category: 'Apartment',
+    scope: ['Complex Renovation', 'Curation'],
+    photographer: 'Giulia Maretti Studio',
+    coverImage: {
+      asset: { _ref: '' },
+      alt: 'Colour-drenched hallway corridor with Victorian floor tiles — Time Travel, Berlin',
+    },
+    seoIntro: 'An unconventional bachelor pad in Berlin Neukölln rooted in Jugendstil and filled with European history — 95 m² of complex renovation and eclectic curation.',
   },
 ]
 

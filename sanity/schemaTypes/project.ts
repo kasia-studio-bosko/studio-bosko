@@ -1,72 +1,227 @@
 import { defineType, defineField } from 'sanity'
 
+// Reusable block content definition for rich text fields
+const blockContent = {
+  type: 'block' as const,
+  styles: [
+    { title: 'Normal', value: 'normal' },
+    { title: 'H3', value: 'h3' },
+  ],
+  marks: {
+    decorators: [
+      { title: 'Italic', value: 'em' },
+      { title: 'Bold', value: 'strong' },
+    ],
+  },
+}
+
 export const projectSchema = defineType({
   name: 'project',
   title: 'Project',
   type: 'document',
+
+  // ── Studio tabs ────────────────────────────────────────────────────────────
+  groups: [
+    { name: 'en', title: '🇬🇧 English', default: true },
+    { name: 'de', title: '🇩🇪 Deutsch' },
+    { name: 'pl', title: '🇵🇱 Polski' },
+    { name: 'details', title: 'Project Details' },
+    { name: 'images', title: 'Images' },
+  ],
+
   fields: [
+    // ── English ────────────────────────────────────────────────────────────
     defineField({
-      name: 'title',
+      name: 'titleEn',
       title: 'Title',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      group: 'en',
+      validation: (Rule) => Rule.required().error('English title is required'),
     }),
     defineField({
+      name: 'seoIntroEn',
+      title: 'SEO intro (short, ~160 chars)',
+      description: 'Used in project listings and as meta description fallback.',
+      type: 'text',
+      rows: 3,
+      group: 'en',
+      validation: (Rule) => Rule.max(200),
+    }),
+    defineField({
+      name: 'descriptionEn',
+      title: 'Description',
+      type: 'array',
+      of: [blockContent],
+      group: 'en',
+    }),
+    defineField({
+      name: 'metaTitleEn',
+      title: 'Meta title (SEO)',
+      description: 'Defaults to title if empty.',
+      type: 'string',
+      group: 'en',
+    }),
+    defineField({
+      name: 'metaDescriptionEn',
+      title: 'Meta description (SEO)',
+      description: 'Defaults to SEO intro if empty. Max 160 chars.',
+      type: 'text',
+      rows: 2,
+      group: 'en',
+      validation: (Rule) => Rule.max(160),
+    }),
+
+    // ── Deutsch ────────────────────────────────────────────────────────────
+    defineField({
+      name: 'titleDe',
+      title: 'Titel',
+      description: 'Leer lassen → englischer Text wird angezeigt.',
+      type: 'string',
+      group: 'de',
+    }),
+    defineField({
+      name: 'seoIntroDe',
+      title: 'SEO-Intro',
+      type: 'text',
+      rows: 3,
+      group: 'de',
+      validation: (Rule) => Rule.max(200),
+    }),
+    defineField({
+      name: 'descriptionDe',
+      title: 'Beschreibung',
+      type: 'array',
+      of: [blockContent],
+      group: 'de',
+    }),
+    defineField({
+      name: 'metaTitleDe',
+      title: 'Meta-Titel (SEO)',
+      type: 'string',
+      group: 'de',
+    }),
+    defineField({
+      name: 'metaDescriptionDe',
+      title: 'Meta-Beschreibung (SEO)',
+      type: 'text',
+      rows: 2,
+      group: 'de',
+      validation: (Rule) => Rule.max(160),
+    }),
+
+    // ── Polski ─────────────────────────────────────────────────────────────
+    defineField({
+      name: 'titlePl',
+      title: 'Tytuł',
+      description: 'Puste → używany jest tekst angielski.',
+      type: 'string',
+      group: 'pl',
+    }),
+    defineField({
+      name: 'seoIntroPl',
+      title: 'SEO intro',
+      type: 'text',
+      rows: 3,
+      group: 'pl',
+      validation: (Rule) => Rule.max(200),
+    }),
+    defineField({
+      name: 'descriptionPl',
+      title: 'Opis',
+      type: 'array',
+      of: [blockContent],
+      group: 'pl',
+    }),
+    defineField({
+      name: 'metaTitlePl',
+      title: 'Meta tytuł (SEO)',
+      type: 'string',
+      group: 'pl',
+    }),
+    defineField({
+      name: 'metaDescriptionPl',
+      title: 'Meta opis (SEO)',
+      type: 'text',
+      rows: 2,
+      group: 'pl',
+      validation: (Rule) => Rule.max(160),
+    }),
+
+    // ── Project Details ────────────────────────────────────────────────────
+    defineField({
       name: 'slug',
-      title: 'Slug',
+      title: 'Slug (URL)',
       type: 'slug',
-      options: { source: 'title', maxLength: 96 },
+      group: 'details',
+      options: { source: 'titleEn', maxLength: 96 },
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'featured',
       title: 'Featured on homepage',
       type: 'boolean',
+      group: 'details',
       initialValue: false,
     }),
     defineField({
       name: 'order',
       title: 'Display order',
+      description: 'Lower numbers appear first.',
       type: 'number',
-      description: 'Lower numbers appear first',
-    }),
-    defineField({
-      name: 'location',
-      title: 'Location',
-      type: 'string',
-      placeholder: 'e.g. Berlin, Germany',
-    }),
-    defineField({
-      name: 'year',
-      title: 'Year completed',
-      type: 'string',
-      placeholder: 'e.g. 2024',
+      group: 'details',
     }),
     defineField({
       name: 'category',
       title: 'Category',
       type: 'string',
+      group: 'details',
       options: {
         list: [
           { title: 'Apartment', value: 'Apartment' },
           { title: 'House', value: 'House' },
+          { title: 'Villa', value: 'Villa' },
+          { title: 'Commercial', value: 'Commercial' },
           { title: 'Other', value: 'Other' },
         ],
+        layout: 'radio',
       },
+    }),
+    defineField({
+      name: 'location',
+      title: 'Location',
+      type: 'string',
+      group: 'details',
+      placeholder: 'e.g. Berlin Kreuzberg',
+    }),
+    defineField({
+      name: 'size',
+      title: 'Size (m²)',
+      type: 'number',
+      group: 'details',
+    }),
+    defineField({
+      name: 'year',
+      title: 'Year completed',
+      type: 'string',
+      group: 'details',
+      placeholder: 'e.g. 2024',
     }),
     defineField({
       name: 'scope',
       title: 'Scope of work',
       type: 'array',
+      group: 'details',
       of: [{ type: 'string' }],
       options: {
         list: [
-          'Interior design',
-          'FF&E procurement',
-          'Construction supervision',
-          'Styling',
-          'Lighting design',
-          'Bespoke joinery',
+          { title: 'Interior Design', value: 'Interior Design' },
+          { title: 'Curation', value: 'Curation' },
+          { title: 'FF&E Procurement', value: 'FF&E Procurement' },
+          { title: 'Complex Renovation', value: 'Complex Renovation' },
+          { title: 'Construction Supervision', value: 'Construction Supervision' },
+          { title: 'Styling', value: 'Styling' },
+          { title: 'Lighting Design', value: 'Lighting Design' },
+          { title: 'Bespoke Joinery', value: 'Bespoke Joinery' },
         ],
       },
     }),
@@ -74,38 +229,40 @@ export const projectSchema = defineType({
       name: 'photographer',
       title: 'Photography credit',
       type: 'string',
+      group: 'details',
     }),
     defineField({
-      name: 'shortDescription',
-      title: 'Short description (for listings)',
-      type: 'text',
-      rows: 3,
-      validation: (Rule) => Rule.max(200),
+      name: 'pressMentions',
+      title: 'Press mentions',
+      description: 'Publications that have featured this specific project.',
+      type: 'array',
+      group: 'details',
+      of: [{ type: 'string' }],
     }),
-    defineField({
-      name: 'description',
-      title: 'Full description',
-      type: 'text',
-      rows: 8,
-    }),
+
+    // ── Images ─────────────────────────────────────────────────────────────
     defineField({
       name: 'coverImage',
       title: 'Cover image',
       type: 'image',
+      group: 'images',
       options: { hotspot: true },
       fields: [
         defineField({
           name: 'alt',
           title: 'Alt text',
           type: 'string',
-          validation: (Rule) => Rule.required().warning('Alt text is required for accessibility'),
+          validation: (Rule) =>
+            Rule.required().error('Alt text is required — critical for SEO and accessibility'),
         }),
       ],
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'gallery',
       title: 'Gallery images',
       type: 'array',
+      group: 'images',
       of: [
         {
           type: 'image',
@@ -115,6 +272,9 @@ export const projectSchema = defineType({
               name: 'alt',
               type: 'string',
               title: 'Alt text',
+              // @ts-expect-error — Sanity inline field validation type
+              validation: (Rule) =>
+                Rule.required().warning('Alt text is strongly recommended for SEO'),
             },
             {
               name: 'caption',
@@ -126,13 +286,15 @@ export const projectSchema = defineType({
       ],
     }),
   ],
+
   preview: {
     select: {
-      title: 'title',
+      title: 'titleEn',
       subtitle: 'location',
       media: 'coverImage',
     },
   },
+
   orderings: [
     {
       title: 'Display order',

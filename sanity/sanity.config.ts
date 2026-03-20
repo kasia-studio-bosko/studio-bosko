@@ -18,6 +18,7 @@ export default defineConfig({
           .items([
             S.listItem()
               .title('Projects')
+              .icon(() => '🏗️')
               .child(
                 S.documentList()
                   .title('Projects')
@@ -26,7 +27,46 @@ export default defineConfig({
               ),
             S.divider(),
             S.listItem()
+              .title('Pages')
+              .icon(() => '📄')
+              .child(
+                S.list()
+                  .title('Pages')
+                  .items([
+                    S.listItem()
+                      .title('🏠 Homepage')
+                      .child(
+                        S.document()
+                          .schemaType('pageContent')
+                          .documentId('pageContent-homepage')
+                      ),
+                    S.listItem()
+                      .title('👤 Studio / About')
+                      .child(
+                        S.document()
+                          .schemaType('pageContent')
+                          .documentId('pageContent-studio')
+                      ),
+                    S.listItem()
+                      .title('📋 Offering / Services')
+                      .child(
+                        S.document()
+                          .schemaType('pageContent')
+                          .documentId('pageContent-offering')
+                      ),
+                    S.listItem()
+                      .title('✉️ Inquire')
+                      .child(
+                        S.document()
+                          .schemaType('pageContent')
+                          .documentId('pageContent-inquire')
+                      ),
+                  ])
+              ),
+            S.divider(),
+            S.listItem()
               .title('Press')
+              .icon(() => '📰')
               .child(
                 S.documentList()
                   .title('Press Items')
