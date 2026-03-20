@@ -61,9 +61,6 @@ export default async function Footer({ locale }: { locale: string }) {
           <p className="text-xs font-cadiz text-[#120b09]/50">
             {t('copyright', { year })}
           </p>
-          <Link href="/privacy" className="text-xs font-cadiz text-[#120b09]/50 hover:text-[#120b09] transition-colors">
-            {t('privacyPolicy')}
-          </Link>
         </div>
       </div>
     </footer>

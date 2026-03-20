@@ -43,12 +43,12 @@ export default async function OfferingPage({
   const t = await getTranslations({ locale, namespace: 'offering' })
 
   const services = [
-    { key: 'service1', number: '01' },
-    { key: 'service2', number: '02' },
-    { key: 'service3', number: '03' },
-    { key: 'service4', number: '04' },
-    { key: 'service5', number: '05' },
-  ] as const
+    { number: '01', title: t('service1Title'), body: t('service1Body') },
+    { number: '02', title: t('service2Title'), body: t('service2Body') },
+    { number: '03', title: t('service3Title'), body: t('service3Body') },
+    { number: '04', title: t('service4Title'), body: t('service4Body') },
+    { number: '05', title: t('service5Title'), body: t('service5Body') },
+  ]
 
   return (
     <>
@@ -89,8 +89,8 @@ export default async function OfferingPage({
 
             {/* Right: services list */}
             <div className="space-y-0 divide-y divide-[#120b09]/10">
-              {services.map(({ key, number }, i) => (
-                <ScrollReveal key={key} delay={i * 80}>
+              {services.map(({ number, title, body }, i) => (
+                <ScrollReveal key={number} delay={i * 80}>
                   <div className="py-10 md:py-12">
                     <div className="flex items-start gap-6">
                       <span className="font-cadiz text-xs text-[#120b09]/40 mt-1.5 shrink-0 w-6">
@@ -98,10 +98,10 @@ export default async function OfferingPage({
                       </span>
                       <div>
                         <h2 className="font-signifier font-light text-display-sm tracking-tight mb-4">
-                          {t(`${key}Title` as keyof typeof t)}
+                          {title}
                         </h2>
                         <p className="font-cadiz text-base leading-relaxed text-[#120b09]/75 max-w-prose">
-                          {t(`${key}Body` as keyof typeof t)}
+                          {body}
                         </p>
                       </div>
                     </div>

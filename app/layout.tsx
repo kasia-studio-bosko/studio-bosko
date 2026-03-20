@@ -13,5 +13,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  return children
+  // The <html> and <body> tags are provided by app/[locale]/layout.tsx
+  // This root layout is required by Next.js but acts as a pass-through
+  return <>{children}</>
 }
