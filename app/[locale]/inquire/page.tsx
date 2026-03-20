@@ -17,7 +17,7 @@ export async function generateMetadata({
   const path = locale === 'en' ? '/inquire' : `/${locale}/${slugMap[locale]}`
 
   return {
-    title: t('metaTitle'),
+    title: { absolute: t('metaTitle') },
     description: t('metaDescription'),
     alternates: {
       canonical: `${siteUrl}${path}`,

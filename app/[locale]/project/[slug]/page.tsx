@@ -69,7 +69,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     : `${siteUrl}/${locale}/${slugPrefixMap[locale]}/${slug}`
 
   return {
-    title: `${title} — Interior Design Project | Studio Bosko`,
+    title: { absolute: `${title} — Interior Design Project | Studio Bosko` },
     description,
     alternates: {
       canonical,
