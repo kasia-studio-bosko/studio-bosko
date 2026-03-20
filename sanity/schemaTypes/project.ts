@@ -272,8 +272,8 @@ export const projectSchema = defineType({
               name: 'alt',
               type: 'string',
               title: 'Alt text',
-              // @ts-expect-error — Sanity inline field validation type
-              validation: (Rule) =>
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              validation: (Rule: any) =>
                 Rule.required().warning('Alt text is strongly recommended for SEO'),
             },
             {

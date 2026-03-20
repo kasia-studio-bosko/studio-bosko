@@ -2,9 +2,9 @@ import { sanityClient } from './client'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-// Portable Text block shape (simplified — avoids hard dep on @portabletext/types)
+// Portable Text block shape — _type is required by next-sanity's PortableText component
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type PortableTextContent = Record<string, any>[]
+export type PortableTextContent = ({ _type: string } & Record<string, any>)[]
 
 export interface Project {
   _id: string
