@@ -4,6 +4,7 @@ export const routing = defineRouting({
   locales: ['en', 'de', 'pl'],
   defaultLocale: 'en',
   localePrefix: 'as-needed', // en at /, de at /de/, pl at /pl/
+  localeDetection: false,    // never redirect based on Accept-Language header
   pathnames: {
     '/': '/',
     '/studio': {

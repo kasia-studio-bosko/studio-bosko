@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 
@@ -7,10 +8,21 @@ export default async function Footer({ locale }: { locale: string }) {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="bg-[#2d1d17] overflow-hidden">
+    <footer className="bg-[#2d1d17]">
       {/* Top row */}
       <div className="max-w-[1440px] mx-auto px-8 md:px-12 pt-10 pb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        {/* Left: nav links */}
+        {/* Left: logo + nav links */}
+        <div className="flex flex-wrap items-center gap-6">
+          <Link href="/" aria-label="Studio Bosko — home">
+            <Image
+              src="/logo.svg"
+              alt="Studio Bosko"
+              width={89}
+              height={12}
+              className="h-3 w-auto opacity-70 hover:opacity-100 transition-opacity duration-200"
+            />
+          </Link>
+        </div>
         <nav className="flex flex-wrap items-center gap-5" aria-label="Footer navigation">
           <Link href="/projects" className="text-xs font-cadiz text-white/70 hover:text-white transition-colors duration-200 tracking-wide">
             {tNav('projects')}
@@ -28,7 +40,6 @@ export default async function Footer({ locale }: { locale: string }) {
             {tNav('inquire')}
           </Link>
         </nav>
-
         {/* Right: Instagram + copyright */}
         <p className="text-xs font-cadiz text-white/70 whitespace-nowrap">
           <a
@@ -44,14 +55,6 @@ export default async function Footer({ locale }: { locale: string }) {
         </p>
       </div>
 
-      {/* Full-width logo wordmark */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/logo.svg"
-        alt=""
-        aria-hidden="true"
-        className="w-full h-auto block"
-      />
     </footer>
   )
 }

@@ -46,8 +46,8 @@ const FEATURED_IMAGES = [
     title: 'Chroma Penthouse',
     location: 'Berlin Kreuzberg',
     year: '2024',
-    coverImage: 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg',
-    coverImageAlt: 'Chroma Penthouse — colour-layered penthouse interior in Berlin Kreuzberg',
+    coverImage: 'https://framerusercontent.com/images/l1lysvdOseg1KyDSJxHjCPPJQo.jpg',
+    coverImageAlt: 'Vibrant living room in a Berlin penthouse — Chroma Penthouse',
     category: 'Apartment',
   },
   {
@@ -55,8 +55,8 @@ const FEATURED_IMAGES = [
     title: 'Zander Rooftop',
     location: 'Berlin Mitte / Kreuzberg',
     year: '2023',
-    coverImage: 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg',
-    coverImageAlt: 'Zander Rooftop — rooftop apartment renovation in Berlin Mitte',
+    coverImage: 'https://framerusercontent.com/images/HtBz4JDvXubiEp6tEPI9Z4Cc.jpg',
+    coverImageAlt: 'Red kitchen island in bespoke kitchen — Zander Rooftop, Berlin',
     category: 'Apartment',
   },
   {
@@ -79,7 +79,7 @@ const FEATURED_IMAGES = [
   },
 ]
 
-const PRESS_MARQUEE = 'AD · VOGUE · ELLE DECORATION · yellowtrace · HOMES & GARDENS · Livingetc · est ·'
+const PRESS_MARQUEE = 'Architectural Digest · Domino · AD Spain · AD Germany · VOGUE Poland · Elle Decoration UK · est living · AD Middle East · Yellowtrace · &Living · AD100 Polska · ELLE Indonesia · BauNetz · Living Corriere · Design Alive ·'
 
 export default async function HomePage({
   params,
@@ -236,13 +236,13 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* ── 5. Press logos marquee ───────────────────────────────────────── */}
-      <section className="bg-[#d4cbc0] py-8 overflow-hidden" aria-label="Press mentions">
+      {/* ── 5. Press marquee ─────────────────────────────────────────────── */}
+      <section className="bg-[#2d1d17] py-5 overflow-hidden" aria-label="Press mentions">
         <div className="flex animate-marquee whitespace-nowrap">
-          <span className="font-cadiz text-lg text-[#2d1d17]/60 pr-16">
+          <span className="font-cadiz text-[11px] tracking-[0.2em] uppercase text-white/50 pr-16">
             {PRESS_MARQUEE}
           </span>
-          <span className="font-cadiz text-lg text-[#2d1d17]/60 pr-16">
+          <span className="font-cadiz text-[11px] tracking-[0.2em] uppercase text-white/50 pr-16">
             {PRESS_MARQUEE}
           </span>
         </div>

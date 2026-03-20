@@ -36,10 +36,6 @@ export async function generateMetadata({
 
 const STUDIO_IMAGE = 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg'
 
-const SUPPLIER_LOGOS = [
-  'Knoll', 'Fritz Hansen', 'Vitra', 'Flos', 'Artek', 'Cassina', 'Molteni&C',
-]
-
 export default async function StudioPage({
   params,
 }: {
@@ -47,7 +43,6 @@ export default async function StudioPage({
 }) {
   const { locale } = params
   setRequestLocale(locale)
-  const t = await getTranslations({ locale, namespace: 'studio' })
 
   return (
     <>
@@ -58,20 +53,20 @@ export default async function StudioPage({
             <p className="label-serif mb-4">Studio Bosko</p>
           </ScrollReveal>
           <ScrollReveal delay={100}>
-            <h1 className="font-signifier font-light text-display-xl tracking-tight text-balance max-w-2xl mb-12">
-              {t('heroHeading')}
+            <h1 className="font-signifier font-light text-display-xl tracking-tight text-balance max-w-3xl">
+              We design personality-driven spaces—crafted with curatorial instinct and delivered with clarity.
             </h1>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* ── Story section ─────────────────────────────────────────────────── */}
-      <section className="pb-section-y" aria-label="Studio story">
+      {/* ── About ─────────────────────────────────────────────────────────── */}
+      <section className="pb-section-y" aria-label="About the studio">
         <div className="page-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
-            {/* Image */}
+            {/* Sticky image */}
             <ScrollReveal>
-              <div className="aspect-[4/5] relative bg-[#d4cbc0] overflow-hidden sticky top-[calc(var(--header-height)+2rem)]">
+              <div className="aspect-[4/5] relative bg-[#d4cbc0] overflow-hidden lg:sticky lg:top-[calc(var(--header-height)+2rem)]">
                 <Image
                   src={STUDIO_IMAGE}
                   alt="Kasia Kronberger, founder of Studio Bosko"
@@ -84,50 +79,50 @@ export default async function StudioPage({
             </ScrollReveal>
 
             {/* Text */}
-            <div className="lg:pt-4 space-y-12">
+            <div className="space-y-10">
               <ScrollReveal delay={100}>
-                <p className="font-signifier font-light text-display-sm tracking-tight text-balance leading-relaxed">
-                  {t('intro')}
-                </p>
+                <p className="label-serif mb-8">About</p>
+                <div className="space-y-6">
+                  <p className="font-cadiz text-base md:text-lg leading-relaxed text-[#120b09]/80">
+                    As an interior design studio named AD100 for 2025 by Architectural Digest Polska, we are tastemakers for clients who share a strong appreciation for art, culture, and craftsmanship. We create layered, personality-driven homes with a clear point of view—confident, curated, and boldly individual. Our work balances high design with lived-in ease—spaces that feel as effortless as they are intentional. A quest for artful character runs through everything we curate, shaping homes that don't just look beautiful, but feel deeply personal.
+                  </p>
+                  <p className="font-cadiz text-base md:text-lg leading-relaxed text-[#120b09]/80">
+                    Practicality and liveability are equally important to us, so each of our designs is entirely custom. We design to support how you actually live, when no one is watching. Because great design isn't just seen — it's felt.
+                  </p>
+                  <p className="font-cadiz text-base md:text-lg leading-relaxed text-[#120b09]/80">
+                    Led by Kasia Kronberger, Studio Bosko brings together structured precision and intuitive curation. Kasia's background spans education in business and trend forecasting, and international design experience across London, Florence, Barcelona, and Brussels. Her work is shaped by a global sensibility—layering modern craftsmanship, historical references, and joyful tension into interiors that are worldly and authentically evocative. She is recognised for creating spaces that start conversations: rooms rich with personality, intentional clashes, and emotional resonance—without ever feeling staged or overworked.
+                  </p>
+                </div>
               </ScrollReveal>
 
-              <div className="space-y-6">
-                <ScrollReveal delay={150}>
-                  <p className="font-cadiz text-base md:text-lg leading-relaxed text-[#120b09]/80">
-                    {t('body1')}
+              {/* Ethos */}
+              <ScrollReveal delay={150}>
+                <div className="border-t border-[#120b09]/10 pt-10">
+                  <p className="label-serif mb-6">Ethos</p>
+                  <p className="font-cadiz text-base leading-relaxed text-[#120b09]/75 mb-6">
+                    Design for us is never about surface or spectacle but rather about self-expression and growth. Home is often our most valuable asset. Whereas the best interiors are the ones filled with character. It's about crafting environments that evolve with our discerning clients—busy professionals and their families—and help them live their best lives.
                   </p>
-                </ScrollReveal>
-                <ScrollReveal delay={200}>
-                  <p className="font-cadiz text-base md:text-lg leading-relaxed text-[#120b09]/80">
-                    {t('body2')}
-                  </p>
-                </ScrollReveal>
-                <ScrollReveal delay={250}>
-                  <p className="font-cadiz text-base md:text-lg leading-relaxed text-[#120b09]/80">
-                    {t('body3')}
-                  </p>
-                </ScrollReveal>
-              </div>
-
-              {/* Awards */}
-              <ScrollReveal delay={300}>
-                <div className="border-t border-[#120b09]/10 pt-8">
-                  <p className="label-serif mb-5">{t('awardsHeading')}</p>
-                  <ul className="space-y-2">
-                    <li className="font-cadiz text-sm text-[#120b09]/80">
-                      — {t('award1')}
-                    </li>
-                    <li className="font-cadiz text-sm text-[#120b09]/80">
-                      — {t('award2')}
-                    </li>
+                  <p className="font-signifier font-light text-sm tracking-wide text-[#120b09]/60 mb-4">How we approach every project:</p>
+                  <ul className="space-y-3">
+                    {[
+                      'We push functionality forward—prioritising flow, storage and usability from the start, so the space supports your lifestyle effortlessly.',
+                      'We curate for visual interest and emotional impact—balancing refined with playful, and old with new.',
+                      'We create homes that tell your story—through materials, colours, and the way light moves inside.',
+                      'We\'re your trusted advisor—guiding you through the complexity, helping you navigate decisions with confidence and problem-solving instincts.',
+                    ].map((item, i) => (
+                      <li key={i} className="flex gap-3 font-cadiz text-sm text-[#120b09]/75 leading-relaxed">
+                        <span className="shrink-0 text-[#120b09]/30 mt-0.5">→</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </ScrollReveal>
 
               {/* CTA */}
-              <ScrollReveal delay={350}>
-                <Link href="/inquire" className="btn-primary">
-                  Start a project →
+              <ScrollReveal delay={200}>
+                <Link href="/offering" className="btn-primary">
+                  Check out what we can do for you →
                 </Link>
               </ScrollReveal>
             </div>
@@ -135,23 +130,15 @@ export default async function StudioPage({
         </div>
       </section>
 
-      {/* ── Collaborations ───────────────────────────────────────────────── */}
-      <section className="section-spacing bg-[#d4cbc0]" aria-label="Collaborations and suppliers">
-        <div className="page-container">
+      {/* ── Yellowtrace quote ─────────────────────────────────────────────── */}
+      <section className="section-spacing bg-[#d4cbc0]" aria-label="Press quote">
+        <div className="page-container max-w-3xl">
           <ScrollReveal>
-            <p className="label-serif mb-10">{t('collaborationsHeading')}</p>
+            <blockquote className="font-signifier font-light text-display-sm tracking-tight text-balance leading-snug text-[#2d1d17] mb-6">
+              "One of the most impressive aspects of Studio Bosko is how it manages to be both bold and harmonious. The balance is achieved through vigilant curation of furniture and artwork, balancing the old with the new, the classic with the niche—the hallmark of Studio Bosko's approach."
+            </blockquote>
+            <p className="font-cadiz text-sm text-[#2d1d17]/60 tracking-widest uppercase">Yellowtrace</p>
           </ScrollReveal>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-6">
-            {SUPPLIER_LOGOS.map((name, i) => (
-              <ScrollReveal key={name} delay={i * 50}>
-                <div className="py-6 px-4 bg-[#ede8e2]/60 flex items-center justify-center text-center">
-                  <span className="font-signifier font-light text-sm tracking-tight">
-                    {name}
-                  </span>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
         </div>
       </section>
     </>
