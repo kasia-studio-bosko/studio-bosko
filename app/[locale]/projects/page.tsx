@@ -102,43 +102,36 @@ export default async function ProjectsPage({
         </div>
       </section>
 
-      {/* ── Projects grid ─────────────────────────────────────────────────── */}
-      <section className="pb-section-y" aria-label="Projects grid">
-        <div className="page-container">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-14">
-            {projects.map((project, i) => (
-              <ScrollReveal key={project.slug} delay={Math.min(i * 60, 300)}>
-                <Link
-                  href={{ pathname: '/project/[slug]', params: { slug: project.slug } }}
-                  className="group block"
-                >
-                  <div className="img-zoom-wrap aspect-[3/4] relative bg-[#d4cbc0] overflow-hidden mb-5">
-                    <Image
-                      src={project.coverImage}
-                      alt={project.coverImageAlt}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                    />
-                  </div>
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <h2 className="font-signifier font-light text-lg tracking-tight group-hover:text-[#f5500a] transition-colors duration-200">
-                        {project.title}
-                      </h2>
-                      <p className="mt-1 text-sm font-cadiz text-[#120b09]/60">
-                        {project.location}
-                        {project.year ? ` · ${project.year}` : ''}
-                      </p>
-                    </div>
-                    <span className="text-xs font-cadiz tracking-widest uppercase text-[#120b09]/40 group-hover:text-[#f5500a] transition-colors duration-200 whitespace-nowrap mt-1">
-                      {t('viewProject')} →
-                    </span>
-                  </div>
-                </Link>
-              </ScrollReveal>
-            ))}
-          </div>
+      {/* ── Projects grid — full-bleed 2-col ─────────────────────────────── */}
+      <section aria-label="Projects grid">
+        <div className="grid grid-cols-1 sm:grid-cols-2">
+          {projects.map((project, i) => (
+            <ScrollReveal key={project.slug} delay={Math.min(i * 60, 300)}>
+              <Link
+                href={{ pathname: '/project/[slug]', params: { slug: project.slug } }}
+                className="group block relative aspect-[3/4] overflow-hidden bg-[#d4cbc0]"
+              >
+                <Image
+                  src={project.coverImage}
+                  alt={project.coverImageAlt}
+                  fill
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                />
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-500" />
+                <div className="absolute bottom-0 left-0 p-6 md:p-8 translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-400">
+                  <h2 className="font-signifier font-light text-xl md:text-2xl text-white tracking-tight leading-tight">
+                    {project.title}
+                  </h2>
+                  <p className="mt-1 text-sm font-cadiz text-white/70">
+                    {project.location}
+                    {project.year ? ` · ${project.year}` : ''}
+                  </p>
+                </div>
+              </Link>
+            </ScrollReveal>
+          ))}
         </div>
       </section>
     </>

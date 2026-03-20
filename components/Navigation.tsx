@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { usePathname } from 'next/navigation'
 import LocaleSwitcher from './LocaleSwitcher'
@@ -68,14 +69,17 @@ export default function Navigation({ locale }: { locale: string }) {
             ))}
           </nav>
 
-          {/* Center: wordmark */}
-          <div className="flex-1 flex justify-center md:justify-center">
-            <Link
-              href="/"
-              className="font-signifier font-light text-[#60bf83] tracking-wider uppercase text-base md:text-lg leading-none"
-              aria-label="Studio Bosko — home"
-            >
-              STUDIO BOSKO
+          {/* Center: logo */}
+          <div className="flex-1 flex justify-center">
+            <Link href="/" aria-label="Studio Bosko — home">
+              <Image
+                src="/logo.svg"
+                alt="Studio Bosko"
+                width={178}
+                height={24}
+                className="h-6 w-auto"
+                priority
+              />
             </Link>
           </div>
 

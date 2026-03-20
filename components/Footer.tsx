@@ -44,15 +44,14 @@ export default async function Footer({ locale }: { locale: string }) {
         </p>
       </div>
 
-      {/* Massive wordmark */}
-      <div className="w-full overflow-hidden leading-none pb-0">
-        <p
-          className="font-signifier font-light text-[#60bf83] tracking-tight uppercase whitespace-nowrap w-full text-center"
-          style={{ fontSize: 'clamp(8rem, 16vw, 22rem)', lineHeight: 0.85 }}
-        >
-          STUDIO BOSKO
-        </p>
-      </div>
+      {/* Full-width logo wordmark */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/logo.svg"
+        alt=""
+        aria-hidden="true"
+        className="w-full h-auto block"
+      />
     </footer>
   )
 }
