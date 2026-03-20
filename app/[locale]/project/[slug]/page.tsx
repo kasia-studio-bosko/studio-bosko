@@ -94,7 +94,7 @@ export default async function ProjectPage({ params }: Props) {
     ? urlFor(data.coverImage).width(1920).height(1080).url()
     : 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg'
 
-  const projectsPath = locale === 'de' ? '/de/projekte' : locale === 'pl' ? '/pl/projekty' : '/projects'
+  const projectsPath = '/projects' as const
 
   // JSON-LD for the project (CreativeWork schema)
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://bosko.studio'
