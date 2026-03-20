@@ -62,6 +62,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const title = project?.metaTitle ?? project?.title ?? FALLBACK_PROJECT.title
   const description = project?.metaDescription ?? project?.seoIntro ?? FALLBACK_PROJECT.seoIntro
+  const ogImage = project?.coverImage?.asset?._ref
+    ? urlFor(project.coverImage).width(1200).height(630).fit('crop').url()
+    : `${siteUrl}/og-image.jpg`
 
   const slugPrefixMap: Record<string, string> = { en: 'project', de: 'projekt', pl: 'projekt' }
   const canonical = locale === 'en'
@@ -84,6 +87,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `${title} | Studio Bosko`,
       description,
       type: 'article',
+      images: [{ url: ogImage, width: 1200, height: 630 }],
     },
   }
 }
