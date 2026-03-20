@@ -58,7 +58,7 @@
   }
 
   body {
-    background-color: #d4cbc0;
+    background-color: #d4cbc0; /* matches live site rgb(212,203,192) */
     color: var(--color-fg);
     font-family: var(--font-cadiz);
     font-size: 1rem;

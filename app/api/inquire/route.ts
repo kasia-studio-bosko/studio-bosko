@@ -6,12 +6,12 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { name, email, phone, budget, timeline, location, description } = body
+    const { firstName, lastName, email, phone, address, serviceType, investment, description } = body
 
     // Validate required fields
-    if (!name || !email) {
+    if (!firstName || !lastName || !email) {
       return NextResponse.json(
-        { error: 'Name and email are required' },
+        { error: 'First name, last name, and email are required' },
         { status: 400 }
       )
     }
@@ -21,11 +21,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid email' }, { status: 400 })
     }
 
+    const fullName = `${firstName} ${lastName}`
+
     const { error } = await resend.emails.send({
       from: 'Studio Bosko <noreply@bosko.studio>',
       to: 'hello@bosko.studio',
       replyTo: email,
-      subject: `New inquiry from ${name}`,
+      subject: `New inquiry from ${fullName}`,
       html: `
         <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 40px 24px; color: #120b09;">
           <p style="font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin: 0 0 32px;">
@@ -33,29 +35,29 @@ export async function POST(request: NextRequest) {
           </p>
 
           <h1 style="font-weight: 300; font-size: 28px; margin: 0 0 32px; letter-spacing: -0.02em;">
-            ${name}
+            ${fullName}
           </h1>
 
           <table style="width: 100%; border-collapse: collapse; font-size: 15px; margin-bottom: 32px;">
             <tr>
-              <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da; color: #888; width: 130px;">Email</td>
+              <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da; color: #888; width: 160px;">Email</td>
               <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da;"><a href="mailto:${email}" style="color: #120b09;">${email}</a></td>
             </tr>
             ${phone ? `<tr>
               <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da; color: #888;">Phone</td>
               <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da;">${phone}</td>
             </tr>` : ''}
-            ${location ? `<tr>
-              <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da; color: #888;">Location</td>
-              <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da;">${location}</td>
+            ${address ? `<tr>
+              <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da; color: #888;">Project Address</td>
+              <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da;">${address}</td>
             </tr>` : ''}
-            ${budget ? `<tr>
-              <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da; color: #888;">Budget</td>
-              <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da;">${budget}</td>
+            ${serviceType ? `<tr>
+              <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da; color: #888;">Services</td>
+              <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da;">${serviceType}</td>
             </tr>` : ''}
-            ${timeline ? `<tr>
-              <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da; color: #888;">Timeline</td>
-              <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da;">${timeline}</td>
+            ${investment ? `<tr>
+              <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da; color: #888;">Investment</td>
+              <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da;">${investment}</td>
             </tr>` : ''}
           </table>
 

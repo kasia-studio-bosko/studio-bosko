@@ -135,7 +135,7 @@ export default async function StudioPage({
         <div className="page-container max-w-3xl">
           <ScrollReveal>
             <blockquote className="font-signifier font-light text-display-sm tracking-tight text-balance leading-snug text-[#2d1d17] mb-6">
-              "One of the most impressive aspects of Studio Bosko is how it manages to be both bold and harmonious. The balance is achieved through vigilant curation of furniture and artwork, balancing the old with the new, the classic with the niche—the hallmark of Studio Bosko's approach."
+              &ldquo;One of the most impressive aspects of [Studio Bosko] is how it manages to be both bold and harmonious. (&hellip;) The balance is achieved through vigilant curation of furniture and artwork, balancing the old with the new, the classic with the niche, the hallmark of Studio Bosko&rsquo;s approach.&rdquo;
             </blockquote>
             <p className="font-cadiz text-sm text-[#2d1d17]/60 tracking-widest uppercase">Yellowtrace</p>
           </ScrollReveal>
