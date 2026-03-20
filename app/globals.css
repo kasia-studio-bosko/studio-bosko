@@ -177,19 +177,27 @@
 
   /* Form input styles */
   .form-input {
-    @apply w-full bg-transparent border-b border-current/30 py-3 text-base font-cadiz
-           placeholder:text-current/40 focus:outline-none focus:border-current
-           transition-colors duration-200;
+    @apply w-full bg-transparent border-b py-3 text-base font-cadiz
+           focus:outline-none transition-colors duration-200;
+    border-color: color-mix(in srgb, currentColor 30%, transparent);
+  }
+  .form-input::placeholder {
+    color: color-mix(in srgb, currentColor 40%, transparent);
+  }
+  .form-input:focus {
+    border-color: currentColor;
   }
 
   /* Press tag */
   .press-tag {
-    @apply text-xs font-cadiz tracking-widest uppercase text-current/60;
+    @apply text-xs font-cadiz tracking-widest uppercase;
+    color: color-mix(in srgb, currentColor 60%, transparent);
   }
 
   /* Thin serif label */
   .label-serif {
-    @apply text-xs font-signifier tracking-widest uppercase text-current/60;
+    @apply text-xs font-signifier tracking-widest uppercase;
+    color: color-mix(in srgb, currentColor 60%, transparent);
   }
 }
 
