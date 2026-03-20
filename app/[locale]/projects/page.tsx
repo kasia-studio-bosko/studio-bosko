@@ -100,9 +100,6 @@ export default async function ProjectsPage({
   setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'projects' })
 
-  const projectPath = locale === 'de' ? 'projekt' : locale === 'pl' ? 'projekt' : 'project'
-  const prefix = locale === 'en' ? '' : `/${locale}`
-
   let projects = FALLBACK_GRID
   try {
     const sanityProjects = await getAllProjects()
@@ -149,7 +146,7 @@ export default async function ProjectsPage({
             {projects.map((project, i) => (
               <ScrollReveal key={project.slug} delay={Math.min(i * 60, 300)}>
                 <Link
-                  href={`${prefix}/${projectPath}/${project.slug}`}
+                  href={{ pathname: '/project/[slug]', params: { slug: project.slug } }}
                   className="group block"
                 >
                   <div className="img-zoom-wrap aspect-[3/4] relative bg-[#d4cbc0] overflow-hidden mb-5">
