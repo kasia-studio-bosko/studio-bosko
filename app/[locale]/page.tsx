@@ -2,9 +2,7 @@ import type { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
-import ProjectCarousel from '@/components/ProjectCarousel'
-import ScrollReveal from '@/components/ScrollReveal'
-import { getFeaturedProjects, getFeaturedPressItems, FALLBACK_PROJECTS, FALLBACK_PRESS } from '@/lib/sanity/queries'
+import { getFeaturedProjects, FALLBACK_PROJECTS } from '@/lib/sanity/queries'
 import { urlFor } from '@/lib/sanity/client'
 
 export async function generateMetadata({
@@ -40,6 +38,7 @@ export async function generateMetadata({
 
 // Framer image placeholders until Sanity is populated
 const HERO_IMAGE = 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg'
+const TESTIMONIAL_IMAGE = 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg'
 
 const FEATURED_IMAGES = [
   {
@@ -80,14 +79,7 @@ const FEATURED_IMAGES = [
   },
 ]
 
-const PRESS_LOGOS = [
-  { name: 'Architectural Digest', label: 'AD100 2025' },
-  { name: 'Domino', label: 'Fall 2025' },
-  { name: 'VOGUE Poland', label: 'Oct 2025' },
-  { name: 'AD Germany', label: 'Mar 2025' },
-  { name: 'est living', label: 'Apr 2025' },
-  { name: 'BauNetz', label: 'Jan 2025' },
-]
+const PRESS_MARQUEE = 'AD · VOGUE · ELLE DECORATION · yellowtrace · HOMES & GARDENS · Livingetc · est ·'
 
 export default async function HomePage({
   params,
@@ -119,209 +111,186 @@ export default async function HomePage({
 
   return (
     <>
-      {/* ── Hero ─────────────────────────────────────────────────────────── */}
+      {/* ── 1. Hero ───────────────────────────────────────────────────────── */}
+      <section className="relative h-screen w-full" aria-label="Hero">
+        <Image
+          src={HERO_IMAGE}
+          alt="Studio Bosko — interior design project showcase"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+          quality={90}
+        />
+      </section>
+
+      {/* ── 2. Intro section ─────────────────────────────────────────────── */}
       <section
-        className="relative min-h-[calc(100vh-var(--header-height))] flex items-end pb-12 md:pb-16 bg-[#d4cbc0]"
-        aria-label="Hero"
+        className="bg-[#705305] py-20 md:py-28 w-full"
+        aria-label="Introduction"
       >
-        {/* Full-bleed hero image */}
-        <div className="absolute inset-0">
-          <Image
-            src={HERO_IMAGE}
-            alt="Studio Bosko — interior design project showcase"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-            quality={90}
-          />
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#2d1d17]/60 via-transparent to-transparent" />
-        </div>
-
-        <div className="relative z-10 page-container w-full">
-          <div className="max-w-xl">
-            <ScrollReveal delay={0}>
-              <p className="text-xs font-cadiz tracking-widest uppercase text-[#ede8e2]/70 mb-4">
-                {t('heroTagline')} · {t('heroLocation')}
-              </p>
-            </ScrollReveal>
-            <ScrollReveal delay={100}>
-              <h1 className="font-signifier font-light text-display-xl text-[#ede8e2] text-balance mb-6">
-                Spaces that feel like home.
-              </h1>
-            </ScrollReveal>
-            <ScrollReveal delay={200}>
-              <p className="text-base md:text-lg font-cadiz text-[#ede8e2]/80 max-w-md mb-8 leading-relaxed">
-                {t('heroBody')}
-              </p>
-            </ScrollReveal>
-            <ScrollReveal delay={300}>
-              <div className="flex flex-wrap gap-4">
-                <Link href="/projects" className="btn-primary-dark">
-                  {t('heroCtaProjects')} →
-                </Link>
-                <Link href="/inquire" className="btn-primary-dark">
-                  {t('heroCtaInquire')}
-                </Link>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Featured projects carousel ────────────────────────────────────── */}
-      <section className="section-spacing" aria-label="Featured projects">
-        <div className="page-container">
-          <ScrollReveal>
-            <div className="flex items-end justify-between mb-10 md:mb-12">
-              <div>
-                <p className="label-serif mb-2">{t('featuredProjectsSubheading')}</p>
-                <h2 className="font-signifier font-light text-display-md tracking-tight">
-                  {t('featuredProjectsHeading')}
-                </h2>
-              </div>
-              <Link href="/projects" className="btn-text hidden md:inline-flex">
-                {t('heroCtaProjects')} →
-              </Link>
-            </div>
-          </ScrollReveal>
-
-          <ProjectCarousel
-            projects={featuredProjects}
-            locale={locale}
-            viewLabel={t('heroCtaProjects')}
-          />
-
-          <div className="mt-8 md:hidden">
-            <Link href="/projects" className="btn-text">
-              {t('heroCtaProjects')} →
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── About teaser ──────────────────────────────────────────────────── */}
-      <section className="section-spacing bg-[#d4cbc0]" aria-label="About Studio Bosko">
-        <div className="page-container">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
-            {/* Image */}
-            <ScrollReveal>
-              <div className="aspect-[3/4] relative bg-[#c4b9ac] overflow-hidden">
-                <Image
-                  src={HERO_IMAGE}
-                  alt="Kasia Kronberger, interior designer at Studio Bosko"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover"
-                />
-              </div>
-            </ScrollReveal>
-
-            {/* Text */}
-            <div>
-              <ScrollReveal delay={100}>
-                <p className="label-serif mb-4">About</p>
-              </ScrollReveal>
-              <ScrollReveal delay={150}>
-                <h2 className="font-signifier font-light text-display-md tracking-tight mb-8 text-balance">
-                  {t('aboutHeading')}
-                </h2>
-              </ScrollReveal>
-              <ScrollReveal delay={200}>
-                <p className="font-cadiz text-base md:text-lg leading-relaxed text-[#120b09]/80 mb-8">
-                  {t('aboutBody')}
-                </p>
-              </ScrollReveal>
-              <ScrollReveal delay={250}>
-                <Link href="/studio" className="btn-primary">
-                  {t('aboutCta')} →
-                </Link>
-              </ScrollReveal>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Offering teaser ───────────────────────────────────────────────── */}
-      <section className="section-spacing" aria-label="Our offering">
-        <div className="page-container max-w-3xl">
-          <ScrollReveal>
-            <p className="label-serif mb-4">{t('offeringHeading')}</p>
-          </ScrollReveal>
-          <ScrollReveal delay={100}>
-            <p className="font-signifier font-light text-display-lg tracking-tight text-balance mb-10">
-              {t('offeringBody')}
+        <div className="max-w-[1440px] mx-auto px-8 md:px-16">
+          <div className="md:w-[55%]">
+            <h1 className="font-signifier font-light text-[30px] leading-snug text-[#e1cd3c] mb-6">
+              {t('introH1')}
+            </h1>
+            <p className="font-signifier font-light text-[30px] leading-snug text-[#e1cd3c] mb-8">
+              {t('introBody')}
             </p>
-          </ScrollReveal>
-          <ScrollReveal delay={200}>
-            <Link href="/offering" className="btn-primary">
-              {t('offeringCta')} →
+            <Link
+              href="/inquire"
+              className="font-cadiz text-[15px] text-[#e1cd3c]/70 hover:text-[#e1cd3c] transition-colors duration-200"
+            >
+              {t('heroCtaSeeIfFit')} ›
             </Link>
-          </ScrollReveal>
+          </div>
         </div>
       </section>
 
-      {/* ── Press strip ───────────────────────────────────────────────────── */}
-      <section className="py-16 border-y border-[#120b09]/10" aria-label="Press mentions">
-        <div className="page-container">
-          <ScrollReveal>
-            <div className="flex items-center justify-between mb-10">
-              <div>
-                <p className="label-serif mb-1">{t('pressHeading')}</p>
-                <p className="font-signifier font-light text-display-sm">
-                  {t('pressIntro')}
+      {/* ── 3. Selected Work — sticky scroll ────────────────────────────── */}
+      <section className="flex w-full" aria-label="Selected Work">
+        {/* Left sticky panel */}
+        <div className="hidden md:flex w-[35%] sticky top-0 h-screen bg-[#d4cbc0] flex-col justify-center pl-16 pr-8">
+          <p className="font-cadiz text-xs tracking-widest uppercase text-[#2d1d17]/50 mb-3">
+            {t('selectedWorkSubheading')}
+          </p>
+          <h2 className="font-signifier font-light text-5xl text-[#2d1d17] mb-6 tracking-tight">
+            {t('selectedWork')}
+          </h2>
+          <Link
+            href="/projects"
+            className="font-cadiz text-sm text-[#2d1d17]/60 hover:text-[#2d1d17] transition-colors duration-200"
+          >
+            {t('seeAllProjects')} →
+          </Link>
+        </div>
+
+        {/* Right scrolling panel */}
+        <div className="w-full md:w-[65%]">
+          {/* Mobile heading */}
+          <div className="md:hidden bg-[#d4cbc0] px-8 py-12">
+            <p className="font-cadiz text-xs tracking-widest uppercase text-[#2d1d17]/50 mb-3">
+              {t('selectedWorkSubheading')}
+            </p>
+            <h2 className="font-signifier font-light text-4xl text-[#2d1d17] mb-4 tracking-tight">
+              {t('selectedWork')}
+            </h2>
+            <Link
+              href="/projects"
+              className="font-cadiz text-sm text-[#2d1d17]/60 hover:text-[#2d1d17] transition-colors duration-200"
+            >
+              {t('seeAllProjects')} →
+            </Link>
+          </div>
+
+          {featuredProjects.map((project) => (
+            <Link
+              key={project.slug}
+              href={{ pathname: '/project/[slug]', params: { slug: project.slug } }}
+              className="block relative group"
+              style={{ height: '85vh' }}
+            >
+              <Image
+                src={project.coverImage}
+                alt={project.coverImageAlt}
+                fill
+                sizes="(max-width: 768px) 100vw, 65vw"
+                className="object-cover"
+              />
+              {/* Hover overlay */}
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-500" />
+              <div className="absolute bottom-0 left-0 p-8 translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-400">
+                <p className="font-signifier font-light text-2xl text-white leading-tight">
+                  {project.title}
+                </p>
+                <p className="font-cadiz text-sm text-white/70 mt-1">
+                  {project.location}
                 </p>
               </div>
-              <Link href="/press" className="btn-text hidden md:inline-flex">
-                {t('pressCta')} →
-              </Link>
-            </div>
-          </ScrollReveal>
-
-          {/* Press logos grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 md:gap-8">
-            {PRESS_LOGOS.map((item, i) => (
-              <ScrollReveal key={item.name} delay={i * 60}>
-                <div className="flex flex-col items-center text-center py-4 px-2 border border-[#120b09]/10 hover:border-[#120b09]/30 transition-colors duration-200">
-                  <span className="font-signifier font-light text-sm tracking-tight text-[#120b09]">
-                    {item.name}
-                  </span>
-                  <span className="text-xs font-cadiz text-[#120b09]/50 mt-1">
-                    {item.label}
-                  </span>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-
-          <div className="mt-8 md:hidden">
-            <Link href="/press" className="btn-text">
-              {t('pressCta')} →
             </Link>
-          </div>
+          ))}
         </div>
       </section>
 
-      {/* ── CTA inquire ───────────────────────────────────────────────────── */}
+      {/* ── 4. Offering section ──────────────────────────────────────────── */}
       <section
-        className="section-spacing bg-[#2d1d17] text-[#ede8e2]"
+        className="bg-[#705305] py-20 md:py-32 px-8 md:px-16 lg:px-24 w-full"
+        aria-label="Offering"
+      >
+        <div className="max-w-[1440px] mx-auto">
+          <h2
+            className="font-signifier font-light text-[#e1cd3c] mb-8 tracking-tight"
+            style={{ fontSize: '50px' }}
+          >
+            Offering
+          </h2>
+          <p className="font-signifier font-light text-[22px] leading-relaxed text-[#e1cd3c]/80 max-w-3xl mb-8">
+            {t('offeringBodyFull')}
+          </p>
+          <Link
+            href="/offering"
+            className="font-cadiz text-[15px] text-[#e1cd3c]/70 hover:text-[#e1cd3c] transition-colors duration-200"
+          >
+            {t('offeringCtaLearn')} ›
+          </Link>
+        </div>
+      </section>
+
+      {/* ── 5. Press logos marquee ───────────────────────────────────────── */}
+      <section className="bg-[#d4cbc0] py-8 overflow-hidden" aria-label="Press mentions">
+        <div className="flex animate-marquee whitespace-nowrap">
+          <span className="font-cadiz text-lg text-[#2d1d17]/60 pr-16">
+            {PRESS_MARQUEE}
+          </span>
+          <span className="font-cadiz text-lg text-[#2d1d17]/60 pr-16">
+            {PRESS_MARQUEE}
+          </span>
+        </div>
+      </section>
+
+      {/* ── 6. Testimonial ──────────────────────────────────────────────── */}
+      <section
+        className="flex flex-col md:flex-row"
+        style={{ height: '85vh' }}
+        aria-label="Client testimonial"
+      >
+        {/* Left: image */}
+        <div className="relative w-full md:w-1/2 h-1/2 md:h-full">
+          <Image
+            src={TESTIMONIAL_IMAGE}
+            alt="Studio Bosko interior project"
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover"
+          />
+        </div>
+
+        {/* Right: quote */}
+        <div className="w-full md:w-1/2 h-1/2 md:h-full bg-[#60bf83] flex flex-col justify-center px-8 md:px-12 lg:px-16">
+          <blockquote className="font-signifier font-light text-2xl md:text-3xl text-white leading-relaxed">
+            {t('testimonialQuote')}
+          </blockquote>
+          <p className="font-cadiz text-sm text-white/70 mt-6">
+            {t('testimonialAttribution')}
+          </p>
+        </div>
+      </section>
+
+      {/* ── 7. CTA section ──────────────────────────────────────────────── */}
+      <section
+        className="bg-[#705305] py-20 md:py-28 px-8 md:px-16 lg:px-24 w-full"
         aria-label="Start a project"
       >
-        <div className="page-container max-w-2xl text-center mx-auto">
-          <ScrollReveal>
-            <p className="label-serif text-[#ede8e2]/60 mb-4">{t('inquireHeading')}</p>
-          </ScrollReveal>
-          <ScrollReveal delay={100}>
-            <h2 className="font-signifier font-light text-display-lg tracking-tight text-balance mb-8">
-              {t('inquireBody')}
-            </h2>
-          </ScrollReveal>
-          <ScrollReveal delay={200}>
-            <Link href="/inquire" className="btn-primary-dark">
-              {t('inquireCta')} →
-            </Link>
-          </ScrollReveal>
+        <div className="max-w-[1440px] mx-auto">
+          <p className="font-signifier font-light text-[30px] leading-snug text-[#e1cd3c] max-w-2xl mb-8">
+            {t('ctaBodyFull')}
+          </p>
+          <Link
+            href="/inquire"
+            className="font-cadiz text-[15px] text-[#e1cd3c]/70 hover:text-[#e1cd3c] transition-colors duration-200"
+          >
+            {t('ctaConsultation')} ›
+          </Link>
         </div>
       </section>
     </>

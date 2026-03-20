@@ -47,7 +47,7 @@
     --font-inter: 'Inter', system-ui, -apple-system, sans-serif;
 
     /* Color tokens */
-    --color-bg: #ede8e2;
+    --color-bg: #d4cbc0;
     --color-beige: #d4cbc0;
     --color-fg: #120b09;
     --color-brown: #2d1d17;
@@ -69,7 +69,7 @@
   }
 
   body {
-    background-color: var(--color-bg);
+    background-color: #d4cbc0;
     color: var(--color-fg);
     font-family: var(--font-cadiz);
     font-size: 1rem;
@@ -254,6 +254,16 @@
 @keyframes slide-in-right {
   from { transform: translateX(100%); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
+}
+
+/* ─── Marquee ───────────────────────────────────────────────────────────────── */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
 }
 
 /* ─── Carousel ──────────────────────────────────────────────────────────────── */

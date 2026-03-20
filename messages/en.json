@@ -28,7 +28,19 @@
     "pressCta": "All press",
     "inquireHeading": "Start a project",
     "inquireBody": "We take on a small number of projects each year to ensure every client receives our full attention.",
-    "inquireCta": "Get in touch"
+    "inquireCta": "Get in touch",
+    "heroCtaSeeIfFit": "See if we're a fit",
+    "selectedWork": "Selected Work",
+    "selectedWorkSubheading": "Recent interiors",
+    "seeAllProjects": "See all projects",
+    "introBody": "Personality-driven interiors layered with character, culture, and craftsmanship. Blending spatial planning with emotive curation, we craft homes that feel artful, personal, and true to how you actually live.",
+    "introH1": "Interior design studio based in Berlin and working across Europe.",
+    "offeringBodyFull": "Studio Bosko is a Berlin-based interior design studio running full-scope residential projects across Europe — from historic renovations and high-end new builds in Berlin and Warsaw, to complete interior design and furnishing schemes in Germany, Austria and beyond. Founded by Kasia Kronberger, the studio focuses on custom residential and boutique commercial projects.",
+    "offeringCtaLearn": "Learn what we offer",
+    "testimonialQuote": "\"With Studio Bosko taking care of everything, we could lean back and enjoy our beautiful place. While initially unsure if interior design would be worth it, we now have no doubt that it added value to our place and enhanced our wellbeing.\"",
+    "testimonialAttribution": "Lana, homeowner and tech executive",
+    "ctaBodyFull": "We take on a limited number of projects each year. If you're considering a renovation or new home, we'd love to hear about it.",
+    "ctaConsultation": "Book a complimentary consultation"
   },
   "studio": {
     "metaTitle": "About Studio Bosko — Interior Designer Kasia Kronberger, Berlin",
