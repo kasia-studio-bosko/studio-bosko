@@ -1,4 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { Resend } from 'resend'
+
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(request: NextRequest) {
   try {
@@ -13,42 +16,66 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
       return NextResponse.json({ error: 'Invalid email' }, { status: 400 })
     }
 
-    /*
-     * TODO: Connect to your preferred email service.
-     * Options:
-     *   - Resend (resend.com) — recommended
-     *   - SendGrid
-     *   - Postmark
-     *
-     * Example with Resend:
-     *
-     * import { Resend } from 'resend'
-     * const resend = new Resend(process.env.RESEND_API_KEY)
-     * await resend.emails.send({
-     *   from: 'noreply@bosko.studio',
-     *   to: 'studio@bosko.studio',
-     *   subject: `New inquiry from ${name}`,
-     *   html: `...`,
-     * })
-     */
+    const { error } = await resend.emails.send({
+      from: 'Studio Bosko <noreply@bosko.studio>',
+      to: 'hello@bosko.studio',
+      replyTo: email,
+      subject: `New inquiry from ${name}`,
+      html: `
+        <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 40px 24px; color: #120b09;">
+          <p style="font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin: 0 0 32px;">
+            Studio Bosko — New Inquiry
+          </p>
 
-    // Log for now (replace with email sending)
-    console.log('Inquiry received:', {
-      name,
-      email,
-      phone,
-      budget,
-      timeline,
-      location,
-      description,
-      timestamp: new Date().toISOString(),
+          <h1 style="font-weight: 300; font-size: 28px; margin: 0 0 32px; letter-spacing: -0.02em;">
+            ${name}
+          </h1>
+
+          <table style="width: 100%; border-collapse: collapse; font-size: 15px; margin-bottom: 32px;">
+            <tr>
+              <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da; color: #888; width: 130px;">Email</td>
+              <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da;"><a href="mailto:${email}" style="color: #120b09;">${email}</a></td>
+            </tr>
+            ${phone ? `<tr>
+              <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da; color: #888;">Phone</td>
+              <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da;">${phone}</td>
+            </tr>` : ''}
+            ${location ? `<tr>
+              <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da; color: #888;">Location</td>
+              <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da;">${location}</td>
+            </tr>` : ''}
+            ${budget ? `<tr>
+              <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da; color: #888;">Budget</td>
+              <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da;">${budget}</td>
+            </tr>` : ''}
+            ${timeline ? `<tr>
+              <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da; color: #888;">Timeline</td>
+              <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da;">${timeline}</td>
+            </tr>` : ''}
+          </table>
+
+          ${description ? `
+          <div style="margin-bottom: 32px;">
+            <p style="font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin: 0 0 12px;">About the project</p>
+            <p style="font-size: 15px; line-height: 1.7; margin: 0; white-space: pre-wrap;">${description}</p>
+          </div>` : ''}
+
+          <p style="font-size: 12px; color: #aaa; margin: 0; border-top: 1px solid #e5e0da; padding-top: 24px;">
+            Sent from bosko.studio/inquire · ${new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+          </p>
+        </div>
+      `,
     })
+
+    if (error) {
+      console.error('Resend error:', error)
+      return NextResponse.json({ error: 'Failed to send email' }, { status: 500 })
+    }
 
     return NextResponse.json({ success: true })
   } catch (error) {
