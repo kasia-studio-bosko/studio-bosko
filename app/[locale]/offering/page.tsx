@@ -33,7 +33,7 @@ export async function generateMetadata({
 const PROJECT_TYPES = [
   {
     title: 'Complex Renovation',
-    body: 'Home is often your most valued asset. We know how to unlock the potential of any property and increase its worth for you and your family. Through thoughtful architectural planning, tailored curation and professional fulfilment, our interiors are both function-forward and high-design. Thanks to our experience, problem-solving attitude as well as a trusted international network of craftspeople, we're ready to realise projects across whole Europe.',
+    body: "Home is often your most valued asset. We know how to unlock the potential of any property and increase its worth for you and your family. Through thoughtful architectural planning, tailored curation and professional fulfilment, our interiors are both function-forward and high-design. Thanks to our experience, problem-solving attitude as well as a trusted international network of craftspeople, we\u2019re ready to realise projects across whole Europe.",
   },
   {
     title: 'Interiors Upgrade',
