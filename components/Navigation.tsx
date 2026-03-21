@@ -75,9 +75,9 @@ export default function Navigation({ locale }: { locale: string }) {
               <Image
                 src="/logo.svg"
                 alt="Studio Bosko"
-                width={148}
-                height={20}
-                className="h-5 w-auto"
+                width={160}
+                height={22}
+                className="h-[22px] w-auto"
                 priority
               />
             </Link>
