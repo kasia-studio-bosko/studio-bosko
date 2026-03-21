@@ -180,7 +180,7 @@ export default async function HomePage({
             <Link
               key={project.slug}
               href={{ pathname: '/project/[slug]', params: { slug: project.slug } }}
-              className="block relative group"
+              className="block relative group overflow-hidden"
               style={{ height: '82vh' }}
             >
               <Image
@@ -188,7 +188,7 @@ export default async function HomePage({
                 alt={project.coverImageAlt}
                 fill
                 sizes="(max-width: 768px) 100vw, 68vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
               />
               {/* Hover overlay */}
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-500" />
