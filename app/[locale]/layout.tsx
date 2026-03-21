@@ -7,6 +7,7 @@ import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
+import FooterReveal from '@/components/FooterReveal'
 import SchemaOrg from '@/components/SchemaOrg'
 import '../globals.css'
 
@@ -98,9 +99,11 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <SchemaOrg locale={locale} />
           <Navigation locale={locale} />
-          <main id="main-content" className="min-h-screen pt-[var(--header-height)]">
-            {children}
-          </main>
+          <FooterReveal>
+            <main id="main-content" className="min-h-screen pt-[var(--header-height)]">
+              {children}
+            </main>
+          </FooterReveal>
           <Footer locale={locale} />
         </NextIntlClientProvider>
       </body>
