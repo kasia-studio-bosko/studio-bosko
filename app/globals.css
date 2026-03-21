@@ -61,15 +61,14 @@
     background-color: #d4cbc0;
     color: var(--color-fg);
     font-family: var(--font-cadiz);
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: 0.9375rem; /* 15px — matches bosko.studio */
+    line-height: 1.4;     /* 21px / 15px */
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-signifier);
     font-weight: 300;
-    line-height: 1.05;
-    letter-spacing: -0.04em;
+    /* No blanket letter-spacing — set per element to match bosko.studio exactly */
   }
 
   a {

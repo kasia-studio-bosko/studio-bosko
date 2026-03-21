@@ -48,7 +48,7 @@ export default function Navigation({ locale }: { locale: string }) {
               <Link
                 key={key}
                 href={href}
-                className="text-[15px] font-cadiz text-white/90 hover:text-white transition-colors duration-200 tracking-wide"
+                className="text-[15px] font-cadiz text-white/90 hover:text-white transition-colors duration-200"
               >
                 {t(key)}
               </Link>

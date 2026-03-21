@@ -53,7 +53,7 @@ export default async function StudioPage({
             <p className="label-serif mb-4">Studio Bosko</p>
           </ScrollReveal>
           <ScrollReveal delay={100}>
-            <h1 className="font-signifier font-light text-[28px] md:text-[34px] leading-snug tracking-tight text-balance max-w-3xl">
+            <h1 className="font-signifier font-light text-[30px] leading-[42px] text-balance max-w-3xl" style={{ letterSpacing: '-0.2px' }}>
               We design personality-driven spaces—crafted with curatorial instinct and delivered with clarity.
             </h1>
           </ScrollReveal>
@@ -134,7 +134,7 @@ export default async function StudioPage({
       <section className="section-spacing bg-[#d4cbc0]" aria-label="Press quote">
         <div className="page-container max-w-3xl">
           <ScrollReveal>
-            <blockquote className="font-signifier font-light text-display-sm tracking-tight text-balance leading-snug text-[#2d1d17] mb-6">
+            <blockquote className="font-signifier font-light text-[30px] leading-[42px] text-balance text-[#2d1d17] mb-6" style={{ letterSpacing: '-0.6px' }}>
               &ldquo;One of the most impressive aspects of [Studio Bosko] is how it manages to be both bold and harmonious. (&hellip;) The balance is achieved through vigilant curation of furniture and artwork, balancing the old with the new, the classic with the niche, the hallmark of Studio Bosko&rsquo;s approach.&rdquo;
             </blockquote>
             <p className="font-cadiz text-sm text-[#2d1d17]/60 tracking-widest uppercase">Yellowtrace</p>

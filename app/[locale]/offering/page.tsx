@@ -62,7 +62,7 @@ export default async function OfferingPage({
             <p className="label-serif mb-4">Studio Bosko</p>
           </ScrollReveal>
           <ScrollReveal delay={100}>
-            <h1 className="font-signifier font-light text-[28px] md:text-[34px] leading-snug tracking-tight text-balance max-w-3xl">
+            <h1 className="font-signifier font-light text-[30px] leading-[42px] text-balance max-w-3xl" style={{ letterSpacing: '-0.2px' }}>
               We're a full-service interior design practice based in Berlin and Warsaw, running projects internationally.
             </h1>
           </ScrollReveal>
@@ -143,7 +143,7 @@ export default async function OfferingPage({
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
             {PROJECT_TYPES.map(({ title, body }, i) => (
               <ScrollReveal key={title} delay={i * 80}>
-                <h2 className="font-signifier font-light text-display-sm tracking-tight mb-4">
+                <h2 className="font-signifier font-normal text-[50px] leading-[60px] mb-4">
                   {title}
                 </h2>
                 <p className="font-cadiz text-sm leading-relaxed text-[#120b09]/70">
@@ -159,7 +159,7 @@ export default async function OfferingPage({
       <section className="section-spacing bg-[#2d1d17]" aria-label="Client testimonial">
         <div className="page-container max-w-2xl">
           <ScrollReveal>
-            <blockquote className="font-signifier font-light text-display-sm tracking-tight text-balance leading-snug text-[#ede8e2] mb-6">
+            <blockquote className="font-signifier font-light text-[30px] leading-[42px] text-balance text-[#ede8e2] mb-6" style={{ letterSpacing: '-0.6px' }}>
               "Studio Bosko was a lifesaver for my apartment redesign. As an expat in Germany, tackling a renovation project was overwhelming, but Kasia's exceptional design sense and strong network of contractors made the process smooth and enjoyable."
             </blockquote>
             <p className="font-cadiz text-sm text-white/50">Doug, homeowner and antiques collector</p>
@@ -171,7 +171,7 @@ export default async function OfferingPage({
       <section className="section-spacing" aria-label="Start your project">
         <div className="page-container max-w-2xl text-center mx-auto">
           <ScrollReveal>
-            <h2 className="font-signifier font-light text-display-lg tracking-tight mb-8 text-balance">
+            <h2 className="font-signifier font-normal text-[50px] leading-[60px] mb-8 text-balance">
               Ready to begin?
             </h2>
           </ScrollReveal>

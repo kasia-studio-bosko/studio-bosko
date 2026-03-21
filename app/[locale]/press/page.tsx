@@ -72,12 +72,12 @@ export default async function PressPage({
             <p className="label-serif mb-4">Studio Bosko</p>
           </ScrollReveal>
           <ScrollReveal delay={100}>
-            <h1 className="font-signifier font-light text-display-xl tracking-tight text-balance mb-8">
+            <h1 className="font-signifier font-light text-[30px] leading-[42px] text-balance mb-8" style={{ letterSpacing: '-0.2px' }}>
               Press
             </h1>
           </ScrollReveal>
           <ScrollReveal delay={150}>
-            <p className="font-cadiz text-base md:text-lg leading-relaxed text-[#120b09]/75 max-w-2xl">
+            <p className="font-cadiz text-[15px] leading-[21px] text-[#120b09]/75 max-w-2xl">
               Studio Bosko has been named AD100 for 2025 and featured in print and online across international publications and platforms. Browse our archive of stories and features.
             </p>
           </ScrollReveal>
@@ -91,7 +91,7 @@ export default async function PressPage({
             {PRESS_ITEMS.map((item, i) => (
               <ScrollReveal key={`${item.publication}-${item.issue}`} delay={Math.min(i * 30, 300)}>
                 <div className="py-5 flex items-baseline justify-between gap-6">
-                  <p className="font-signifier font-light text-lg tracking-tight text-[#120b09]">
+                  <p className="font-cadiz text-[15px] leading-[21px] text-[#120b09]">
                     {item.publication}
                   </p>
                   <p className="font-cadiz text-sm text-[#120b09]/50 shrink-0">
@@ -111,7 +111,7 @@ export default async function PressPage({
       >
         <div className="page-container max-w-2xl">
           <ScrollReveal>
-            <h2 className="font-signifier font-light text-display-lg tracking-tight mb-8 text-balance">
+            <h2 className="font-signifier font-normal text-[50px] leading-[60px] mb-8 text-balance">
               Start a project with Studio Bosko
             </h2>
           </ScrollReveal>

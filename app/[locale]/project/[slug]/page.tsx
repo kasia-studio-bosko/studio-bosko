@@ -165,7 +165,7 @@ export default async function ProjectPage({ params }: Props) {
                 </Link>
               </ScrollReveal>
               <ScrollReveal delay={100}>
-                <h1 className="font-signifier font-light text-display-lg tracking-tight text-balance mb-6">
+                <h1 className="font-signifier font-light text-[30px] leading-[42px] text-balance mb-6" style={{ letterSpacing: '-0.2px' }}>
                   {data.title}
                 </h1>
               </ScrollReveal>
@@ -283,7 +283,7 @@ export default async function ProjectPage({ params }: Props) {
       >
         <div className="page-container max-w-2xl">
           <ScrollReveal>
-            <h2 className="font-signifier font-light text-display-lg tracking-tight text-balance mb-8">
+            <h2 className="font-signifier font-normal text-[50px] leading-[60px] text-balance mb-8">
               Interested in working together?
             </h2>
           </ScrollReveal>

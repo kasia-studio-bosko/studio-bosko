@@ -82,7 +82,7 @@ export default function HeroCarousel({ slides, seeIfFitLabel, seeAllLabel }: Her
           <p className="font-cadiz text-xs tracking-[0.18em] uppercase text-white/60 mb-1">
             {slides[current].location}
           </p>
-          <p className="font-signifier font-light text-2xl md:text-3xl text-white leading-tight">
+          <p className="font-signifier font-light text-[30px] leading-[42px] text-white" style={{ letterSpacing: '-0.6px' }}>
             {slides[current].title}
           </p>
         </div>
@@ -111,7 +111,7 @@ export default function HeroCarousel({ slides, seeIfFitLabel, seeAllLabel }: Her
           {/* See all link */}
           <Link
             href="/projects"
-            className="font-cadiz text-[13px] text-white/70 hover:text-white transition-colors duration-200 tracking-wide"
+            className="font-cadiz text-[15px] text-white/70 hover:text-white transition-colors duration-200"
           >
             {seeAllLabel} →
           </Link>

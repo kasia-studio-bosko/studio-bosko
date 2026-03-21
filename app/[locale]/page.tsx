@@ -124,10 +124,10 @@ export default async function HomePage({
       <section className="bg-[#705305] py-20 md:py-28 w-full" aria-label="Introduction">
         <div className="max-w-[1440px] mx-auto px-8 md:px-16">
           <div className="md:w-[58%]">
-            <h1 className="font-signifier font-light text-[28px] md:text-[34px] leading-snug text-[#e1cd3c] mb-6 tracking-tight">
+            <h1 className="font-signifier font-light text-[30px] leading-[42px] text-[#e1cd3c] mb-6" style={{ letterSpacing: '-0.2px' }}>
               {t('introH1')}
             </h1>
-            <p className="font-signifier font-light text-[22px] md:text-[26px] leading-snug text-[#e1cd3c]/80 mb-10">
+            <p className="font-signifier font-light text-[30px] leading-[42px] text-[#e1cd3c]/80 mb-10" style={{ letterSpacing: '-0.6px' }}>
               {t('introBody')}
             </p>
             <Link
@@ -147,7 +147,7 @@ export default async function HomePage({
           <p className="font-cadiz text-[11px] tracking-[0.2em] uppercase text-[#2d1d17]/50 mb-3">
             {t('selectedWorkSubheading')}
           </p>
-          <h2 className="font-signifier font-light text-[44px] text-[#2d1d17] mb-6 tracking-tight leading-tight">
+          <h2 className="font-signifier font-normal text-[50px] text-[#2d1d17] mb-6 leading-[60px]">
             {t('selectedWork')}
           </h2>
           <Link
@@ -165,7 +165,7 @@ export default async function HomePage({
             <p className="font-cadiz text-[11px] tracking-[0.2em] uppercase text-[#2d1d17]/50 mb-3">
               {t('selectedWorkSubheading')}
             </p>
-            <h2 className="font-signifier font-light text-4xl text-[#2d1d17] mb-4 tracking-tight">
+            <h2 className="font-signifier font-normal text-[50px] text-[#2d1d17] mb-4 leading-[60px]">
               {t('selectedWork')}
             </h2>
             <Link
@@ -214,10 +214,7 @@ export default async function HomePage({
           <p className="font-cadiz text-[11px] tracking-[0.2em] uppercase text-[#e1cd3c]/50 mb-6">
             Studio Bosko
           </p>
-          <h2
-            className="font-signifier font-light text-[#e1cd3c] mb-8 tracking-tight leading-tight"
-            style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)' }}
-          >
+          <h2 className="font-signifier font-normal text-[50px] leading-[60px] text-[#e1cd3c] mb-8">
             Offering
           </h2>
           <p className="font-signifier font-light text-[20px] md:text-[24px] leading-relaxed text-[#e1cd3c]/80 max-w-3xl mb-10">
@@ -263,7 +260,7 @@ export default async function HomePage({
 
         {/* Right: quote */}
         <div className="w-full md:w-1/2 bg-[#60bf83] flex flex-col justify-center px-10 md:px-14 lg:px-20 py-16">
-          <blockquote className="font-signifier font-light text-[22px] md:text-[26px] leading-relaxed text-white mb-8">
+          <blockquote className="font-signifier font-light text-[30px] leading-[42px] text-white mb-8" style={{ letterSpacing: '-0.6px' }}>
             {t('testimonialQuote')}
           </blockquote>
           <p className="font-cadiz text-sm text-white/70 tracking-wide">
@@ -278,7 +275,7 @@ export default async function HomePage({
         aria-label="Start a project"
       >
         <div className="max-w-[1440px] mx-auto">
-          <p className="font-signifier font-light text-[22px] md:text-[28px] leading-snug text-[#e1cd3c] max-w-2xl mb-10">
+          <p className="font-signifier font-light text-[30px] leading-[42px] text-[#e1cd3c] max-w-2xl mb-10" style={{ letterSpacing: '-0.6px' }}>
             {t('ctaBodyFull')}
           </p>
           <Link

@@ -90,7 +90,7 @@ export default async function ProjectsPage({
             <p className="label-serif mb-4">Studio Bosko</p>
           </ScrollReveal>
           <ScrollReveal delay={100}>
-            <h1 className="font-signifier font-light text-display-xl tracking-tight text-balance max-w-2xl mb-4">
+            <h1 className="font-signifier font-light text-[30px] leading-[42px] text-balance max-w-2xl mb-4" style={{ letterSpacing: '-0.2px' }}>
               {t('heroHeading')}
             </h1>
           </ScrollReveal>
@@ -109,7 +109,7 @@ export default async function ProjectsPage({
             <ScrollReveal key={project.slug} delay={Math.min(i * 60, 300)}>
               <Link
                 href={{ pathname: '/project/[slug]', params: { slug: project.slug } }}
-                className="group block relative aspect-[3/4] overflow-hidden bg-[#d4cbc0]"
+                className="group block relative aspect-square overflow-hidden bg-[#d4cbc0]"
               >
                 <Image
                   src={project.coverImage}
@@ -121,7 +121,7 @@ export default async function ProjectsPage({
                 {/* Hover overlay */}
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-500" />
                 <div className="absolute bottom-0 left-0 p-6 md:p-8 translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-400">
-                  <h2 className="font-signifier font-light text-xl md:text-2xl text-white tracking-tight leading-tight">
+                  <h2 className="font-signifier font-light text-[30px] leading-[42px] text-white" style={{ letterSpacing: '-0.6px' }}>
                     {project.title}
                   </h2>
                   <p className="mt-1 text-sm font-cadiz text-white/70">
