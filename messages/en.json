@@ -44,7 +44,7 @@
   },
   "studio": {
     "metaTitle": "About Studio Bosko — Interior Designer Kasia Kronberger, Berlin",
-    "metaDescription": "Studio Bosko is the practice of Kasia Kronberger — Berlin-based interior designer specialising in full-scope residential projects across Europe.",
+    "metaDescription": "AD100-recognised interior design studio led by Kasia Kronberger. Based in Berlin, working internationally. Personality-driven homes crafted with curatorial instinct.",
     "heroHeading": "About the studio",
     "intro": "Studio Bosko is the practice of Kasia Kronberger, an interior designer based in Berlin.",
     "body1": "We work on full-scope residential projects across Berlin, Warsaw, and Europe — from initial concept through to construction supervision and final styling.",
@@ -53,11 +53,19 @@
     "awardsHeading": "Recognition",
     "award1": "AD100, Architectural Digest — 2025",
     "award2": "Featured in Vogue, AD Germany, Domino, est living",
-    "collaborationsHeading": "Collaborations & suppliers"
+    "collaborationsHeading": "Collaborations & suppliers",
+    "headline": "We design personality-driven spaces—crafted with curatorial instinct and delivered with clarity.",
+    "aboutHeading": "About",
+    "aboutBody1": "As an interior design studio named AD100 for 2025 by Architectural Digest Polska, we are tastemakers for clients who share a strong appreciation for art, culture, and craftsmanship. We create layered, personality-driven homes with a clear point of view—confident, curated, and boldly individual. Our work balances high design with lived-in ease—spaces that feel as effortless as they are intentional. A quest for artful character runs through everything we curate, shaping homes that don't just look beautiful, but feel deeply personal.",
+    "aboutBody2": "Practicality and liveability are equally important to us, so each of our designs is entirely custom. We design to support how you actually live, when no one is watching. Because great design isn't just seen — it's felt.",
+    "aboutBody3": "Led by Kasia Kronberger, Studio Bosko brings together structured precision and intuitive curation. Kasia's background spans education in business and trend forecasting, and international design experience across London, Florence, Barcelona, and Brussels. Her work is shaped by a global sensibility—layering modern craftsmanship, historical references, and joyful tension into interiors that are worldly and authentically evocative. She is recognised for creating spaces that start conversations: rooms rich with personality, intentional clashes, and emotional resonance—without ever feeling staged or overworked.",
+    "ethosHeading": "Ethos",
+    "ethosBody": "Design for us is never about surface or spectacle but rather about self-expression and growth. Home is often our most valuable asset. Whereas the best interiors are the ones filled with character.",
+    "ctaOffering": "Check out what we can do for you"
   },
   "offering": {
     "metaTitle": "Interior Design Services — Full-Scope Residential Projects | Studio Bosko",
-    "metaDescription": "Studio Bosko offers full-scope residential interior design services in Berlin, Warsaw, and across Europe. From concept to completion.",
+    "metaDescription": "Full-scope interior design services: space planning, bespoke specifications, procurement, art sourcing and project supervision. Berlin, Warsaw, Vienna and across Europe.",
     "heroHeading": "Our offering",
     "heroSubheading": "Full-scope residential interior design",
     "service1Title": "Concept & Vision",
@@ -73,11 +81,29 @@
     "processHeading": "How we work",
     "processBody": "Every project is unique, but our process is consistent: thorough at the start, precise in the middle, personal at the end.",
     "cta": "Begin your project",
-    "ctaBody": "We take on a small number of projects each year."
+    "ctaBody": "We take on a small number of projects each year.",
+    "headline": "We're a full-service interior design practice based in Berlin and Warsaw, running projects internationally.",
+    "mainBody1": "We specialize in full-scope residential projects, overseeing every phase of the process with care and clarity. We understand you need an expert partner to design your home—one that grasps your personal style and translates it into a unique, timeless interior, without the operational hassle. With our intuition for the emotive connections and business expertise, we articulate visions and bring them to fruition for our discerning clientele.",
+    "scopeHeading": "Our work typically includes:",
+    "scopeItems": [
+      "Interior Architecture and Space Planning",
+      "Interior Design, Finish and Fixture Specifications",
+      "Construction Drawings, Bespoke Furnishing Specs",
+      "Furniture Selection and Procurement",
+      "Art Sourcing and Interior Curation",
+      "Budget Planning and Fulfilment Coordination"
+    ],
+    "noHeading": "We don't take on:",
+    "noItems": [
+      "One-room makeovers",
+      "Final-stage styling for existing homes",
+      "Projects without implementation oversight"
+    ],
+    "tagline": "If we're in, we're all in."
   },
   "projects": {
     "metaTitle": "Interior Design Projects — Berlin, Warsaw & Europe | Studio Bosko",
-    "metaDescription": "A selection of residential interior design projects by Studio Bosko in Berlin, Warsaw, and across Europe.",
+    "metaDescription": "Portfolio of residential projects by Studio Bosko — penthouse renovations, high-end new builds and complete curation schemes across Berlin, Warsaw and Vienna.",
     "heroHeading": "Projects",
     "heroSubheading": "Recent interiors designed by Studio Bosko",
     "filterAll": "All",
@@ -88,7 +114,7 @@
   },
   "press": {
     "metaTitle": "Press & Recognition | Studio Bosko",
-    "metaDescription": "Studio Bosko has been named AD100 for 2025 and featured in Architectural Digest, Vogue, Domino, and more.",
+    "metaDescription": "Studio Bosko featured in Elle Decoration UK, Architectural Digest Polska, Vogue Poland, Yellowtrace, AD Spain and more.",
     "heroHeading": "Press",
     "heroBody": "Studio Bosko has been named AD100 for 2025 and featured in print and online across international publications and platforms.",
     "featuredIn": "Featured in",
@@ -96,9 +122,9 @@
   },
   "inquire": {
     "metaTitle": "Start an Interior Design Project | Studio Bosko",
-    "metaDescription": "Inquire about working with Studio Bosko on your residential interior design project in Berlin, Warsaw, or Europe.",
-    "heroHeading": "We\u2019re currently welcoming inquiries for spring 2026 and beyond.",
-    "heroBody": "Thank you for your interest! To get started, please inquire below and we will be in touch within 24\u201348 business hours.",
+    "metaDescription": "Begin a conversation with Studio Bosko. We're welcoming new residential interior design projects across Berlin, Warsaw, Vienna and Europe for spring 2026.",
+    "heroHeading": "We're currently welcoming inquiries for spring 2026 and beyond.",
+    "heroBody": "Thank you for your interest! To get started, please inquire below and we will be in touch within 24–48 business hours.",
     "formName": "Your name",
     "formEmail": "Email address",
     "formPhone": "Phone number",
@@ -109,7 +135,16 @@
     "formDescriptionPlaceholder": "Describe your space, what you're hoping for, and anything else that feels relevant.",
     "formSubmit": "Send enquiry",
     "formSuccess": "Thank you — we'll be in touch shortly.",
-    "formError": "Something went wrong. Please try again or email us directly."
+    "formError": "Something went wrong. Please try again or email us directly.",
+    "formFirstName": "First Name",
+    "formLastName": "Last Name",
+    "formAddress": "Project Address",
+    "serviceLabel": "What type of Studio Bosko services are you interested in?",
+    "serviceOptions": ["Renovating & Furnishing", "Furnishing & Art Curation"],
+    "budgetLabel": "What is your planned interior investment to achieve your goals?",
+    "budgetOptions": ["Under 50K €", "50–100K €", "100–150K €", "150–250K €", "250K €+", "Let's discuss"],
+    "messageLabel": "Tell us about your project",
+    "submitButton": "Send Inquiry"
   },
   "project": {
     "backToProjects": "All projects",
@@ -129,7 +164,7 @@
   },
   "meta": {
     "siteTitle": "Studio Bosko — Interior Design Studio Berlin & Warsaw",
-    "siteDescription": "Studio Bosko is a Berlin-based interior design studio specialising in full-scope residential projects across Europe.",
+    "siteDescription": "Full-scope residential interior design by Studio Bosko — Berlin, Warsaw & Vienna. Curated homes for discerning professionals. AD100 Polska 2025.",
     "homeTitle": "Studio Bosko — Interior Design Studio Berlin & Warsaw"
   }
 }

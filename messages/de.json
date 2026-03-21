@@ -4,7 +4,7 @@
     "studio": "Studio",
     "offering": "Leistungen",
     "press": "Presse",
-    "inquire": "Anfrage",
+    "inquire": "Anfragen",
     "instagram": "Instagram",
     "openMenu": "Menü öffnen",
     "closeMenu": "Menü schließen"
@@ -12,15 +12,15 @@
   "home": {
     "heroTagline": "Innenarchitektur Studio",
     "heroLocation": "Berlin & Warschau",
-    "heroBody": "Wir gestalten durchdachte Wohnräume — Räume, die persönlich, dauerhaft und lebendig wirken.",
+    "heroBody": "Wir verbinden Raumplanung mit emotionaler Kuration und gestalten Zuhause, die so mühelos wirken wie sie durchdacht sind.",
     "heroCtaProjects": "Projekte ansehen",
     "heroCtaInquire": "Projekt starten",
-    "featuredProjectsHeading": "Ausgewählte Arbeiten",
+    "featuredProjectsHeading": "Ausgewählte Projekte",
     "featuredProjectsSubheading": "Aktuelle Innenräume",
     "aboutHeading": "Ein Studio für Räume, die sich wie Zuhause anfühlen",
     "aboutBody": "Studio Bosko ist das Büro von Kasia Kronberger, einer Innenarchitektin, die in Berlin, Warschau und ganz Europa tätig ist. Wir arbeiten an Gesamtprojekten im Wohnbereich — von der Konzeption bis zur Fertigstellung.",
     "aboutCta": "Über das Studio",
-    "offeringHeading": "Was wir tun",
+    "offeringHeading": "Leistungen",
     "offeringBody": "Ganzheitliche Innenarchitektur für Wohnräume, vom ersten Konzept über Planung bis hin zur Bauleitung und Styling.",
     "offeringCta": "Unsere Leistungen",
     "pressHeading": "In der Presse",
@@ -29,22 +29,22 @@
     "inquireHeading": "Projekt starten",
     "inquireBody": "Wir nehmen pro Jahr eine begrenzte Anzahl von Projekten an, um jedem Kunden unsere volle Aufmerksamkeit zu widmen.",
     "inquireCta": "Kontakt aufnehmen",
-    "heroCtaSeeIfFit": "Schauen Sie, ob wir passen",
-    "selectedWork": "Ausgewählte Arbeiten",
+    "heroCtaSeeIfFit": "Schauen Sie, ob wir zusammenpassen",
+    "selectedWork": "Ausgewählte Projekte",
     "selectedWorkSubheading": "Aktuelle Innenräume",
-    "seeAllProjects": "Alle Projekte ansehen",
-    "introBody": "Persönlichkeitsgetriebene Innenräume, geprägt von Charakter, Kultur und Handwerkskunst. Wir verbinden Raumplanung mit emotionaler Kuration und schaffen Häuser, die künstlerisch, persönlich und dem echten Leben entsprechen.",
-    "introH1": "Innenarchitektur Studio mit Sitz in Berlin und Projekten in ganz Europa.",
+    "seeAllProjects": "Alle Projekte",
+    "introBody": "Persönlichkeitsgetriebene Innenräume, geprägt von Charakter, Kultur und Handwerkskunst. Wir verbinden Raumplanung mit emotionaler Kuration und gestalten Zuhause, die so mühelos wirken wie sie durchdacht sind.",
+    "introH1": "Räume mit Persönlichkeit — geschichtet mit Charakter, Kultur und Handwerkskunst.",
     "offeringBodyFull": "Studio Bosko ist ein Berliner Innenarchitekturstudio, das umfassende Wohnprojekte in ganz Europa realisiert — von historischen Sanierungen und hochwertigen Neubauten in Berlin und Warschau bis hin zu kompletten Innenarchitektur- und Einrichtungskonzepten in Deutschland, Österreich und darüber hinaus. Das von Kasia Kronberger gegründete Studio konzentriert sich auf individuelle Wohn- und Boutique-Gewerbeprojekte.",
     "offeringCtaLearn": "Unser Angebot entdecken",
     "testimonialQuote": "\"Dank der Rundum-Betreuung durch Studio Bosko konnten wir uns zurücklehnen und unser schönes Zuhause genießen. Anfangs waren wir unsicher, ob Innenarchitektur den Aufwand wert ist — heute zweifeln wir keine Sekunde daran, dass sie den Wert unserer Wohnung gesteigert und unser Wohlbefinden verbessert hat.\"",
     "testimonialAttribution": "Lana, Hausbesitzerin und Tech-Managerin",
-    "ctaBodyFull": "Wir nehmen pro Jahr eine begrenzte Anzahl von Projekten an. Wenn Sie eine Renovierung oder ein neues Zuhause planen, würden wir gerne davon hören.",
-    "ctaConsultation": "Kostenloses Erstgespräch buchen"
+    "ctaBodyFull": "Wir nehmen jährlich eine begrenzte Anzahl an Projekten an. Wenn Sie an einer Renovierung oder einem neuen Zuhause arbeiten — wir freuen uns, davon zu hören.",
+    "ctaConsultation": "Erzählen Sie uns von Ihrem Projekt"
   },
   "studio": {
     "metaTitle": "Über Studio Bosko — Innenarchitektin Kasia Kronberger, Berlin",
-    "metaDescription": "Studio Bosko ist das Büro von Kasia Kronberger — in Berlin ansässige Innenarchitektin, spezialisiert auf Gesamtprojekte im Wohnbereich in ganz Europa.",
+    "metaDescription": "AD100-ausgezeichnetes Innenarchitektur-Studio unter der Leitung von Kasia Kronberger. Berlin-basiert, international tätig. Räume mit Persönlichkeit und kuratorischer Präzision.",
     "heroHeading": "Über das Studio",
     "intro": "Studio Bosko ist das Büro von Kasia Kronberger, einer in Berlin ansässigen Innenarchitektin.",
     "body1": "Wir arbeiten an Gesamtprojekten im Wohnbereich in Berlin, Warschau und ganz Europa — von der ersten Konzeption über die Bauleitung bis hin zum finalen Styling.",
@@ -53,11 +53,19 @@
     "awardsHeading": "Auszeichnungen",
     "award1": "AD100, Architectural Digest — 2025",
     "award2": "Vorgestellt in Vogue, AD Germany, Domino, est living",
-    "collaborationsHeading": "Kooperationen & Lieferanten"
+    "collaborationsHeading": "Kooperationen & Lieferanten",
+    "headline": "Wir gestalten Räume mit Persönlichkeit — mit kuratorischem Instinkt und kompromissloser Klarheit.",
+    "aboutHeading": "Studio",
+    "aboutBody1": "Als AD100-ausgezeichnetes Innenarchitektur-Studio — nominiert von Architectural Digest Polska 2025 — arbeiten wir für Auftraggeber, die Kunst, Kultur und Handwerkskunst wirklich schätzen. Wir entwerfen vielschichtige, charakterstarke Zuhause mit einer klaren Haltung — selbstbewusst, kuratiert, unverwechselbar. Unsere Arbeit verbindet hochkarätiges Design mit gelebter Leichtigkeit. Räume, die so selbstverständlich wirken wie sie sorgfältig gedacht sind. Ein Gespür für künstlerischen Charakter durchzieht alles, was wir kuratieren — und formt Zuhause, die nicht nur schön aussehen, sondern tief persönlich sind.",
+    "aboutBody2": "Praktikabilität und Alltagstauglichkeit sind uns ebenso wichtig. Jedes unserer Projekte ist vollständig individuell gestaltet — für das Leben, wie es wirklich gelebt wird. Denn großes Design wird nicht nur gesehen. Es wird gespürt.",
+    "aboutBody3": "Unter der Leitung von Kasia Kronberger vereint Studio Bosko strukturelle Präzision mit intuitiver Kuration. Kasias Hintergrund umfasst Business und Trendforschung sowie internationale Designerfahrung in London, Florenz, Barcelona und Brüssel. Ihre Arbeit trägt eine globale Sensibilität — Handwerkskunst der Gegenwart trifft historische Referenzen und bewusste Spannung. Räume, die Gespräche auslösen: reich an Persönlichkeit, gewollten Kontrasten und emotionaler Dichte — ohne je inszeniert zu wirken.",
+    "ethosHeading": "Haltung",
+    "ethosBody": "Design ist für uns nie Oberfläche oder Spektakel — sondern Selbstausdruck und Entwicklung. Das Zuhause ist oft unser wertvollstes Gut. Die besten Interieurs sind jene, die Charakter atmen.",
+    "ctaOffering": "Was wir für Sie tun können"
   },
   "offering": {
     "metaTitle": "Innenarchitektur-Leistungen — Wohnprojekte aus einer Hand | Studio Bosko",
-    "metaDescription": "Studio Bosko bietet vollständige Innenarchitektur-Leistungen für Wohnprojekte in Berlin, Warschau und ganz Europa. Von der Konzeption bis zur Fertigstellung.",
+    "metaDescription": "Full-Service Innenarchitektur: Raumplanung, Materialspezifikation, Beschaffung, Kunstkuration und Baubegleitung. Berlin, Warschau, Wien und europaweit.",
     "heroHeading": "Unsere Leistungen",
     "heroSubheading": "Ganzheitliche Innenarchitektur für Wohnräume",
     "service1Title": "Konzept & Vision",
@@ -73,11 +81,29 @@
     "processHeading": "Wie wir arbeiten",
     "processBody": "Jedes Projekt ist einzigartig, aber unser Prozess ist konsistent: gründlich am Anfang, präzise in der Mitte, persönlich am Ende.",
     "cta": "Ihr Projekt beginnen",
-    "ctaBody": "Wir nehmen pro Jahr eine begrenzte Anzahl von Projekten an."
+    "ctaBody": "Wir nehmen pro Jahr eine begrenzte Anzahl von Projekten an.",
+    "headline": "Full-Service Innenarchitektur — mit Sitz in Berlin und Warschau, tätig in ganz Europa.",
+    "mainBody1": "Wir spezialisieren uns auf vollständige Wohnprojekte und begleiten jeden Prozessschritt mit Sorgfalt und Klarheit. Sie brauchen einen Partner, der Ihren persönlichen Stil versteht und ihn in ein unverwechselbares, zeitloses Interieur übersetzt — ohne operativen Aufwand Ihrerseits. Mit unserem Gespür für emotionale Zusammenhänge und unternehmerischem Denken übersetzen wir Visionen in Wirklichkeit.",
+    "scopeHeading": "Unser Leistungsumfang umfasst:",
+    "scopeItems": [
+      "Innenarchitektur und Raumplanung",
+      "Entwurfsplanung, Material- und Ausstattungsspezifikation",
+      "Ausführungszeichnungen und Möbelspezifikationen",
+      "Möbelauswahl und Beschaffung",
+      "Kunstbeschaffung und Interieurkuration",
+      "Budgetplanung und Baubegleitung"
+    ],
+    "noHeading": "Was wir nicht anbieten:",
+    "noItems": [
+      "Einzelraum-Umgestaltungen",
+      "Styling für bestehende Einrichtungen",
+      "Projekte ohne Realisierungsbegleitung"
+    ],
+    "tagline": "Wer mit uns arbeitet, bekommt uns ganz."
   },
   "projects": {
     "metaTitle": "Innenarchitektur-Projekte — Berlin, Warschau & Europa | Studio Bosko",
-    "metaDescription": "Eine Auswahl von Wohnprojekten von Studio Bosko in Berlin, Warschau und ganz Europa.",
+    "metaDescription": "Projektportfolio von Studio Bosko — Penthouse-Renovierungen, Neubauprojekte und vollständige Einrichtungskonzepte in Berlin, Warschau und Wien.",
     "heroHeading": "Projekte",
     "heroSubheading": "Aktuelle Innenräume von Studio Bosko",
     "filterAll": "Alle",
@@ -88,7 +114,7 @@
   },
   "press": {
     "metaTitle": "Presse & Auszeichnungen | Studio Bosko",
-    "metaDescription": "Studio Bosko wurde 2025 in die AD100-Liste aufgenommen und in Architectural Digest, Vogue, Domino und weiteren Medien vorgestellt.",
+    "metaDescription": "Studio Bosko in Elle Decoration UK, Architectural Digest Polska, Vogue Poland, Yellowtrace, AD Spain und weiteren Medien.",
     "heroHeading": "Presse",
     "heroBody": "Studio Bosko wurde 2025 in die AD100-Liste aufgenommen und ist in nationalen und internationalen Print- und Online-Publikationen erschienen.",
     "featuredIn": "Vorgestellt in",
@@ -96,9 +122,9 @@
   },
   "inquire": {
     "metaTitle": "Innenarchitektur-Projekt anfragen | Studio Bosko",
-    "metaDescription": "Fragen Sie nach einer Zusammenarbeit mit Studio Bosko für Ihr Wohnprojekt in Berlin, Warschau oder Europa.",
-    "heroHeading": "Lassen Sie uns zusammenarbeiten",
-    "heroBody": "Wir nehmen pro Jahr eine begrenzte Anzahl von Projekten an, um jedem Kunden unsere volle Aufmerksamkeit zu widmen. Erzählen Sie uns von Ihrem Projekt.",
+    "metaDescription": "Starten Sie ein Gespräch mit Studio Bosko. Wir nehmen neue Wohnprojekte in Berlin, Warschau, Wien und ganz Europa für Frühjahr 2026 an.",
+    "heroHeading": "Wir freuen uns auf Anfragen für Frühjahr 2026 und darüber hinaus.",
+    "heroBody": "Danke für Ihr Interesse. Teilen Sie uns unten die Details mit — wir melden uns innerhalb von 24–48 Stunden.",
     "formName": "Ihr Name",
     "formEmail": "E-Mail-Adresse",
     "formPhone": "Telefonnummer",
@@ -109,7 +135,16 @@
     "formDescriptionPlaceholder": "Beschreiben Sie Ihren Raum, Ihre Wünsche und alles andere, was relevant erscheint.",
     "formSubmit": "Anfrage senden",
     "formSuccess": "Vielen Dank — wir melden uns in Kürze.",
-    "formError": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt."
+    "formError": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.",
+    "formFirstName": "Vorname",
+    "formLastName": "Nachname",
+    "formAddress": "Projektadresse",
+    "serviceLabel": "Welche Leistungen von Studio Bosko interessieren Sie?",
+    "serviceOptions": ["Renovierung & Einrichtung", "Einrichtung & Kunstkuration"],
+    "budgetLabel": "Wie hoch ist Ihr geplantes Investitionsbudget?",
+    "budgetOptions": ["Unter 50.000 €", "50.000–100.000 €", "100.000–150.000 €", "150.000–250.000 €", "Über 250.000 €", "Auf Anfrage"],
+    "messageLabel": "Erzählen Sie uns von Ihrem Projekt",
+    "submitButton": "Anfrage senden"
   },
   "project": {
     "backToProjects": "Alle Projekte",
@@ -129,7 +164,7 @@
   },
   "meta": {
     "siteTitle": "Studio Bosko — Innenarchitektur Studio Berlin & Warschau",
-    "siteDescription": "Studio Bosko ist ein in Berlin ansässiges Innenarchitektur-Studio, spezialisiert auf ganzheitliche Wohnprojekte in ganz Europa.",
+    "siteDescription": "Umfassende Wohnraum-Innenarchitektur von Studio Bosko — Berlin, Warschau & Wien. Charakterstarke Zuhause für anspruchsvolle Auftraggeber. AD100 Polska 2025.",
     "homeTitle": "Studio Bosko — Innenarchitektur Studio Berlin & Warschau"
   }
 }

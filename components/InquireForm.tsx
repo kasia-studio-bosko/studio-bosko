@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, FormEvent } from 'react'
+import { useTranslations } from 'next-intl'
 
 interface FormState {
   firstName: string
@@ -24,21 +25,11 @@ const INITIAL_STATE: FormState = {
   description: '',
 }
 
-const SERVICE_OPTIONS = [
-  'Renovating & Furnishing',
-  'Furnishing & Art Curation',
-]
-
-const INVESTMENT_OPTIONS = [
-  'Under 50K \u20ac',
-  '50\u2013100K \u20ac',
-  '100\u2013150K \u20ac',
-  '150\u2013250K \u20ac',
-  '250K \u20ac +',
-  'Let\u2019s discuss',
-]
-
 export default function InquireForm() {
+  const t = useTranslations('inquire')
+  const serviceOptions = t.raw('serviceOptions') as string[]
+  const budgetOptions = t.raw('budgetOptions') as string[]
+
   const [form, setForm] = useState<FormState>(INITIAL_STATE)
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
 
@@ -73,7 +64,7 @@ export default function InquireForm() {
     return (
       <div className="py-16">
         <p className="font-signifier font-light text-2xl text-[#ede8e2] tracking-tight">
-          Thank you — we&apos;ll be in touch shortly.
+          {t('formSuccess')}
         </p>
       </div>
     )
@@ -95,7 +86,7 @@ export default function InquireForm() {
           name="firstName"
           value={form.firstName}
           onChange={handleChange}
-          placeholder="First Name*"
+          placeholder={`${t('formFirstName')}*`}
           required
           className={inputClass}
           autoComplete="given-name"
@@ -105,7 +96,7 @@ export default function InquireForm() {
           name="lastName"
           value={form.lastName}
           onChange={handleChange}
-          placeholder="Last Name*"
+          placeholder={`${t('formLastName')}*`}
           required
           className={inputClass}
           autoComplete="family-name"
@@ -119,7 +110,7 @@ export default function InquireForm() {
           name="email"
           value={form.email}
           onChange={handleChange}
-          placeholder="Email*"
+          placeholder={`${t('formEmail')}*`}
           required
           className={inputClass}
           autoComplete="email"
@@ -129,7 +120,7 @@ export default function InquireForm() {
           name="phone"
           value={form.phone}
           onChange={handleChange}
-          placeholder="Phone"
+          placeholder={t('formPhone')}
           className={inputClass}
           autoComplete="tel"
         />
@@ -141,7 +132,7 @@ export default function InquireForm() {
         name="address"
         value={form.address}
         onChange={handleChange}
-        placeholder="Project Address"
+        placeholder={t('formAddress')}
         className={inputClass}
         autoComplete="street-address"
       />
@@ -156,9 +147,9 @@ export default function InquireForm() {
           required
         >
           <option value="" disabled className="bg-[#2d1d17] text-[#ede8e2]">
-            What type of Studio Bosko services are you interested in?*
+            {t('serviceLabel')}*
           </option>
-          {SERVICE_OPTIONS.map((opt) => (
+          {serviceOptions.map((opt) => (
             <option key={opt} value={opt} className="bg-[#2d1d17] text-[#ede8e2]">
               {opt}
             </option>
@@ -179,9 +170,9 @@ export default function InquireForm() {
           required
         >
           <option value="" disabled className="bg-[#2d1d17] text-[#ede8e2]">
-            What is your planned interior investment to achieve your goals?*
+            {t('budgetLabel')}*
           </option>
-          {INVESTMENT_OPTIONS.map((opt) => (
+          {budgetOptions.map((opt) => (
             <option key={opt} value={opt} className="bg-[#2d1d17] text-[#ede8e2]">
               {opt}
             </option>
@@ -197,7 +188,7 @@ export default function InquireForm() {
         name="description"
         value={form.description}
         onChange={handleChange}
-        placeholder="Tell us about your project"
+        placeholder={t('messageLabel')}
         rows={6}
         className={`${inputClass} resize-none`}
       />
@@ -209,11 +200,11 @@ export default function InquireForm() {
           disabled={status === 'loading'}
           className="btn-primary-dark disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {status === 'loading' ? '...' : 'Send Inquiry \u2192'}
+          {status === 'loading' ? '…' : t('submitButton')}
         </button>
         {status === 'error' && (
           <p className="text-sm font-cadiz text-red-400">
-            Something went wrong. Please try again or email us directly.
+            {t('formError')}
           </p>
         )}
       </div>

@@ -31,7 +31,7 @@ export async function generateMetadata({
   }
 }
 
-const INQUIRE_IMAGE = 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg'
+const INQUIRE_IMAGE = 'https://framerusercontent.com/images/BLcEb8zhESV8vCYUNx12PnA9d5c.jpg'
 
 export default async function InquirePage({
   params,
