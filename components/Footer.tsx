@@ -10,7 +10,7 @@ export default async function Footer({ locale }: { locale: string }) {
     // data-footer-fixed is read by FooterReveal to measure footer height
     <footer
       data-footer-fixed
-      className="fixed bottom-0 left-0 right-0 bg-[#2d1d17] overflow-hidden"
+      className="fixed bottom-0 left-0 right-0 bg-[#2d1d17]"
       style={{ zIndex: 0 }}
     >
       {/* ── Large full-width wordmark (+20% via scale) ────────────── */}

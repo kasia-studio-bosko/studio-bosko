@@ -3,26 +3,35 @@
 /**
  * FooterReveal
  *
- * Wraps the main content so it sits above the fixed footer (z-index 10 > 0).
- * Measures the footer height on mount + resize and applies equivalent
- * padding-bottom so no content is ever hidden behind the fixed footer.
- * When the user scrolls to the very bottom, the transparent padding area
- * reveals the footer behind it — creating the "footer sticks at bottom" effect.
+ * Two-element approach for the fixed-footer parallax reveal:
+ *
+ *   1. Opaque content wrapper  (z-index 10, bg #d4cbc0)
+ *      Sits above the fixed footer while the user scrolls through content,
+ *      hiding the footer until it should be revealed.
+ *
+ *   2. Transparent spacer      (z-index 5, no background)
+ *      Matches the fixed footer's height exactly.
+ *      Being transparent, the footer shows through it — revealing the footer
+ *      once the user scrolls past the end of the page content.
+ *
+ * Without this split, a single div with both a background AND padding-bottom
+ * would paint over the footer even at the very bottom of the page.
  */
 import { useEffect, useRef, type ReactNode } from 'react'
 
 export default function FooterReveal({ children }: { children: ReactNode }) {
-  const wrapperRef = useRef<HTMLDivElement>(null)
+  const spacerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const footer = document.querySelector(
       '[data-footer-fixed]'
     ) as HTMLElement | null
-    if (!footer || !wrapperRef.current) return
+
+    if (!footer || !spacerRef.current) return
 
     const sync = () => {
-      if (wrapperRef.current) {
-        wrapperRef.current.style.paddingBottom = `${footer.offsetHeight}px`
+      if (spacerRef.current) {
+        spacerRef.current.style.height = `${footer.offsetHeight}px`
       }
     }
 
@@ -39,15 +48,17 @@ export default function FooterReveal({ children }: { children: ReactNode }) {
   }, [])
 
   return (
-    // position:relative + z-index:10 ensures this wrapper paints above
-    // the fixed footer (z-index:0), hiding the footer until the user
-    // scrolls to the bottom.
-    <div
-      ref={wrapperRef}
-      className="relative bg-[#d4cbc0]"
-      style={{ zIndex: 10, isolation: 'isolate' }}
-    >
-      {children}
-    </div>
+    <>
+      {/* ── Opaque wrapper — hides the fixed footer while scrolling ── */}
+      <div
+        className="relative bg-[#d4cbc0]"
+        style={{ zIndex: 10, isolation: 'isolate' }}
+      >
+        {children}
+      </div>
+
+      {/* ── Transparent spacer — lets the fixed footer show through ── */}
+      <div ref={spacerRef} style={{ position: 'relative', zIndex: 5 }} />
+    </>
   )
 }
