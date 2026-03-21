@@ -6,6 +6,18 @@ import { sanityClient } from './client'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type PortableTextContent = ({ _type: string } & Record<string, any>)[]
 
+export interface GalleryImage {
+  asset: { _ref: string }
+  alt?: string
+  caption?: string
+  /** Natural width from Sanity image metadata */
+  width?: number
+  /** Natural height from Sanity image metadata */
+  height?: number
+  /** Pre-computed aspect ratio (width / height) from Sanity */
+  aspectRatio?: number
+}
+
 export interface Project {
   _id: string
   title: string
@@ -18,7 +30,7 @@ export interface Project {
   photographer: string
   pressMentions?: string[]
   coverImage: { asset: { _ref: string }; alt?: string }
-  gallery: Array<{ asset: { _ref: string }; alt?: string; caption?: string }>
+  gallery: GalleryImage[]
   /** Short plain-text intro for listings and meta description fallback */
   seoIntro: string
   description: PortableTextContent | null
@@ -72,6 +84,7 @@ const projectListFields = `
   size,
   year,
   category,
+  scope,
   photographer,
   pressMentions,
   featured,
@@ -83,7 +96,14 @@ const projectListFields = `
 
 const projectFullFields = `
   ${projectListFields},
-  gallery,
+  "gallery": gallery[] {
+    alt,
+    caption,
+    asset,
+    "width": asset->metadata.dimensions.width,
+    "height": asset->metadata.dimensions.height,
+    "aspectRatio": asset->metadata.dimensions.aspectRatio
+  },
   ${localizedField('description')},
   ${localizedField('metaTitle')},
   ${localizedField('metaDescription')}

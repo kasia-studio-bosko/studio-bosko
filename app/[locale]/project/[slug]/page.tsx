@@ -5,10 +5,10 @@ import { notFound } from 'next/navigation'
 import { PortableText } from 'next-sanity'
 import { Link } from '@/i18n/navigation'
 import ScrollReveal from '@/components/ScrollReveal'
-import { getProjectBySlug, getAllProjectSlugs, type PortableTextContent } from '@/lib/sanity/queries'
+import { getProjectBySlug, getAllProjectSlugs, type PortableTextContent, type GalleryImage } from '@/lib/sanity/queries'
 import { urlFor } from '@/lib/sanity/client'
 
-// Static fallback for local dev when Sanity is empty
+// ─── Static fallback for local dev when Sanity is empty ──────────────────────
 const FALLBACK_PROJECT = {
   _id: 'fallback',
   title: 'Chroma Penthouse',
@@ -24,7 +24,7 @@ const FALLBACK_PROJECT = {
   description: null as PortableTextContent | null,
   descriptionFallback: 'Chroma Penthouse is a full interior design and curation project for a 143 m² penthouse in Berlin Kreuzberg.\n\nThe brief centred on colour — using it boldly to create distinct moods across the apartment while maintaining a coherent whole. Each room takes its cue from a different part of the client\'s life: the kitchen from markets in Morocco, the living room from a favourite painting, the bedroom from quiet mornings in the countryside.',
   coverImage: { asset: { _ref: '' }, alt: 'Chroma Penthouse — a bold, colour-layered penthouse in Berlin Kreuzberg' },
-  gallery: [] as Array<{ asset: { _ref: string }; alt?: string; caption?: string }>,
+  gallery: [] as GalleryImage[],
   featured: true,
   order: 1,
   metaTitle: undefined as string | undefined,
@@ -34,6 +34,60 @@ const FALLBACK_PROJECT = {
 type Props = {
   params: { locale: string; slug: string }
 }
+
+// ─── Smart gallery row grouping ───────────────────────────────────────────────
+
+type GalleryRow =
+  | { type: 'full'; image: GalleryImage }
+  | { type: 'pair'; images: [GalleryImage, GalleryImage] }
+
+function getAspectRatio(img: GalleryImage): number {
+  if (img.aspectRatio) return img.aspectRatio
+  if (img.width && img.height) return img.width / img.height
+  return 1.5 // default to landscape
+}
+
+/**
+ * Groups gallery images into editorial rows:
+ * - Image 0 always starts as a full-width hero row
+ * - Two consecutive portraits → side-by-side pair
+ * - Two consecutive landscapes → side-by-side pair
+ * - Everything else → full-width
+ */
+function groupGalleryRows(images: GalleryImage[]): GalleryRow[] {
+  if (images.length === 0) return []
+
+  const rows: GalleryRow[] = []
+  rows.push({ type: 'full', image: images[0] })
+
+  let i = 1
+  while (i < images.length) {
+    const cur = images[i]
+    const curRatio = getAspectRatio(cur)
+    const isPortrait = curRatio < 0.85
+    const isLandscape = curRatio > 1.2
+
+    const next = images[i + 1]
+    if (next) {
+      const nextRatio = getAspectRatio(next)
+      const nextIsPortrait = nextRatio < 0.85
+      const nextIsLandscape = nextRatio > 1.2
+
+      if ((isPortrait && nextIsPortrait) || (isLandscape && nextIsLandscape)) {
+        rows.push({ type: 'pair', images: [cur, next] })
+        i += 2
+        continue
+      }
+    }
+
+    rows.push({ type: 'full', image: cur })
+    i += 1
+  }
+
+  return rows
+}
+
+// ─── Static generation ────────────────────────────────────────────────────────
 
 export async function generateStaticParams() {
   try {
@@ -92,6 +146,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
+// ─── Page ─────────────────────────────────────────────────────────────────────
+
 export default async function ProjectPage({ params }: Props) {
   const { locale, slug } = params
   setRequestLocale(locale)
@@ -102,9 +158,7 @@ export default async function ProjectPage({ params }: Props) {
     project = await getProjectBySlug(slug, locale)
   } catch {}
 
-  // Use fallback only for the specific known slug
   const data = project ?? (slug === 'chroma-penthouse' ? FALLBACK_PROJECT : null)
-
   if (!data) notFound()
 
   const heroImage = data.coverImage?.asset?._ref
@@ -123,11 +177,12 @@ export default async function ProjectPage({ params }: Props) {
     image: heroImage,
   }
 
-  // Description is Portable Text from Sanity, or a plain-text fallback string
   const description = data.description
   const descriptionFallback = 'descriptionFallback' in data
     ? (data as typeof FALLBACK_PROJECT).descriptionFallback
     : null
+
+  const galleryRows = groupGalleryRows(data.gallery ?? [])
 
   return (
     <>
@@ -136,7 +191,7 @@ export default async function ProjectPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }}
       />
 
-      {/* ── Hero image ───────────────────────────────────────────────────── */}
+      {/* ── Cover image hero ──────────────────────────────────────────────── */}
       <section className="relative h-[60vh] md:h-[80vh] bg-[#d4cbc0]" aria-label="Project hero">
         <Image
           src={heroImage}
@@ -149,7 +204,7 @@ export default async function ProjectPage({ params }: Props) {
         />
       </section>
 
-      {/* ── Project header ───────────────────────────────────────────────── */}
+      {/* ── Project header ────────────────────────────────────────────────── */}
       <section className="section-spacing" aria-label="Project details">
         <div className="page-container">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-24">
@@ -165,7 +220,10 @@ export default async function ProjectPage({ params }: Props) {
                 </Link>
               </ScrollReveal>
               <ScrollReveal delay={100}>
-                <h1 className="font-signifier font-light text-[30px] leading-[42px] text-balance mb-6" style={{ letterSpacing: '-0.2px' }}>
+                <h1
+                  className="font-signifier font-light text-[28px] md:text-[36px] leading-[1.25] text-balance mb-6 text-[#2d1d17]"
+                  style={{ letterSpacing: '-0.3px' }}
+                >
                   {data.title}
                 </h1>
               </ScrollReveal>
@@ -173,7 +231,7 @@ export default async function ProjectPage({ params }: Props) {
               {/* Portable Text (from Sanity) */}
               {Array.isArray(description) && description.length > 0 && (
                 <ScrollReveal delay={150}>
-                  <div className="font-cadiz text-base md:text-lg leading-relaxed text-[#2d1d17]/80 max-w-prose [&>p]:mb-4 [&>h3]:font-signifier [&>h3]:font-light [&>h3]:text-xl [&>h3]:mb-3 [&>h3]:mt-6">
+                  <div className="font-cadiz text-base md:text-lg leading-relaxed text-[#2d1d17]/75 max-w-prose [&>p]:mb-4 [&>h3]:font-signifier [&>h3]:font-light [&>h3]:text-xl [&>h3]:mb-3 [&>h3]:mt-6">
                     <PortableText value={description} />
                   </div>
                 </ScrollReveal>
@@ -182,7 +240,7 @@ export default async function ProjectPage({ params }: Props) {
               {/* Plain-text fallback */}
               {!Array.isArray(description) && descriptionFallback && (
                 <ScrollReveal delay={150}>
-                  <div className="font-cadiz text-base md:text-lg leading-relaxed text-[#2d1d17]/80 max-w-prose space-y-4">
+                  <div className="font-cadiz text-base md:text-lg leading-relaxed text-[#2d1d17]/75 max-w-prose space-y-4">
                     {descriptionFallback.split('\n\n').map((para: string, i: number) => (
                       <p key={i}>{para}</p>
                     ))}
@@ -197,19 +255,19 @@ export default async function ProjectPage({ params }: Props) {
                 {data.location && (
                   <div>
                     <p className="label-serif mb-1">{t('location')}</p>
-                    <p className="font-cadiz text-sm">{data.location}</p>
+                    <p className="font-cadiz text-sm text-[#2d1d17]">{data.location}</p>
                   </div>
                 )}
                 {data.size && (
                   <div>
                     <p className="label-serif mb-1">Size</p>
-                    <p className="font-cadiz text-sm">{data.size} m²</p>
+                    <p className="font-cadiz text-sm text-[#2d1d17]">{data.size} m²</p>
                   </div>
                 )}
                 {data.year && (
                   <div>
                     <p className="label-serif mb-1">{t('year')}</p>
-                    <p className="font-cadiz text-sm">{data.year}</p>
+                    <p className="font-cadiz text-sm text-[#2d1d17]">{data.year}</p>
                   </div>
                 )}
                 {data.scope && data.scope.length > 0 && (
@@ -217,7 +275,7 @@ export default async function ProjectPage({ params }: Props) {
                     <p className="label-serif mb-1">{t('scope')}</p>
                     <ul className="space-y-1">
                       {data.scope.map((s: string) => (
-                        <li key={s} className="font-cadiz text-sm text-[#2d1d17]/80">{s}</li>
+                        <li key={s} className="font-cadiz text-sm text-[#2d1d17]/75">{s}</li>
                       ))}
                     </ul>
                   </div>
@@ -225,7 +283,7 @@ export default async function ProjectPage({ params }: Props) {
                 {data.photographer && (
                   <div>
                     <p className="label-serif mb-1">{t('photographer')}</p>
-                    <p className="font-cadiz text-sm">{data.photographer}</p>
+                    <p className="font-cadiz text-sm text-[#2d1d17]">{data.photographer}</p>
                   </div>
                 )}
                 {data.pressMentions && data.pressMentions.length > 0 && (
@@ -233,7 +291,7 @@ export default async function ProjectPage({ params }: Props) {
                     <p className="label-serif mb-1">Press</p>
                     <ul className="space-y-1">
                       {data.pressMentions.map((pub: string) => (
-                        <li key={pub} className="font-cadiz text-sm text-[#2d1d17]/80">{pub}</li>
+                        <li key={pub} className="font-cadiz text-sm text-[#2d1d17]/75">{pub}</li>
                       ))}
                     </ul>
                   </div>
@@ -244,41 +302,114 @@ export default async function ProjectPage({ params }: Props) {
         </div>
       </section>
 
-      {/* ── Gallery ──────────────────────────────────────────────────────── */}
-      {data.gallery && data.gallery.length > 0 && (
-        <section className="pb-section-y" aria-label="Project gallery">
-          <div className="page-container">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-              {data.gallery.map(
-                (img: { asset: { _ref: string }; alt?: string; caption?: string }, i: number) => (
-                  <ScrollReveal key={i} delay={Math.min(i * 80, 400)}>
-                    <div
-                      className={`relative bg-[#d4cbc0] overflow-hidden ${
-                        i === 0 ? 'md:col-span-2 aspect-[16/9]' : 'aspect-[3/4]'
-                      }`}
-                    >
-                      <Image
-                        src={urlFor(img).width(1600).url()}
-                        alt={img.alt ?? `${data.title} — image ${i + 1}`}
-                        fill
-                        sizes={i === 0 ? '100vw' : '(max-width: 768px) 100vw, 50vw'}
-                        className="object-cover"
-                      />
+      {/* ── Editorial gallery ─────────────────────────────────────────────── */}
+      {galleryRows.length > 0 && (
+        <section className="pb-[var(--section-padding-y)]" aria-label="Project gallery">
+          <div className="flex flex-col gap-10 md:gap-12">
+            {galleryRows.map((row, rowIndex) => {
+              if (row.type === 'full') {
+                const img = row.image
+                const w = img.width ?? 1600
+                const h = img.height ?? 1067
+                const ar = getAspectRatio(img)
+                const imgSrc = img.asset._ref
+                  ? urlFor(img).width(1920).quality(85).url()
+                  : 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg'
+
+                return (
+                  <ScrollReveal key={rowIndex} delay={rowIndex === 0 ? 0 : 100}>
+                    <div>
+                      <div
+                        className="relative w-full overflow-hidden"
+                        style={{ aspectRatio: `${w}/${h}` }}
+                      >
+                        <Image
+                          src={imgSrc}
+                          alt={img.alt ?? `${data.title} — image ${rowIndex + 1}`}
+                          fill
+                          sizes="100vw"
+                          className="object-cover"
+                          quality={85}
+                        />
+                      </div>
+                      {img.caption && (
+                        <p className="mt-3 px-6 md:px-12 lg:px-16 text-xs font-cadiz text-[#2d1d17]/50">
+                          {img.caption}
+                        </p>
+                      )}
                     </div>
-                    {img.caption && (
-                      <p className="mt-2 text-xs font-cadiz text-[#2d1d17]/50">{img.caption}</p>
-                    )}
                   </ScrollReveal>
                 )
-              )}
-            </div>
+              }
+
+              // Paired row — two images side by side
+              const [imgA, imgB] = row.images
+              const wA = imgA.width ?? 800; const hA = imgA.height ?? 1067
+              const wB = imgB.width ?? 800; const hB = imgB.height ?? 1067
+              const srcA = imgA.asset._ref
+                ? urlFor(imgA).width(960).quality(85).url()
+                : 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg'
+              const srcB = imgB.asset._ref
+                ? urlFor(imgB).width(960).quality(85).url()
+                : 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg'
+
+              return (
+                <ScrollReveal key={rowIndex} delay={100}>
+                  <div className="flex gap-2 md:gap-3">
+                    {/* Image A */}
+                    <div className="flex-1 flex flex-col">
+                      <div
+                        className="relative w-full overflow-hidden"
+                        style={{ aspectRatio: `${wA}/${hA}` }}
+                      >
+                        <Image
+                          src={srcA}
+                          alt={imgA.alt ?? `${data.title} — image ${rowIndex + 1}a`}
+                          fill
+                          sizes="(max-width: 768px) 50vw, 50vw"
+                          className="object-cover"
+                          quality={85}
+                        />
+                      </div>
+                      {imgA.caption && (
+                        <p className="mt-2 text-xs font-cadiz text-[#2d1d17]/50">
+                          {imgA.caption}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Image B */}
+                    <div className="flex-1 flex flex-col">
+                      <div
+                        className="relative w-full overflow-hidden"
+                        style={{ aspectRatio: `${wB}/${hB}` }}
+                      >
+                        <Image
+                          src={srcB}
+                          alt={imgB.alt ?? `${data.title} — image ${rowIndex + 1}b`}
+                          fill
+                          sizes="(max-width: 768px) 50vw, 50vw"
+                          className="object-cover"
+                          quality={85}
+                        />
+                      </div>
+                      {imgB.caption && (
+                        <p className="mt-2 text-xs font-cadiz text-[#2d1d17]/50">
+                          {imgB.caption}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </ScrollReveal>
+              )
+            })}
           </div>
         </section>
       )}
 
-      {/* ── CTA ──────────────────────────────────────────────────────────── */}
+      {/* ── CTA ───────────────────────────────────────────────────────────── */}
       <section
-        className="section-spacing bg-[#2d1d17] text-[#ede8e2]"
+        className="section-spacing bg-[#2d1d17] text-[#d4cbc0]"
         aria-label="Start a project"
       >
         <div className="page-container max-w-2xl">
