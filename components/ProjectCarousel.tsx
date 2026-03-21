@@ -91,12 +91,12 @@ export default function ProjectCarousel({
                   <h3 className="font-signifier font-light text-lg leading-tight tracking-tight group-hover:text-[#f5500a] transition-colors duration-200">
                     {project.title}
                   </h3>
-                  <p className="mt-1 text-sm font-cadiz text-[#120b09]/60">
+                  <p className="mt-1 text-sm font-cadiz text-[#2d1d17]/60">
                     {project.location}
                     {project.year && ` · ${project.year}`}
                   </p>
                 </div>
-                <span className="text-xs font-cadiz tracking-widest uppercase text-[#120b09]/50 group-hover:text-[#f5500a] transition-colors duration-200 whitespace-nowrap mt-1">
+                <span className="text-xs font-cadiz tracking-widest uppercase text-[#2d1d17]/50 group-hover:text-[#f5500a] transition-colors duration-200 whitespace-nowrap mt-1">
                   {viewLabel} →
                 </span>
               </div>

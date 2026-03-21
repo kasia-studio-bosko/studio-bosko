@@ -173,7 +173,7 @@ export default async function ProjectPage({ params }: Props) {
               {/* Portable Text (from Sanity) */}
               {Array.isArray(description) && description.length > 0 && (
                 <ScrollReveal delay={150}>
-                  <div className="font-cadiz text-base md:text-lg leading-relaxed text-[#120b09]/80 max-w-prose [&>p]:mb-4 [&>h3]:font-signifier [&>h3]:font-light [&>h3]:text-xl [&>h3]:mb-3 [&>h3]:mt-6">
+                  <div className="font-cadiz text-base md:text-lg leading-relaxed text-[#2d1d17]/80 max-w-prose [&>p]:mb-4 [&>h3]:font-signifier [&>h3]:font-light [&>h3]:text-xl [&>h3]:mb-3 [&>h3]:mt-6">
                     <PortableText value={description} />
                   </div>
                 </ScrollReveal>
@@ -182,7 +182,7 @@ export default async function ProjectPage({ params }: Props) {
               {/* Plain-text fallback */}
               {!Array.isArray(description) && descriptionFallback && (
                 <ScrollReveal delay={150}>
-                  <div className="font-cadiz text-base md:text-lg leading-relaxed text-[#120b09]/80 max-w-prose space-y-4">
+                  <div className="font-cadiz text-base md:text-lg leading-relaxed text-[#2d1d17]/80 max-w-prose space-y-4">
                     {descriptionFallback.split('\n\n').map((para: string, i: number) => (
                       <p key={i}>{para}</p>
                     ))}
@@ -217,7 +217,7 @@ export default async function ProjectPage({ params }: Props) {
                     <p className="label-serif mb-1">{t('scope')}</p>
                     <ul className="space-y-1">
                       {data.scope.map((s: string) => (
-                        <li key={s} className="font-cadiz text-sm text-[#120b09]/80">{s}</li>
+                        <li key={s} className="font-cadiz text-sm text-[#2d1d17]/80">{s}</li>
                       ))}
                     </ul>
                   </div>
@@ -233,7 +233,7 @@ export default async function ProjectPage({ params }: Props) {
                     <p className="label-serif mb-1">Press</p>
                     <ul className="space-y-1">
                       {data.pressMentions.map((pub: string) => (
-                        <li key={pub} className="font-cadiz text-sm text-[#120b09]/80">{pub}</li>
+                        <li key={pub} className="font-cadiz text-sm text-[#2d1d17]/80">{pub}</li>
                       ))}
                     </ul>
                   </div>
@@ -266,7 +266,7 @@ export default async function ProjectPage({ params }: Props) {
                       />
                     </div>
                     {img.caption && (
-                      <p className="mt-2 text-xs font-cadiz text-[#120b09]/50">{img.caption}</p>
+                      <p className="mt-2 text-xs font-cadiz text-[#2d1d17]/50">{img.caption}</p>
                     )}
                   </ScrollReveal>
                 )

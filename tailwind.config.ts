@@ -9,20 +9,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Studio Bosko brand palette
-        beige: '#d4cbc0',
-        'beige-light': '#ede8e2',
+        // Studio Bosko brand palette — exact values from bosko.studio
+        beige: '#d4cbc0',        // page background, card bg, muted sections
+        'beige-light': '#ede8e2', // text on dark, light accents
         'beige-dark': '#c4b9ac',
-        orange: '#f5500a',
-        'dark-brown': '#2d1d17',
-        'near-black': '#120b09',
-        'warm-brown': '#705305',
-        sage: '#60bf83',
-        gold: '#e1cd3c',
+        orange: '#f5500a',       // hover states, CTAs
+        'dark-brown': '#2d1d17', // dark sections, nav (scrolled), footer, CTA, inquiry page
+        'warm-brown': '#705305', // intro / offering / CTA sections (olive-brown)
+        sage: '#60bf83',         // testimonial block
+        gold: '#e1cd3c',         // text on warm-brown sections
         // Semantic aliases
-        background: '#ede8e2',
-        foreground: '#120b09',
-        accent: '#f5500a',
+        background: '#d4cbc0',   // true page background
+        foreground: '#2d1d17',   // primary text color
+        accent: '#f5500a',       // interactive / hover
         muted: '#d4cbc0',
       },
       fontFamily: {

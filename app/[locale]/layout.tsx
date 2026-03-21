@@ -95,7 +95,7 @@ export default async function LocaleLayout({
         <link rel="preconnect" href="https://framerusercontent.com" />
         <link rel="dns-prefetch" href="https://framerusercontent.com" />
       </head>
-      <body className="bg-[#d4cbc0] text-[#120b09] font-cadiz antialiased">
+      <body className="bg-[#d4cbc0] text-[#2d1d17] font-cadiz antialiased">
         <NextIntlClientProvider messages={messages}>
           <SchemaOrg locale={locale} />
           <Navigation locale={locale} />

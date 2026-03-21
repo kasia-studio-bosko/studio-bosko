@@ -77,10 +77,10 @@ export default async function OfferingPage({
             <ScrollReveal>
               <p className="label-serif mb-8">Offering</p>
               <div className="space-y-5">
-                <p className="font-cadiz text-base md:text-lg leading-relaxed text-[#120b09]/80">
+                <p className="font-cadiz text-base md:text-lg leading-relaxed text-[#2d1d17]/80">
                   We specialize in full-scope residential projects, overseeing every phase of the process with care and clarity. We understand you need an expert partner to design your home—one that grasps your personal style and translates it into a unique, timeless interior, without the operational hassle. With our intuition for the emotive connections and business expertise, we articulate visions and bring them to fruition for our discerning clientele.
                 </p>
-                <p className="font-cadiz text-base leading-relaxed text-[#120b09]/75">
+                <p className="font-cadiz text-base leading-relaxed text-[#2d1d17]/75">
                   Our process includes thorough research—from architecture, culture to client's lifestyle—through layered design development and full spec-packages, down to author's supervision on project fulfilment, on which we work with a network of trusted craftspeople and specialists.
                 </p>
               </div>
@@ -89,7 +89,7 @@ export default async function OfferingPage({
             {/* Right: what's included + what we don't take on */}
             <div className="space-y-10">
               <ScrollReveal delay={100}>
-                <p className="font-signifier font-light text-sm tracking-wide text-[#120b09]/60 mb-4">Our work typically includes:</p>
+                <p className="font-signifier font-light text-sm tracking-wide text-[#2d1d17]/60 mb-4">Our work typically includes:</p>
                 <ul className="space-y-2">
                   {[
                     'Interior Architecture and Space Planning',
@@ -99,8 +99,8 @@ export default async function OfferingPage({
                     'Art Sourcing and Interior Curation',
                     'Budget Planning and Fulfilment Coordination',
                   ].map((item) => (
-                    <li key={item} className="flex gap-3 font-cadiz text-sm text-[#120b09]/75 leading-relaxed">
-                      <span className="shrink-0 text-[#120b09]/30 mt-0.5">—</span>
+                    <li key={item} className="flex gap-3 font-cadiz text-sm text-[#2d1d17]/75 leading-relaxed">
+                      <span className="shrink-0 text-[#2d1d17]/30 mt-0.5">—</span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -108,20 +108,20 @@ export default async function OfferingPage({
               </ScrollReveal>
 
               <ScrollReveal delay={150}>
-                <p className="font-signifier font-light text-sm tracking-wide text-[#120b09]/60 mb-4">We don't take on:</p>
+                <p className="font-signifier font-light text-sm tracking-wide text-[#2d1d17]/60 mb-4">We don't take on:</p>
                 <ul className="space-y-2 mb-6">
                   {[
                     'One-room makeovers',
                     'Final-stage styling for existing homes',
                     'Projects without implementation oversight',
                   ].map((item) => (
-                    <li key={item} className="flex gap-3 font-cadiz text-sm text-[#120b09]/50 leading-relaxed">
+                    <li key={item} className="flex gap-3 font-cadiz text-sm text-[#2d1d17]/50 leading-relaxed">
                       <span className="shrink-0 mt-0.5">✕</span>
                       <span>{item}</span>
                     </li>
                   ))}
                 </ul>
-                <p className="font-signifier font-light text-base italic text-[#120b09]/70">If we're in, we're all in.</p>
+                <p className="font-signifier font-light text-base italic text-[#2d1d17]/70">If we're in, we're all in.</p>
               </ScrollReveal>
 
               <ScrollReveal delay={200}>
@@ -146,7 +146,7 @@ export default async function OfferingPage({
                 <h2 className="font-signifier font-normal text-[50px] leading-[60px] mb-4">
                   {title}
                 </h2>
-                <p className="font-cadiz text-sm leading-relaxed text-[#120b09]/70">
+                <p className="font-cadiz text-sm leading-relaxed text-[#2d1d17]/70">
                   {body}
                 </p>
               </ScrollReveal>
@@ -156,13 +156,13 @@ export default async function OfferingPage({
       </section>
 
       {/* ── Testimonial ──────────────────────────────────────────────────── */}
-      <section className="section-spacing bg-[#2d1d17]" aria-label="Client testimonial">
+      <section className="section-spacing bg-[#60bf83]" aria-label="Client testimonial">
         <div className="page-container max-w-2xl">
           <ScrollReveal>
-            <blockquote className="font-signifier font-light text-[30px] leading-[42px] text-balance text-[#ede8e2] mb-6" style={{ letterSpacing: '-0.6px' }}>
+            <blockquote className="font-signifier font-light text-[30px] leading-[42px] text-balance text-white mb-6" style={{ letterSpacing: '-0.6px' }}>
               "Studio Bosko was a lifesaver for my apartment redesign. As an expat in Germany, tackling a renovation project was overwhelming, but Kasia's exceptional design sense and strong network of contractors made the process smooth and enjoyable."
             </blockquote>
-            <p className="font-cadiz text-sm text-white/50">Doug, homeowner and antiques collector</p>
+            <p className="font-cadiz text-sm text-white/70">Doug, homeowner and antiques collector</p>
           </ScrollReveal>
         </div>
       </section>

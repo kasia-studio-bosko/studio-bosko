@@ -77,7 +77,7 @@ export default async function PressPage({
             </h1>
           </ScrollReveal>
           <ScrollReveal delay={150}>
-            <p className="font-cadiz text-[15px] leading-[21px] text-[#120b09]/75 max-w-2xl">
+            <p className="font-cadiz text-[15px] leading-[21px] text-[#2d1d17]/75 max-w-2xl">
               Studio Bosko has been named AD100 for 2025 and featured in print and online across international publications and platforms. Browse our archive of stories and features.
             </p>
           </ScrollReveal>
@@ -87,14 +87,14 @@ export default async function PressPage({
       {/* ── Press list ────────────────────────────────────────────────────── */}
       <section className="pb-section-y" aria-label="Press coverage">
         <div className="page-container max-w-3xl">
-          <div className="divide-y divide-[#120b09]/10">
+          <div className="divide-y divide-[#2d1d17]/10">
             {PRESS_ITEMS.map((item, i) => (
               <ScrollReveal key={`${item.publication}-${item.issue}`} delay={Math.min(i * 30, 300)}>
                 <div className="py-5 flex items-baseline justify-between gap-6">
-                  <p className="font-cadiz text-[15px] leading-[21px] text-[#120b09]">
+                  <p className="font-cadiz text-[15px] leading-[21px] text-[#2d1d17]">
                     {item.publication}
                   </p>
-                  <p className="font-cadiz text-sm text-[#120b09]/50 shrink-0">
+                  <p className="font-cadiz text-sm text-[#2d1d17]/50 shrink-0">
                     {item.issue}
                   </p>
                 </div>

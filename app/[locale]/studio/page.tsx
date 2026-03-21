@@ -83,13 +83,13 @@ export default async function StudioPage({
               <ScrollReveal delay={100}>
                 <p className="label-serif mb-8">About</p>
                 <div className="space-y-6">
-                  <p className="font-cadiz text-base md:text-lg leading-relaxed text-[#120b09]/80">
+                  <p className="font-cadiz text-base md:text-lg leading-relaxed text-[#2d1d17]/80">
                     As an interior design studio named AD100 for 2025 by Architectural Digest Polska, we are tastemakers for clients who share a strong appreciation for art, culture, and craftsmanship. We create layered, personality-driven homes with a clear point of view—confident, curated, and boldly individual. Our work balances high design with lived-in ease—spaces that feel as effortless as they are intentional. A quest for artful character runs through everything we curate, shaping homes that don't just look beautiful, but feel deeply personal.
                   </p>
-                  <p className="font-cadiz text-base md:text-lg leading-relaxed text-[#120b09]/80">
+                  <p className="font-cadiz text-base md:text-lg leading-relaxed text-[#2d1d17]/80">
                     Practicality and liveability are equally important to us, so each of our designs is entirely custom. We design to support how you actually live, when no one is watching. Because great design isn't just seen — it's felt.
                   </p>
-                  <p className="font-cadiz text-base md:text-lg leading-relaxed text-[#120b09]/80">
+                  <p className="font-cadiz text-base md:text-lg leading-relaxed text-[#2d1d17]/80">
                     Led by Kasia Kronberger, Studio Bosko brings together structured precision and intuitive curation. Kasia's background spans education in business and trend forecasting, and international design experience across London, Florence, Barcelona, and Brussels. Her work is shaped by a global sensibility—layering modern craftsmanship, historical references, and joyful tension into interiors that are worldly and authentically evocative. She is recognised for creating spaces that start conversations: rooms rich with personality, intentional clashes, and emotional resonance—without ever feeling staged or overworked.
                   </p>
                 </div>
@@ -97,12 +97,12 @@ export default async function StudioPage({
 
               {/* Ethos */}
               <ScrollReveal delay={150}>
-                <div className="border-t border-[#120b09]/10 pt-10">
+                <div className="border-t border-[#2d1d17]/10 pt-10">
                   <p className="label-serif mb-6">Ethos</p>
-                  <p className="font-cadiz text-base leading-relaxed text-[#120b09]/75 mb-6">
+                  <p className="font-cadiz text-base leading-relaxed text-[#2d1d17]/75 mb-6">
                     Design for us is never about surface or spectacle but rather about self-expression and growth. Home is often our most valuable asset. Whereas the best interiors are the ones filled with character. It's about crafting environments that evolve with our discerning clients—busy professionals and their families—and help them live their best lives.
                   </p>
-                  <p className="font-signifier font-light text-sm tracking-wide text-[#120b09]/60 mb-4">How we approach every project:</p>
+                  <p className="font-signifier font-light text-sm tracking-wide text-[#2d1d17]/60 mb-4">How we approach every project:</p>
                   <ul className="space-y-3">
                     {[
                       'We push functionality forward—prioritising flow, storage and usability from the start, so the space supports your lifestyle effortlessly.',
@@ -110,8 +110,8 @@ export default async function StudioPage({
                       'We create homes that tell your story—through materials, colours, and the way light moves inside.',
                       'We\'re your trusted advisor—guiding you through the complexity, helping you navigate decisions with confidence and problem-solving instincts.',
                     ].map((item, i) => (
-                      <li key={i} className="flex gap-3 font-cadiz text-sm text-[#120b09]/75 leading-relaxed">
-                        <span className="shrink-0 text-[#120b09]/30 mt-0.5">→</span>
+                      <li key={i} className="flex gap-3 font-cadiz text-sm text-[#2d1d17]/75 leading-relaxed">
+                        <span className="shrink-0 text-[#2d1d17]/30 mt-0.5">→</span>
                         <span>{item}</span>
                       </li>
                     ))}

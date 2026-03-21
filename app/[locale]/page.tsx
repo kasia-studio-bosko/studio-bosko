@@ -191,7 +191,7 @@ export default async function HomePage({
                 className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
               />
               {/* Hover overlay */}
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-all duration-500" />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-500" />
               <div className="absolute bottom-0 left-0 p-8 translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-400">
                 <p className="font-signifier font-light text-2xl text-white leading-tight">
                   {project.title}
@@ -230,7 +230,7 @@ export default async function HomePage({
       </section>
 
       {/* ── 5. Press marquee ──────────────────────────────────────────────── */}
-      <section className="bg-[#120b09] py-[14px] overflow-hidden" aria-label="Press mentions">
+      <section className="bg-[#2d1d17] py-[14px] overflow-hidden" aria-label="Press mentions">
         <div className="flex animate-marquee whitespace-nowrap">
           <span className="font-cadiz text-[11px] tracking-[0.25em] uppercase text-white/50 pr-20">
             {PRESS_MARQUEE}

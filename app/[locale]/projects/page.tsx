@@ -95,7 +95,7 @@ export default async function ProjectsPage({
             </h1>
           </ScrollReveal>
           <ScrollReveal delay={150}>
-            <p className="font-cadiz text-base text-[#120b09]/60">
+            <p className="font-cadiz text-base text-[#2d1d17]/60">
               {t('heroSubheading')}
             </p>
           </ScrollReveal>
@@ -119,7 +119,7 @@ export default async function ProjectsPage({
                   className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 />
                 {/* Hover overlay */}
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-500" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-500" />
                 <div className="absolute bottom-0 left-0 p-6 md:p-8 translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-400">
                   <h2 className="font-signifier font-light text-[30px] leading-[42px] text-white" style={{ letterSpacing: '-0.6px' }}>
                     {project.title}

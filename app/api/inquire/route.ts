@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
       replyTo: email,
       subject: `New inquiry from ${fullName}`,
       html: `
-        <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 40px 24px; color: #120b09;">
+        <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 40px 24px; color: #2d1d17;">
           <p style="font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin: 0 0 32px;">
             Studio Bosko — New Inquiry
           </p>
@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
           <table style="width: 100%; border-collapse: collapse; font-size: 15px; margin-bottom: 32px;">
             <tr>
               <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da; color: #888; width: 160px;">Email</td>
-              <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da;"><a href="mailto:${email}" style="color: #120b09;">${email}</a></td>
+              <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da;"><a href="mailto:${email}" style="color: #2d1d17;">${email}</a></td>
             </tr>
             ${phone ? `<tr>
               <td style="padding: 10px 0; border-bottom: 1px solid #e5e0da; color: #888;">Phone</td>
