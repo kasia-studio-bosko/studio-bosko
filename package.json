@@ -9,7 +9,8 @@
     "lint": "next lint",
     "sanity": "sanity dev --basePath /studio",
     "seed": "node scripts/seed-sanity.mjs",
-    "clean-projects": "node scripts/clean-projects.mjs"
+    "clean-projects": "node scripts/clean-projects.mjs",
+    "seed-new": "node scripts/seed-new-projects.mjs"
   },
   "dependencies": {
     "@headlessui/react": "^2.1.2",
