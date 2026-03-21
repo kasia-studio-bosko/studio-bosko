@@ -62,7 +62,7 @@ export default async function OfferingPage({
             <p className="label-serif mb-4">Studio Bosko</p>
           </ScrollReveal>
           <ScrollReveal delay={100}>
-            <h1 className="font-signifier font-light text-display-xl tracking-tight text-balance max-w-3xl">
+            <h1 className="font-signifier font-light text-[28px] md:text-[34px] leading-snug tracking-tight text-balance max-w-3xl">
               We're a full-service interior design practice based in Berlin and Warsaw, running projects internationally.
             </h1>
           </ScrollReveal>

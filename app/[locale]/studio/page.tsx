@@ -53,7 +53,7 @@ export default async function StudioPage({
             <p className="label-serif mb-4">Studio Bosko</p>
           </ScrollReveal>
           <ScrollReveal delay={100}>
-            <h1 className="font-signifier font-light text-display-xl tracking-tight text-balance max-w-3xl">
+            <h1 className="font-signifier font-light text-[28px] md:text-[34px] leading-snug tracking-tight text-balance max-w-3xl">
               We design personality-driven spaces—crafted with curatorial instinct and delivered with clarity.
             </h1>
           </ScrollReveal>
