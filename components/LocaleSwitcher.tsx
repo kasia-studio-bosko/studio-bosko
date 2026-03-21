@@ -3,6 +3,7 @@
 import { useLocale } from 'next-intl'
 import { usePathname, useRouter } from 'next/navigation'
 import { routing } from '@/i18n/routing'
+import { LOCALE_COOKIE, LOCALE_COOKIE_MAX_AGE } from '@/lib/locale-cookie'
 
 const localeLabels: Record<string, string> = {
   en: 'EN',
@@ -16,19 +17,29 @@ export default function LocaleSwitcher() {
   const pathname = usePathname()
 
   const handleChange = (nextLocale: string) => {
-    // Strip current locale prefix from pathname
-    let newPath = pathname
+    // ── Persist explicit user choice in a cookie ─────────────────────────────
+    // This overrides Accept-Language detection on future visits.
+    document.cookie = [
+      `${LOCALE_COOKIE}=${nextLocale}`,
+      `path=/`,
+      `max-age=${LOCALE_COOKIE_MAX_AGE}`,
+      `SameSite=Lax`,
+    ].join('; ')
+
+    // ── Navigate to the same page in the new locale ──────────────────────────
+    // Strip current non-default locale prefix (/de/… or /pl/…) from pathname
+    let basePath = pathname
     for (const loc of routing.locales) {
       if (loc !== routing.defaultLocale && pathname.startsWith(`/${loc}`)) {
-        newPath = pathname.slice(`/${loc}`.length) || '/'
+        basePath = pathname.slice(`/${loc}`.length) || '/'
         break
       }
     }
-    // Navigate to new locale
+
     if (nextLocale === routing.defaultLocale) {
-      router.push(newPath)
+      router.push(basePath)
     } else {
-      router.push(`/${nextLocale}${newPath}`)
+      router.push(`/${nextLocale}${basePath}`)
     }
   }
 
@@ -40,8 +51,8 @@ export default function LocaleSwitcher() {
             onClick={() => handleChange(loc)}
             className={`text-xs font-cadiz tracking-widest uppercase transition-colors duration-200 px-1 py-0.5 ${
               locale === loc
-                ? 'text-[#120b09] font-semibold'
-                : 'text-[#120b09]/50 hover:text-[#120b09]'
+                ? 'text-white font-semibold'
+                : 'text-white/50 hover:text-white'
             }`}
             aria-label={`Switch to ${loc.toUpperCase()}`}
             aria-current={locale === loc ? 'true' : undefined}
@@ -50,7 +61,7 @@ export default function LocaleSwitcher() {
             {localeLabels[loc]}
           </button>
           {i < routing.locales.length - 1 && (
-            <span className="text-[#120b09]/30 text-xs">·</span>
+            <span className="text-white/30 text-xs">·</span>
           )}
         </span>
       ))}
