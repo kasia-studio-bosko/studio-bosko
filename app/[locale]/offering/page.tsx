@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
+import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import ScrollReveal from '@/components/ScrollReveal'
 import ParallaxImage from '@/components/ParallaxImage'
@@ -146,16 +147,17 @@ export default async function OfferingPage({
               </ScrollReveal>
             </div>
 
-            {/* Right — bookshelf portrait, top-aligned, parallax */}
+            {/* Right — bookshelf portrait, top-aligned */}
             <div
               className="absolute top-0 right-0 overflow-hidden bg-[#d4cbc0]"
               style={{ width: '44%', aspectRatio: '578 / 867' }}
             >
-              <ParallaxImage
+              <Image
                 src={PHOTO_BOOKSHELF}
                 alt="Curated bookshelf — Studio Bosko"
+                fill
                 sizes="44vw"
-                speed={0.2}
+                className="object-cover"
                 priority
               />
             </div>
@@ -164,19 +166,17 @@ export default async function OfferingPage({
       </section>
 
       {/* ─────────────────────────────────────────────────────────────────────
-          FULL-BLEED MOODBOARD — near-square, parallax
-          Reference: 1299×1364 = aspect 0.952. Very tall, nearly square.
-          Creates the impression of two tall images close together at the top.
+          FULL-BLEED MOODBOARD — 400px tall, centred crop, parallax
       ───────────────────────────────────────────────────────────────────── */}
       <div
         className="relative w-full overflow-hidden bg-[#d4cbc0] mt-10 md:mt-14"
-        style={{ aspectRatio: '1299 / 1364' }}
+        style={{ height: '400px' }}
       >
         <ParallaxImage
           src={PHOTO_MOODBOARD}
           alt="Interior design moodboard — Studio Bosko"
           sizes="100vw"
-          speed={0.22}
+          speed={0.25}
         />
       </div>
 
@@ -254,12 +254,12 @@ export default async function OfferingPage({
               className="relative overflow-hidden bg-[#ede8e2]"
               style={{ aspectRatio: '731 / 577' }}
             >
-              <ParallaxImage
+              <Image
                 src={PHOTO_FLOORPLAN}
                 alt="Interior design floor plan — Studio Bosko"
+                fill
                 sizes="(max-width: 768px) 100vw, 56vw"
-                speed={0.2}
-                imgClassName="object-contain"
+                className="object-contain"
               />
             </div>
           </div>
@@ -316,16 +316,17 @@ export default async function OfferingPage({
         className="flex flex-col md:flex-row overflow-hidden"
         aria-label="Client testimonial"
       >
-        {/* Left — hallway photo, parallax */}
+        {/* Left — hallway photo */}
         <div
           className="relative overflow-hidden bg-[#d4cbc0] w-full md:w-1/2"
           style={{ aspectRatio: '650 / 671' }}
         >
-          <ParallaxImage
+          <Image
             src={PHOTO_HALLWAY}
             alt="Colour-drenched hallway — Studio Bosko"
+            fill
             sizes="(max-width: 768px) 100vw, 50vw"
-            speed={0.2}
+            className="object-cover"
           />
         </div>
 

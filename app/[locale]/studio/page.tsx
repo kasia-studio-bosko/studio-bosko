@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
+import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import ScrollReveal from '@/components/ScrollReveal'
 import ParallaxImage from '@/components/ParallaxImage'
@@ -94,16 +95,17 @@ export default async function StudioPage({
               </ScrollReveal>
             </div>
 
-            {/* Right — Kasia portrait, top-aligned, with parallax */}
+            {/* Right — Kasia portrait, top-aligned */}
             <div
               className="absolute top-0 right-0 overflow-hidden bg-[#d4cbc0]"
               style={{ width: '44%', aspectRatio: '578 / 738' }}
             >
-              <ParallaxImage
+              <Image
                 src={PHOTO_KASIA_PORTRAIT}
                 alt="Kasia Kronberger, founder of Studio Bosko"
+                fill
                 sizes="44vw"
-                speed={0.2}
+                className="object-cover"
                 priority
               />
             </div>
@@ -112,18 +114,17 @@ export default async function StudioPage({
       </section>
 
       {/* ─────────────────────────────────────────────────────────────────────
-          FULL-BLEED STUDIO PHOTO — 100vh, parallax
-          Reference: 1299×831 rendered on 831px viewport = exactly 100vh.
+          FULL-BLEED STUDIO PHOTO — 400px tall, centred crop, parallax
       ───────────────────────────────────────────────────────────────────── */}
       <div
         className="relative w-full overflow-hidden bg-[#d4cbc0] mt-10 md:mt-14"
-        style={{ height: '100vh' }}
+        style={{ height: '400px' }}
       >
         <ParallaxImage
           src={PHOTO_KASIA_STUDIO}
           alt="Kasia Kronberger at work in the studio"
           sizes="100vw"
-          speed={0.22}
+          speed={0.25}
         />
       </div>
 
@@ -163,11 +164,12 @@ export default async function StudioPage({
               className="relative overflow-hidden bg-[#d4cbc0]"
               style={{ aspectRatio: '747 / 498' }}
             >
-              <ParallaxImage
+              <Image
                 src={PHOTO_FURNITURE_DETAIL}
                 alt="Bespoke furniture detail — Studio Bosko"
+                fill
                 sizes="(max-width: 768px) 100vw, 57vw"
-                speed={0.25}
+                className="object-cover"
               />
             </div>
           </div>
@@ -220,11 +222,12 @@ export default async function StudioPage({
               className="relative overflow-hidden bg-[#d4cbc0]"
               style={{ aspectRatio: '747 / 498' }}
             >
-              <ParallaxImage
+              <Image
                 src={PHOTO_ALTBAU}
                 alt="Altbau renovation — Studio Bosko Berlin"
+                fill
                 sizes="(max-width: 768px) 100vw, 57vw"
-                speed={0.25}
+                className="object-cover"
               />
             </div>
           </div>
@@ -244,16 +247,17 @@ export default async function StudioPage({
         className="flex flex-col md:flex-row overflow-hidden"
         aria-label="Press testimonial"
       >
-        {/* Left — penthouse image, parallax */}
+        {/* Left — penthouse image */}
         <div
           className="relative overflow-hidden bg-[#d4cbc0] w-full md:w-1/2"
           style={{ aspectRatio: '650 / 671' }}
         >
-          <ParallaxImage
+          <Image
             src={PHOTO_PENTHOUSE}
             alt="Penthouse interior — Studio Bosko"
+            fill
             sizes="(max-width: 768px) 100vw, 50vw"
-            speed={0.2}
+            className="object-cover"
           />
         </div>
 
