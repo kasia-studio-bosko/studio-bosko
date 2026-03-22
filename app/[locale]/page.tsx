@@ -2,9 +2,8 @@ import type { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
-import { getFeaturedProjects, getPageContent } from '@/lib/sanity/queries'
+import { getFeaturedProjects, getHomepageContent } from '@/lib/sanity/queries'
 import { urlFor } from '@/lib/sanity/client'
-import { ptToStrings } from '@/lib/sanity/utils'
 import HeroCarousel, { type CarouselSlide } from '@/components/HeroCarousel'
 
 export async function generateMetadata({
@@ -15,7 +14,7 @@ export async function generateMetadata({
   const { locale } = params
   const [t, sanity] = await Promise.all([
     getTranslations({ locale, namespace: 'meta' }),
-    getPageContent('homepage', locale),
+    getHomepageContent(locale),
   ])
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://bosko.studio'
   const canonicalUrl = locale === 'en' ? siteUrl : `${siteUrl}/${locale}`
@@ -76,7 +75,8 @@ const FALLBACK_CAROUSEL: CarouselSlide[] = [
   },
 ]
 
-const TESTIMONIAL_IMAGE =
+// Fallback testimonial image
+const FALLBACK_TESTIMONIAL_IMAGE =
   'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg'
 
 const PRESS_MARQUEE =
@@ -91,14 +91,24 @@ export default async function HomePage({
   setRequestLocale(locale)
   const [t, sanity] = await Promise.all([
     getTranslations({ locale, namespace: 'home' }),
-    getPageContent('homepage', locale),
+    getHomepageContent(locale),
   ])
 
-  // Heading and body — Sanity first, translations as fallback
-  const bodyParas       = ptToStrings(sanity?.body)
-  const introH1         = sanity?.heading ?? t('introH1')
-  const introBody       = bodyParas[0] ?? t('introBody')
-  const offeringBodyFull = bodyParas[1] ?? t('offeringBodyFull')
+  // Content — Sanity first, translation fallback
+  const introH1        = sanity?.heroHeadline ?? t('introH1')
+  const introBody      = sanity?.heroBody     ?? t('introBody')
+  const offeringBodyFull = sanity?.offeringBody ?? t('offeringBodyFull')
+
+  // Testimonial — Sanity first, translation fallback
+  const testimonialQuote       = sanity?.testimonialQuote  ?? t('testimonialQuote')
+  const testimonialAttribution = sanity?.testimonialAuthor ?? t('testimonialAttribution')
+  const testimonialImageUrl    = sanity?.testimonialImage?.asset?._ref
+    ? urlFor(sanity.testimonialImage).width(1200).height(900).url()
+    : FALLBACK_TESTIMONIAL_IMAGE
+
+  // CTA section
+  const ctaBody = sanity?.scarcityText ?? t('ctaBodyFull')
+  const ctaBtn  = sanity?.scarcityCta  ?? t('ctaConsultation')
 
   // Carousel slides: try Sanity first, fall back to static data
   let carouselSlides: CarouselSlide[] = FALLBACK_CAROUSEL
@@ -120,10 +130,6 @@ export default async function HomePage({
   return (
     <>
       {/* ── 1. Full-bleed hero carousel ────────────────────────────────────── */}
-      {/*
-        Negative top margin cancels the `pt-[--header-height]` on <main>,
-        so the hero fills the screen edge-to-edge behind the transparent nav.
-      */}
       <section
         className="-mt-[var(--header-height)] relative w-full overflow-hidden"
         style={{ height: '100svh' }}
@@ -131,7 +137,7 @@ export default async function HomePage({
       >
         <HeroCarousel
           slides={carouselSlides}
-          seeIfFitLabel={t('heroCtaSeeIfFit')}
+          seeIfFitLabel={sanity?.heroCta ?? t('heroCtaSeeIfFit')}
           seeAllLabel={t('seeAllProjects')}
         />
       </section>
@@ -150,7 +156,7 @@ export default async function HomePage({
               href="/inquire"
               className="font-cadiz text-[14px] tracking-widest uppercase text-[#e1cd3c]/70 hover:text-[#e1cd3c] transition-colors duration-200 border-b border-[#e1cd3c]/30 pb-0.5"
             >
-              {t('heroCtaSeeIfFit')} ›
+              {sanity?.heroCta ?? t('heroCtaSeeIfFit')} ›
             </Link>
           </div>
         </div>
@@ -164,7 +170,7 @@ export default async function HomePage({
             {t('selectedWorkSubheading')}
           </p>
           <h2 className="font-signifier font-normal text-[50px] text-[#2d1d17] mb-6 leading-[60px]">
-            {t('selectedWork')}
+            {sanity?.selectedWorkLabel ?? t('selectedWork')}
           </h2>
           <Link
             href="/projects"
@@ -182,7 +188,7 @@ export default async function HomePage({
               {t('selectedWorkSubheading')}
             </p>
             <h2 className="font-signifier font-normal text-[50px] text-[#2d1d17] mb-4 leading-[60px]">
-              {t('selectedWork')}
+              {sanity?.selectedWorkLabel ?? t('selectedWork')}
             </h2>
             <Link
               href="/projects"
@@ -231,7 +237,7 @@ export default async function HomePage({
             Studio Bosko
           </p>
           <h2 className="font-signifier font-normal text-[50px] leading-[60px] text-[#e1cd3c] mb-8">
-            Offering
+            {sanity?.offeringHeadline ?? 'Offering'}
           </h2>
           <p className="font-signifier font-light text-[20px] md:text-[24px] leading-relaxed text-[#e1cd3c]/80 max-w-3xl mb-10">
             {offeringBodyFull}
@@ -240,7 +246,7 @@ export default async function HomePage({
             href="/offering"
             className="font-cadiz text-[14px] tracking-widest uppercase text-[#e1cd3c]/70 hover:text-[#e1cd3c] transition-colors duration-200 border-b border-[#e1cd3c]/30 pb-0.5"
           >
-            {t('offeringCtaLearn')} ›
+            {sanity?.offeringCta ?? t('offeringCtaLearn')} ›
           </Link>
         </div>
       </section>
@@ -266,8 +272,8 @@ export default async function HomePage({
         {/* Left: image */}
         <div className="relative w-full md:w-1/2 h-[50vw] md:h-auto min-h-[320px]">
           <Image
-            src={TESTIMONIAL_IMAGE}
-            alt="Studio Bosko interior project"
+            src={testimonialImageUrl}
+            alt={sanity?.testimonialImage?.alt ?? 'Studio Bosko interior project'}
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover"
@@ -277,10 +283,10 @@ export default async function HomePage({
         {/* Right: quote */}
         <div className="w-full md:w-1/2 bg-[#60bf83] flex flex-col justify-center px-10 md:px-14 lg:px-20 py-16">
           <blockquote className="font-signifier font-light text-[30px] leading-[42px] text-white mb-8" style={{ letterSpacing: '-0.6px' }}>
-            {t('testimonialQuote')}
+            {testimonialQuote}
           </blockquote>
           <p className="font-cadiz text-sm text-white/70 tracking-wide">
-            {t('testimonialAttribution')}
+            {testimonialAttribution}
           </p>
         </div>
       </section>
@@ -292,13 +298,13 @@ export default async function HomePage({
       >
         <div className="max-w-[1440px] mx-auto">
           <p className="font-signifier font-light text-[30px] leading-[42px] text-[#e1cd3c] max-w-2xl mb-10" style={{ letterSpacing: '-0.6px' }}>
-            {t('ctaBodyFull')}
+            {ctaBody}
           </p>
           <Link
             href="/inquire"
             className="font-cadiz text-[14px] tracking-widest uppercase text-[#e1cd3c]/70 hover:text-[#e1cd3c] transition-colors duration-200 border-b border-[#e1cd3c]/30 pb-0.5"
           >
-            {t('ctaConsultation')} ›
+            {ctaBtn} ›
           </Link>
         </div>
       </section>

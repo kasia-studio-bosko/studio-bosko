@@ -43,29 +43,36 @@ export default defineConfig({
                       .title('🏠 Homepage')
                       .child(
                         S.document()
-                          .schemaType('pageContent')
-                          .documentId('pageContent-homepage')
+                          .schemaType('homepage')
+                          .documentId('homepage')
                       ),
                     S.listItem()
                       .title('👤 Studio / About')
                       .child(
                         S.document()
-                          .schemaType('pageContent')
-                          .documentId('pageContent-studio')
+                          .schemaType('studioPage')
+                          .documentId('studioPage')
                       ),
                     S.listItem()
                       .title('📋 Offering / Services')
                       .child(
                         S.document()
-                          .schemaType('pageContent')
-                          .documentId('pageContent-offering')
+                          .schemaType('offeringPage')
+                          .documentId('offeringPage')
+                      ),
+                    S.listItem()
+                      .title('📰 Press')
+                      .child(
+                        S.document()
+                          .schemaType('pressPage')
+                          .documentId('pressPage')
                       ),
                     S.listItem()
                       .title('✉️ Inquire')
                       .child(
                         S.document()
-                          .schemaType('pageContent')
-                          .documentId('pageContent-inquire')
+                          .schemaType('inquirePage')
+                          .documentId('inquirePage')
                       ),
                     S.listItem()
                       .title('🏗️ Projects Index (SEO)')

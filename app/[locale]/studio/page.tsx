@@ -4,7 +4,8 @@ import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import ScrollReveal from '@/components/ScrollReveal'
 import ParallaxImage from '@/components/ParallaxImage'
-import { getPageContent } from '@/lib/sanity/queries'
+import { getStudioPageContent } from '@/lib/sanity/queries'
+import { urlFor } from '@/lib/sanity/client'
 import { ptToStrings } from '@/lib/sanity/utils'
 
 export async function generateMetadata({
@@ -15,7 +16,7 @@ export async function generateMetadata({
   const { locale } = params
   const [t, sanity] = await Promise.all([
     getTranslations({ locale, namespace: 'studio' }),
-    getPageContent('studio', locale),
+    getStudioPageContent(locale),
   ])
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://bosko.studio'
   const path = locale === 'en' ? '/studio' : `/${locale}/studio`
@@ -43,12 +44,12 @@ export async function generateMetadata({
   }
 }
 
-// ── Image constants (from bosko.studio) ──────────────────────────────────────
-const PHOTO_KASIA_PORTRAIT   = 'https://framerusercontent.com/images/R8TMgB8ZuigjgRdDrkIq1XL8pyE.jpg'
-const PHOTO_KASIA_STUDIO     = 'https://framerusercontent.com/images/8v65b9JTdh7Lt2d0LE7LfBwg.jpg'
-const PHOTO_FURNITURE_DETAIL = 'https://framerusercontent.com/images/TmcA1nzDm35cOZWzjts2wkS6kZ0.jpg'
-const PHOTO_ALTBAU           = 'https://framerusercontent.com/images/5UTLSTSHs0DzqrK1CoNNl85Uro.jpg'
-const PHOTO_PENTHOUSE        = 'https://framerusercontent.com/images/PHAwXxLNYORjMHEr1SMzbzN9KkM.jpg'
+// ── Fallback image constants (Framer-hosted) ──────────────────────────────────
+const FALLBACK_KASIA_PORTRAIT   = 'https://framerusercontent.com/images/R8TMgB8ZuigjgRdDrkIq1XL8pyE.jpg'
+const FALLBACK_KASIA_STUDIO     = 'https://framerusercontent.com/images/8v65b9JTdh7Lt2d0LE7LfBwg.jpg'
+const FALLBACK_FURNITURE_DETAIL = 'https://framerusercontent.com/images/TmcA1nzDm35cOZWzjts2wkS6kZ0.jpg'
+const FALLBACK_ALTBAU           = 'https://framerusercontent.com/images/5UTLSTSHs0DzqrK1CoNNl85Uro.jpg'
+const FALLBACK_PENTHOUSE        = 'https://framerusercontent.com/images/PHAwXxLNYORjMHEr1SMzbzN9KkM.jpg'
 
 export default async function StudioPage({
   params,
@@ -59,24 +60,47 @@ export default async function StudioPage({
   setRequestLocale(locale)
   const [t, sanity] = await Promise.all([
     getTranslations({ locale, namespace: 'studio' }),
-    getPageContent('studio', locale),
+    getStudioPageContent(locale),
   ])
 
-  // Heading and body paragraphs — Sanity takes precedence, translations as fallback
-  const headline  = sanity?.heading ?? t('headline')
-  const bodyParas = ptToStrings(sanity?.body)
+  // Headline — Sanity first, translation fallback
+  const headline = sanity?.heroHeadline ?? t('headline')
+
+  // About body paragraphs — Sanity first, translation fallback
+  const bodyParas = ptToStrings(sanity?.aboutBody)
   const aboutBody1 = bodyParas[0] ?? t('aboutBody1')
   const aboutBody2 = bodyParas[1] ?? t('aboutBody2')
   const aboutBody3 = bodyParas[2] ?? t('aboutBody3')
+
+  // Ethos bullets — Sanity first, translation fallback
+  const ethosBullets: string[] = sanity?.ethosBullets?.map((b) => b.text).filter(Boolean) as string[] ??
+    (t.raw('ethosPoints') as string[])
+
+  // Testimonial (Yellowtrace quote) — Sanity first, translation fallback
+  const testimonialQuote       = sanity?.yellowtraceQuote  ?? t('testimonialQuote')
+  const testimonialAttribution = sanity?.yellowtraceAttribution ?? t('testimonialAttribution')
+
+  // Images — Sanity first, fallback to Framer-hosted URLs
+  const kasiaPortraitUrl = sanity?.kasiaPhoto1?.asset?._ref
+    ? urlFor(sanity.kasiaPhoto1).width(578).height(738).url()
+    : FALLBACK_KASIA_PORTRAIT
+
+  const kasiaStudioUrl = sanity?.kasiaPhoto2?.asset?._ref
+    ? urlFor(sanity.kasiaPhoto2).width(1920).height(600).url()
+    : FALLBACK_KASIA_STUDIO
+
+  const furnitureDetailUrl = sanity?.studioPhoto1?.asset?._ref
+    ? urlFor(sanity.studioPhoto1).width(747).height(498).url()
+    : FALLBACK_FURNITURE_DETAIL
+
+  const altbauUrl = sanity?.studioPhoto2?.asset?._ref
+    ? urlFor(sanity.studioPhoto2).width(747).height(498).url()
+    : FALLBACK_ALTBAU
 
   return (
     <>
       {/* ─────────────────────────────────────────────────────────────────────
           HERO — headline lower-left + Kasia portrait upper-right
-          Reference: bosko.studio/studio
-            • Portrait: 578×652 rendered, right side of page (x=691 on 1299px)
-            • Headline: left 53%, bottom-aligned (flex-col justify-end)
-            • Both elements share the same bottom edge
       ───────────────────────────────────────────────────────────────────── */}
       <section
         className="overflow-hidden"
@@ -119,8 +143,8 @@ export default async function StudioPage({
               style={{ width: '44%', aspectRatio: '578 / 738' }}
             >
               <Image
-                src={PHOTO_KASIA_PORTRAIT}
-                alt="Kasia Kronberger, founder of Studio Bosko"
+                src={kasiaPortraitUrl}
+                alt={sanity?.kasiaPhoto1?.alt ?? 'Kasia Kronberger, founder of Studio Bosko'}
                 fill
                 sizes="44vw"
                 className="object-cover"
@@ -139,8 +163,8 @@ export default async function StudioPage({
         style={{ height: '400px' }}
       >
         <ParallaxImage
-          src={PHOTO_KASIA_STUDIO}
-          alt="Kasia Kronberger at work in the studio"
+          src={kasiaStudioUrl}
+          alt={sanity?.kasiaPhoto2?.alt ?? 'Kasia Kronberger at work in the studio'}
           sizes="100vw"
           speed={0.25}
         />
@@ -148,13 +172,12 @@ export default async function StudioPage({
 
       {/* ─────────────────────────────────────────────────────────────────────
           ABOUT — right-column layout (~64% width, left margin ~36%)
-          Reference: text starts at x=473 on a 1299px page (36% from left).
       ───────────────────────────────────────────────────────────────────── */}
       <section className="section-spacing" aria-label="About the studio">
         <div className="page-container">
           <ScrollReveal>
             <div className="md:ml-[36%]">
-              <p className="label-serif mb-6">{t('aboutHeading')}</p>
+              <p className="label-serif mb-6">{sanity?.aboutHeading ?? t('aboutHeading')}</p>
               <div className="space-y-5 max-w-[660px]">
                 <p className="font-cadiz text-base md:text-[17px] leading-relaxed text-[#2d1d17]/80">
                   {aboutBody1}
@@ -172,8 +195,7 @@ export default async function StudioPage({
       </section>
 
       {/* ─────────────────────────────────────────────────────────────────────
-          FURNITURE DETAIL — right-column, landscape, parallax
-          Reference: left=473, width=747 on 1299px (36% offset, 57% width).
+          FURNITURE DETAIL — right-column, landscape
       ───────────────────────────────────────────────────────────────────── */}
       <div className="page-container">
         <ScrollReveal>
@@ -183,8 +205,8 @@ export default async function StudioPage({
               style={{ aspectRatio: '747 / 498' }}
             >
               <Image
-                src={PHOTO_FURNITURE_DETAIL}
-                alt="Bespoke furniture detail — Studio Bosko"
+                src={furnitureDetailUrl}
+                alt={sanity?.studioPhoto1?.alt ?? 'Bespoke furniture detail — Studio Bosko'}
                 fill
                 sizes="(max-width: 768px) 100vw, 57vw"
                 className="object-cover"
@@ -195,7 +217,7 @@ export default async function StudioPage({
       </div>
 
       {/* ─────────────────────────────────────────────────────────────────────
-          ETHOS — right-column layout, matching About above
+          ETHOS — right-column layout
       ───────────────────────────────────────────────────────────────────── */}
       <section className="section-spacing" aria-label="Studio ethos">
         <div className="page-container">
@@ -209,7 +231,7 @@ export default async function StudioPage({
                 {t('ethosSubheading')}
               </p>
               <ul className="space-y-4 mb-10">
-                {(t.raw('ethosPoints') as string[]).map((item, i) => (
+                {ethosBullets.map((item, i) => (
                   <li
                     key={i}
                     className="flex gap-3 font-cadiz text-[15px] text-[#2d1d17]/75 leading-relaxed"
@@ -230,8 +252,7 @@ export default async function StudioPage({
       </section>
 
       {/* ─────────────────────────────────────────────────────────────────────
-          ALTBAU IMAGE — right-column, landscape, parallax
-          Same column position as furniture detail above.
+          ALTBAU IMAGE — right-column, landscape
       ───────────────────────────────────────────────────────────────────── */}
       <div className="page-container pb-[var(--section-padding-y)]">
         <ScrollReveal>
@@ -241,8 +262,8 @@ export default async function StudioPage({
               style={{ aspectRatio: '747 / 498' }}
             >
               <Image
-                src={PHOTO_ALTBAU}
-                alt="Altbau renovation — Studio Bosko Berlin"
+                src={altbauUrl}
+                alt={sanity?.studioPhoto2?.alt ?? 'Altbau renovation — Studio Bosko Berlin'}
                 fill
                 sizes="(max-width: 768px) 100vw, 57vw"
                 className="object-cover"
@@ -253,13 +274,9 @@ export default async function StudioPage({
       </div>
 
       {/* ─────────────────────────────────────────────────────────────────────
-          TESTIMONIAL — 50/50 full-bleed split (no page-container padding)
-          Left  50%: penthouse photo with parallax
+          TESTIMONIAL — 50/50 full-bleed split
+          Left  50%: penthouse photo
           Right 50%: sage green (#60BF83) box with Yellowtrace quote
-
-          Reference: rgb(96, 191, 131) = #60BF83, quote at x=680 in a
-          650px-wide right half = 30px left padding inside the green box.
-          Image height 671px on 1299px viewport (≈ aspect 650/671).
       ───────────────────────────────────────────────────────────────────── */}
       <section
         className="flex flex-col md:flex-row overflow-hidden"
@@ -271,7 +288,7 @@ export default async function StudioPage({
           style={{ aspectRatio: '650 / 671' }}
         >
           <Image
-            src={PHOTO_PENTHOUSE}
+            src={FALLBACK_PENTHOUSE}
             alt="Penthouse interior — Studio Bosko"
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
@@ -294,10 +311,10 @@ export default async function StudioPage({
                   letterSpacing: '-0.2px',
                 }}
               >
-                &ldquo;{t('testimonialQuote')}&rdquo;
+                &ldquo;{testimonialQuote}&rdquo;
               </blockquote>
               <p className="font-cadiz text-sm text-[#2d1d17]/70">
-                {t('testimonialAttribution')}
+                {testimonialAttribution}
               </p>
             </ScrollReveal>
           </div>

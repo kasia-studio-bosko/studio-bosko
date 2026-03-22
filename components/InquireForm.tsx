@@ -25,10 +25,17 @@ const INITIAL_STATE: FormState = {
   description: '',
 }
 
-export default function InquireForm() {
+interface InquireFormProps {
+  /** CMS-driven service options — falls back to translation file when undefined */
+  serviceOptions?: string[]
+  /** CMS-driven budget options — falls back to translation file when undefined */
+  budgetOptions?: string[]
+}
+
+export default function InquireForm({ serviceOptions: propServiceOptions, budgetOptions: propBudgetOptions }: InquireFormProps = {}) {
   const t = useTranslations('inquire')
-  const serviceOptions = t.raw('serviceOptions') as string[]
-  const budgetOptions = t.raw('budgetOptions') as string[]
+  const serviceOptions = propServiceOptions ?? (t.raw('serviceOptions') as string[])
+  const budgetOptions  = propBudgetOptions  ?? (t.raw('budgetOptions')  as string[])
 
   const [form, setForm] = useState<FormState>(INITIAL_STATE)
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')

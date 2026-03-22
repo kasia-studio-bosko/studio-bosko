@@ -4,7 +4,8 @@ import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import ScrollReveal from '@/components/ScrollReveal'
 import ParallaxImage from '@/components/ParallaxImage'
-import { getPageContent } from '@/lib/sanity/queries'
+import { getOfferingPageContent } from '@/lib/sanity/queries'
+import { urlFor } from '@/lib/sanity/client'
 import { ptToStrings } from '@/lib/sanity/utils'
 
 export async function generateMetadata({
@@ -15,7 +16,7 @@ export async function generateMetadata({
   const { locale } = params
   const [t, sanity] = await Promise.all([
     getTranslations({ locale, namespace: 'offering' }),
-    getPageContent('offering', locale),
+    getOfferingPageContent(locale),
   ])
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://bosko.studio'
 
@@ -40,13 +41,13 @@ export async function generateMetadata({
   }
 }
 
-// ── Image constants (from bosko.studio) ──────────────────────────────────────
-const PHOTO_BOOKSHELF  = 'https://framerusercontent.com/images/9RomZBJL6uDE9riO4mhK43xA.jpg'
-const PHOTO_MOODBOARD  = 'https://framerusercontent.com/images/rbIRqe2yxSTp84HPR7YpLWO59o.jpg'
-const PHOTO_FLOORPLAN  = 'https://framerusercontent.com/images/MU12NSy3wj6azUf80fouUcr6Bpg.png'
-const PHOTO_HALLWAY    = 'https://framerusercontent.com/images/BLcEb8zhESV8vCYUNx12PnA9d5c.jpg'
+// ── Fallback image constants ──────────────────────────────────────────────────
+const FALLBACK_BOOKSHELF = 'https://framerusercontent.com/images/9RomZBJL6uDE9riO4mhK43xA.jpg'
+const FALLBACK_MOODBOARD = 'https://framerusercontent.com/images/rbIRqe2yxSTp84HPR7YpLWO59o.jpg'
+const FALLBACK_FLOORPLAN = 'https://framerusercontent.com/images/MU12NSy3wj6azUf80fouUcr6Bpg.png'
+const FALLBACK_HALLWAY   = 'https://framerusercontent.com/images/BLcEb8zhESV8vCYUNx12PnA9d5c.jpg'
 
-// Project types — locale-keyed
+// ── Fallback project types ────────────────────────────────────────────────────
 const PROJECT_TYPES_EN = [
   {
     title: 'Complex Renovation',
@@ -92,7 +93,7 @@ const PROJECT_TYPES_PL = [
   },
 ]
 
-const PROJECT_TYPES_BY_LOCALE: Record<string, typeof PROJECT_TYPES_EN> = {
+const FALLBACK_PROJECT_TYPES: Record<string, typeof PROJECT_TYPES_EN> = {
   en: PROJECT_TYPES_EN,
   de: PROJECT_TYPES_DE,
   pl: PROJECT_TYPES_PL,
@@ -107,26 +108,55 @@ export default async function OfferingPage({
   setRequestLocale(locale)
   const [t, sanity] = await Promise.all([
     getTranslations({ locale, namespace: 'offering' }),
-    getPageContent('offering', locale),
+    getOfferingPageContent(locale),
   ])
 
-  const scopeItems   = t.raw('scopeItems') as string[]
-  const noItems      = t.raw('noItems') as string[]
-  const projectTypes = PROJECT_TYPES_BY_LOCALE[locale] ?? PROJECT_TYPES_EN
+  // Headline — Sanity first, translation fallback
+  const headline = sanity?.heroHeadline ?? t('headline')
 
-  // Heading and main body — Sanity first, translations as fallback
-  const headline  = sanity?.heading ?? t('headline')
-  const bodyParas = ptToStrings(sanity?.body)
+  // Main body — Sanity first, translation fallback
+  const bodyParas = ptToStrings(sanity?.offeringBody)
   const mainBody1 = bodyParas[0] ?? t('mainBody1')
+
+  // Scope & No items — Sanity first, translation fallback
+  const scopeItems = sanity?.scopeItems?.map((s) => s.label).filter(Boolean) as string[] ??
+    (t.raw('scopeItems') as string[])
+  const noItems = sanity?.noItems?.map((n) => n.label).filter(Boolean) as string[] ??
+    (t.raw('noItems') as string[])
+
+  // Tagline — Sanity first, translation fallback
+  const tagline = sanity?.tagline ?? t('tagline')
+
+  // Project types — Sanity first, fallback to locale-specific hardcoded data
+  const projectTypes = (sanity?.projectTypes && sanity.projectTypes.length > 0)
+    ? sanity.projectTypes
+    : (FALLBACK_PROJECT_TYPES[locale] ?? PROJECT_TYPES_EN)
+
+  // Testimonial — Sanity first, translation fallback
+  const testimonialQuote       = sanity?.testimonialQuote  ?? t('testimonialQuote')
+  const testimonialAttribution = sanity?.testimonialAuthor ?? t('testimonialAttribution')
+
+  // Images — Sanity first, fallback to Framer-hosted URLs
+  const bookselfUrl = sanity?.image1?.asset?._ref
+    ? urlFor(sanity.image1).width(578).height(867).url()
+    : FALLBACK_BOOKSHELF
+
+  const moodboardUrl = sanity?.image2?.asset?._ref
+    ? urlFor(sanity.image2).width(1920).height(600).url()
+    : FALLBACK_MOODBOARD
+
+  const floorplanUrl = sanity?.image3?.asset?._ref
+    ? urlFor(sanity.image3).width(731).height(577).url()
+    : FALLBACK_FLOORPLAN
+
+  const hallwayUrl = sanity?.testimonialImage?.asset?._ref
+    ? urlFor(sanity.testimonialImage).width(650).height(671).url()
+    : FALLBACK_HALLWAY
 
   return (
     <>
       {/* ─────────────────────────────────────────────────────────────────────
           HERO — headline lower-left + bookshelf portrait upper-right
-          Reference: bosko.studio/offering
-            • Portrait: 578×652, right side (x=691 on 1299px = 44%)
-            • H1: left 53%, bottom-aligned
-            • Both bottom-aligned to the same edge
       ───────────────────────────────────────────────────────────────────── */}
       <section
         className="overflow-hidden"
@@ -169,8 +199,8 @@ export default async function OfferingPage({
               style={{ width: '44%', aspectRatio: '578 / 867' }}
             >
               <Image
-                src={PHOTO_BOOKSHELF}
-                alt="Curated bookshelf — Studio Bosko"
+                src={bookselfUrl}
+                alt={sanity?.image1?.alt ?? 'Curated bookshelf — Studio Bosko'}
                 fill
                 sizes="44vw"
                 className="object-cover"
@@ -189,8 +219,8 @@ export default async function OfferingPage({
         style={{ height: '400px' }}
       >
         <ParallaxImage
-          src={PHOTO_MOODBOARD}
-          alt="Interior design moodboard — Studio Bosko"
+          src={moodboardUrl}
+          alt={sanity?.image2?.alt ?? 'Interior design moodboard — Studio Bosko'}
           sizes="100vw"
           speed={0.25}
         />
@@ -198,7 +228,6 @@ export default async function OfferingPage({
 
       {/* ─────────────────────────────────────────────────────────────────────
           SCOPE SECTION — two-column: left label | right content
-          Reference: "Offering" label at x=30, body text at x=538 (41%)
       ───────────────────────────────────────────────────────────────────── */}
       <section className="section-spacing" aria-label="Offering detail">
         <div className="page-container">
@@ -244,7 +273,7 @@ export default async function OfferingPage({
                   ))}
                 </ul>
                 <p className="font-signifier font-light text-base italic text-[#2d1d17]/65 mb-8">
-                  {t('tagline')}
+                  {tagline}
                 </p>
               </ScrollReveal>
 
@@ -259,9 +288,7 @@ export default async function OfferingPage({
       </section>
 
       {/* ─────────────────────────────────────────────────────────────────────
-          FLOOR PLAN — right-aligned, parallax
-          Reference: left=538, width=731 on 1299px (41% offset, 56% width).
-          object-contain so the drawing lines stay sharp.
+          FLOOR PLAN — right-aligned
       ───────────────────────────────────────────────────────────────────── */}
       <div className="page-container pb-[var(--section-padding-y)]">
         <ScrollReveal>
@@ -271,8 +298,8 @@ export default async function OfferingPage({
               style={{ aspectRatio: '731 / 577' }}
             >
               <Image
-                src={PHOTO_FLOORPLAN}
-                alt="Interior design floor plan — Studio Bosko"
+                src={floorplanUrl}
+                alt={sanity?.image3?.alt ?? 'Interior design floor plan — Studio Bosko'}
                 fill
                 sizes="(max-width: 768px) 100vw, 56vw"
                 className="object-contain"
@@ -284,8 +311,6 @@ export default async function OfferingPage({
 
       {/* ─────────────────────────────────────────────────────────────────────
           PROJECT TYPES — label left | vertical stack right
-          Reference: "Types of projects" label at x=30 (left column),
-          each project type stacked in the right column (x=538).
       ───────────────────────────────────────────────────────────────────── */}
       <section
         className="section-spacing bg-[#d4cbc0]"
@@ -294,12 +319,12 @@ export default async function OfferingPage({
         <div className="page-container">
           <div className="grid grid-cols-1 md:grid-cols-[41%_1fr] gap-12 md:gap-16">
 
-            {/* Left — section label, sticks to top */}
+            {/* Left — section label */}
             <ScrollReveal>
               <p className="label-serif pt-1">{t('projectTypesHeading')}</p>
             </ScrollReveal>
 
-            {/* Right — vertical stack of 3 project types */}
+            {/* Right — vertical stack of project types */}
             <div className="space-y-12">
               {projectTypes.map(({ title, body }, i) => (
                 <ScrollReveal key={title} delay={i * 100}>
@@ -320,13 +345,7 @@ export default async function OfferingPage({
       </section>
 
       {/* ─────────────────────────────────────────────────────────────────────
-          TESTIMONIAL — 50/50 full-bleed split (no page-container padding)
-          Left  50%: terracotta hallway image with parallax
-          Right 50%: sage green (#60BF83) box with Doug's quote
-
-          Reference: rgb(96, 191, 131) = #60BF83 on BOTH studio and offering
-          pages. Hallway image: 650×671, left=0. Quote: x=680 in right half
-          (30px left padding inside the green box), Signifier 30px, dark type.
+          TESTIMONIAL — 50/50 full-bleed split
       ───────────────────────────────────────────────────────────────────── */}
       <section
         className="flex flex-col md:flex-row overflow-hidden"
@@ -338,15 +357,15 @@ export default async function OfferingPage({
           style={{ aspectRatio: '650 / 671' }}
         >
           <Image
-            src={PHOTO_HALLWAY}
-            alt="Colour-drenched hallway — Studio Bosko"
+            src={hallwayUrl}
+            alt={sanity?.testimonialImage?.alt ?? 'Colour-drenched hallway — Studio Bosko'}
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover"
           />
         </div>
 
-        {/* Right — green box with Doug's quote */}
+        {/* Right — green box with testimonial quote */}
         <div
           className="w-full md:w-1/2 flex items-center"
           style={{ backgroundColor: '#60BF83', minHeight: 'clamp(320px, 40vw, 671px)' }}
@@ -361,10 +380,10 @@ export default async function OfferingPage({
                   letterSpacing: '-0.2px',
                 }}
               >
-                &ldquo;{t('testimonialQuote')}&rdquo;
+                &ldquo;{testimonialQuote}&rdquo;
               </blockquote>
               <p className="font-cadiz text-sm text-[#2d1d17]/70">
-                {t('testimonialAttribution')}
+                {testimonialAttribution}
               </p>
             </ScrollReveal>
           </div>

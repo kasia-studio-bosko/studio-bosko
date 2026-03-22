@@ -3,8 +3,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server'
 import Image from 'next/image'
 import InquireForm from '@/components/InquireForm'
 import ScrollReveal from '@/components/ScrollReveal'
-import { getPageContent } from '@/lib/sanity/queries'
-import { ptToStrings } from '@/lib/sanity/utils'
+import { getInquirePageContent } from '@/lib/sanity/queries'
 
 export async function generateMetadata({
   params,
@@ -14,7 +13,7 @@ export async function generateMetadata({
   const { locale } = params
   const [t, sanity] = await Promise.all([
     getTranslations({ locale, namespace: 'inquire' }),
-    getPageContent('inquire', locale),
+    getInquirePageContent(locale),
   ])
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://bosko.studio'
 
@@ -50,12 +49,15 @@ export default async function InquirePage({
   setRequestLocale(locale)
   const [t, sanity] = await Promise.all([
     getTranslations({ locale, namespace: 'inquire' }),
-    getPageContent('inquire', locale),
+    getInquirePageContent(locale),
   ])
 
-  const bodyParas  = ptToStrings(sanity?.body)
-  const heroHeading = sanity?.heading ?? t('heroHeading')
-  const heroBody    = bodyParas[0] ?? t('heroBody')
+  const heroHeading = sanity?.headline ?? t('heroHeading')
+  const heroBody    = sanity?.subtext  ?? t('heroBody')
+
+  // Service / budget options — Sanity first, translation fallback
+  const serviceOptions = sanity?.serviceOptions?.map((o) => o.label).filter(Boolean) as string[] | undefined
+  const budgetOptions  = sanity?.budgetOptions?.map((o) => o.label).filter(Boolean) as string[] | undefined
 
   return (
     // Dark background for this page — overrides the layout bg
@@ -77,7 +79,7 @@ export default async function InquirePage({
             </p>
           </ScrollReveal>
           <ScrollReveal delay={200}>
-            <InquireForm />
+            <InquireForm serviceOptions={serviceOptions} budgetOptions={budgetOptions} />
           </ScrollReveal>
         </div>
 

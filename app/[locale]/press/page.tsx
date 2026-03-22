@@ -3,7 +3,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server'
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import ScrollReveal from '@/components/ScrollReveal'
-import { getAllPressItems, getPageContent, type PressItem } from '@/lib/sanity/queries'
+import { getAllPressItems, getPressPageContent, type PressItem } from '@/lib/sanity/queries'
 import { urlFor } from '@/lib/sanity/client'
 
 export async function generateMetadata({
@@ -14,14 +14,14 @@ export async function generateMetadata({
   const { locale } = params
   const [t, sanity] = await Promise.all([
     getTranslations({ locale, namespace: 'press' }),
-    getPageContent('press', locale),
+    getPressPageContent(locale),
   ])
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://bosko.studio'
 
   const slugMap: Record<string, string> = { en: 'press', de: 'presse', pl: 'prasa' }
   const path = locale === 'en' ? '/press' : `/${locale}/${slugMap[locale]}`
 
-  const title       = sanity?.seoTitle ?? t('metaTitle')
+  const title       = sanity?.seoTitle       ?? t('metaTitle')
   const description = sanity?.seoDescription ?? t('metaDescription')
 
   return {
@@ -56,7 +56,13 @@ export default async function PressPage({
 }) {
   const { locale } = params
   setRequestLocale(locale)
-  const t = await getTranslations({ locale, namespace: 'press' })
+  const [t, sanityPage] = await Promise.all([
+    getTranslations({ locale, namespace: 'press' }),
+    getPressPageContent(locale),
+  ])
+
+  const heroHeading = sanityPage?.headline ?? t('heroHeading')
+  const heroBody    = sanityPage?.heroBody  ?? t('heroBody')
 
   // ── Fetch from Sanity; fall back to translation files ────────────────────
   let featuredItems: FeaturedItem[] = []
@@ -102,12 +108,12 @@ export default async function PressPage({
           </ScrollReveal>
           <ScrollReveal delay={100}>
             <h1 className="font-signifier font-light text-[30px] leading-[42px] text-balance mb-8" style={{ letterSpacing: '-0.2px' }}>
-              {t('heroHeading')}
+              {heroHeading}
             </h1>
           </ScrollReveal>
           <ScrollReveal delay={150}>
             <p className="font-cadiz text-[15px] leading-[21px] text-[#2d1d17]/75 max-w-2xl">
-              {t('heroBody')}
+              {heroBody}
             </p>
           </ScrollReveal>
         </div>

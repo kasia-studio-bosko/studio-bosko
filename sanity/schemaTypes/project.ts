@@ -252,7 +252,7 @@ export const projectSchema = defineType({
           title: 'Alt text',
           type: 'string',
           validation: (Rule) =>
-            Rule.required().warning('Alt text is strongly recommended for SEO and accessibility'),
+            Rule.warning('Alt text is strongly recommended for SEO and accessibility'),
         }),
       ],
     }),
@@ -272,7 +272,7 @@ export const projectSchema = defineType({
               title: 'Alt text',
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               validation: (Rule: any) =>
-                Rule.required().warning('Alt text is strongly recommended for SEO'),
+                Rule.warning('Alt text is strongly recommended for SEO'),
             },
             {
               name: 'caption',
