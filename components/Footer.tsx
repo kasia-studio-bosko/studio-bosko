@@ -42,6 +42,13 @@ export default async function Footer({ locale }: { locale: string }) {
             Instagram
           </a>
           {' · '}
+          <Link
+            href="/impressum"
+            className="hover:text-white transition-colors duration-200"
+          >
+            Impressum
+          </Link>
+          {' · '}
           © Studio Bosko {year}
         </p>
       </div>

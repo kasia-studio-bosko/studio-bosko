@@ -44,12 +44,24 @@ export interface Project {
 export interface PressItem {
   _id: string
   publication: string
-  headline: string
-  date: string
-  url?: string
-  logo?: { asset: { _ref: string } }
+  /** Locale-specific issue label, e.g. "AD Spain / January 2026" */
+  issue: { en?: string; de?: string; pl?: string }
+  date?: string
+  externalUrl?: string
   coverImage?: { asset: { _ref: string }; alt?: string }
   featured: boolean
+  order?: number
+}
+
+export interface ProjectsPageSeo {
+  seoTitle?: string
+  seoDescription?: string
+}
+
+export interface ImpressumContent {
+  body?: PortableTextContent
+  seoTitle?: string
+  seoDescription?: string
 }
 
 export interface PageContent {
@@ -142,20 +154,64 @@ export async function getAllProjectSlugs(): Promise<string[]> {
 
 // ─── Press Queries ────────────────────────────────────────────────────────────
 
-export async function getFeaturedPressItems(): Promise<PressItem[]> {
+/** Fetch all press items ordered by display order then date. */
+export const getAllPressItems = cache(async (): Promise<PressItem[]> => {
   return sanityClient.fetch(
-    `*[_type == "pressItem"] | order(date desc) [0...12] {
+    `*[_type == "press"] | order(coalesce(order, 999) asc, date desc) {
       _id,
       publication,
-      headline,
+      issue,
       date,
-      url,
-      logo,
+      externalUrl,
       coverImage,
-      featured
+      featured,
+      order
     }`
   )
-}
+})
+
+/** Fetch SEO metadata for the /projects index page. */
+export const getProjectsPageSeo = cache(async (locale = 'en'): Promise<ProjectsPageSeo | null> => {
+  return sanityClient.fetch(
+    `*[_type == "projectsPage"][0] {
+      "seoTitle": select(
+        $locale == "de" => seoTitleDe,
+        $locale == "pl" => seoTitlePl,
+        seoTitleEn
+      ),
+      "seoDescription": select(
+        $locale == "de" => seoDescriptionDe,
+        $locale == "pl" => seoDescriptionPl,
+        seoDescriptionEn
+      )
+    }`,
+    { locale }
+  )
+})
+
+/** Fetch the Impressum page content for a given locale. */
+export const getImpressumContent = cache(async (locale = 'en'): Promise<ImpressumContent | null> => {
+  return sanityClient.fetch(
+    `*[_type == "impressum"][0] {
+      "body": select(
+        $locale == "de" => bodyDe,
+        $locale == "pl" => bodyPl,
+        bodyEn
+      ),
+      "seoTitle": select(
+        $locale == "de" => seoTitleDe,
+        $locale == "pl" => seoTitlePl,
+        seoTitleEn
+      ),
+      "seoDescription": select(
+        $locale == "de" => seoDescriptionDe,
+        $locale == "pl" => seoDescriptionPl,
+        seoDescriptionEn
+      )
+    }`,
+    { locale }
+  )
+})
 
 // ─── Page Content Queries ─────────────────────────────────────────────────────
 
@@ -249,12 +305,12 @@ export const FALLBACK_PROJECTS: Array<
 ]
 
 export const FALLBACK_PRESS: Omit<PressItem, '_id'>[] = [
-  { publication: 'Architectural Digest', headline: 'AD100 2025', date: '2025-04-01', featured: true },
-  { publication: 'Domino', headline: 'Home Front (Fall 2025)', date: '2025-09-01', featured: true },
-  { publication: 'AD Spain', headline: 'January 2026', date: '2026-01-01', featured: true },
-  { publication: 'VOGUE Poland', headline: 'October 2025', date: '2025-10-01', featured: false },
-  { publication: 'AD Germany', headline: 'March 2025', date: '2025-03-01', featured: false },
-  { publication: 'est living', headline: 'April 2025', date: '2025-04-01', featured: false },
-  { publication: 'BauNetz', headline: 'January 2025', date: '2025-01-01', featured: false },
-  { publication: 'ELLE Indonesia', headline: 'November 2024', date: '2024-11-01', featured: false },
+  { publication: 'Architectural Digest', issue: { en: 'AD100 2025' },           date: '2025-04-01', featured: true  },
+  { publication: 'Domino',               issue: { en: 'Home Front (Fall 2025)' }, date: '2025-09-01', featured: true  },
+  { publication: 'AD Spain',             issue: { en: 'January 2026' },          date: '2026-01-01', featured: true  },
+  { publication: 'VOGUE Poland',         issue: { en: 'October 2025' },          date: '2025-10-01', featured: false },
+  { publication: 'AD Germany',           issue: { en: 'March 2025' },            date: '2025-03-01', featured: false },
+  { publication: 'est living',           issue: { en: 'April 2025' },            date: '2025-04-01', featured: false },
+  { publication: 'BauNetz',             issue: { en: 'January 2025' },          date: '2025-01-01', featured: false },
+  { publication: 'ELLE Indonesia',       issue: { en: 'November 2024' },         date: '2024-11-01', featured: false },
 ]

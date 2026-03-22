@@ -49,7 +49,6 @@ export const pageContentSchema = defineType({
         ],
         layout: 'radio',
       },
-      validation: (Rule) => Rule.required(),
     }),
 
     // ── English ────────────────────────────────────────────────────────────

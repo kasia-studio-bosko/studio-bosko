@@ -36,7 +36,6 @@ export const projectSchema = defineType({
       title: 'Title',
       type: 'string',
       group: 'en',
-      validation: (Rule) => Rule.required().error('English title is required'),
     }),
     defineField({
       name: 'seoIntroEn',
@@ -253,10 +252,9 @@ export const projectSchema = defineType({
           title: 'Alt text',
           type: 'string',
           validation: (Rule) =>
-            Rule.required().error('Alt text is required — critical for SEO and accessibility'),
+            Rule.required().warning('Alt text is strongly recommended for SEO and accessibility'),
         }),
       ],
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'gallery',

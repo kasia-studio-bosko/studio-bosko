@@ -3,7 +3,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server'
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import ScrollReveal from '@/components/ScrollReveal'
-import { getAllProjects, FALLBACK_PROJECTS } from '@/lib/sanity/queries'
+import { getAllProjects, getProjectsPageSeo, FALLBACK_PROJECTS } from '@/lib/sanity/queries'
 import { urlFor } from '@/lib/sanity/client'
 
 export async function generateMetadata({
@@ -12,15 +12,21 @@ export async function generateMetadata({
   params: { locale: string }
 }): Promise<Metadata> {
   const { locale } = params
-  const t = await getTranslations({ locale, namespace: 'projects' })
+  const [t, sanity] = await Promise.all([
+    getTranslations({ locale, namespace: 'projects' }),
+    getProjectsPageSeo(locale),
+  ])
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://bosko.studio'
 
   const slugMap: Record<string, string> = { en: 'projects', de: 'projekte', pl: 'projekty' }
   const path = locale === 'en' ? '/projects' : `/${locale}/${slugMap[locale]}`
 
+  const title       = sanity?.seoTitle       ?? t('metaTitle')
+  const description = sanity?.seoDescription ?? t('metaDescription')
+
   return {
-    title: { absolute: t('metaTitle') },
-    description: t('metaDescription'),
+    title: { absolute: title },
+    description,
     alternates: {
       canonical: `${siteUrl}${path}`,
       languages: {

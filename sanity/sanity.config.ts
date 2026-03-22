@@ -10,9 +10,6 @@ export default defineConfig({
   projectId: 'ysq1y4zp',
   dataset: 'production',
 
-  // Tells the embedded Studio that it lives at /cms, so all
-  // internal navigation (document open, tool switching) stays
-  // within /cms/... rather than trying to route to /.
   basePath: '/cms',
 
   plugins: [
@@ -21,6 +18,7 @@ export default defineConfig({
         S.list()
           .title('Studio Bosko CMS')
           .items([
+            // ── Projects ──────────────────────────────────────────────────────
             S.listItem()
               .title('Projects')
               .icon(() => '🏗️')
@@ -30,7 +28,10 @@ export default defineConfig({
                   .filter('_type == "project"')
                   .defaultOrdering([{ field: 'order', direction: 'asc' }])
               ),
+
             S.divider(),
+
+            // ── Pages (singletons) ────────────────────────────────────────────
             S.listItem()
               .title('Pages')
               .icon(() => '📄')
@@ -66,17 +67,37 @@ export default defineConfig({
                           .schemaType('pageContent')
                           .documentId('pageContent-inquire')
                       ),
+                    S.listItem()
+                      .title('🏗️ Projects Index (SEO)')
+                      .child(
+                        S.document()
+                          .schemaType('projectsPage')
+                          .documentId('projectsPage')
+                      ),
+                    S.listItem()
+                      .title('⚖️ Impressum')
+                      .child(
+                        S.document()
+                          .schemaType('impressum')
+                          .documentId('impressum')
+                      ),
                   ])
               ),
+
             S.divider(),
+
+            // ── Press ─────────────────────────────────────────────────────────
             S.listItem()
               .title('Press')
               .icon(() => '📰')
               .child(
                 S.documentList()
                   .title('Press Items')
-                  .filter('_type == "pressItem"')
-                  .defaultOrdering([{ field: 'date', direction: 'desc' }])
+                  .filter('_type == "press"')
+                  .defaultOrdering([
+                    { field: 'order', direction: 'asc' },
+                    { field: 'date',  direction: 'desc' },
+                  ])
               ),
           ]),
     }),
@@ -94,6 +115,7 @@ export default defineConfig({
         const slug = (document as { slug?: { current?: string } }).slug?.current
         if (slug) return `${siteUrl}/project/${slug}`
       }
+      if (document._type === 'impressum') return `${siteUrl}/impressum`
       return prev
     },
   },
