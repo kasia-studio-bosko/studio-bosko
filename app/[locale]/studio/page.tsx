@@ -4,6 +4,8 @@ import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import ScrollReveal from '@/components/ScrollReveal'
 import ParallaxImage from '@/components/ParallaxImage'
+import { getPageContent } from '@/lib/sanity/queries'
+import { ptToStrings } from '@/lib/sanity/utils'
 
 export async function generateMetadata({
   params,
@@ -11,13 +13,19 @@ export async function generateMetadata({
   params: { locale: string }
 }): Promise<Metadata> {
   const { locale } = params
-  const t = await getTranslations({ locale, namespace: 'studio' })
+  const [t, sanity] = await Promise.all([
+    getTranslations({ locale, namespace: 'studio' }),
+    getPageContent('studio', locale),
+  ])
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://bosko.studio'
   const path = locale === 'en' ? '/studio' : `/${locale}/studio`
 
+  const title = sanity?.seoTitle ?? t('metaTitle')
+  const description = sanity?.seoDescription ?? t('metaDescription')
+
   return {
-    title: { absolute: t('metaTitle') },
-    description: t('metaDescription'),
+    title: { absolute: title },
+    description,
     alternates: {
       canonical: `${siteUrl}${path}`,
       languages: {
@@ -28,8 +36,8 @@ export async function generateMetadata({
       },
     },
     openGraph: {
-      title: t('metaTitle'),
-      description: t('metaDescription'),
+      title,
+      description,
       url: `${siteUrl}${path}`,
     },
   }
@@ -49,7 +57,17 @@ export default async function StudioPage({
 }) {
   const { locale } = params
   setRequestLocale(locale)
-  const t = await getTranslations({ locale, namespace: 'studio' })
+  const [t, sanity] = await Promise.all([
+    getTranslations({ locale, namespace: 'studio' }),
+    getPageContent('studio', locale),
+  ])
+
+  // Heading and body paragraphs — Sanity takes precedence, translations as fallback
+  const headline  = sanity?.heading ?? t('headline')
+  const bodyParas = ptToStrings(sanity?.body)
+  const aboutBody1 = bodyParas[0] ?? t('aboutBody1')
+  const aboutBody2 = bodyParas[1] ?? t('aboutBody2')
+  const aboutBody3 = bodyParas[2] ?? t('aboutBody3')
 
   return (
     <>
@@ -90,7 +108,7 @@ export default async function StudioPage({
                     letterSpacing: '-0.3px',
                   }}
                 >
-                  {t('headline')}
+                  {headline}
                 </h1>
               </ScrollReveal>
             </div>
@@ -139,13 +157,13 @@ export default async function StudioPage({
               <p className="label-serif mb-6">{t('aboutHeading')}</p>
               <div className="space-y-5 max-w-[660px]">
                 <p className="font-cadiz text-base md:text-[17px] leading-relaxed text-[#2d1d17]/80">
-                  {t('aboutBody1')}
+                  {aboutBody1}
                 </p>
                 <p className="font-cadiz text-base md:text-[17px] leading-relaxed text-[#2d1d17]/80">
-                  {t('aboutBody2')}
+                  {aboutBody2}
                 </p>
                 <p className="font-cadiz text-base md:text-[17px] leading-relaxed text-[#2d1d17]/80">
-                  {t('aboutBody3')}
+                  {aboutBody3}
                 </p>
               </div>
             </div>

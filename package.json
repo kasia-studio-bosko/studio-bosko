@@ -11,7 +11,8 @@
     "seed": "node scripts/seed-sanity.mjs",
     "clean-projects": "node scripts/clean-projects.mjs",
     "seed-new": "node scripts/seed-new-projects.mjs",
-    "seed-galleries": "node scripts/seed-galleries.mjs"
+    "seed-galleries": "node scripts/seed-galleries.mjs",
+    "seed-pages": "node scripts/seed-page-content.mjs"
   },
   "dependencies": {
     "@headlessui/react": "^2.1.2",

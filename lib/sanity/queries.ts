@@ -1,3 +1,4 @@
+import { cache } from 'react'
 import { sanityClient } from './client'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -158,7 +159,12 @@ export async function getFeaturedPressItems(): Promise<PressItem[]> {
 
 // ─── Page Content Queries ─────────────────────────────────────────────────────
 
-export async function getPageContent(pageId: string, locale = 'en'): Promise<PageContent | null> {
+/**
+ * Fetch a single pageContent document by pageId and locale.
+ * Wrapped in React `cache` so multiple calls with the same args
+ * (e.g. from generateMetadata + the page component) share one fetch.
+ */
+export const getPageContent = cache(async (pageId: string, locale = 'en'): Promise<PageContent | null> => {
   return sanityClient.fetch(
     `*[_type == "pageContent" && pageId == $pageId][0] {
       pageId,
@@ -170,7 +176,7 @@ export async function getPageContent(pageId: string, locale = 'en'): Promise<Pag
     }`,
     { pageId, locale }
   )
-}
+})
 
 // ─── Static fallback data ─────────────────────────────────────────────────────
 // Used for local dev when Sanity has no content yet, and as seed-script reference.

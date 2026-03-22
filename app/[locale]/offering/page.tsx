@@ -4,6 +4,8 @@ import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import ScrollReveal from '@/components/ScrollReveal'
 import ParallaxImage from '@/components/ParallaxImage'
+import { getPageContent } from '@/lib/sanity/queries'
+import { ptToStrings } from '@/lib/sanity/utils'
 
 export async function generateMetadata({
   params,
@@ -11,15 +13,21 @@ export async function generateMetadata({
   params: { locale: string }
 }): Promise<Metadata> {
   const { locale } = params
-  const t = await getTranslations({ locale, namespace: 'offering' })
+  const [t, sanity] = await Promise.all([
+    getTranslations({ locale, namespace: 'offering' }),
+    getPageContent('offering', locale),
+  ])
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://bosko.studio'
 
   const slugMap: Record<string, string> = { en: 'offering', de: 'leistungen', pl: 'oferta' }
   const path = locale === 'en' ? '/offering' : `/${locale}/${slugMap[locale]}`
 
+  const title       = sanity?.seoTitle ?? t('metaTitle')
+  const description = sanity?.seoDescription ?? t('metaDescription')
+
   return {
-    title: { absolute: t('metaTitle') },
-    description: t('metaDescription'),
+    title: { absolute: title },
+    description,
     alternates: {
       canonical: `${siteUrl}${path}`,
       languages: {
@@ -97,11 +105,19 @@ export default async function OfferingPage({
 }) {
   const { locale } = params
   setRequestLocale(locale)
-  const t = await getTranslations({ locale, namespace: 'offering' })
+  const [t, sanity] = await Promise.all([
+    getTranslations({ locale, namespace: 'offering' }),
+    getPageContent('offering', locale),
+  ])
 
-  const scopeItems = t.raw('scopeItems') as string[]
-  const noItems   = t.raw('noItems') as string[]
+  const scopeItems   = t.raw('scopeItems') as string[]
+  const noItems      = t.raw('noItems') as string[]
   const projectTypes = PROJECT_TYPES_BY_LOCALE[locale] ?? PROJECT_TYPES_EN
+
+  // Heading and main body — Sanity first, translations as fallback
+  const headline  = sanity?.heading ?? t('headline')
+  const bodyParas = ptToStrings(sanity?.body)
+  const mainBody1 = bodyParas[0] ?? t('mainBody1')
 
   return (
     <>
@@ -142,7 +158,7 @@ export default async function OfferingPage({
                     letterSpacing: '-0.3px',
                   }}
                 >
-                  {t('headline')}
+                  {headline}
                 </h1>
               </ScrollReveal>
             </div>
@@ -197,7 +213,7 @@ export default async function OfferingPage({
             <div className="space-y-10">
               <ScrollReveal delay={80}>
                 <p className="font-cadiz text-base md:text-[17px] leading-relaxed text-[#2d1d17]/80 mb-6">
-                  {t('mainBody1')}
+                  {mainBody1}
                 </p>
                 <ul className="space-y-2 mb-8">
                   {scopeItems.map((item) => (
@@ -234,7 +250,7 @@ export default async function OfferingPage({
 
               <ScrollReveal delay={180}>
                 <Link href={{ pathname: '/inquire' }} className="btn-primary inline-flex">
-                  Reach out about a project →
+                  {t('reachOut')} →
                 </Link>
               </ScrollReveal>
             </div>
@@ -280,7 +296,7 @@ export default async function OfferingPage({
 
             {/* Left — section label, sticks to top */}
             <ScrollReveal>
-              <p className="label-serif pt-1">Types of projects we work on</p>
+              <p className="label-serif pt-1">{t('projectTypesHeading')}</p>
             </ScrollReveal>
 
             {/* Right — vertical stack of 3 project types */}
@@ -365,12 +381,12 @@ export default async function OfferingPage({
               className="font-signifier font-normal mb-8 text-balance text-[#2d1d17]"
               style={{ fontSize: 'clamp(36px, 4vw, 54px)', lineHeight: 1.15 }}
             >
-              Ready to begin?
+              {t('cta')}
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={100}>
             <Link href={{ pathname: '/inquire' }} className="btn-primary">
-              Begin your project →
+              {t('reachOut')} →
             </Link>
           </ScrollReveal>
         </div>

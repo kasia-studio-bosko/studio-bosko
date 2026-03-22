@@ -2,8 +2,9 @@ import type { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
-import { getFeaturedProjects } from '@/lib/sanity/queries'
+import { getFeaturedProjects, getPageContent } from '@/lib/sanity/queries'
 import { urlFor } from '@/lib/sanity/client'
+import { ptToStrings } from '@/lib/sanity/utils'
 import HeroCarousel, { type CarouselSlide } from '@/components/HeroCarousel'
 
 export async function generateMetadata({
@@ -12,13 +13,19 @@ export async function generateMetadata({
   params: { locale: string }
 }): Promise<Metadata> {
   const { locale } = params
-  const t = await getTranslations({ locale, namespace: 'meta' })
+  const [t, sanity] = await Promise.all([
+    getTranslations({ locale, namespace: 'meta' }),
+    getPageContent('homepage', locale),
+  ])
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://bosko.studio'
   const canonicalUrl = locale === 'en' ? siteUrl : `${siteUrl}/${locale}`
 
+  const title       = sanity?.seoTitle ?? t('homeTitle')
+  const description = sanity?.seoDescription ?? t('siteDescription')
+
   return {
-    title: { absolute: t('homeTitle') },
-    description: t('siteDescription'),
+    title: { absolute: title },
+    description,
     alternates: {
       canonical: canonicalUrl,
       languages: {
@@ -29,8 +36,8 @@ export async function generateMetadata({
       },
     },
     openGraph: {
-      title: t('homeTitle'),
-      description: t('siteDescription'),
+      title,
+      description,
       url: canonicalUrl,
       images: [{ url: `${siteUrl}/og-image.jpg`, width: 1200, height: 630 }],
     },
@@ -82,7 +89,16 @@ export default async function HomePage({
 }) {
   const { locale } = params
   setRequestLocale(locale)
-  const t = await getTranslations({ locale, namespace: 'home' })
+  const [t, sanity] = await Promise.all([
+    getTranslations({ locale, namespace: 'home' }),
+    getPageContent('homepage', locale),
+  ])
+
+  // Heading and body — Sanity first, translations as fallback
+  const bodyParas       = ptToStrings(sanity?.body)
+  const introH1         = sanity?.heading ?? t('introH1')
+  const introBody       = bodyParas[0] ?? t('introBody')
+  const offeringBodyFull = bodyParas[1] ?? t('offeringBodyFull')
 
   // Carousel slides: try Sanity first, fall back to static data
   let carouselSlides: CarouselSlide[] = FALLBACK_CAROUSEL
@@ -125,10 +141,10 @@ export default async function HomePage({
         <div className="max-w-[1440px] mx-auto px-8 md:px-16">
           <div className="md:w-[58%]">
             <h1 className="font-signifier font-light text-[30px] leading-[42px] text-[#e1cd3c] mb-6" style={{ letterSpacing: '-0.2px' }}>
-              {t('introH1')}
+              {introH1}
             </h1>
             <p className="font-signifier font-light text-[30px] leading-[42px] text-[#e1cd3c]/80 mb-10" style={{ letterSpacing: '-0.6px' }}>
-              {t('introBody')}
+              {introBody}
             </p>
             <Link
               href="/inquire"
@@ -218,7 +234,7 @@ export default async function HomePage({
             Offering
           </h2>
           <p className="font-signifier font-light text-[20px] md:text-[24px] leading-relaxed text-[#e1cd3c]/80 max-w-3xl mb-10">
-            {t('offeringBodyFull')}
+            {offeringBodyFull}
           </p>
           <Link
             href="/offering"

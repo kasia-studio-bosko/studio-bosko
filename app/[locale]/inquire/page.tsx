@@ -3,6 +3,8 @@ import { getTranslations, setRequestLocale } from 'next-intl/server'
 import Image from 'next/image'
 import InquireForm from '@/components/InquireForm'
 import ScrollReveal from '@/components/ScrollReveal'
+import { getPageContent } from '@/lib/sanity/queries'
+import { ptToStrings } from '@/lib/sanity/utils'
 
 export async function generateMetadata({
   params,
@@ -10,15 +12,21 @@ export async function generateMetadata({
   params: { locale: string }
 }): Promise<Metadata> {
   const { locale } = params
-  const t = await getTranslations({ locale, namespace: 'inquire' })
+  const [t, sanity] = await Promise.all([
+    getTranslations({ locale, namespace: 'inquire' }),
+    getPageContent('inquire', locale),
+  ])
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://bosko.studio'
 
   const slugMap: Record<string, string> = { en: 'inquire', de: 'anfrage', pl: 'zapytanie' }
   const path = locale === 'en' ? '/inquire' : `/${locale}/${slugMap[locale]}`
 
+  const title       = sanity?.seoTitle ?? t('metaTitle')
+  const description = sanity?.seoDescription ?? t('metaDescription')
+
   return {
-    title: { absolute: t('metaTitle') },
-    description: t('metaDescription'),
+    title: { absolute: title },
+    description,
     alternates: {
       canonical: `${siteUrl}${path}`,
       languages: {
@@ -40,7 +48,14 @@ export default async function InquirePage({
 }) {
   const { locale } = params
   setRequestLocale(locale)
-  const t = await getTranslations({ locale, namespace: 'inquire' })
+  const [t, sanity] = await Promise.all([
+    getTranslations({ locale, namespace: 'inquire' }),
+    getPageContent('inquire', locale),
+  ])
+
+  const bodyParas  = ptToStrings(sanity?.body)
+  const heroHeading = sanity?.heading ?? t('heroHeading')
+  const heroBody    = bodyParas[0] ?? t('heroBody')
 
   return (
     // Dark background for this page — overrides the layout bg
@@ -53,12 +68,12 @@ export default async function InquirePage({
           </ScrollReveal>
           <ScrollReveal delay={100}>
             <h1 className="font-signifier font-light text-[30px] leading-[42px] text-balance mb-4" style={{ letterSpacing: '-0.2px' }}>
-              {t('heroHeading')}
+              {heroHeading}
             </h1>
           </ScrollReveal>
           <ScrollReveal delay={150}>
             <p className="font-cadiz text-base text-[#ede8e2]/70 mb-12 max-w-md leading-relaxed">
-              {t('heroBody')}
+              {heroBody}
             </p>
           </ScrollReveal>
           <ScrollReveal delay={200}>
