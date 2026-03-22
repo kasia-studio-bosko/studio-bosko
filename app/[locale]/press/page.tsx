@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
+import Image from 'next/image'
+import { Link } from '@/i18n/navigation'
 import ScrollReveal from '@/components/ScrollReveal'
 
 export async function generateMetadata({
@@ -29,31 +31,8 @@ export async function generateMetadata({
   }
 }
 
-const PRESS_ITEMS = [
-  { publication: 'Domino', issue: 'Home Front / Fall 2025' },
-  { publication: '&Living', issue: 'June 2025' },
-  { publication: '&Living', issue: 'May 2025' },
-  { publication: 'Architectural Digest', issue: 'April 2025' },
-  { publication: 'AD Spain', issue: 'April 2025' },
-  { publication: 'est living', issue: 'April 2025' },
-  { publication: 'AD Germany', issue: 'March 2025' },
-  { publication: 'BauNetz', issue: 'January 2025' },
-  { publication: 'AD100 AD Polska', issue: 'December 2024' },
-  { publication: 'VOGUE Poland', issue: 'November 2024' },
-  { publication: 'ELLE Indonesia', issue: 'November 2024' },
-  { publication: 'AD Germany', issue: 'November 2024' },
-  { publication: 'Yellowtrace', issue: 'October 2024' },
-  { publication: 'Elle Decoration UK', issue: 'October 2024' },
-  { publication: 'Elle Decoration UK', issue: 'September 2024' },
-  { publication: 'AD Middle East', issue: 'April 2024' },
-  { publication: 'AD Germany', issue: 'August 2024' },
-  { publication: 'VOGUE Poland', issue: 'January 2024' },
-  { publication: 'Living Corriere', issue: 'February 2024' },
-  { publication: 'VOGUE Poland', issue: 'December 2023' },
-  { publication: 'Label Magazine', issue: 'January 2024' },
-  { publication: 'Design Alive', issue: 'October 2023' },
-  { publication: 'Architectural Digest', issue: 'October 2023' },
-]
+type FeaturedItem = { publication: string; issue: string; image: string }
+type ArchiveItem = { publication: string; issue: string }
 
 export default async function PressPage({
   params,
@@ -62,6 +41,10 @@ export default async function PressPage({
 }) {
   const { locale } = params
   setRequestLocale(locale)
+  const t = await getTranslations({ locale, namespace: 'press' })
+
+  const featuredItems = t.raw('featuredItems') as FeaturedItem[]
+  const archiveItems = t.raw('archiveItems') as ArchiveItem[]
 
   return (
     <>
@@ -73,23 +56,57 @@ export default async function PressPage({
           </ScrollReveal>
           <ScrollReveal delay={100}>
             <h1 className="font-signifier font-light text-[30px] leading-[42px] text-balance mb-8" style={{ letterSpacing: '-0.2px' }}>
-              Press
+              {t('heroHeading')}
             </h1>
           </ScrollReveal>
           <ScrollReveal delay={150}>
             <p className="font-cadiz text-[15px] leading-[21px] text-[#2d1d17]/75 max-w-2xl">
-              Studio Bosko has been named AD100 for 2025 and featured in print and online across international publications and platforms. Browse our archive of stories and features.
+              {t('heroBody')}
             </p>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* ── Press list ────────────────────────────────────────────────────── */}
-      <section className="pb-section-y" aria-label="Press coverage">
+      {/* ── Featured press — 2×2 image grid ─────────────────────────────── */}
+      <section className="pb-section-y" aria-label="Featured press coverage">
+        <div className="page-container">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+            {featuredItems.map((item, i) => (
+              <ScrollReveal key={`${item.publication}-${i}`} delay={i * 60}>
+                <div className="flex flex-col gap-3">
+                  <div className="relative w-full overflow-hidden bg-[#d4cbc0]" style={{ aspectRatio: '3 / 4' }}>
+                    <Image
+                      src={item.image}
+                      alt={`${item.publication} — ${item.issue}`}
+                      fill
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                      className="object-cover"
+                    />
+                  </div>
+                  <div>
+                    <p className="font-cadiz text-[13px] font-medium text-[#2d1d17] leading-tight">
+                      {item.publication}
+                    </p>
+                    <p className="font-cadiz text-[12px] text-[#2d1d17]/50 leading-tight mt-0.5">
+                      {item.issue}
+                    </p>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Archive list ──────────────────────────────────────────────────── */}
+      <section className="pb-section-y" aria-label="Press archive">
         <div className="page-container max-w-3xl">
+          <ScrollReveal>
+            <p className="label-serif mb-8">{t('featuredIn')}</p>
+          </ScrollReveal>
           <div className="divide-y divide-[#2d1d17]/10">
-            {PRESS_ITEMS.map((item, i) => (
-              <ScrollReveal key={`${item.publication}-${item.issue}`} delay={Math.min(i * 30, 300)}>
+            {archiveItems.map((item, i) => (
+              <ScrollReveal key={`${item.publication}-${item.issue}-${i}`} delay={Math.min(i * 25, 300)}>
                 <div className="py-5 flex items-baseline justify-between gap-6">
                   <p className="font-cadiz text-[15px] leading-[21px] text-[#2d1d17]">
                     {item.publication}
@@ -112,13 +129,13 @@ export default async function PressPage({
         <div className="page-container max-w-2xl">
           <ScrollReveal>
             <h2 className="font-signifier font-normal text-[50px] leading-[60px] mb-8 text-balance">
-              Start a project with Studio Bosko
+              {t('ctaHeading')}
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={100}>
-            <a href="/inquire" className="btn-primary-dark">
-              Inquire →
-            </a>
+            <Link href={{ pathname: '/inquire' }} className="btn-primary-dark">
+              {t('ctaButton')}
+            </Link>
           </ScrollReveal>
         </div>
       </section>

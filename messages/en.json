@@ -61,7 +61,16 @@
     "aboutBody3": "Led by Kasia Kronberger, Studio Bosko brings together structured precision and intuitive curation. Kasia's background spans education in business and trend forecasting, and international design experience across London, Florence, Barcelona, and Brussels. Her work is shaped by a global sensibility—layering modern craftsmanship, historical references, and joyful tension into interiors that are worldly and authentically evocative. She is recognised for creating spaces that start conversations: rooms rich with personality, intentional clashes, and emotional resonance—without ever feeling staged or overworked.",
     "ethosHeading": "Ethos",
     "ethosBody": "Design for us is never about surface or spectacle but rather about self-expression and growth. Home is often our most valuable asset. Whereas the best interiors are the ones filled with character.",
-    "ctaOffering": "Check out what we can do for you"
+    "ctaOffering": "Check out what we can do for you",
+    "ethosSubheading": "How we approach every project:",
+    "ethosPoints": [
+      "We push functionality forward — prioritising flow, storage and usability from the start, so the space supports your lifestyle effortlessly.",
+      "We curate for visual interest and emotional impact — balancing refined with playful, and old with new.",
+      "We create homes that tell your story — through materials, colours, and the way light moves inside.",
+      "We're your trusted advisor — guiding you through the complexity, helping you navigate decisions with confidence and problem-solving instincts."
+    ],
+    "testimonialQuote": "One of the most impressive aspects of [Studio Bosko] is how it manages to be both bold and harmonious. (…) The balance is achieved through vigilant curation of furniture and artwork, balancing the old with the new, the classic with the niche, the hallmark of Studio Bosko's approach.",
+    "testimonialAttribution": "Yellowtrace"
   },
   "offering": {
     "metaTitle": "Interior Design Services — Full-Scope Residential Projects | Studio Bosko",
@@ -99,7 +108,25 @@
       "Final-stage styling for existing homes",
       "Projects without implementation oversight"
     ],
-    "tagline": "If we're in, we're all in."
+    "tagline": "If we're in, we're all in.",
+    "projectTypesHeading": "Types of projects we work on",
+    "projectTypes": [
+      {
+        "title": "Complex Renovation",
+        "body": "Home is often your most valued asset. We know how to unlock the potential of any property and increase its worth for you and your family. Through thoughtful architectural planning, tailored curation and professional fulfilment, our interiors are both function-forward and high-design. Thanks to our experience, problem-solving attitude as well as a trusted international network of craftspeople, we're ready to realise projects across whole Europe."
+      },
+      {
+        "title": "Interiors Upgrade",
+        "body": "From defining surface materials to final styling, we bring that tactile energy into a space through emotive textural pairings and joyful palettes. Our experience allows for accurate scope-setting and decisions that help avoid costly mistakes. Sometimes redesigning parts of the space can go a long way. We inject personality into already good bones, so at the end you can call the place uniquely yours."
+      },
+      {
+        "title": "Full-Scope Curation",
+        "body": "We curate and source everything on your behalf — from a sofa, through lighting, to artworks and elements of decor. This can mean merging your selected existing pieces with new finds commissioned locally or sourced globally to create unique compositions throughout your home. Working on newly built or acquired spaces, we prepare a full furnishing and decor scheme based on a defined creative direction and take care of the procurement."
+      }
+    ],
+    "testimonialQuote": "Studio Bosko was a lifesaver for my apartment redesign. As an expat in Germany, tackling a renovation project was overwhelming, but Kasia's exceptional design sense and strong network of contractors made the process smooth and enjoyable.",
+    "testimonialAttribution": "Doug, homeowner and antiques collector",
+    "reachOut": "Reach out about a project"
   },
   "projects": {
     "metaTitle": "Interior Design Projects — Berlin, Warsaw & Europe | Studio Bosko",
@@ -116,9 +143,42 @@
     "metaTitle": "Press & Recognition | Studio Bosko",
     "metaDescription": "Studio Bosko featured in Elle Decoration UK, Architectural Digest Polska, Vogue Poland, Yellowtrace, AD Spain and more.",
     "heroHeading": "Press",
-    "heroBody": "Studio Bosko has been named AD100 for 2025 and featured in print and online across international publications and platforms.",
+    "heroBody": "Studio Bosko has been named AD100 for 2025 and featured in print and online across international publications and platforms. Browse our archive of stories and features.",
     "featuredIn": "Featured in",
-    "readArticle": "Read"
+    "readArticle": "Read",
+    "featuredItems": [
+      { "publication": "Domino", "issue": "Home Front / Fall 2025", "image": "https://framerusercontent.com/images/yOS6IPw7UnX1byUBBlGhaPuQE.webp" },
+      { "publication": "AD Spain", "issue": "AD Spain / January 2026", "image": "https://framerusercontent.com/images/zzMQ5CKV47O2UDZmALsM1sXk0vA.png" },
+      { "publication": "Vogue Poland", "issue": "VOGUE Poland / October 2025", "image": "https://framerusercontent.com/images/9OJJz2lgse9DPsi7HVQNv0AuaVc.png" },
+      { "publication": "AD Germany", "issue": "AD Germany / March 2025", "image": "https://framerusercontent.com/images/pPRFObEDAdHJISGOKhSHlHovL2s.png" }
+    ],
+    "archiveItems": [
+      { "publication": "Domino", "issue": "Home Front / Fall 2025" },
+      { "publication": "&Living", "issue": "June 2025" },
+      { "publication": "&Living", "issue": "May 2025" },
+      { "publication": "Architectural Digest", "issue": "April 2025" },
+      { "publication": "AD Spain", "issue": "January 2026" },
+      { "publication": "est living", "issue": "April 2025" },
+      { "publication": "AD Germany", "issue": "March 2025" },
+      { "publication": "BauNetz", "issue": "January 2025" },
+      { "publication": "AD100 AD Polska", "issue": "December 2024" },
+      { "publication": "VOGUE Poland", "issue": "October 2025" },
+      { "publication": "ELLE Indonesia", "issue": "November 2024" },
+      { "publication": "AD Germany", "issue": "November 2024" },
+      { "publication": "Yellowtrace", "issue": "October 2024" },
+      { "publication": "Elle Decoration UK", "issue": "October 2024" },
+      { "publication": "Elle Decoration UK", "issue": "September 2024" },
+      { "publication": "AD Middle East", "issue": "April 2024" },
+      { "publication": "AD Germany", "issue": "August 2024" },
+      { "publication": "VOGUE Poland", "issue": "January 2024" },
+      { "publication": "Living Corriere", "issue": "February 2024" },
+      { "publication": "VOGUE Poland", "issue": "December 2023" },
+      { "publication": "Label Magazine", "issue": "January 2024" },
+      { "publication": "Design Alive", "issue": "October 2023" },
+      { "publication": "Architectural Digest", "issue": "October 2023" }
+    ],
+    "ctaHeading": "Start a project with Studio Bosko",
+    "ctaButton": "Inquire →"
   },
   "inquire": {
     "metaTitle": "Start an Interior Design Project | Studio Bosko",

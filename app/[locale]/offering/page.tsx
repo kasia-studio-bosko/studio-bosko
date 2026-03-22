@@ -36,20 +36,6 @@ const PHOTO_MOODBOARD  = 'https://framerusercontent.com/images/rbIRqe2yxSTp84HPR
 const PHOTO_FLOORPLAN  = 'https://framerusercontent.com/images/MU12NSy3wj6azUf80fouUcr6Bpg.png'
 const PHOTO_PENTHOUSE  = 'https://framerusercontent.com/images/BLcEb8zhESV8vCYUNx12PnA9d5c.jpg'
 
-const PROJECT_TYPES_EN = [
-  {
-    title: 'Complex Renovation',
-    body: "Home is often your most valued asset. We know how to unlock the potential of any property and increase its worth for you and your family. Through thoughtful architectural planning, tailored curation and professional fulfilment, our interiors are both function-forward and high-design. Thanks to our experience, problem-solving attitude as well as a trusted international network of craftspeople, we're ready to realise projects across whole Europe.",
-  },
-  {
-    title: 'Interiors Upgrade',
-    body: 'From defining surface materials to final styling, we bring that tactile energy into a space through emotive textural pairings and joyful palettes. Our experience allows for accurate scope-setting and decisions that help avoid costly mistakes. Sometimes redesigning parts of the space can go a long way. We inject personality into already good bones, so at the end you can call the place uniquely yours.',
-  },
-  {
-    title: 'Full-Scope Curation',
-    body: 'We curate and source everything on your behalf—from a sofa, through lighting, to artworks and elements of decor. This can mean merging your selected existing pieces with new finds commissioned locally or sourced globally to create unique compositions throughout your home. Working on newly built or acquired spaces, we prepare a full furnishing and decor scheme based on a defined creative direction and take care of the procurement.',
-  },
-]
 
 export default async function OfferingPage({
   params,
@@ -62,6 +48,7 @@ export default async function OfferingPage({
 
   const scopeItems = t.raw('scopeItems') as string[]
   const noItems = t.raw('noItems') as string[]
+  const projectTypes = t.raw('projectTypes') as Array<{ title: string; body: string }>
 
   return (
     <>
@@ -167,7 +154,7 @@ export default async function OfferingPage({
 
               <ScrollReveal delay={200}>
                 <Link href={{ pathname: '/inquire' }} className="btn-primary inline-flex">
-                  Reach out about a project →
+                  {t('reachOut')} →
                 </Link>
               </ScrollReveal>
             </div>
@@ -192,10 +179,10 @@ export default async function OfferingPage({
       <section className="section-spacing bg-[#d4cbc0]" aria-label="Types of projects">
         <div className="page-container">
           <ScrollReveal>
-            <p className="label-serif mb-12">Types of projects we work on</p>
+            <p className="label-serif mb-12">{t('projectTypesHeading')}</p>
           </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-            {PROJECT_TYPES_EN.map(({ title, body }, i) => (
+            {projectTypes.map(({ title, body }, i) => (
               <ScrollReveal key={title} delay={i * 80}>
                 <h2
                   className="font-signifier font-normal mb-4"
@@ -230,9 +217,9 @@ export default async function OfferingPage({
               className="font-signifier font-light text-balance text-white mb-6"
               style={{ fontSize: 'clamp(22px, 2.5vw, 32px)', lineHeight: 1.4, letterSpacing: '-0.3px' }}
             >
-              &ldquo;Studio Bosko was a lifesaver for my apartment redesign. As an expat in Germany, tackling a renovation project was overwhelming, but Kasia&rsquo;s exceptional design sense and strong network of contractors made the process smooth and enjoyable.&rdquo;
+              &ldquo;{t('testimonialQuote')}&rdquo;
             </blockquote>
-            <p className="font-cadiz text-sm text-white/70">Doug, homeowner and antiques collector</p>
+            <p className="font-cadiz text-sm text-white/70">{t('testimonialAttribution')}</p>
           </ScrollReveal>
         </div>
       </section>

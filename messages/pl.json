@@ -61,7 +61,16 @@
     "aboutBody3": "Studio Bosko prowadzi Kasia Kronberger — projektantka łącząca strukturalną precyzję z intuicyjną kuracją. Jej wykształcenie w zakresie biznesu i prognozowania trendów oraz doświadczenie projektowe w Londynie, Florencji, Barcelonie i Brukseli ukształtowały globalną wrażliwość, którą wnosi do każdej realizacji.",
     "ethosHeading": "Filozofia",
     "ethosBody": "Dla nas design to nigdy nie powierzchnia ani spektakl — to wyraz siebie i przestrzeń do wzrostu. Dom jest często naszym najcenniejszym dobrem. Najlepsze wnętrza to te, które oddychają charakterem.",
-    "ctaOffering": "Zobacz, co możemy dla Ciebie zrobić"
+    "ctaOffering": "Zobacz, co możemy dla Ciebie zrobić",
+    "ethosSubheading": "Jak podchodzimy do każdego projektu:",
+    "ethosPoints": [
+      "Myślimy o funkcjonalności od samego początku — priorytetyzując przepływ, przestrzeń do przechowywania i użyteczność, aby przestrzeń wspierała Twój styl życia bez wysiłku.",
+      "Tworzymy z myślą o wizualnym zainteresowaniu i emocjonalnym oddziaływaniu — balansując między wyrafinowaniem a zabawą, starym i nowym.",
+      "Projektujemy domy, które opowiadają Twoją historię — przez materiały, kolory i sposób, w jaki światło porusza się wewnątrz.",
+      "Jesteśmy Twoim zaufanym doradcą — prowadzimy Cię przez złożoność projektu, pomagając podejmować decyzje z pewnością siebie."
+    ],
+    "testimonialQuote": "Jedną z najbardziej imponujących cech [Studio Bosko] jest to, jak udaje mu się być jednocześnie odważnym i harmonijnym. (…) Równowaga osiągana jest przez staranne dobieranie mebli i dzieł sztuki — stare z nowym, klasyczne z niszowym. To znak rozpoznawczy Studio Bosko.",
+    "testimonialAttribution": "Yellowtrace"
   },
   "offering": {
     "metaTitle": "Usługi projektowania wnętrz — kompleksowe projekty mieszkaniowe | Studio Bosko",
@@ -99,7 +108,25 @@
       "Stylizacji istniejących wnętrz",
       "Projektów bez nadzoru realizacji"
     ],
-    "tagline": "Jeśli jesteśmy w projekcie — jesteśmy w nim w pełni."
+    "tagline": "Jeśli jesteśmy w projekcie — jesteśmy w nim w pełni.",
+    "projectTypesHeading": "Rodzaje projektów, nad którymi pracujemy",
+    "projectTypes": [
+      {
+        "title": "Kompleksowa renowacja",
+        "body": "Dom jest często Twoim najcenniejszym dobrem. Wiemy, jak uwolnić potencjał każdej nieruchomości i zwiększyć jej wartość dla Ciebie i Twojej rodziny. Przez przemyślane planowanie architektoniczne, indywidualną kurację i profesjonalną realizację nasze wnętrza są zarówno funkcjonalne, jak i wysokiej jakości. Dzięki doświadczeniu, nastawieniu na rozwiązania i zaufanej międzynarodowej sieci rzemieślników jesteśmy gotowi realizować projekty w całej Europie."
+      },
+      {
+        "title": "Metamorfoza wnętrza",
+        "body": "Od doboru materiałów po finalny styling — wnosimy taktylną energię do przestrzeni przez emocjonalne zestawienia faktur i radosne palety. Nasze doświadczenie pozwala na precyzyjne określenie zakresu i decyzje, które pomagają uniknąć kosztownych błędów. Czasem przeprojektowanie części przestrzeni robi ogromną różnicę. Dodajemy osobowość do już dobrej substancji — żeby miejsce mogło być niepowtarzalnie Twoje."
+      },
+      {
+        "title": "Pełna kuracja wnętrza",
+        "body": "Dobieramy i pozyskujemy wszystko w Twoim imieniu — od sofy, przez oświetlenie, po dzieła sztuki i elementy dekoracyjne. Może to oznaczać połączenie wybranych istniejących przedmiotów z nowymi znaleziskami zamawianymi lokalnie lub pozyskiwanymi globalnie, tworząc unikalne kompozycje w całym domu. Pracując w nowo wybudowanych lub nabytych przestrzeniach, przygotowujemy kompletny schemat aranżacji i dekoracji oparty na zdefiniowanym kierunku twórczym i zajmujemy się całą realizacją zakupów."
+      }
+    ],
+    "testimonialQuote": "Studio Bosko uratowało mój projekt redesignu mieszkania. Jako ekspatriant w Niemczech, myśl o podjęciu się projektu renowacji była przytłaczająca — ale wyjątkowe wyczucie designu Kasi i silna sieć wykonawców sprawiły, że proces był płynny i przyjemny.",
+    "testimonialAttribution": "Doug, właściciel mieszkania i kolekcjoner antyków",
+    "reachOut": "Zapytaj o projekt"
   },
   "projects": {
     "metaTitle": "Projekty wnętrz — Berlin, Warszawa i Europa | Studio Bosko",
@@ -116,9 +143,42 @@
     "metaTitle": "Prasa i wyróżnienia | Studio Bosko",
     "metaDescription": "Studio Bosko w Elle Decoration UK, Architectural Digest Polska, Vogue Poland, Yellowtrace, AD Spain i innych publikacjach.",
     "heroHeading": "Prasa",
-    "heroBody": "Studio Bosko zostało uwzględnione na liście AD100 na rok 2025 i pojawiło się w druku i online w międzynarodowych publikacjach.",
+    "heroBody": "Studio Bosko zostało wyróżnione tytułem AD100 2025 i ukazało się w drukowanych i internetowych publikacjach na całym świecie. Przeglądaj nasze archiwum.",
     "featuredIn": "W mediach",
-    "readArticle": "Czytaj"
+    "readArticle": "Czytaj",
+    "featuredItems": [
+      { "publication": "Domino", "issue": "Home Front / Jesień 2025", "image": "https://framerusercontent.com/images/yOS6IPw7UnX1byUBBlGhaPuQE.webp" },
+      { "publication": "AD Spain", "issue": "AD Spain / Styczeń 2026", "image": "https://framerusercontent.com/images/zzMQ5CKV47O2UDZmALsM1sXk0vA.png" },
+      { "publication": "Vogue Poland", "issue": "VOGUE Poland / Październik 2025", "image": "https://framerusercontent.com/images/9OJJz2lgse9DPsi7HVQNv0AuaVc.png" },
+      { "publication": "AD Germany", "issue": "AD Germany / Marzec 2025", "image": "https://framerusercontent.com/images/pPRFObEDAdHJISGOKhSHlHovL2s.png" }
+    ],
+    "archiveItems": [
+      { "publication": "Domino", "issue": "Home Front / Jesień 2025" },
+      { "publication": "&Living", "issue": "Czerwiec 2025" },
+      { "publication": "&Living", "issue": "Maj 2025" },
+      { "publication": "Architectural Digest", "issue": "Kwiecień 2025" },
+      { "publication": "AD Spain", "issue": "Styczeń 2026" },
+      { "publication": "est living", "issue": "Kwiecień 2025" },
+      { "publication": "AD Germany", "issue": "Marzec 2025" },
+      { "publication": "BauNetz", "issue": "Styczeń 2025" },
+      { "publication": "AD100 AD Polska", "issue": "Grudzień 2024" },
+      { "publication": "VOGUE Poland", "issue": "Październik 2025" },
+      { "publication": "ELLE Indonesia", "issue": "Listopad 2024" },
+      { "publication": "AD Germany", "issue": "Listopad 2024" },
+      { "publication": "Yellowtrace", "issue": "Październik 2024" },
+      { "publication": "Elle Decoration UK", "issue": "Październik 2024" },
+      { "publication": "Elle Decoration UK", "issue": "Wrzesień 2024" },
+      { "publication": "AD Middle East", "issue": "Kwiecień 2024" },
+      { "publication": "AD Germany", "issue": "Sierpień 2024" },
+      { "publication": "VOGUE Poland", "issue": "Styczeń 2024" },
+      { "publication": "Living Corriere", "issue": "Luty 2024" },
+      { "publication": "VOGUE Poland", "issue": "Grudzień 2023" },
+      { "publication": "Label Magazine", "issue": "Styczeń 2024" },
+      { "publication": "Design Alive", "issue": "Październik 2023" },
+      { "publication": "Architectural Digest", "issue": "Październik 2023" }
+    ],
+    "ctaHeading": "Zacznij projekt ze Studio Bosko",
+    "ctaButton": "Zapytaj →"
   },
   "inquire": {
     "metaTitle": "Rozpocznij projekt wnętrz | Studio Bosko",

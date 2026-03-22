@@ -137,15 +137,10 @@ export default async function StudioPage({
                     {t('ethosBody')}
                   </p>
                   <p className="font-signifier font-light text-sm tracking-wide text-[#2d1d17]/60 mb-4">
-                    How we approach every project:
+                    {t('ethosSubheading')}
                   </p>
                   <ul className="space-y-3">
-                    {[
-                      'We push functionality forward—prioritising flow, storage and usability from the start, so the space supports your lifestyle effortlessly.',
-                      'We curate for visual interest and emotional impact—balancing refined with playful, and old with new.',
-                      'We create homes that tell your story—through materials, colours, and the way light moves inside.',
-                      'We\'re your trusted advisor—guiding you through the complexity, helping you navigate decisions with confidence and problem-solving instincts.',
-                    ].map((item, i) => (
+                    {(t.raw('ethosPoints') as string[]).map((item, i) => (
                       <li key={i} className="flex gap-3 font-cadiz text-sm text-[#2d1d17]/75 leading-relaxed">
                         <span className="shrink-0 text-[#2d1d17]/30 mt-0.5">→</span>
                         <span>{item}</span>
@@ -215,9 +210,9 @@ export default async function StudioPage({
               className="font-signifier font-light text-balance text-[#2d1d17] mb-6"
               style={{ fontSize: 'clamp(24px, 2.5vw, 34px)', lineHeight: 1.35, letterSpacing: '-0.4px' }}
             >
-              &ldquo;One of the most impressive aspects of [Studio Bosko] is how it manages to be both bold and harmonious. (&hellip;) The balance is achieved through vigilant curation of furniture and artwork, balancing the old with the new, the classic with the niche, the hallmark of Studio Bosko&rsquo;s approach.&rdquo;
+              &ldquo;{t('testimonialQuote')}&rdquo;
             </blockquote>
-            <p className="font-cadiz text-sm text-[#2d1d17]/60 tracking-widest uppercase">Yellowtrace</p>
+            <p className="font-cadiz text-sm text-[#2d1d17]/60 tracking-widest uppercase">{t('testimonialAttribution')}</p>
           </ScrollReveal>
         </div>
       </section>
