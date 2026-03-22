@@ -10,6 +10,11 @@ export default defineConfig({
   projectId: 'ysq1y4zp',
   dataset: 'production',
 
+  // Tells the embedded Studio that it lives at /cms, so all
+  // internal navigation (document open, tool switching) stays
+  // within /cms/... rather than trying to route to /.
+  basePath: '/cms',
+
   plugins: [
     structureTool({
       structure: (S) =>
