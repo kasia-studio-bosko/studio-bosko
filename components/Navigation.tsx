@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { usePathname } from 'next/navigation'
@@ -19,10 +19,26 @@ export default function Navigation({ locale }: { locale: string }) {
   const t = useTranslations('nav')
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
+  // null = use default white; string = colour from project theme provider
+  const [navLinkColor, setNavLinkColor] = useState<string | null>(null)
+
+  const readNavColor = useCallback(() => {
+    const v = document.documentElement.style.getPropertyValue('--nav-link-color').trim()
+    setNavLinkColor(v || null)
+  }, [])
+
+  useEffect(() => {
+    // Read on mount and on every route change (theme provider may have updated it)
+    readNavColor()
+    window.addEventListener('nav-theme-change', readNavColor)
+    return () => window.removeEventListener('nav-theme-change', readNavColor)
+  }, [readNavColor])
 
   useEffect(() => {
     setMenuOpen(false)
-  }, [pathname])
+    // Re-read theme colour when pathname changes (new page may not have a theme)
+    readNavColor()
+  }, [pathname, readNavColor])
 
   useEffect(() => {
     if (menuOpen) {
@@ -48,7 +64,8 @@ export default function Navigation({ locale }: { locale: string }) {
               <Link
                 key={key}
                 href={href}
-                className="text-[15px] font-cadiz text-white/90 hover:text-white transition-colors duration-200"
+                className="text-[15px] font-cadiz transition-colors duration-200"
+                style={{ color: navLinkColor ?? 'rgba(255,255,255,0.9)' }}
               >
                 {t(key)}
               </Link>
@@ -63,7 +80,8 @@ export default function Navigation({ locale }: { locale: string }) {
                 alt="Studio Bosko"
                 width={192}
                 height={26}
-                className="h-[26px] w-auto"
+                className="h-[26px] w-auto transition-[filter] duration-200"
+                style={navLinkColor && navLinkColor !== '#ffffff' && navLinkColor !== 'rgba(255,255,255,0.9)' ? { filter: 'invert(1)' } : undefined}
                 priority
               />
             </Link>
@@ -80,21 +98,17 @@ export default function Navigation({ locale }: { locale: string }) {
               aria-expanded={menuOpen}
               aria-label={menuOpen ? t('closeMenu') : t('openMenu')}
             >
-              <span
-                className={`block w-full h-px bg-white transition-all duration-300 ${
-                  menuOpen ? 'rotate-45 translate-y-[7px]' : ''
-                }`}
-              />
-              <span
-                className={`block w-full h-px bg-white transition-all duration-300 ${
-                  menuOpen ? 'opacity-0' : ''
-                }`}
-              />
-              <span
-                className={`block w-full h-px bg-white transition-all duration-300 ${
-                  menuOpen ? '-rotate-45 -translate-y-[7px]' : ''
-                }`}
-              />
+              {[
+                menuOpen ? 'rotate-45 translate-y-[7px]' : '',
+                menuOpen ? 'opacity-0' : '',
+                menuOpen ? '-rotate-45 -translate-y-[7px]' : '',
+              ].map((extra, i) => (
+                <span
+                  key={i}
+                  className={`block w-full h-px transition-all duration-300 ${extra}`}
+                  style={{ backgroundColor: navLinkColor ?? '#ffffff' }}
+                />
+              ))}
             </button>
           </div>
         </div>

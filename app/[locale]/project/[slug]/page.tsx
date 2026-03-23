@@ -12,6 +12,26 @@ import {
   type GalleryImage,
 } from '@/lib/sanity/queries'
 import { urlFor } from '@/lib/sanity/client'
+import ProjectThemeProvider from '@/components/ProjectThemeProvider'
+
+// ─── Theme palettes (mirrors seed-project-themes.mjs) ────────────────────────
+
+const THEME_PALETTES: Record<string, { bg: string; text: string; heading: string; nav: string }> = {
+  'warm-light':     { bg: '#705305', text: '#ffffff', heading: '#e1cd3c', nav: '#ffffff' },
+  'dark-moody':     { bg: '#2d1d17', text: '#ffffff', heading: '#60bf83', nav: '#ffffff' },
+  'earthy-neutral': { bg: '#60bf83', text: '#000000', heading: '#2d1d17', nav: '#000000' },
+  'cool-minimal':   { bg: '#d4cbc0', text: '#705305', heading: '#705305', nav: '#000000' },
+}
+
+function resolveTheme(project: { colorTheme?: string; backgroundColor?: string; textColor?: string; headingColor?: string }) {
+  const preset = project.colorTheme ? THEME_PALETTES[project.colorTheme] : null
+  return {
+    bg:      project.backgroundColor ?? preset?.bg ?? '#ede8e2',
+    text:    project.textColor       ?? preset?.text ?? '#2d1d17',
+    heading: project.headingColor    ?? preset?.heading ?? '#2d1d17',
+    nav:     preset?.nav ?? '#ffffff',
+  }
+}
 
 // ─── Fallback for local dev when Sanity is empty ─────────────────────────────
 const FALLBACK_PROJECT = {
@@ -164,6 +184,8 @@ export default async function ProjectPage({ params }: Props) {
   const data = project ?? (slug === 'chroma-penthouse' ? FALLBACK_PROJECT : null)
   if (!data) notFound()
 
+  const theme = resolveTheme(data)
+
   const heroSrc = data.coverImage?.asset?._ref
     ? urlFor(data.coverImage).width(1920).height(1080).url()
     : 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg'
@@ -198,6 +220,12 @@ export default async function ProjectPage({ params }: Props) {
 
   return (
     <>
+      <ProjectThemeProvider
+        backgroundColor={theme.bg}
+        textColor={theme.text}
+        headingColor={theme.heading}
+        navColor={theme.nav}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }}
@@ -205,8 +233,8 @@ export default async function ProjectPage({ params }: Props) {
 
       {/* ── Full-bleed cover image ────────────────────────────────────────── */}
       <section
-        className="relative w-full overflow-hidden bg-[#d4cbc0]"
-        style={{ height: 'min(85vh, 900px)' }}
+        className="relative w-full overflow-hidden"
+        style={{ height: 'min(85vh, 900px)', backgroundColor: theme.bg }}
         aria-label="Project hero"
       >
         <Image
@@ -221,12 +249,20 @@ export default async function ProjectPage({ params }: Props) {
       </section>
 
       {/* ── Project header ────────────────────────────────────────────────── */}
-      <section className="section-spacing" aria-label="Project details">
+      <section
+        className="section-spacing"
+        style={{ backgroundColor: theme.bg }}
+        aria-label="Project details"
+      >
         <div className="page-container">
 
           {/* Back link */}
           <ScrollReveal>
-            <Link href={{ pathname: '/projects' }} className="btn-text text-xs mb-10 block">
+            <Link
+              href={{ pathname: '/projects' }}
+              className="btn-text text-xs mb-10 block"
+              style={{ color: theme.text, opacity: 0.6 }}
+            >
               ← {t('backToProjects')}
             </Link>
           </ScrollReveal>
@@ -236,8 +272,8 @@ export default async function ProjectPage({ params }: Props) {
 
             <ScrollReveal delay={80}>
               <h1
-                className="font-signifier font-light text-[#2d1d17] text-balance mb-5"
-                style={{ fontSize: 'clamp(36px, 4vw, 54px)', lineHeight: 1.12, letterSpacing: '-0.4px' }}
+                className="font-signifier font-light text-balance mb-5"
+                style={{ fontSize: 'clamp(36px, 4vw, 54px)', lineHeight: 1.12, letterSpacing: '-0.4px', color: theme.heading }}
               >
                 {data.title}
               </h1>
@@ -245,7 +281,10 @@ export default async function ProjectPage({ params }: Props) {
 
             {/* Metadata: Category · Location · Size · Year */}
             <ScrollReveal delay={130}>
-              <p className="font-cadiz text-xs tracking-[0.12em] uppercase text-[#2d1d17]/50 mb-10">
+              <p
+                className="font-cadiz text-xs tracking-[0.12em] uppercase mb-10"
+                style={{ color: theme.text, opacity: 0.55 }}
+              >
                 {metaLine}
               </p>
             </ScrollReveal>
@@ -253,7 +292,10 @@ export default async function ProjectPage({ params }: Props) {
             {/* Description — Portable Text from Sanity */}
             {Array.isArray(description) && description.length > 0 && (
               <ScrollReveal delay={180}>
-                <div className="font-cadiz text-base md:text-[17px] leading-relaxed text-[#2d1d17]/75 space-y-4 [&>p]:mb-0 [&>h3]:font-signifier [&>h3]:font-light [&>h3]:text-xl [&>h3]:mb-3 [&>h3]:mt-6">
+                <div
+                  className="font-cadiz text-base md:text-[17px] leading-relaxed space-y-4 [&>p]:mb-0 [&>h3]:font-signifier [&>h3]:font-light [&>h3]:text-xl [&>h3]:mb-3 [&>h3]:mt-6"
+                  style={{ color: theme.text, opacity: 0.85 }}
+                >
                   <PortableText value={description} />
                 </div>
               </ScrollReveal>
@@ -262,7 +304,10 @@ export default async function ProjectPage({ params }: Props) {
             {/* Description — plain-text fallback */}
             {!Array.isArray(description) && descriptionFallback && (
               <ScrollReveal delay={180}>
-                <div className="font-cadiz text-base md:text-[17px] leading-relaxed text-[#2d1d17]/75 space-y-4">
+                <div
+                  className="font-cadiz text-base md:text-[17px] leading-relaxed space-y-4"
+                  style={{ color: theme.text, opacity: 0.85 }}
+                >
                   {descriptionFallback.split('\n\n').map((para: string, i: number) => (
                     <p key={i}>{para}</p>
                   ))}
@@ -277,7 +322,8 @@ export default async function ProjectPage({ params }: Props) {
                   {data.scope.map((s: string) => (
                     <span
                       key={s}
-                      className="font-cadiz text-xs tracking-[0.1em] uppercase border border-[#2d1d17]/25 text-[#2d1d17]/60 px-3 py-1"
+                      className="font-cadiz text-xs tracking-[0.1em] uppercase px-3 py-1"
+                      style={{ border: `1px solid ${theme.text}40`, color: `${theme.text}99` }}
                     >
                       {s}
                     </span>
@@ -289,7 +335,7 @@ export default async function ProjectPage({ params }: Props) {
             {/* Photographer credit */}
             {data.photographer && (
               <ScrollReveal delay={230}>
-                <p className="mt-6 font-cadiz text-sm text-[#2d1d17]/40">
+                <p className="mt-6 font-cadiz text-sm" style={{ color: theme.text, opacity: 0.4 }}>
                   Photos: {data.photographer}
                 </p>
               </ScrollReveal>
@@ -298,7 +344,7 @@ export default async function ProjectPage({ params }: Props) {
             {/* Press mentions */}
             {data.pressMentions && data.pressMentions.length > 0 && (
               <ScrollReveal delay={250}>
-                <p className="mt-3 font-cadiz text-sm text-[#2d1d17]/40">
+                <p className="mt-3 font-cadiz text-sm" style={{ color: theme.text, opacity: 0.4 }}>
                   As seen in: {data.pressMentions.join(', ')}
                 </p>
               </ScrollReveal>
@@ -309,7 +355,11 @@ export default async function ProjectPage({ params }: Props) {
 
       {/* ── Editorial gallery ─────────────────────────────────────────────── */}
       {galleryRows.length > 0 && (
-        <section className="pb-[var(--section-padding-y)]" aria-label="Project gallery">
+        <section
+          className="pb-[var(--section-padding-y)]"
+          style={{ backgroundColor: theme.bg }}
+          aria-label="Project gallery"
+        >
           <div className="flex flex-col" style={{ gap: 'clamp(20px, 3vw, 48px)' }}>
 
             {galleryRows.map((row, ri) => {
@@ -328,8 +378,8 @@ export default async function ProjectPage({ params }: Props) {
                     <div>
                       {/* Edge-to-edge: no horizontal padding */}
                       <div
-                        className="relative w-full overflow-hidden bg-[#d4cbc0]"
-                        style={{ aspectRatio: `${w} / ${h}` }}
+                        className="relative w-full overflow-hidden"
+                        style={{ aspectRatio: `${w} / ${h}`, backgroundColor: theme.bg }}
                       >
                         <Image
                           src={src}
@@ -341,7 +391,7 @@ export default async function ProjectPage({ params }: Props) {
                         />
                       </div>
                       {img.caption && (
-                        <p className="mt-3 px-6 md:px-12 lg:px-16 font-cadiz text-xs text-[#2d1d17]/45 tracking-wide">
+                        <p className="mt-3 px-6 md:px-12 lg:px-16 font-cadiz text-xs tracking-wide" style={{ color: theme.text, opacity: 0.45 }}>
                           {img.caption}
                         </p>
                       )}
@@ -365,8 +415,8 @@ export default async function ProjectPage({ params }: Props) {
                     {/* Image A */}
                     <div className="flex-1 flex flex-col min-w-0">
                       <div
-                        className="relative w-full overflow-hidden bg-[#d4cbc0]"
-                        style={{ aspectRatio: `${wA} / ${hA}` }}
+                        className="relative w-full overflow-hidden"
+                        style={{ aspectRatio: `${wA} / ${hA}`, backgroundColor: theme.bg }}
                       >
                         <Image
                           src={srcA}
@@ -378,7 +428,7 @@ export default async function ProjectPage({ params }: Props) {
                         />
                       </div>
                       {a.caption && (
-                        <p className="mt-2 font-cadiz text-xs text-[#2d1d17]/45 tracking-wide">
+                        <p className="mt-2 font-cadiz text-xs tracking-wide" style={{ color: theme.text, opacity: 0.45 }}>
                           {a.caption}
                         </p>
                       )}
@@ -387,8 +437,8 @@ export default async function ProjectPage({ params }: Props) {
                     {/* Image B */}
                     <div className="flex-1 flex flex-col min-w-0">
                       <div
-                        className="relative w-full overflow-hidden bg-[#d4cbc0]"
-                        style={{ aspectRatio: `${wB} / ${hB}` }}
+                        className="relative w-full overflow-hidden"
+                        style={{ aspectRatio: `${wB} / ${hB}`, backgroundColor: theme.bg }}
                       >
                         <Image
                           src={srcB}
@@ -400,7 +450,7 @@ export default async function ProjectPage({ params }: Props) {
                         />
                       </div>
                       {b.caption && (
-                        <p className="mt-2 font-cadiz text-xs text-[#2d1d17]/45 tracking-wide">
+                        <p className="mt-2 font-cadiz text-xs tracking-wide" style={{ color: theme.text, opacity: 0.45 }}>
                           {b.caption}
                         </p>
                       )}

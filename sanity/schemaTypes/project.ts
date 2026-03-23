@@ -238,6 +238,42 @@ export const projectSchema = defineType({
       group: 'details',
       of: [{ type: 'string' }],
     }),
+    defineField({
+      name: 'colorTheme',
+      title: 'Colour theme',
+      type: 'string',
+      group: 'details',
+      options: {
+        list: [
+          { title: 'Warm Light (golden/brown)', value: 'warm-light' },
+          { title: 'Dark Moody (dark brown/mint)', value: 'dark-moody' },
+          { title: 'Earthy Neutral (mint green)', value: 'earthy-neutral' },
+          { title: 'Cool Minimal (beige)', value: 'cool-minimal' },
+        ],
+        layout: 'radio',
+      },
+    }),
+    defineField({
+      name: 'backgroundColor',
+      title: 'Background colour (hex)',
+      description: 'Page background hex, e.g. #705305',
+      type: 'string',
+      group: 'details',
+    }),
+    defineField({
+      name: 'textColor',
+      title: 'Text colour (hex)',
+      description: 'Body text hex, e.g. #ffffff',
+      type: 'string',
+      group: 'details',
+    }),
+    defineField({
+      name: 'headingColor',
+      title: 'Heading colour (hex)',
+      description: 'H1/H2 heading hex, e.g. #e1cd3c',
+      type: 'string',
+      group: 'details',
+    }),
 
     // ── Images ─────────────────────────────────────────────────────────────
     defineField({

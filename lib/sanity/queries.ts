@@ -39,6 +39,10 @@ export interface Project {
   metaDescription?: string
   featured: boolean
   order: number
+  colorTheme?: string
+  backgroundColor?: string
+  textColor?: string
+  headingColor?: string
 }
 
 export interface PressItem {
@@ -112,6 +116,10 @@ const projectListFields = `
   featured,
   order,
   coverImage,
+  colorTheme,
+  backgroundColor,
+  textColor,
+  headingColor,
   ${localizedField('title')},
   ${localizedField('seoIntro')}
 `

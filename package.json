@@ -15,7 +15,8 @@
     "seed-pages": "node scripts/seed-pages.mjs",
     "seed-page-content": "node scripts/seed-page-content.mjs",
     "seed-press": "node scripts/seed-press.mjs",
-    "seed-singletons": "node scripts/seed-singleton-pages.mjs"
+    "seed-singletons": "node scripts/seed-singleton-pages.mjs",
+    "seed-themes": "node scripts/seed-project-themes.mjs"
   },
   "dependencies": {
     "@headlessui/react": "^2.1.2",
