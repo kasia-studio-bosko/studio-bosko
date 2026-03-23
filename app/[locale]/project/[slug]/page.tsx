@@ -283,7 +283,7 @@ export default async function ProjectPage({ params }: Props) {
             <Link
               href={{ pathname: '/projects' }}
               className="btn-text text-xs mb-10 block"
-              style={{ color: theme.text, opacity: 0.6 }}
+              style={{ color: theme.heading, opacity: 0.6 }}
             >
               ← {t('backToProjects')}
             </Link>
@@ -305,7 +305,7 @@ export default async function ProjectPage({ params }: Props) {
             <ScrollReveal delay={130}>
               <p
                 className="font-cadiz text-xs tracking-[0.12em] uppercase mb-10"
-                style={{ color: theme.text, opacity: 0.55 }}
+                style={{ color: theme.heading, opacity: 0.55 }}
               >
                 {metaLine}
               </p>
@@ -316,7 +316,7 @@ export default async function ProjectPage({ params }: Props) {
               <ScrollReveal delay={180}>
                 <div
                   className="font-cadiz text-base md:text-[17px] leading-relaxed space-y-4 [&>p]:mb-0 [&>h3]:font-signifier [&>h3]:font-light [&>h3]:text-xl [&>h3]:mb-3 [&>h3]:mt-6"
-                  style={{ color: theme.text, opacity: 0.85 }}
+                  style={{ color: theme.heading, opacity: 0.85 }}
                 >
                   <PortableText value={description} />
                 </div>
@@ -328,7 +328,7 @@ export default async function ProjectPage({ params }: Props) {
               <ScrollReveal delay={180}>
                 <div
                   className="font-cadiz text-base md:text-[17px] leading-relaxed space-y-4"
-                  style={{ color: theme.text, opacity: 0.85 }}
+                  style={{ color: theme.heading, opacity: 0.85 }}
                 >
                   {descriptionFallback.split('\n\n').map((para: string, i: number) => (
                     <p key={i}>{para}</p>
@@ -345,7 +345,7 @@ export default async function ProjectPage({ params }: Props) {
                     <span
                       key={s}
                       className="font-cadiz text-xs tracking-[0.1em] uppercase px-3 py-1"
-                      style={{ border: `1px solid ${theme.text}40`, color: `${theme.text}99` }}
+                      style={{ border: `1px solid ${theme.heading}40`, color: `${theme.heading}99` }}
                     >
                       {s}
                     </span>
@@ -357,7 +357,7 @@ export default async function ProjectPage({ params }: Props) {
             {/* Photographer credit */}
             {data.photographer && (
               <ScrollReveal delay={230}>
-                <p className="mt-6 font-cadiz text-sm" style={{ color: theme.text, opacity: 0.4 }}>
+                <p className="mt-6 font-cadiz text-sm" style={{ color: theme.heading, opacity: 0.4 }}>
                   Photos: {data.photographer}
                 </p>
               </ScrollReveal>
@@ -366,7 +366,7 @@ export default async function ProjectPage({ params }: Props) {
             {/* Press mentions */}
             {data.pressMentions && data.pressMentions.length > 0 && (
               <ScrollReveal delay={250}>
-                <p className="mt-3 font-cadiz text-sm" style={{ color: theme.text, opacity: 0.4 }}>
+                <p className="mt-3 font-cadiz text-sm" style={{ color: theme.heading, opacity: 0.4 }}>
                   As seen in: {data.pressMentions.join(', ')}
                 </p>
               </ScrollReveal>
@@ -413,7 +413,7 @@ export default async function ProjectPage({ params }: Props) {
                         />
                       </div>
                       {img.caption && (
-                        <p className="mt-3 px-6 md:px-12 lg:px-16 font-cadiz text-xs tracking-wide" style={{ color: theme.text, opacity: 0.45 }}>
+                        <p className="mt-3 px-6 md:px-12 lg:px-16 font-cadiz text-xs tracking-wide" style={{ color: theme.heading, opacity: 0.45 }}>
                           {img.caption}
                         </p>
                       )}
@@ -450,7 +450,7 @@ export default async function ProjectPage({ params }: Props) {
                         />
                       </div>
                       {a.caption && (
-                        <p className="mt-2 font-cadiz text-xs tracking-wide" style={{ color: theme.text, opacity: 0.45 }}>
+                        <p className="mt-2 font-cadiz text-xs tracking-wide" style={{ color: theme.heading, opacity: 0.45 }}>
                           {a.caption}
                         </p>
                       )}
@@ -472,7 +472,7 @@ export default async function ProjectPage({ params }: Props) {
                         />
                       </div>
                       {b.caption && (
-                        <p className="mt-2 font-cadiz text-xs tracking-wide" style={{ color: theme.text, opacity: 0.45 }}>
+                        <p className="mt-2 font-cadiz text-xs tracking-wide" style={{ color: theme.heading, opacity: 0.45 }}>
                           {b.caption}
                         </p>
                       )}
