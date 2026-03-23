@@ -14,7 +14,7 @@ import {
 import { urlFor } from '@/lib/sanity/client'
 import ProjectThemeProvider from '@/components/ProjectThemeProvider'
 
-// ─── Theme palettes (mirrors seed-project-themes.mjs) ────────────────────────
+// ─── Theme palettes ───────────────────────────────────────────────────────────
 
 const THEME_PALETTES: Record<string, { bg: string; text: string; heading: string; nav: string }> = {
   'warm-light':     { bg: '#705305', text: '#ffffff', heading: '#e1cd3c', nav: '#ffffff' },
@@ -23,11 +23,29 @@ const THEME_PALETTES: Record<string, { bg: string; text: string; heading: string
   'cool-minimal':   { bg: '#d4cbc0', text: '#705305', heading: '#705305', nav: '#000000' },
 }
 
-function resolveTheme(project: { colorTheme?: string; backgroundColor?: string; textColor?: string; headingColor?: string }) {
-  const preset = project.colorTheme ? THEME_PALETTES[project.colorTheme] : null
+/** Slug → theme name, used as a hardcoded fallback so themes work before seeding */
+const SLUG_THEME_MAP: Record<string, string> = {
+  'chroma-penthouse':   'warm-light',
+  'zander-rooftop':     'warm-light',
+  'time-travel':        'dark-moody',
+  'casa-norte':         'dark-moody',
+  'side-to-side':       'earthy-neutral',
+  'wilhelm-lane':       'earthy-neutral',
+  'haus-giebelgarten':  'earthy-neutral',
+  'ballet-school':      'cool-minimal',
+  'westend-rose':       'cool-minimal',
+}
+
+function resolveTheme(
+  project: { colorTheme?: string; backgroundColor?: string; textColor?: string; headingColor?: string },
+  slug: string
+) {
+  // Priority: Sanity per-field override → Sanity colorTheme preset → slug-based preset → brand defaults
+  const themeName = project.colorTheme ?? SLUG_THEME_MAP[slug]
+  const preset = themeName ? THEME_PALETTES[themeName] : null
   return {
-    bg:      project.backgroundColor ?? preset?.bg ?? '#ede8e2',
-    text:    project.textColor       ?? preset?.text ?? '#2d1d17',
+    bg:      project.backgroundColor ?? preset?.bg      ?? '#ede8e2',
+    text:    project.textColor       ?? preset?.text    ?? '#2d1d17',
     heading: project.headingColor    ?? preset?.heading ?? '#2d1d17',
     nav:     preset?.nav ?? '#ffffff',
   }
@@ -188,7 +206,7 @@ export default async function ProjectPage({ params }: Props) {
   const data = project ?? (slug === 'chroma-penthouse' ? FALLBACK_PROJECT : null)
   if (!data) notFound()
 
-  const theme = resolveTheme(data)
+  const theme = resolveTheme(data, slug)
 
   const heroSrc = data.coverImage?.asset?._ref
     ? urlFor(data.coverImage).width(1920).height(1080).url()
