@@ -45,6 +45,10 @@ const FALLBACK_PROJECT = {
   scope: ['Interior Design', 'Curation'],
   photographer: 'Giulia Maretti Studio',
   pressMentions: [] as string[],
+  colorTheme: 'warm-light' as string | undefined,
+  backgroundColor: undefined as string | undefined,
+  textColor: undefined as string | undefined,
+  headingColor: undefined as string | undefined,
   seoIntro:
     'A colour-forward penthouse in Berlin Kreuzberg — 143 m² of layered character, custom furniture, and considered curation.',
   description: null as PortableTextContent | null,
