@@ -164,34 +164,55 @@ export default async function PressPage({
         </section>
       )}
 
-      {/* ── Archive list ──────────────────────────────────────────────────── */}
+      {/* ── Archive — card grid ───────────────────────────────────────────── */}
       <section className="pb-section-y" aria-label="Press archive">
-        <div className="page-container max-w-3xl">
+        <div className="page-container">
           <ScrollReveal>
             <p className="label-serif mb-8">{t('featuredIn')}</p>
           </ScrollReveal>
-          <div className="divide-y divide-[#2d1d17]/10">
-            {archiveItems.map((item, i) => (
-              <ScrollReveal key={`${item.publication}-${item.issue}-${i}`} delay={Math.min(i * 25, 300)}>
-                <div className="py-5 flex items-baseline justify-between gap-6">
-                  <p className="font-cadiz text-[15px] leading-[21px] text-[#2d1d17]">
-                    {item.url ? (
-                      <a
-                        href={item.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-[#f5500a] transition-colors duration-200"
-                      >
-                        {item.publication}
-                      </a>
-                    ) : item.publication}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+            {archiveItems.map((item, i) => {
+              const inner = (
+                <div className="flex flex-col justify-between h-full p-5 md:p-6">
+                  <p className="font-cadiz text-[13px] font-medium text-[#2d1d17] leading-snug">
+                    {item.publication}
                   </p>
-                  <p className="font-cadiz text-sm text-[#2d1d17]/50 shrink-0">
-                    {item.issue}
-                  </p>
+                  <div className="mt-auto pt-4 flex items-end justify-between">
+                    <p className="font-cadiz text-[12px] text-[#2d1d17]/50 leading-tight">
+                      {item.issue}
+                    </p>
+                    {item.url && (
+                      <span className="font-cadiz text-[11px] text-[#2d1d17]/30 group-hover:text-[#f5500a] transition-colors duration-200">
+                        ↗
+                      </span>
+                    )}
+                  </div>
                 </div>
-              </ScrollReveal>
-            ))}
+              )
+
+              return (
+                <ScrollReveal key={`${item.publication}-${item.issue}-${i}`} delay={Math.min(i * 20, 280)}>
+                  {item.url ? (
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block border border-[#2d1d17]/12 hover:border-[#2d1d17]/30 bg-[#ede8e2] hover:bg-white transition-all duration-200"
+                      style={{ aspectRatio: '3 / 2' }}
+                    >
+                      {inner}
+                    </a>
+                  ) : (
+                    <div
+                      className="border border-[#2d1d17]/12 bg-[#ede8e2]"
+                      style={{ aspectRatio: '3 / 2' }}
+                    >
+                      {inner}
+                    </div>
+                  )}
+                </ScrollReveal>
+              )
+            })}
           </div>
         </div>
       </section>

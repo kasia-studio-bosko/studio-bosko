@@ -30,7 +30,9 @@ export default function SchemaOrg({ locale }: { locale: string }) {
       { '@type': 'Country', name: 'Poland' },
       { '@type': 'Continent', name: 'Europe' },
     ],
-    award: 'AD100 2025 — Architectural Digest',
+    award: 'AD100 Polska 2025',
+    priceRange: '€€€€',
+    email: 'hello@bosko.studio',
   }
 
   return (

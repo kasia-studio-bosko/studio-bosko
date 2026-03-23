@@ -106,7 +106,11 @@ function localField(base: string): string {
 const projectListFields = `
   _id,
   slug,
-  location,
+  "location": select(
+    $locale == "de" => coalesce(locationDe, location),
+    $locale == "pl" => coalesce(locationPl, location),
+    location
+  ),
   size,
   year,
   category,

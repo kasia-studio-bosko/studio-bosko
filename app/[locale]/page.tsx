@@ -28,10 +28,10 @@ export async function generateMetadata({
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        'x-default': siteUrl,
-        en: siteUrl,
-        de: `${siteUrl}/de`,
-        pl: `${siteUrl}/pl`,
+        'x-default': `${siteUrl}/`,
+        en: `${siteUrl}/`,
+        de: `${siteUrl}/de/`,
+        pl: `${siteUrl}/pl/`,
       },
     },
     openGraph: {
@@ -79,8 +79,12 @@ const FALLBACK_CAROUSEL: CarouselSlide[] = [
 const FALLBACK_TESTIMONIAL_IMAGE =
   'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg'
 
-const PRESS_MARQUEE =
-  'AD · VOGUE · ELLE DECORATION · YELLOWTRACE · DOMINO · EST LIVING · AD SPAIN · AD GERMANY · HOMES & GARDENS · LIVINGETC · AD MIDDLE EAST · ELLE INDONESIA · &LIVING · AD100 POLSKA · BAUNETZ ·'
+const PRESS_ITEMS = [
+  'AD', 'Vogue', 'Elle Decoration', 'Yellowtrace', 'Domino',
+  'Est Living', 'AD Spain', 'AD Germany', 'Homes & Gardens',
+  'Livingetc', 'AD Middle East', 'Elle Indonesia', '&Living',
+  'AD100 Polska', 'BauNetz',
+]
 
 export default async function HomePage({
   params,
@@ -252,14 +256,29 @@ export default async function HomePage({
       </section>
 
       {/* ── 5. Press marquee ──────────────────────────────────────────────── */}
-      <section className="bg-[#2d1d17] py-[14px] overflow-hidden" aria-label="Press mentions">
-        <div className="flex animate-marquee whitespace-nowrap">
-          <span className="font-cadiz text-[11px] tracking-[0.25em] uppercase text-white/50 pr-20">
-            {PRESS_MARQUEE}
-          </span>
-          <span className="font-cadiz text-[11px] tracking-[0.25em] uppercase text-white/50 pr-20">
-            {PRESS_MARQUEE}
-          </span>
+      <section
+        className="bg-[#ede8e2] overflow-hidden"
+        style={{ minHeight: '88px' }}
+        aria-label="Press mentions"
+      >
+        <div className="flex items-center" style={{ minHeight: '88px' }}>
+          {/*
+            Single scrolling strip containing two identical copies.
+            animate-marquee translates by -50% (= exactly one copy's width)
+            so the loop is seamless with no gaps or jumps.
+          */}
+          <div className="flex animate-marquee whitespace-nowrap items-center">
+            {[0, 1].map((copy) =>
+              PRESS_ITEMS.map((name, i) => (
+                <span key={`${copy}-${i}`} className="inline-flex items-center">
+                  <span className="font-signifier font-light text-[18px] tracking-[0.12em] text-[#2d1d17] px-8">
+                    {name}
+                  </span>
+                  <span className="text-[#2d1d17]/25 text-[18px]" aria-hidden="true">·</span>
+                </span>
+              ))
+            )}
+          </div>
         </div>
       </section>
 

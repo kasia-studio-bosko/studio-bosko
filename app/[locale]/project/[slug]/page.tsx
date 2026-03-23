@@ -159,9 +159,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   let project = null
   try { project = await getProjectBySlug(slug, locale) } catch {}
 
-  const title = project?.metaTitle ?? project?.title ?? FALLBACK_PROJECT.title
-  const description =
-    project?.metaDescription ?? project?.seoIntro ?? FALLBACK_PROJECT.seoIntro
+  // Use plain project title for formatting — metaTitle may already contain "Studio Bosko"
+  const displayTitle  = project?.title       ?? FALLBACK_PROJECT.title
+  const customTitle   = project?.metaTitle   // if set, treat as fully-formed (use absolute)
+  const description   = project?.metaDescription ?? project?.seoIntro ?? FALLBACK_PROJECT.seoIntro
   const ogImage = project?.coverImage?.asset?._ref
     ? urlFor(project.coverImage).width(1200).height(630).fit('crop').url()
     : `${siteUrl}/og-image.jpg`
@@ -172,8 +173,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       ? `${siteUrl}/project/${slug}`
       : `${siteUrl}/${locale}/${slugPrefixMap[locale]}/${slug}`
 
+  const formattedTitle = customTitle ?? `${displayTitle} — Interior Design Project | Studio Bosko`
+
   return {
-    title: { absolute: `${title} — Interior Design Project | Studio Bosko` },
+    title: { absolute: formattedTitle },
     description,
     alternates: {
       canonical,
@@ -185,7 +188,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
     },
     openGraph: {
-      title: `${title} | Studio Bosko`,
+      title: `${displayTitle} | Studio Bosko`,
       description,
       type: 'article',
       images: [{ url: ogImage, width: 1200, height: 630 }],

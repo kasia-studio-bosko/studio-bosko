@@ -33,10 +33,10 @@ export async function generateMetadata({
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://bosko.studio'
 
   const alternates: Record<string, string> = {
-    'x-default': siteUrl,
-    en: siteUrl,
-    de: `${siteUrl}/de`,
-    pl: `${siteUrl}/pl`,
+    'x-default': `${siteUrl}/`,
+    en: `${siteUrl}/`,
+    de: `${siteUrl}/de/`,
+    pl: `${siteUrl}/pl/`,
   }
 
   return {

@@ -187,10 +187,24 @@ export const projectSchema = defineType({
     }),
     defineField({
       name: 'location',
-      title: 'Location',
+      title: 'Location (English)',
       type: 'string',
       group: 'details',
       placeholder: 'e.g. Berlin Kreuzberg',
+    }),
+    defineField({
+      name: 'locationDe',
+      title: 'Location (Deutsch)',
+      description: 'Leave empty to inherit English value.',
+      type: 'string',
+      group: 'details',
+    }),
+    defineField({
+      name: 'locationPl',
+      title: 'Location (Polski)',
+      description: 'Leave empty to inherit English value.',
+      type: 'string',
+      group: 'details',
     }),
     defineField({
       name: 'size',
