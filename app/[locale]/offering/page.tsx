@@ -288,23 +288,19 @@ export default async function OfferingPage({
       </section>
 
       {/* ─────────────────────────────────────────────────────────────────────
-          FLOOR PLAN — right-aligned
+          FLOOR PLAN — right-aligned, natural size (no letterboxing)
       ───────────────────────────────────────────────────────────────────── */}
       <div className="page-container pb-[var(--section-padding-y)]">
         <ScrollReveal>
           <div className="md:ml-[41%]">
-            <div
-              className="relative overflow-hidden bg-[#ede8e2]"
-              style={{ aspectRatio: '731 / 577' }}
-            >
-              <Image
-                src={floorplanUrl}
-                alt={sanity?.image3?.alt ?? 'Interior design floor plan — Studio Bosko'}
-                fill
-                sizes="(max-width: 768px) 100vw, 56vw"
-                className="object-contain"
-              />
-            </div>
+            <Image
+              src={floorplanUrl}
+              alt={sanity?.image3?.alt ?? 'Interior design floor plan — Studio Bosko'}
+              width={731}
+              height={577}
+              sizes="(max-width: 768px) 100vw, 56vw"
+              className="w-full h-auto"
+            />
           </div>
         </ScrollReveal>
       </div>
