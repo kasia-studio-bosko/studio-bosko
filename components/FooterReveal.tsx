@@ -58,7 +58,8 @@ export default function FooterReveal({ children }: { children: ReactNode }) {
       </div>
 
       {/* ── Transparent spacer — lets the fixed footer show through ── */}
-      <div ref={spacerRef} style={{ position: 'relative', zIndex: 5 }} />
+      {/* pointer-events: none so clicks pass through to the footer links below */}
+      <div ref={spacerRef} style={{ position: 'relative', zIndex: 5, pointerEvents: 'none' }} />
     </>
   )
 }
