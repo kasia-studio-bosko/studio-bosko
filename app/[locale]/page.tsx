@@ -79,11 +79,27 @@ const FALLBACK_CAROUSEL: CarouselSlide[] = [
 const FALLBACK_TESTIMONIAL_IMAGE =
   'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg'
 
-const PRESS_ITEMS = [
-  'AD', 'Vogue', 'Elle Decoration', 'Yellowtrace', 'Domino',
-  'Est Living', 'AD Spain', 'AD Germany', 'Homes & Gardens',
-  'Livingetc', 'AD Middle East', 'Elle Indonesia', '&Living',
-  'AD100 Polska', 'BauNetz',
+/**
+ * Each entry has the display name + an optional logo path.
+ * logo: null  → rendered as styled text (same weight/size as text next to logos)
+ * logo: path  → rendered as <Image> with filter:brightness(0) for dark colour on beige bg
+ */
+const PRESS_ITEMS: { name: string; logo: string | null }[] = [
+  { name: 'AD',              logo: '/logos/logo-ad.png'              },
+  { name: 'Vogue',           logo: '/logos/logo-vogue.png'           },
+  { name: 'Elle Decoration', logo: '/logos/logo-elle-decoration.png' },
+  { name: 'Yellowtrace',     logo: '/logos/logo-yellowtrace.png'     },
+  { name: 'Domino',          logo: '/logos/logo-domino.png'          },
+  { name: 'Est Living',      logo: '/logos/logo-est.png'             },
+  { name: 'Livingetc',       logo: '/logos/logo-livingetc.png'       },
+  { name: 'AD Spain',        logo: null },
+  { name: 'AD Germany',      logo: null },
+  { name: 'Homes & Gardens', logo: null },
+  { name: 'AD Middle East',  logo: null },
+  { name: 'Elle Indonesia',  logo: null },
+  { name: '&Living',         logo: null },
+  { name: 'AD100 Polska',    logo: null },
+  { name: 'BauNetz',         logo: null },
 ]
 
 export default async function HomePage({
@@ -263,18 +279,39 @@ export default async function HomePage({
       >
         <div className="flex items-center" style={{ minHeight: '88px' }}>
           {/*
-            Single scrolling strip containing two identical copies.
-            animate-marquee translates by -50% (= exactly one copy's width)
-            so the loop is seamless with no gaps or jumps.
+            Four identical copies inside a single animate-marquee wrapper.
+            The keyframe translates by -25% (= exactly one copy's width),
+            guaranteeing a seamless infinite loop with no gap or jump.
+            Logo images use filter:brightness(0) → dark ink on the beige strip.
           */}
-          <div className="flex animate-marquee whitespace-nowrap items-center">
-            {[0, 1].map((copy) =>
-              PRESS_ITEMS.map((name, i) => (
+          <div
+            className="flex animate-marquee whitespace-nowrap items-center"
+            style={{ willChange: 'transform' }}
+          >
+            {[0, 1, 2, 3].map((copy) =>
+              PRESS_ITEMS.map((item, i) => (
                 <span key={`${copy}-${i}`} className="inline-flex items-center">
-                  <span className="font-signifier font-light text-[18px] tracking-[0.12em] text-[#2d1d17] px-8">
-                    {name}
+                  <span className="inline-flex items-center px-10">
+                    {item.logo ? (
+                      <Image
+                        src={item.logo}
+                        alt={item.name}
+                        width={160}
+                        height={48}
+                        style={{
+                          height: '20px',
+                          width: 'auto',
+                          filter: 'brightness(0)',
+                        }}
+                        className="object-contain"
+                      />
+                    ) : (
+                      <span className="font-signifier font-light text-[18px] tracking-[0.12em] text-[#2d1d17]">
+                        {item.name}
+                      </span>
+                    )}
                   </span>
-                  <span className="text-[#2d1d17]/25 text-[18px]" aria-hidden="true">·</span>
+                  <span className="text-[#2d1d17]/25 text-[20px]" aria-hidden="true">·</span>
                 </span>
               ))
             )}

@@ -55,10 +55,6 @@ export default async function InquirePage({
   const heroHeading = sanity?.headline ?? t('heroHeading')
   const heroBody    = sanity?.subtext  ?? t('heroBody')
 
-  // Service / budget options — Sanity first, translation fallback
-  const serviceOptions = sanity?.serviceOptions?.map((o) => o.label).filter(Boolean) as string[] | undefined
-  const budgetOptions  = sanity?.budgetOptions?.map((o) => o.label).filter(Boolean) as string[] | undefined
-
   return (
     // Dark background for this page — overrides the layout bg
     <div className="min-h-screen bg-[#2d1d17] text-[#ede8e2]">
@@ -79,7 +75,13 @@ export default async function InquirePage({
             </p>
           </ScrollReveal>
           <ScrollReveal delay={200}>
-            <InquireForm serviceOptions={serviceOptions} budgetOptions={budgetOptions} />
+            <InquireForm
+              formQuestions={sanity?.formQuestions}
+              labelFirstName={sanity?.labelFirstName}
+              labelLastName={sanity?.labelLastName}
+              labelEmail={sanity?.labelEmail}
+              labelSubmit={sanity?.labelSubmit}
+            />
           </ScrollReveal>
         </div>
 

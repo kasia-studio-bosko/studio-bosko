@@ -323,10 +323,27 @@ export interface PressPageContent {
   seoDescription?: string
 }
 
+export interface FormQuestion {
+  fieldId: string
+  fieldType: 'text' | 'tel' | 'textarea' | 'select'
+  label: string
+  required: boolean
+  options?: { label: string }[]
+}
+
 export interface InquirePageContent {
   headline?: string
   subtext?: string
+  /** CMS-managed dynamic questions rendered after the fixed contact fields */
+  formQuestions?: FormQuestion[]
+  /** Override labels for the always-visible contact fields */
+  labelFirstName?: string
+  labelLastName?: string
+  labelEmail?: string
+  labelSubmit?: string
+  /** @deprecated Legacy — superseded by formQuestions */
   serviceOptions?: { label: string }[]
+  /** @deprecated Legacy — superseded by formQuestions */
   budgetOptions?: { label: string }[]
   seoTitle?: string
   seoDescription?: string
@@ -452,6 +469,43 @@ export const getInquirePageContent = cache(async (locale = 'en'): Promise<Inquir
     `*[_type == "inquirePage" && _id == "inquirePage"][0] {
       ${localField('headline')},
       ${localField('subtext')},
+      "formQuestions": formQuestions[]{
+        fieldId,
+        fieldType,
+        "label": select(
+          $locale == "de" => coalesce(label_de, label_en),
+          $locale == "pl" => coalesce(label_pl, label_en),
+          label_en
+        ),
+        required,
+        "options": options[]{
+          "label": select(
+            $locale == "de" => coalesce(label_de, label_en),
+            $locale == "pl" => coalesce(label_pl, label_en),
+            label_en
+          )
+        }
+      },
+      "labelFirstName": select(
+        $locale == "de" => coalesce(labelFirstName_de, labelFirstName_en),
+        $locale == "pl" => coalesce(labelFirstName_pl, labelFirstName_en),
+        labelFirstName_en
+      ),
+      "labelLastName": select(
+        $locale == "de" => coalesce(labelLastName_de, labelLastName_en),
+        $locale == "pl" => coalesce(labelLastName_pl, labelLastName_en),
+        labelLastName_en
+      ),
+      "labelEmail": select(
+        $locale == "de" => coalesce(labelEmail_de, labelEmail_en),
+        $locale == "pl" => coalesce(labelEmail_pl, labelEmail_en),
+        labelEmail_en
+      ),
+      "labelSubmit": select(
+        $locale == "de" => coalesce(labelSubmit_de, labelSubmit_en),
+        $locale == "pl" => coalesce(labelSubmit_pl, labelSubmit_en),
+        labelSubmit_en
+      ),
       "serviceOptions": serviceOptions[]{
         "label": select(
           $locale == "de" => coalesce(label_de, label_en),

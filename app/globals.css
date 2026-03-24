@@ -246,12 +246,12 @@
 
 /* ─── Marquee ───────────────────────────────────────────────────────────────── */
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-25%); }   /* -25% = exactly 1 of 4 identical copies */
 }
 
 .animate-marquee {
-  animation: marquee 25s linear infinite;
+  animation: marquee 35s linear infinite;
 }
 
 /* ─── Carousel ──────────────────────────────────────────────────────────────── */
