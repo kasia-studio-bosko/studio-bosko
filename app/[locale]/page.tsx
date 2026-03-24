@@ -84,6 +84,7 @@ const FALLBACK_TESTIMONIAL_IMAGE =
  * Rendered as plain <img> tags (not next/image) so height:20px + width:auto
  * work without fighting Next.js dimension constraints.
  * filter:brightness(0) renders all logos as dark ink on the beige strip.
+ * Note: logo-est.png is actually a WebP file — referenced as .webp.
  */
 const PRESS_LOGOS: { name: string; src: string }[] = [
   { name: 'AD',              src: '/logos/logo-ad.png'              },
@@ -91,8 +92,9 @@ const PRESS_LOGOS: { name: string; src: string }[] = [
   { name: 'Elle Decoration', src: '/logos/logo-elle-decoration.png' },
   { name: 'Yellowtrace',     src: '/logos/logo-yellowtrace.png'     },
   { name: 'Domino',          src: '/logos/logo-domino.png'          },
-  { name: 'Est Living',      src: '/logos/logo-est.png'             },
+  { name: 'Est Living',      src: '/logos/logo-est.webp'            },
   { name: 'Livingetc',       src: '/logos/logo-livingetc.png'       },
+  { name: 'Homes & Gardens', src: '/logos/logo-homes-gardens.png'   },
 ]
 
 export default async function HomePage({
@@ -297,10 +299,12 @@ export default async function HomePage({
                     src={logo.src}
                     alt={logo.name}
                     style={{
+                      display: 'inline-block',
                       height: '20px',
                       width: 'auto',
+                      maxHeight: '20px',
+                      flexShrink: 0,
                       filter: 'brightness(0)',
-                      display: 'block',
                     }}
                   />
                 </span>
