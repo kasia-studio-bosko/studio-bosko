@@ -285,7 +285,13 @@ export default async function HomePage({
           >
             {[0, 1, 2, 3].map((copy) =>
               PRESS_LOGOS.map((logo, i) => (
-                <span key={`${copy}-${i}`} className="inline-flex items-center">
+                /* Fixed padding on both sides → identical gap between every logo
+                   regardless of each logo's natural width.               */
+                <span
+                  key={`${copy}-${i}`}
+                  className="inline-flex items-center"
+                  style={{ paddingLeft: '72px', paddingRight: '72px' }}
+                >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={logo.src}
@@ -297,7 +303,6 @@ export default async function HomePage({
                       display: 'block',
                     }}
                   />
-                  <span className="text-[#2d1d17]/20 text-[20px] mx-10" aria-hidden="true">·</span>
                 </span>
               ))
             )}
