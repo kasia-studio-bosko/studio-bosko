@@ -125,13 +125,21 @@ export default async function HomePage({
   const ctaBody = sanity?.scarcityText ?? t('ctaBodyFull')
   const ctaBtn  = sanity?.scarcityCta  ?? t('ctaConsultation')
 
-  // Carousel slides: try Sanity first, fall back to static data
-  let carouselSlides: CarouselSlide[] = FALLBACK_CAROUSEL
+  // Hero carousel — always uses coverImage (the primary project photo)
+  let heroSlides: CarouselSlide[] = FALLBACK_CAROUSEL
+  // Selected Work section — uses featuredImage if set, falls back to coverImage
+  let selectedWorkSlides: CarouselSlide[] = FALLBACK_CAROUSEL
   try {
     const sanityProjects = await getFeaturedProjects(locale)
     if (sanityProjects.length > 0) {
-      carouselSlides = sanityProjects.map((p) => {
-        // featuredImage → coverImage (fallback chain for the homepage carousel)
+      heroSlides = sanityProjects.map((p) => ({
+        slug: p.slug.current,
+        title: p.title,
+        location: p.location,
+        coverImage: urlFor(p.coverImage).auto('format').url(),
+        coverImageAlt: p.coverImage?.alt ?? p.title,
+      }))
+      selectedWorkSlides = sanityProjects.map((p) => {
         const imgRef = p.featuredImage?.asset?._ref ? p.featuredImage : p.coverImage
         return {
           slug: p.slug.current,
@@ -155,7 +163,7 @@ export default async function HomePage({
         aria-label="Hero — selected projects"
       >
         <HeroCarousel
-          slides={carouselSlides}
+          slides={heroSlides}
           seeIfFitLabel={sanity?.heroCta ?? t('heroCtaSeeIfFit')}
           seeAllLabel={t('seeAllProjects')}
         />
@@ -217,7 +225,7 @@ export default async function HomePage({
             </Link>
           </div>
 
-          {carouselSlides.map((project) => (
+          {selectedWorkSlides.map((project) => (
             <Link
               key={project.slug}
               href={{ pathname: '/project/[slug]', params: { slug: project.slug } }}
