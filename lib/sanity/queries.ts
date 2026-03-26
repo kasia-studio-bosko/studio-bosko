@@ -36,6 +36,10 @@ export interface Project {
   /** Separate image for the homepage "Selected Work" carousel (falls back to coverImage) */
   featuredImage?: { asset: { _ref: string }; alt?: string }
   gallery: GalleryImage[]
+  /** Pull quote shown after the gallery */
+  pullQuote?: string
+  pullQuoteAttribution?: string
+  pullQuoteImage?: { asset: { _ref: string }; alt?: string }
   /** Short plain-text intro for listings and meta description fallback */
   seoIntro: string
   description: PortableTextContent | null
@@ -144,6 +148,9 @@ const projectFullFields = `
     "height": asset->metadata.dimensions.height,
     "aspectRatio": asset->metadata.dimensions.aspectRatio
   },
+  pullQuote,
+  pullQuoteAttribution,
+  pullQuoteImage,
   ${localizedField('description')},
   ${localizedField('metaTitle')},
   ${localizedField('metaDescription')}

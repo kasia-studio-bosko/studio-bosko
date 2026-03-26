@@ -77,6 +77,9 @@ const FALLBACK_PROJECT = {
     alt: 'Chroma Penthouse — a bold, colour-layered penthouse in Berlin Kreuzberg',
   },
   gallery: [] as GalleryImage[],
+  pullQuote: undefined as string | undefined,
+  pullQuoteAttribution: undefined as string | undefined,
+  pullQuoteImage: undefined as { asset: { _ref: string }; alt?: string } | undefined,
   featured: true,
   order: 1,
   metaTitle: undefined as string | undefined,
@@ -85,11 +88,13 @@ const FALLBACK_PROJECT = {
 
 type Props = { params: { locale: string; slug: string } }
 
-// ─── Smart gallery row algorithm ─────────────────────────────────────────────
+// ─── Editorial gallery row algorithm ─────────────────────────────────────────
 
 type GalleryRow =
-  | { type: 'full'; image: GalleryImage }
-  | { type: 'pair'; images: [GalleryImage, GalleryImage] }
+  | { type: 'full';            image: GalleryImage }                        // landscape → edge-to-edge
+  | { type: 'portrait-left';   image: GalleryImage }                        // portrait → 62% left
+  | { type: 'portrait-right';  image: GalleryImage }                        // portrait → 62% right
+  | { type: 'pair';            images: [GalleryImage, GalleryImage] }       // two portraits → asymmetric
 
 function imgRatio(img: GalleryImage): number {
   if (img.aspectRatio) return img.aspectRatio
@@ -98,39 +103,47 @@ function imgRatio(img: GalleryImage): number {
 }
 
 /**
- * Groups gallery images into editorial rows:
- * - First image always full-width hero
- * - Two consecutive portraits (ratio < 0.85) → side-by-side pair
- * - Two consecutive landscapes (ratio > 1.3) → side-by-side pair
- * - All other images → full-width
+ * Editorial layout rules:
+ * - First image always full-width (hero scene-setter)
+ * - Portrait pair → asymmetric side-by-side
+ * - Solo portrait → alternates portrait-left / portrait-right (never full-bleed)
+ * - Landscape → full-width edge-to-edge
  */
 function buildRows(images: GalleryImage[]): GalleryRow[] {
   if (!images.length) return []
 
   const rows: GalleryRow[] = [{ type: 'full', image: images[0] }]
   let i = 1
+  let portraitSide: 'left' | 'right' = 'left'
 
   while (i < images.length) {
-    const cur = images[i]
+    const cur  = images[i]
     const curR = imgRatio(cur)
-    const isPortrait = curR < 0.85
-    const isLandscape = curR > 1.3
+    const isPortrait = curR < 1.0   // includes square-ish
 
-    const next = images[i + 1]
-    if (next) {
-      const nextR = imgRatio(next)
-      const nextIsPortrait = nextR < 0.85
-      const nextIsLandscape = nextR > 1.3
+    const next  = images[i + 1]
+    const nextR = next ? imgRatio(next) : null
+    const nextIsPortrait = nextR !== null && nextR < 1.0
 
-      if ((isPortrait && nextIsPortrait) || (isLandscape && nextIsLandscape)) {
-        rows.push({ type: 'pair', images: [cur, next] })
-        i += 2
-        continue
-      }
+    // Two consecutive portraits → asymmetric pair
+    if (isPortrait && nextIsPortrait) {
+      rows.push({ type: 'pair', images: [cur, next!] })
+      portraitSide = portraitSide === 'left' ? 'right' : 'left' // shift after pair
+      i += 2
+      continue
     }
 
+    // Solo portrait → constrained, alternating sides
+    if (isPortrait) {
+      rows.push({ type: portraitSide === 'left' ? 'portrait-left' : 'portrait-right', image: cur })
+      portraitSide = portraitSide === 'left' ? 'right' : 'left'
+      i++
+      continue
+    }
+
+    // Landscape → full width
     rows.push({ type: 'full', image: cur })
-    i += 1
+    i++
   }
 
   return rows
@@ -381,51 +394,84 @@ export default async function ProjectPage({ params }: Props) {
       {/* ── Editorial gallery ─────────────────────────────────────────────── */}
       {galleryRows.length > 0 && (
         <section
-          className="pb-[var(--section-padding-y)]"
-          style={{ backgroundColor: theme.bg }}
+          style={{ backgroundColor: theme.bg, paddingBottom: 'clamp(60px, 10vw, 160px)' }}
           aria-label="Project gallery"
         >
-          <div className="flex flex-col" style={{ gap: 'clamp(20px, 3vw, 48px)' }}>
+          {/* Large breathing room between rows — the bg colour is the design element */}
+          <div className="flex flex-col" style={{ gap: 'clamp(80px, 12vw, 180px)' }}>
 
             {galleryRows.map((row, ri) => {
 
-              /* ── Full-width row ─────────────────────────────────────────── */
+              /* ── Full-width landscape ──────────────────────────────────── */
               if (row.type === 'full') {
                 const img = row.image
                 const w = img.width ?? 1600
                 const h = img.height ?? 1067
-                const src = img.asset._ref
-                  ? urlFor(img).auto('format').url()
-                  : heroSrc
-
+                const src = img.asset._ref ? urlFor(img).auto('format').url() : heroSrc
                 return (
-                  <ScrollReveal key={ri} delay={ri === 0 ? 0 : 80}>
+                  <ScrollReveal key={ri} delay={ri === 0 ? 0 : 60}>
                     <div>
-                      {/* Edge-to-edge: no horizontal padding */}
-                      <div
-                        className="relative w-full overflow-hidden"
-                        style={{ aspectRatio: `${w} / ${h}`, backgroundColor: theme.bg }}
-                      >
-                        <Image
-                          src={src}
-                          alt={img.alt ?? `${data.title} — photo ${ri + 1}`}
-                          fill
-                          sizes="100vw"
-                          className="object-cover"
-                          quality={90}
-                        />
+                      <div className="relative w-full overflow-hidden"
+                        style={{ aspectRatio: `${w} / ${h}`, backgroundColor: theme.bg }}>
+                        <Image src={src} alt={img.alt ?? `${data.title} — photo ${ri + 1}`}
+                          fill sizes="100vw" className="object-cover" quality={90} />
                       </div>
                       {img.caption && (
-                        <p className="mt-3 px-6 md:px-12 lg:px-16 font-cadiz text-xs tracking-wide" style={{ color: theme.heading, opacity: 0.45 }}>
-                          {img.caption}
-                        </p>
+                        <p className="mt-3 px-6 md:px-12 lg:px-16 font-cadiz text-xs tracking-wide"
+                          style={{ color: theme.heading, opacity: 0.4 }}>{img.caption}</p>
                       )}
                     </div>
                   </ScrollReveal>
                 )
               }
 
-              /* ── Side-by-side pair ──────────────────────────────────────── */
+              /* ── Portrait — left-aligned, max 62 vw ───────────────────── */
+              if (row.type === 'portrait-left') {
+                const img = row.image
+                const w = img.width ?? 800
+                const h = img.height ?? 1067
+                const src = img.asset._ref ? urlFor(img).auto('format').url() : heroSrc
+                return (
+                  <ScrollReveal key={ri} delay={60}>
+                    <div style={{ paddingLeft: 0, paddingRight: '38%' }}>
+                      <div className="relative w-full overflow-hidden"
+                        style={{ aspectRatio: `${w} / ${h}`, backgroundColor: theme.bg }}>
+                        <Image src={src} alt={img.alt ?? `${data.title} — photo ${ri + 1}`}
+                          fill sizes="(max-width: 768px) 100vw, 62vw" className="object-cover" quality={90} />
+                      </div>
+                      {img.caption && (
+                        <p className="mt-3 font-cadiz text-xs tracking-wide"
+                          style={{ color: theme.heading, opacity: 0.4 }}>{img.caption}</p>
+                      )}
+                    </div>
+                  </ScrollReveal>
+                )
+              }
+
+              /* ── Portrait — right-aligned, max 62 vw ──────────────────── */
+              if (row.type === 'portrait-right') {
+                const img = row.image
+                const w = img.width ?? 800
+                const h = img.height ?? 1067
+                const src = img.asset._ref ? urlFor(img).auto('format').url() : heroSrc
+                return (
+                  <ScrollReveal key={ri} delay={60}>
+                    <div style={{ paddingLeft: '38%', paddingRight: 0 }}>
+                      <div className="relative w-full overflow-hidden"
+                        style={{ aspectRatio: `${w} / ${h}`, backgroundColor: theme.bg }}>
+                        <Image src={src} alt={img.alt ?? `${data.title} — photo ${ri + 1}`}
+                          fill sizes="(max-width: 768px) 100vw, 62vw" className="object-cover" quality={90} />
+                      </div>
+                      {img.caption && (
+                        <p className="mt-3 font-cadiz text-xs tracking-wide"
+                          style={{ color: theme.heading, opacity: 0.4 }}>{img.caption}</p>
+                      )}
+                    </div>
+                  </ScrollReveal>
+                )
+              }
+
+              /* ── Asymmetric portrait pair ──────────────────────────────── */
               const [a, b] = row.images
               const [wA, hA] = [a.width ?? 800, a.height ?? 1067]
               const [wB, hB] = [b.width ?? 800, b.height ?? 1067]
@@ -433,51 +479,34 @@ export default async function ProjectPage({ params }: Props) {
               const srcB = b.asset._ref ? urlFor(b).auto('format').url() : heroSrc
 
               return (
-                <ScrollReveal key={ri} delay={80}>
-                  {/* Edge-to-edge pair — gap is page background showing through */}
-                  <div className="flex gap-[12px] md:gap-[16px]">
+                <ScrollReveal key={ri} delay={60}>
+                  {/* Primary ~57%, secondary ~37% — secondary drops down for rhythm */}
+                  <div className="flex items-start" style={{ gap: 'clamp(10px, 1.5vw, 20px)' }}>
 
-                    {/* Image A */}
-                    <div className="flex-1 flex flex-col min-w-0">
-                      <div
-                        className="relative w-full overflow-hidden"
-                        style={{ aspectRatio: `${wA} / ${hA}`, backgroundColor: theme.bg }}
-                      >
-                        <Image
-                          src={srcA}
-                          alt={a.alt ?? `${data.title} — photo ${ri + 1}a`}
-                          fill
-                          sizes="(max-width: 768px) 50vw, 50vw"
-                          className="object-cover"
-                          quality={90}
-                        />
+                    {/* Primary — larger */}
+                    <div className="flex flex-col min-w-0" style={{ width: '57%', flexShrink: 0 }}>
+                      <div className="relative w-full overflow-hidden"
+                        style={{ aspectRatio: `${wA} / ${hA}`, backgroundColor: theme.bg }}>
+                        <Image src={srcA} alt={a.alt ?? `${data.title} — photo ${ri + 1}a`}
+                          fill sizes="(max-width: 768px) 60vw, 57vw" className="object-cover" quality={90} />
                       </div>
                       {a.caption && (
-                        <p className="mt-2 font-cadiz text-xs tracking-wide" style={{ color: theme.heading, opacity: 0.45 }}>
-                          {a.caption}
-                        </p>
+                        <p className="mt-2 font-cadiz text-xs tracking-wide"
+                          style={{ color: theme.heading, opacity: 0.4 }}>{a.caption}</p>
                       )}
                     </div>
 
-                    {/* Image B */}
-                    <div className="flex-1 flex flex-col min-w-0">
-                      <div
-                        className="relative w-full overflow-hidden"
-                        style={{ aspectRatio: `${wB} / ${hB}`, backgroundColor: theme.bg }}
-                      >
-                        <Image
-                          src={srcB}
-                          alt={b.alt ?? `${data.title} — photo ${ri + 1}b`}
-                          fill
-                          sizes="(max-width: 768px) 50vw, 50vw"
-                          className="object-cover"
-                          quality={90}
-                        />
+                    {/* Secondary — smaller, drops down */}
+                    <div className="flex flex-col min-w-0 flex-1"
+                      style={{ marginTop: 'clamp(40px, 8vw, 120px)' }}>
+                      <div className="relative w-full overflow-hidden"
+                        style={{ aspectRatio: `${wB} / ${hB}`, backgroundColor: theme.bg }}>
+                        <Image src={srcB} alt={b.alt ?? `${data.title} — photo ${ri + 1}b`}
+                          fill sizes="(max-width: 768px) 40vw, 37vw" className="object-cover" quality={90} />
                       </div>
                       {b.caption && (
-                        <p className="mt-2 font-cadiz text-xs tracking-wide" style={{ color: theme.heading, opacity: 0.45 }}>
-                          {b.caption}
-                        </p>
+                        <p className="mt-2 font-cadiz text-xs tracking-wide"
+                          style={{ color: theme.heading, opacity: 0.4 }}>{b.caption}</p>
                       )}
                     </div>
 
@@ -486,6 +515,55 @@ export default async function ProjectPage({ params }: Props) {
               )
             })}
 
+          </div>
+        </section>
+      )}
+
+      {/* ── Pull quote + image ────────────────────────────────────────────── */}
+      {data.pullQuote && (
+        <section
+          className="flex flex-col md:flex-row overflow-hidden"
+          style={{ backgroundColor: theme.bg, minHeight: 'clamp(400px, 55vw, 780px)' }}
+          aria-label="Project quote"
+        >
+          {/* Left — photo */}
+          {data.pullQuoteImage?.asset?._ref && (
+            <div className="relative w-full md:w-[48%] shrink-0 overflow-hidden"
+              style={{ minHeight: 'clamp(300px, 40vw, 600px)', backgroundColor: theme.bg }}>
+              <Image
+                src={urlFor(data.pullQuoteImage).auto('format').url()}
+                alt={data.pullQuoteImage.alt ?? `${data.title} — detail`}
+                fill
+                sizes="(max-width: 768px) 100vw, 48vw"
+                className="object-cover"
+                quality={90}
+              />
+            </div>
+          )}
+
+          {/* Right — quote */}
+          <div className="flex-1 flex flex-col justify-center px-10 md:px-14 lg:px-20 py-16"
+            style={{ backgroundColor: theme.bg }}>
+            <ScrollReveal>
+              <blockquote
+                className="font-signifier font-light italic"
+                style={{
+                  fontSize: 'clamp(20px, 2.4vw, 36px)',
+                  lineHeight: 1.45,
+                  letterSpacing: '-0.3px',
+                  color: theme.heading,
+                  maxWidth: '560px',
+                }}
+              >
+                &ldquo;{data.pullQuote}&rdquo;
+              </blockquote>
+              {data.pullQuoteAttribution && (
+                <p className="mt-6 font-cadiz text-sm tracking-widest uppercase"
+                  style={{ color: theme.heading, opacity: 0.5 }}>
+                  {data.pullQuoteAttribution}
+                </p>
+              )}
+            </ScrollReveal>
           </div>
         </section>
       )}

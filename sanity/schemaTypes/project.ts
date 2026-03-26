@@ -329,6 +329,34 @@ export const projectSchema = defineType({
         defineField({ name: 'alt', title: 'Alt text', type: 'string' }),
       ],
     }),
+    // ── Pull quote (quote + image block shown after gallery) ───────────────
+    defineField({
+      name: 'pullQuoteImage',
+      title: 'Quote block — image',
+      description: 'Photo shown on the left of the quote block. Portrait orientation works best.',
+      type: 'image',
+      group: 'images',
+      options: { hotspot: true },
+      fields: [
+        defineField({ name: 'alt', title: 'Alt text', type: 'string' }),
+      ],
+    }),
+    defineField({
+      name: 'pullQuote',
+      title: 'Quote block — quote text',
+      description: 'Pull quote shown to the right of the image. Leave empty to hide the block.',
+      type: 'text',
+      rows: 4,
+      group: 'images',
+    }),
+    defineField({
+      name: 'pullQuoteAttribution',
+      title: 'Quote block — attribution',
+      description: 'e.g. "&Living Magazine" or "Yellowtrace"',
+      type: 'string',
+      group: 'images',
+    }),
+
     defineField({
       name: 'gallery',
       title: 'Gallery images',
