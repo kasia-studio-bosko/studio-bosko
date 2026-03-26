@@ -25,6 +25,35 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      // ── /home → / (Framer site had a /home variant) ──────────────────────
+      { source: '/home', destination: '/', permanent: true },
+      { source: '/de/home', destination: '/de', permanent: true },
+      { source: '/pl/home', destination: '/pl', permanent: true },
+
+      // ── /projects/:slug → /project/:slug (plural → singular) ──────────────
+      // EN (default locale — no prefix)
+      {
+        source: '/projects/:slug',
+        destination: '/project/:slug',
+        permanent: true,
+      },
+      // DE locale
+      {
+        source: '/de/projekte/:slug',
+        destination: '/de/projekt/:slug',
+        permanent: true,
+      },
+      // PL locale
+      {
+        source: '/pl/projekty/:slug',
+        destination: '/pl/projekt/:slug',
+        permanent: true,
+      },
+    ]
+  },
+
   async headers() {
     return [
       {

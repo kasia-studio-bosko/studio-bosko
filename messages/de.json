@@ -222,6 +222,13 @@
     "copyright": "© Studio Bosko {year}",
     "privacyPolicy": "Datenschutz"
   },
+  "notFound": {
+    "eyebrow": "404",
+    "heading": "Seite nicht gefunden",
+    "body": "Die gesuchte Seite existiert nicht oder wurde möglicherweise verschoben. Lassen Sie uns Sie woanders hinführen.",
+    "backHome": "Zur Startseite",
+    "viewProjects": "Projekte ansehen"
+  },
   "meta": {
     "siteTitle": "Studio Bosko — Innenarchitektur Studio Berlin & Warschau",
     "siteDescription": "Umfassende Wohnraum-Innenarchitektur von Studio Bosko — Berlin, Warschau & Wien. Charakterstarke Zuhause für anspruchsvolle Auftraggeber. AD100 Polska 2025.",

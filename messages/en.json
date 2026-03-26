@@ -222,6 +222,13 @@
     "copyright": "© Studio Bosko {year}",
     "privacyPolicy": "Privacy Policy"
   },
+  "notFound": {
+    "eyebrow": "404",
+    "heading": "Page not found",
+    "body": "The page you're looking for doesn't exist or may have moved. Let us take you somewhere more beautiful.",
+    "backHome": "Back to homepage",
+    "viewProjects": "View projects"
+  },
   "meta": {
     "siteTitle": "Studio Bosko — Interior Design Studio Berlin & Warsaw",
     "siteDescription": "Full-scope residential interior design by Studio Bosko — Berlin, Warsaw & Vienna. Curated homes for discerning professionals. AD100 Polska 2025.",

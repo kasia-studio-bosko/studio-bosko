@@ -222,6 +222,13 @@
     "copyright": "© Studio Bosko {year}",
     "privacyPolicy": "Polityka prywatności"
   },
+  "notFound": {
+    "eyebrow": "404",
+    "heading": "Nie znaleziono strony",
+    "body": "Strona, której szukasz, nie istnieje lub mogła zostać przeniesiona. Pozwól, że zaprowdzimy Cię w inne miejsce.",
+    "backHome": "Wróć na stronę główną",
+    "viewProjects": "Zobacz projekty"
+  },
   "meta": {
     "siteTitle": "Studio Bosko — Studio Projektowania Wnętrz Berlin i Warszawa",
     "siteDescription": "Kompleksowe projektowanie wnętrz mieszkalnych — Berlin, Warszawa i Wiedeń. Charakterne wnętrza dla wymagających klientów. AD100 Polska 2025.",
