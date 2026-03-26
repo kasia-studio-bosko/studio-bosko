@@ -48,7 +48,6 @@ function getIssue(item: PressItem, locale: string): string {
 }
 
 type FeaturedItem = { publication: string; issue: string; image: string; url?: string }
-type ArchiveItem  = { publication: string; issue: string; url?: string }
 
 export default async function PressPage({
   params,
@@ -67,14 +66,10 @@ export default async function PressPage({
 
   // ── Fetch from Sanity; fall back to translation files ────────────────────
   let featuredItems: FeaturedItem[] = []
-  let archiveItems:  ArchiveItem[]  = []
-  let usingSanity = false
 
   try {
     const sanityItems = await getAllPressItems()
     if (sanityItems.length > 0) {
-      usingSanity = true
-
       featuredItems = sanityItems
         .filter((p) => p.featured && p.coverImage?.asset?._ref)
         .map((p) => ({
@@ -83,20 +78,13 @@ export default async function PressPage({
           image:       urlFor(p.coverImage!).auto('format').url(),
           url:         p.externalUrl,
         }))
-
-      archiveItems = sanityItems.map((p) => ({
-        publication: p.publication,
-        issue:       getIssue(p, locale),
-        url:         p.externalUrl,
-      }))
     }
   } catch {
     /* Sanity not reachable — use fallback */
   }
 
-  if (!usingSanity) {
+  if (featuredItems.length === 0) {
     featuredItems = t.raw('featuredItems') as FeaturedItem[]
-    archiveItems  = t.raw('archiveItems')  as ArchiveItem[]
   }
 
   return (
@@ -168,60 +156,7 @@ export default async function PressPage({
         </section>
       )}
 
-      {/* ── Archive — card grid ───────────────────────────────────────────── */}
-      <section className="pb-section-y" aria-label="Press archive">
-        <div className="page-container">
-          <ScrollReveal>
-            <p className="label-serif mb-8">{t('featuredIn')}</p>
-          </ScrollReveal>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
-            {archiveItems.map((item, i) => {
-              const inner = (
-                <div className="flex flex-col justify-between h-full p-5 md:p-6">
-                  <p className="font-cadiz text-[13px] font-medium text-[#2d1d17] leading-snug">
-                    {item.publication}
-                  </p>
-                  <div className="mt-auto pt-4 flex items-end justify-between">
-                    <p className="font-cadiz text-[12px] text-[#2d1d17]/50 leading-tight">
-                      {item.issue}
-                    </p>
-                    {item.url && (
-                      <span className="font-cadiz text-[11px] text-[#2d1d17]/30 group-hover:text-[#f5500a] transition-colors duration-200">
-                        ↗
-                      </span>
-                    )}
-                  </div>
-                </div>
-              )
-
-              return (
-                <ScrollReveal key={`${item.publication}-${item.issue}-${i}`} delay={Math.min(i * 20, 280)}>
-                  {item.url ? (
-                    <a
-                      href={item.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group block border border-[#2d1d17]/12 hover:border-[#2d1d17]/30 bg-[#ede8e2] hover:bg-white transition-all duration-200"
-                      style={{ aspectRatio: '3 / 2' }}
-                    >
-                      {inner}
-                    </a>
-                  ) : (
-                    <div
-                      className="border border-[#2d1d17]/12 bg-[#ede8e2]"
-                      style={{ aspectRatio: '3 / 2' }}
-                    >
-                      {inner}
-                    </div>
-                  )}
-                </ScrollReveal>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ── CTA ──────────────────────────────────────────────────────────── */}
+{/* ── CTA ──────────────────────────────────────────────────────────── */}
       <section
         className="section-spacing bg-[#2d1d17] text-[#ede8e2]"
         aria-label="Work with Studio Bosko"
