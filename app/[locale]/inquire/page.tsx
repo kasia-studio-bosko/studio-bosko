@@ -56,7 +56,7 @@ export default async function InquirePage({
   const heroHeading  = sanity?.headline ?? t('heroHeading')
   const heroBody     = sanity?.subtext  ?? t('heroBody')
   const sideImageUrl = sanity?.sideImage?.asset?._ref
-    ? urlFor(sanity.sideImage).width(1280).height(1920).url()
+    ? urlFor(sanity.sideImage).auto('format').url()
     : FALLBACK_SIDE_IMAGE
 
   return (
@@ -98,6 +98,7 @@ export default async function InquirePage({
               fill
               sizes="50vw"
               className="object-cover"
+              quality={90}
               priority
             />
           </div>

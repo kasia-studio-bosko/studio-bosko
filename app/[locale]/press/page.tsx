@@ -79,7 +79,7 @@ export default async function PressPage({
         .map((p) => ({
           publication: p.publication,
           issue:       getIssue(p, locale),
-          image:       urlFor(p.coverImage!).width(600).height(800).url(),
+          image:       urlFor(p.coverImage!).auto('format').url(),
           url:         p.externalUrl,
         }))
 
@@ -136,6 +136,7 @@ export default async function PressPage({
                             fill
                             sizes="(max-width: 768px) 50vw, 25vw"
                             className="object-cover hover:scale-105 transition-transform duration-500"
+                            quality={90}
                           />
                         </a>
                       ) : (
@@ -145,6 +146,7 @@ export default async function PressPage({
                           fill
                           sizes="(max-width: 768px) 50vw, 25vw"
                           className="object-cover"
+                          quality={90}
                         />
                       )}
                     </div>

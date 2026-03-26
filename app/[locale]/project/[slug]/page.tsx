@@ -212,7 +212,7 @@ export default async function ProjectPage({ params }: Props) {
   const theme = resolveTheme(data, slug)
 
   const heroSrc = data.coverImage?.asset?._ref
-    ? urlFor(data.coverImage).width(1920).height(1080).url()
+    ? urlFor(data.coverImage).auto('format').url()
     : 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg'
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://bosko.studio'
@@ -395,7 +395,7 @@ export default async function ProjectPage({ params }: Props) {
                 const w = img.width ?? 1600
                 const h = img.height ?? 1067
                 const src = img.asset._ref
-                  ? urlFor(img).width(1920).quality(88).url()
+                  ? urlFor(img).auto('format').url()
                   : heroSrc
 
                 return (
@@ -412,7 +412,7 @@ export default async function ProjectPage({ params }: Props) {
                           fill
                           sizes="100vw"
                           className="object-cover"
-                          quality={88}
+                          quality={90}
                         />
                       </div>
                       {img.caption && (
@@ -429,8 +429,8 @@ export default async function ProjectPage({ params }: Props) {
               const [a, b] = row.images
               const [wA, hA] = [a.width ?? 800, a.height ?? 1067]
               const [wB, hB] = [b.width ?? 800, b.height ?? 1067]
-              const srcA = a.asset._ref ? urlFor(a).width(960).quality(88).url() : heroSrc
-              const srcB = b.asset._ref ? urlFor(b).width(960).quality(88).url() : heroSrc
+              const srcA = a.asset._ref ? urlFor(a).auto('format').url() : heroSrc
+              const srcB = b.asset._ref ? urlFor(b).auto('format').url() : heroSrc
 
               return (
                 <ScrollReveal key={ri} delay={80}>
@@ -449,7 +449,7 @@ export default async function ProjectPage({ params }: Props) {
                           fill
                           sizes="(max-width: 768px) 50vw, 50vw"
                           className="object-cover"
-                          quality={88}
+                          quality={90}
                         />
                       </div>
                       {a.caption && (
@@ -471,7 +471,7 @@ export default async function ProjectPage({ params }: Props) {
                           fill
                           sizes="(max-width: 768px) 50vw, 50vw"
                           className="object-cover"
-                          quality={88}
+                          quality={90}
                         />
                       </div>
                       {b.caption && (

@@ -5,6 +5,13 @@ const withNextIntl = createNextIntlPlugin('./i18n/request.ts')
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    // Serve modern formats (AVIF → WebP → JPEG) automatically
+    formats: ['image/avif', 'image/webp'],
+    // Standard breakpoints + extra retina sizes
+    deviceSizes: [640, 750, 828, 1080, 1200, 1440, 1920, 2560, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384, 512],
+    // Quality default raised to 90 (can still override per-component)
+    minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
     remotePatterns: [
       {
         protocol: 'https',

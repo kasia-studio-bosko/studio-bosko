@@ -118,7 +118,7 @@ export default async function HomePage({
   const testimonialQuote       = sanity?.testimonialQuote  ?? t('testimonialQuote')
   const testimonialAttribution = sanity?.testimonialAuthor ?? t('testimonialAttribution')
   const testimonialImageUrl    = sanity?.testimonialImage?.asset?._ref
-    ? urlFor(sanity.testimonialImage).width(1200).height(900).url()
+    ? urlFor(sanity.testimonialImage).auto('format').url()
     : FALLBACK_TESTIMONIAL_IMAGE
 
   // CTA section
@@ -230,6 +230,7 @@ export default async function HomePage({
                 fill
                 sizes="(max-width: 768px) 100vw, 68vw"
                 className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
+                quality={90}
               />
               {/* Hover overlay */}
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-500" />
@@ -329,6 +330,7 @@ export default async function HomePage({
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover"
+            quality={90}
           />
         </div>
 

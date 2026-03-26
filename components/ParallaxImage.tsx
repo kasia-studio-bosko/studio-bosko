@@ -36,7 +36,7 @@ export default function ParallaxImage({
   sizes = '100vw',
   speed = 0.25,
   priority = false,
-  quality = 85,
+  quality = 90,
   imgClassName = '',
 }: ParallaxImageProps) {
   const { containerRef, ty } = useParallax(speed)

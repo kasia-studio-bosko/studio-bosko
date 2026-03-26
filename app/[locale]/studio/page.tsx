@@ -82,23 +82,23 @@ export default async function StudioPage({
 
   // Images — Sanity first, fallback to Framer-hosted URLs
   const kasiaPortraitUrl = sanity?.kasiaPhoto1?.asset?._ref
-    ? urlFor(sanity.kasiaPhoto1).width(578).height(738).url()
+    ? urlFor(sanity.kasiaPhoto1).auto('format').url()
     : FALLBACK_KASIA_PORTRAIT
 
   const kasiaStudioUrl = sanity?.kasiaPhoto2?.asset?._ref
-    ? urlFor(sanity.kasiaPhoto2).width(1920).height(600).url()
+    ? urlFor(sanity.kasiaPhoto2).auto('format').url()
     : FALLBACK_KASIA_STUDIO
 
   const furnitureDetailUrl = sanity?.studioPhoto1?.asset?._ref
-    ? urlFor(sanity.studioPhoto1).width(747).height(498).url()
+    ? urlFor(sanity.studioPhoto1).auto('format').url()
     : FALLBACK_FURNITURE_DETAIL
 
   const altbauUrl = sanity?.studioPhoto2?.asset?._ref
-    ? urlFor(sanity.studioPhoto2).width(747).height(498).url()
+    ? urlFor(sanity.studioPhoto2).auto('format').url()
     : FALLBACK_ALTBAU
 
   const testimonialImageUrl = sanity?.testimonialImage?.asset?._ref
-    ? urlFor(sanity.testimonialImage).width(650).height(671).url()
+    ? urlFor(sanity.testimonialImage).auto('format').url()
     : FALLBACK_TESTIMONIAL
 
   return (
@@ -150,8 +150,9 @@ export default async function StudioPage({
                 src={kasiaPortraitUrl}
                 alt={sanity?.kasiaPhoto1?.alt ?? 'Kasia Kronberger, founder of Studio Bosko'}
                 fill
-                sizes="44vw"
+                sizes="(max-width: 768px) 100vw, 44vw"
                 className="object-cover"
+                quality={90}
                 priority
               />
             </div>
@@ -214,6 +215,7 @@ export default async function StudioPage({
                 fill
                 sizes="(max-width: 768px) 100vw, 57vw"
                 className="object-cover"
+                quality={90}
               />
             </div>
           </div>
@@ -271,6 +273,7 @@ export default async function StudioPage({
                 fill
                 sizes="(max-width: 768px) 100vw, 57vw"
                 className="object-cover"
+                quality={90}
               />
             </div>
           </div>
@@ -297,6 +300,7 @@ export default async function StudioPage({
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover"
+            quality={90}
           />
         </div>
 

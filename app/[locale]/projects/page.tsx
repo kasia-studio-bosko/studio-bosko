@@ -74,9 +74,9 @@ export default async function ProjectsPage({
       projects = sanityProjects.map((p) => {
         // listingImage → coverImage (fallback chain for the index grid)
         const imgSrc = p.listingImage?.asset?._ref
-          ? urlFor(p.listingImage).width(960).height(1280).url()
+          ? urlFor(p.listingImage).auto('format').url()
           : p.coverImage?.asset?._ref
-            ? urlFor(p.coverImage).width(960).height(1280).url()
+            ? urlFor(p.coverImage).auto('format').url()
             : 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg'
         const imgAlt = p.listingImage?.alt ?? p.coverImage?.alt ?? p.title
         return {
@@ -130,6 +130,7 @@ export default async function ProjectsPage({
                   fill
                   sizes="(max-width: 640px) 100vw, 50vw"
                   className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
+                  quality={90}
                 />
                 {/* Hover overlay */}
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-500" />

@@ -138,19 +138,19 @@ export default async function OfferingPage({
 
   // Images — Sanity first, fallback to Framer-hosted URLs
   const bookselfUrl = sanity?.image1?.asset?._ref
-    ? urlFor(sanity.image1).width(578).height(867).url()
+    ? urlFor(sanity.image1).auto('format').url()
     : FALLBACK_BOOKSHELF
 
   const moodboardUrl = sanity?.image2?.asset?._ref
-    ? urlFor(sanity.image2).width(1920).height(600).url()
+    ? urlFor(sanity.image2).auto('format').url()
     : FALLBACK_MOODBOARD
 
   const floorplanUrl = sanity?.image3?.asset?._ref
-    ? urlFor(sanity.image3).width(731).height(577).url()
+    ? urlFor(sanity.image3).auto('format').url()
     : FALLBACK_FLOORPLAN
 
   const hallwayUrl = sanity?.testimonialImage?.asset?._ref
-    ? urlFor(sanity.testimonialImage).width(650).height(671).url()
+    ? urlFor(sanity.testimonialImage).auto('format').url()
     : FALLBACK_HALLWAY
 
   return (
@@ -202,8 +202,9 @@ export default async function OfferingPage({
                 src={bookselfUrl}
                 alt={sanity?.image1?.alt ?? 'Curated bookshelf — Studio Bosko'}
                 fill
-                sizes="44vw"
+                sizes="(max-width: 768px) 100vw, 44vw"
                 className="object-cover"
+                quality={90}
                 priority
               />
             </div>
@@ -300,6 +301,7 @@ export default async function OfferingPage({
               height={577}
               sizes="(max-width: 768px) 100vw, 56vw"
               className="w-full h-auto"
+              quality={90}
             />
           </div>
         </ScrollReveal>
@@ -358,6 +360,7 @@ export default async function OfferingPage({
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover"
+            quality={90}
           />
         </div>
 
