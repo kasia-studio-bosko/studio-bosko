@@ -96,6 +96,14 @@ export default function InquireForm({
   // Note: GROQ returns null (not undefined) for unset array fields
   const useLegacy = formQuestions == null
 
+  // Safely coerce t.raw() array values — returns [] if key is missing or null at build time
+  const rawSvcOpts = Array.isArray(legacyServiceOptions ?? t.raw('serviceOptions'))
+    ? (legacyServiceOptions ?? (t.raw('serviceOptions') as string[]))
+    : ([] as string[])
+  const rawBudgetOpts = Array.isArray(legacyBudgetOptions ?? t.raw('budgetOptions'))
+    ? (legacyBudgetOptions ?? (t.raw('budgetOptions') as string[]))
+    : ([] as string[])
+
   const questions: FormQuestion[] = useLegacy
     ? FALLBACK_QUESTIONS.map((q) => {
         // Hydrate labels + options from translation keys for the legacy fallback
@@ -104,17 +112,17 @@ export default function InquireForm({
         if (q.fieldId === 'serviceType') return {
           ...q,
           label:   t('serviceLabel'),
-          options: (legacyServiceOptions ?? (t.raw('serviceOptions') as string[])).map((l) => ({ label: l })),
+          options: rawSvcOpts.map((l) => ({ label: l })),
         }
         if (q.fieldId === 'investment')  return {
           ...q,
           label:   t('budgetLabel'),
-          options: (legacyBudgetOptions ?? (t.raw('budgetOptions') as string[])).map((l) => ({ label: l })),
+          options: rawBudgetOpts.map((l) => ({ label: l })),
         }
         if (q.fieldId === 'description') return { ...q, label: t('messageLabel') }
         return q
       })
-    : formQuestions
+    : (formQuestions ?? [])
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6" noValidate>
@@ -155,7 +163,7 @@ export default function InquireForm({
       />
 
       {/* ── Dynamic questions from CMS ── */}
-      {questions.map((q) => {
+      {(questions ?? []).map((q) => {
         const value       = dynamicFields[q.fieldId] ?? ''
         const placeholder = q.required ? `${q.label}*` : q.label
 
