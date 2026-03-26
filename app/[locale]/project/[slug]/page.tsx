@@ -172,9 +172,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   let project = null
   try { project = await getProjectBySlug(slug, locale) } catch {}
 
-  // Use plain project title for formatting — metaTitle may already contain "Studio Bosko"
+  // Use plain project title for formatting
   const displayTitle  = project?.title       ?? FALLBACK_PROJECT.title
-  const customTitle   = project?.metaTitle   // if set, treat as fully-formed (use absolute)
   const description   = project?.metaDescription ?? project?.seoIntro ?? FALLBACK_PROJECT.seoIntro
   const ogImage = project?.coverImage?.asset?._ref
     ? urlFor(project.coverImage).width(1200).height(630).fit('crop').url()
@@ -186,10 +185,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       ? `${siteUrl}/project/${slug}`
       : `${siteUrl}/${locale}/${slugPrefixMap[locale]}/${slug}`
 
-  const formattedTitle = customTitle ?? `${displayTitle} — Interior Design Project | Studio Bosko`
+  // Strip any trailing "| Studio Bosko" the CMS may have added to metaTitle
+  // — the layout template '%s | Studio Bosko' will append it exactly once
+  const cleanMetaTitle = project?.metaTitle
+    ? project.metaTitle.replace(/\s*\|\s*Studio Bosko\s*$/i, '').trim()
+    : null
+
+  const formattedTitle = cleanMetaTitle
+    ?? (project?.location
+        ? `${displayTitle} — Interior Design ${project.location}`
+        : `${displayTitle} — Interior Design Project`)
 
   return {
-    title: { absolute: formattedTitle },
+    title: formattedTitle,   // string → layout template adds '| Studio Bosko' once
     description,
     alternates: {
       canonical,

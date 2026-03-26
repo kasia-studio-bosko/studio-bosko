@@ -5,6 +5,7 @@ import { Link } from '@/i18n/navigation'
 import { getFeaturedProjects, getHomepageContent } from '@/lib/sanity/queries'
 import { urlFor } from '@/lib/sanity/client'
 import HeroCarousel, { type CarouselSlide } from '@/components/HeroCarousel'
+import PageNavTheme from '@/components/PageNavTheme'
 
 export async function generateMetadata({
   params,
@@ -87,14 +88,14 @@ const FALLBACK_TESTIMONIAL_IMAGE =
  * Note: logo-est.png is actually a WebP file — referenced as .webp.
  */
 const PRESS_LOGOS: { name: string; src: string }[] = [
-  { name: 'AD',              src: '/logos/logo-ad.png'              },
-  { name: 'Vogue',           src: '/logos/logo-vogue.png'           },
-  { name: 'Elle Decoration', src: '/logos/logo-elle-decoration.png' },
-  { name: 'Yellowtrace',     src: '/logos/logo-yellowtrace.png'     },
-  { name: 'Domino',          src: '/logos/logo-domino.png'          },
-  { name: 'Est Living',      src: '/logos/logo-est.webp'            },
-  { name: 'Livingetc',       src: '/logos/logo-livingetc.png'       },
-  { name: 'Homes & Gardens', src: '/logos/logo-homes-gardens.png'   },
+  { name: 'Architectural Digest logo',             src: '/logos/logo-ad.png'              },
+  { name: 'Vogue magazine logo',                   src: '/logos/logo-vogue.png'           },
+  { name: 'Elle Decoration magazine logo',         src: '/logos/logo-elle-decoration.png' },
+  { name: 'Yellowtrace design publication logo',   src: '/logos/logo-yellowtrace.png'     },
+  { name: 'Domino home magazine logo',             src: '/logos/logo-domino.png'          },
+  { name: 'Est Living design magazine logo',       src: '/logos/logo-est.webp'            },
+  { name: 'Livingetc interior design magazine logo', src: '/logos/logo-livingetc.png'     },
+  { name: 'Homes and Gardens magazine logo',       src: '/logos/logo-homes-gardens.png'   },
 ]
 
 export default async function HomePage({
@@ -109,9 +110,10 @@ export default async function HomePage({
     getHomepageContent(locale),
   ])
 
-  // Content — Sanity first, translation fallback
-  const introH1        = sanity?.heroHeadline ?? t('introH1')
-  const introBody      = sanity?.heroBody     ?? t('introBody')
+  // Content — the CMS has heroHeadline/heroBody stored in swapped fields;
+  // map so the H1 always gets the short tagline and the paragraph gets the longer copy.
+  const introH1        = sanity?.heroBody     ?? t('introH1')    // short: "Interior design studio based in…"
+  const introBody      = sanity?.heroHeadline ?? t('introBody')  // long:  "Personality-driven interiors…"
   const offeringBodyFull = sanity?.offeringBody ?? t('offeringBodyFull')
 
   // Testimonial — Sanity first, translation fallback
@@ -156,6 +158,9 @@ export default async function HomePage({
 
   return (
     <>
+      {/* White nav over the dark hero carousel */}
+      <PageNavTheme color="#ffffff" />
+
       {/* ── 1. Full-bleed hero carousel ────────────────────────────────────── */}
       <section
         className="-mt-[var(--header-height)] relative w-full overflow-hidden"
@@ -191,8 +196,8 @@ export default async function HomePage({
 
       {/* ── 3. Selected Work — sticky-scroll stack ─────────────────────────── */}
       <section className="flex w-full" aria-label="Selected Work">
-        {/* Left sticky label panel */}
-        <div className="hidden md:flex w-[32%] sticky top-0 h-screen bg-[#d4cbc0] flex-col justify-center pl-14 pr-8">
+        {/* Left sticky label panel — desktop only; aria-hidden because the mobile heading below is the semantic one */}
+        <div className="hidden md:flex w-[32%] sticky top-0 h-screen bg-[#d4cbc0] flex-col justify-center pl-14 pr-8" aria-hidden="true">
           <p className="font-cadiz text-[11px] tracking-[0.2em] uppercase text-[#2d1d17]/50 mb-3">
             {t('selectedWorkSubheading')}
           </p>
@@ -261,9 +266,6 @@ export default async function HomePage({
         aria-label="Offering"
       >
         <div className="max-w-[1440px] mx-auto">
-          <p className="font-cadiz text-[11px] tracking-[0.2em] uppercase text-[#e1cd3c]/50 mb-6">
-            Studio Bosko
-          </p>
           <h2 className="font-signifier font-normal text-[50px] leading-[60px] text-[#e1cd3c] mb-8">
             {sanity?.offeringHeadline ?? 'Offering'}
           </h2>
@@ -282,49 +284,34 @@ export default async function HomePage({
       {/* ── 5. Press marquee ──────────────────────────────────────────────── */}
       <section
         className="bg-[#ede8e2] overflow-hidden"
-        style={{ minHeight: '88px' }}
+        style={{ height: '88px', display: 'flex', alignItems: 'center' }}
         aria-label="Press mentions"
       >
-        <div className="flex items-center" style={{ minHeight: '88px' }}>
-          {/*
-            Four identical copies inside a single animate-marquee wrapper.
-            The keyframe translates by -25% (= exactly one copy's width),
-            guaranteeing a seamless infinite loop with no gap or jump.
-            Plain <img> (not next/image) lets height:20px + width:auto
-            work reliably on local /public assets.
-            filter:brightness(0) renders each logo as dark ink on the beige bg.
-          */}
-          <div
-            className="flex animate-marquee whitespace-nowrap items-center"
-            style={{ willChange: 'transform' }}
-          >
-            {[0, 1, 2, 3].map((copy) =>
-              PRESS_LOGOS.map((logo, i) => (
-                /*
-                 * IMPORTANT: span must be inline-flex so the <img> becomes a
-                 * flex item. Flex items on replaced elements (img) size from
-                 * their intrinsic ratio, giving correct width at height:20px.
-                 * inline-block / block spans cause width:auto → 0 on the img.
-                 */
-                <span
-                  key={`${copy}-${i}`}
-                  className="inline-flex items-center"
-                  style={{ paddingLeft: '72px', paddingRight: '72px' }}
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={logo.src}
-                    alt={logo.name}
-                    style={{
-                      height: '20px',
-                      width: 'auto',
-                      filter: 'brightness(0)',
-                    }}
-                  />
-                </span>
-              ))
-            )}
-          </div>
+        {/*
+          Four identical copies of the logo set inside one animate-marquee div.
+          keyframe: translateX(0 → -25%) — exactly one copy's width — seamless loop.
+          flex-shrink:0 prevents the flex-item from being compressed to viewport width,
+          which would break the -25% translation math.
+        */}
+        <div
+          className="flex animate-marquee items-center"
+          style={{ flexShrink: 0, willChange: 'transform' }}
+        >
+          {[0, 1, 2, 3].map((copy) =>
+            PRESS_LOGOS.map((logo, i) => (
+              <span
+                key={`${copy}-${i}`}
+                style={{ display: 'inline-flex', alignItems: 'center', paddingLeft: '72px', paddingRight: '72px', flexShrink: 0 }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={logo.src}
+                  alt={logo.name}
+                  style={{ height: '20px', width: 'auto', filter: 'brightness(0)', display: 'block' }}
+                />
+              </span>
+            ))
+          )}
         </div>
       </section>
 
