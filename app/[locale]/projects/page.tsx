@@ -71,17 +71,24 @@ export default async function ProjectsPage({
   try {
     const sanityProjects = await getAllProjects(locale)
     if (sanityProjects.length > 0) {
-      projects = sanityProjects.map((p) => ({
-        slug: p.slug.current,
-        title: p.title,
-        location: p.location,
-        year: p.year ?? '',
-        category: p.category,
-        coverImage: p.coverImage?.asset?._ref
-          ? urlFor(p.coverImage).width(960).height(1280).url()
-          : 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg',
-        coverImageAlt: p.coverImage?.alt ?? p.title,
-      }))
+      projects = sanityProjects.map((p) => {
+        // listingImage → coverImage (fallback chain for the index grid)
+        const imgSrc = p.listingImage?.asset?._ref
+          ? urlFor(p.listingImage).width(960).height(1280).url()
+          : p.coverImage?.asset?._ref
+            ? urlFor(p.coverImage).width(960).height(1280).url()
+            : 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg'
+        const imgAlt = p.listingImage?.alt ?? p.coverImage?.alt ?? p.title
+        return {
+          slug: p.slug.current,
+          title: p.title,
+          location: p.location,
+          year: p.year ?? '',
+          category: p.category,
+          coverImage: imgSrc,
+          coverImageAlt: imgAlt,
+        }
+      })
     }
   } catch {
     // Sanity not configured — use fallback

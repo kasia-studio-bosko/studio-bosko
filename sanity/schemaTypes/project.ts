@@ -293,6 +293,7 @@ export const projectSchema = defineType({
     defineField({
       name: 'coverImage',
       title: 'Cover image',
+      description: 'Primary image. Used as fallback everywhere no specific image is set.',
       type: 'image',
       group: 'images',
       options: { hotspot: true },
@@ -304,6 +305,28 @@ export const projectSchema = defineType({
           validation: (Rule) =>
             Rule.warning('Alt text is strongly recommended for SEO and accessibility'),
         }),
+      ],
+    }),
+    defineField({
+      name: 'listingImage',
+      title: 'Project index image',
+      description: 'Image shown on the /projects grid. Falls back to Cover image if empty.',
+      type: 'image',
+      group: 'images',
+      options: { hotspot: true },
+      fields: [
+        defineField({ name: 'alt', title: 'Alt text', type: 'string' }),
+      ],
+    }),
+    defineField({
+      name: 'featuredImage',
+      title: 'Homepage carousel image',
+      description: 'Image shown in the "Selected Work" carousel on the homepage. Falls back to Cover image if empty.',
+      type: 'image',
+      group: 'images',
+      options: { hotspot: true },
+      fields: [
+        defineField({ name: 'alt', title: 'Alt text', type: 'string' }),
       ],
     }),
     defineField({

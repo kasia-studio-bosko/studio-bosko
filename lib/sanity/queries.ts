@@ -31,6 +31,10 @@ export interface Project {
   photographer: string
   pressMentions?: string[]
   coverImage: { asset: { _ref: string }; alt?: string }
+  /** Separate image for the /projects index grid (falls back to coverImage) */
+  listingImage?: { asset: { _ref: string }; alt?: string }
+  /** Separate image for the homepage "Selected Work" carousel (falls back to coverImage) */
+  featuredImage?: { asset: { _ref: string }; alt?: string }
   gallery: GalleryImage[]
   /** Short plain-text intro for listings and meta description fallback */
   seoIntro: string
@@ -120,6 +124,8 @@ const projectListFields = `
   featured,
   order,
   coverImage,
+  listingImage,
+  featuredImage,
   colorTheme,
   backgroundColor,
   textColor,

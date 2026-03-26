@@ -130,13 +130,17 @@ export default async function HomePage({
   try {
     const sanityProjects = await getFeaturedProjects(locale)
     if (sanityProjects.length > 0) {
-      carouselSlides = sanityProjects.map((p) => ({
-        slug: p.slug.current,
-        title: p.title,
-        location: p.location,
-        coverImage: urlFor(p.coverImage).width(1920).height(1080).url(),
-        coverImageAlt: p.coverImage.alt ?? p.title,
-      }))
+      carouselSlides = sanityProjects.map((p) => {
+        // featuredImage → coverImage (fallback chain for the homepage carousel)
+        const imgRef = p.featuredImage?.asset?._ref ? p.featuredImage : p.coverImage
+        return {
+          slug: p.slug.current,
+          title: p.title,
+          location: p.location,
+          coverImage: urlFor(imgRef).width(1920).height(1080).url(),
+          coverImageAlt: p.featuredImage?.alt ?? p.coverImage?.alt ?? p.title,
+        }
+      })
     }
   } catch {
     // Sanity not reachable — use fallback
