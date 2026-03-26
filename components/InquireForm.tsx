@@ -90,10 +90,11 @@ export default function InquireForm({
     'w-full bg-transparent border-b border-[#ede8e2]/25 py-3.5 text-[15px] font-cadiz text-[#ede8e2] focus:outline-none focus:border-[#ede8e2]/70 transition-colors duration-200 appearance-none cursor-pointer'
 
   // Decide which questions to render
-  // formQuestions === undefined → CMS unavailable → use legacy fallback
-  // formQuestions === []        → CMS says: no extra questions
-  // formQuestions.length > 0   → render CMS questions
-  const useLegacy = formQuestions === undefined
+  // formQuestions == null  → CMS unavailable or field not set → use legacy fallback
+  // formQuestions === []   → CMS says: no extra questions
+  // formQuestions.length>0 → render CMS questions
+  // Note: GROQ returns null (not undefined) for unset array fields
+  const useLegacy = formQuestions == null
 
   const questions: FormQuestion[] = useLegacy
     ? FALLBACK_QUESTIONS.map((q) => {
