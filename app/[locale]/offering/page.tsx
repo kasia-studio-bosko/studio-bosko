@@ -7,6 +7,7 @@ import ParallaxImage from '@/components/ParallaxImage'
 import { getOfferingPageContent } from '@/lib/sanity/queries'
 import { urlFor } from '@/lib/sanity/client'
 import { ptToStrings } from '@/lib/sanity/utils'
+import PageNavTheme from '@/components/PageNavTheme'
 
 export async function generateMetadata({
   params,
@@ -155,6 +156,7 @@ export default async function OfferingPage({
 
   return (
     <>
+      <PageNavTheme color="#2d1d17" />
       {/* ─────────────────────────────────────────────────────────────────────
           HERO — headline lower-left + bookshelf portrait upper-right
       ───────────────────────────────────────────────────────────────────── */}

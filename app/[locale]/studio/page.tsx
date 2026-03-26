@@ -7,6 +7,7 @@ import ParallaxImage from '@/components/ParallaxImage'
 import { getStudioPageContent } from '@/lib/sanity/queries'
 import { urlFor } from '@/lib/sanity/client'
 import { ptToStrings } from '@/lib/sanity/utils'
+import PageNavTheme from '@/components/PageNavTheme'
 
 export async function generateMetadata({
   params,
@@ -103,6 +104,7 @@ export default async function StudioPage({
 
   return (
     <>
+      <PageNavTheme color="#2d1d17" />
       {/* ─────────────────────────────────────────────────────────────────────
           HERO — headline lower-left + Kasia portrait upper-right
       ───────────────────────────────────────────────────────────────────── */}

@@ -19,8 +19,8 @@ import ProjectThemeProvider from '@/components/ProjectThemeProvider'
 const THEME_PALETTES: Record<string, { bg: string; text: string; heading: string; nav: string }> = {
   'warm-light':     { bg: '#705305', text: '#ffffff', heading: '#e1cd3c', nav: '#ffffff' },
   'dark-moody':     { bg: '#2d1d17', text: '#ffffff', heading: '#60bf83', nav: '#ffffff' },
-  'earthy-neutral': { bg: '#60bf83', text: '#000000', heading: '#2d1d17', nav: '#000000' },
-  'cool-minimal':   { bg: '#d4cbc0', text: '#705305', heading: '#705305', nav: '#000000' },
+  'earthy-neutral': { bg: '#60bf83', text: '#000000', heading: '#2d1d17', nav: '#2d1d17' },
+  'cool-minimal':   { bg: '#d4cbc0', text: '#705305', heading: '#705305', nav: '#2d1d17' },
 }
 
 /** Slug → theme name, used as a hardcoded fallback so themes work before seeding */

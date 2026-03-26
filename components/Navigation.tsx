@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import LogoSvg from './LogoSvg'
 import { usePathname } from 'next/navigation'
 import LocaleSwitcher from './LocaleSwitcher'
 import { Link } from '@/i18n/navigation'
@@ -72,17 +72,13 @@ export default function Navigation({ locale }: { locale: string }) {
             ))}
           </nav>
 
-          {/* Center: logo */}
+          {/* Center: logo — color driven by navLinkColor from ProjectThemeProvider / PageNavTheme */}
           <div className="flex-1 flex justify-center">
             <Link href="/" aria-label="Studio Bosko — home">
-              <Image
-                src="/logo.svg"
-                alt="Studio Bosko"
-                width={230}
+              <LogoSvg
+                color={navLinkColor ?? '#5fbf83'}
                 height={31}
-                className="h-[31px] w-auto transition-[filter] duration-200"
-                style={navLinkColor && navLinkColor !== '#ffffff' && navLinkColor !== 'rgba(255,255,255,0.9)' ? { filter: 'invert(1)' } : undefined}
-                priority
+                className="transition-[fill] duration-200"
               />
             </Link>
           </div>

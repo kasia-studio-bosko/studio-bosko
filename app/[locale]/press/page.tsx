@@ -5,6 +5,7 @@ import { Link } from '@/i18n/navigation'
 import ScrollReveal from '@/components/ScrollReveal'
 import { getAllPressItems, getPressPageContent, type PressItem } from '@/lib/sanity/queries'
 import { urlFor } from '@/lib/sanity/client'
+import PageNavTheme from '@/components/PageNavTheme'
 
 export async function generateMetadata({
   params,
@@ -100,6 +101,7 @@ export default async function PressPage({
 
   return (
     <>
+      <PageNavTheme color="#2d1d17" />
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="section-spacing" aria-label="Press hero">
         <div className="page-container max-w-3xl">
