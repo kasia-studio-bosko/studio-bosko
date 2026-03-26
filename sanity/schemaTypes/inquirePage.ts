@@ -19,6 +19,7 @@ export const inquirePageSchema = defineType({
 
   groups: [
     { name: 'content',  title: '📝 Content',         default: true },
+    { name: 'media',    title: '🖼️ Media'             },
     { name: 'form',     title: '📋 Form Questions'  },
     { name: 'labels',   title: '🏷️  Contact Labels'  },
     { name: 'seo',      title: '🔍 SEO'              },
@@ -33,6 +34,16 @@ export const inquirePageSchema = defineType({
     defineField({ name: 'subtext_en', title: 'Subtext (EN)', type: 'text', rows: 3, group: 'content' }),
     defineField({ name: 'subtext_de', title: 'Subtext (DE)', type: 'text', rows: 3, group: 'content' }),
     defineField({ name: 'subtext_pl', title: 'Subtext (PL)', type: 'text', rows: 3, group: 'content' }),
+
+    // ── Side image ────────────────────────────────────────────────────────
+    defineField({
+      name: 'sideImage',
+      title: 'Side Image (right column, sticky on desktop)',
+      type: 'image',
+      group: 'media',
+      options: { hotspot: true },
+      fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
+    }),
 
     // ── Dynamic form questions ────────────────────────────────────────────
     defineField({

@@ -288,6 +288,7 @@ export interface StudioPageContent {
   kasiaPhoto2?: SanityImageRef
   studioPhoto1?: SanityImageRef
   studioPhoto2?: SanityImageRef
+  testimonialImage?: SanityImageRef
   yellowtraceQuote?: string
   yellowtraceAttribution?: string
   seoTitle?: string
@@ -334,6 +335,7 @@ export interface FormQuestion {
 export interface InquirePageContent {
   headline?: string
   subtext?: string
+  sideImage?: SanityImageRef
   /** CMS-managed dynamic questions rendered after the fixed contact fields */
   formQuestions?: FormQuestion[]
   /** Override labels for the always-visible contact fields */
@@ -394,6 +396,7 @@ export const getStudioPageContent = cache(async (locale = 'en'): Promise<StudioP
       kasiaPhoto2,
       studioPhoto1,
       studioPhoto2,
+      testimonialImage,
       ${localField('yellowtraceQuote')},
       yellowtraceAttribution,
       ${localField('seoTitle')},
@@ -469,6 +472,7 @@ export const getInquirePageContent = cache(async (locale = 'en'): Promise<Inquir
     `*[_type == "inquirePage" && _id == "inquirePage"][0] {
       ${localField('headline')},
       ${localField('subtext')},
+      sideImage,
       "formQuestions": formQuestions[]{
         fieldId,
         fieldType,

@@ -4,6 +4,7 @@ import Image from 'next/image'
 import InquireForm from '@/components/InquireForm'
 import ScrollReveal from '@/components/ScrollReveal'
 import { getInquirePageContent } from '@/lib/sanity/queries'
+import { urlFor } from '@/lib/sanity/client'
 
 export async function generateMetadata({
   params,
@@ -38,7 +39,7 @@ export async function generateMetadata({
   }
 }
 
-const INQUIRE_IMAGE = 'https://framerusercontent.com/images/BLcEb8zhESV8vCYUNx12PnA9d5c.jpg'
+const FALLBACK_SIDE_IMAGE = 'https://framerusercontent.com/images/BLcEb8zhESV8vCYUNx12PnA9d5c.jpg'
 
 export default async function InquirePage({
   params,
@@ -52,8 +53,11 @@ export default async function InquirePage({
     getInquirePageContent(locale),
   ])
 
-  const heroHeading = sanity?.headline ?? t('heroHeading')
-  const heroBody    = sanity?.subtext  ?? t('heroBody')
+  const heroHeading  = sanity?.headline ?? t('heroHeading')
+  const heroBody     = sanity?.subtext  ?? t('heroBody')
+  const sideImageUrl = sanity?.sideImage?.asset?._ref
+    ? urlFor(sanity.sideImage).width(1280).height(1920).url()
+    : FALLBACK_SIDE_IMAGE
 
   return (
     // Dark background for this page — overrides the layout bg
@@ -89,8 +93,8 @@ export default async function InquirePage({
         <div className="hidden lg:block relative">
           <div className="sticky top-0 h-screen">
             <Image
-              src={INQUIRE_IMAGE}
-              alt="Studio Bosko interior — inquire about your project"
+              src={sideImageUrl}
+              alt={sanity?.sideImage?.alt ?? 'Studio Bosko interior — inquire about your project'}
               fill
               sizes="50vw"
               className="object-cover"

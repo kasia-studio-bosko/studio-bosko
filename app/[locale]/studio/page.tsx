@@ -49,7 +49,7 @@ const FALLBACK_KASIA_PORTRAIT   = 'https://framerusercontent.com/images/R8TMgB8Z
 const FALLBACK_KASIA_STUDIO     = 'https://framerusercontent.com/images/8v65b9JTdh7Lt2d0LE7LfBwg.jpg'
 const FALLBACK_FURNITURE_DETAIL = 'https://framerusercontent.com/images/TmcA1nzDm35cOZWzjts2wkS6kZ0.jpg'
 const FALLBACK_ALTBAU           = 'https://framerusercontent.com/images/5UTLSTSHs0DzqrK1CoNNl85Uro.jpg'
-const FALLBACK_PENTHOUSE        = 'https://framerusercontent.com/images/PHAwXxLNYORjMHEr1SMzbzN9KkM.jpg'
+const FALLBACK_TESTIMONIAL      = 'https://framerusercontent.com/images/PHAwXxLNYORjMHEr1SMzbzN9KkM.jpg'
 
 export default async function StudioPage({
   params,
@@ -96,6 +96,10 @@ export default async function StudioPage({
   const altbauUrl = sanity?.studioPhoto2?.asset?._ref
     ? urlFor(sanity.studioPhoto2).width(747).height(498).url()
     : FALLBACK_ALTBAU
+
+  const testimonialImageUrl = sanity?.testimonialImage?.asset?._ref
+    ? urlFor(sanity.testimonialImage).width(650).height(671).url()
+    : FALLBACK_TESTIMONIAL
 
   return (
     <>
@@ -282,14 +286,14 @@ export default async function StudioPage({
         className="flex flex-col md:flex-row overflow-hidden"
         aria-label="Press testimonial"
       >
-        {/* Left — penthouse image */}
+        {/* Left — testimonial image */}
         <div
           className="relative overflow-hidden bg-[#d4cbc0] w-full md:w-1/2"
           style={{ aspectRatio: '650 / 671' }}
         >
           <Image
-            src={FALLBACK_PENTHOUSE}
-            alt="Penthouse interior — Studio Bosko"
+            src={testimonialImageUrl}
+            alt={sanity?.testimonialImage?.alt ?? 'Studio Bosko interior project'}
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover"

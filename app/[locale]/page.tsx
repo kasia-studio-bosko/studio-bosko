@@ -287,23 +287,20 @@ export default async function HomePage({
           >
             {[0, 1, 2, 3].map((copy) =>
               PRESS_LOGOS.map((logo, i) => (
-                /* Fixed padding on both sides → identical gap between every logo
-                   regardless of each logo's natural width.               */
+                /* inline-block (not inline-flex) so the img's intrinsic
+                   aspect ratio correctly determines its width at height:20px */
                 <span
                   key={`${copy}-${i}`}
-                  className="inline-flex items-center"
-                  style={{ paddingLeft: '72px', paddingRight: '72px' }}
+                  style={{ display: 'inline-block', paddingLeft: '72px', paddingRight: '72px' }}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={logo.src}
                     alt={logo.name}
                     style={{
-                      display: 'inline-block',
+                      display: 'block',
                       height: '20px',
                       width: 'auto',
-                      maxHeight: '20px',
-                      flexShrink: 0,
                       filter: 'brightness(0)',
                     }}
                   />

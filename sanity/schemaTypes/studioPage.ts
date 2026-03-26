@@ -96,6 +96,14 @@ export const studioPageSchema = defineType({
       options: { hotspot: true },
       fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
     }),
+    defineField({
+      name: 'testimonialImage',
+      title: 'Testimonial Image (left side of Yellowtrace quote block)',
+      type: 'image',
+      group: 'media',
+      options: { hotspot: true },
+      fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
+    }),
 
     // ── Yellowtrace Quote (testimonial) ───────────────────────────────────
     defineField({ name: 'yellowtraceQuote_en', title: 'Yellowtrace Quote',    type: 'text', rows: 4, group: 'en' }),
