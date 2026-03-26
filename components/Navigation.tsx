@@ -78,9 +78,9 @@ export default function Navigation({ locale }: { locale: string }) {
               <Image
                 src="/logo.svg"
                 alt="Studio Bosko"
-                width={192}
-                height={26}
-                className="h-[26px] w-auto transition-[filter] duration-200"
+                width={230}
+                height={31}
+                className="h-[31px] w-auto transition-[filter] duration-200"
                 style={navLinkColor && navLinkColor !== '#ffffff' && navLinkColor !== 'rgba(255,255,255,0.9)' ? { filter: 'invert(1)' } : undefined}
                 priority
               />
