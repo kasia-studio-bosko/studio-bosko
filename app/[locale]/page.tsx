@@ -137,7 +137,7 @@ export default async function HomePage({
           slug: p.slug.current,
           title: p.title,
           location: p.location,
-          coverImage: urlFor(imgRef).width(1920).height(1080).url(),
+          coverImage: urlFor(imgRef).auto('format').url(),
           coverImageAlt: p.featuredImage?.alt ?? p.coverImage?.alt ?? p.title,
         }
       })
@@ -292,18 +292,22 @@ export default async function HomePage({
           >
             {[0, 1, 2, 3].map((copy) =>
               PRESS_LOGOS.map((logo, i) => (
-                /* inline-block (not inline-flex) so the img's intrinsic
-                   aspect ratio correctly determines its width at height:20px */
+                /*
+                 * IMPORTANT: span must be inline-flex so the <img> becomes a
+                 * flex item. Flex items on replaced elements (img) size from
+                 * their intrinsic ratio, giving correct width at height:20px.
+                 * inline-block / block spans cause width:auto → 0 on the img.
+                 */
                 <span
                   key={`${copy}-${i}`}
-                  style={{ display: 'inline-block', paddingLeft: '72px', paddingRight: '72px' }}
+                  className="inline-flex items-center"
+                  style={{ paddingLeft: '72px', paddingRight: '72px' }}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={logo.src}
                     alt={logo.name}
                     style={{
-                      display: 'block',
                       height: '20px',
                       width: 'auto',
                       filter: 'brightness(0)',
