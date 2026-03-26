@@ -1,11 +1,13 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
+import { useRouter, usePathname } from 'next/navigation'
 import LogoSvg from './LogoSvg'
-import { usePathname } from 'next/navigation'
 import LocaleSwitcher from './LocaleSwitcher'
 import { Link } from '@/i18n/navigation'
+import { routing } from '@/i18n/routing'
+import { LOCALE_COOKIE, LOCALE_COOKIE_MAX_AGE } from '@/lib/locale-cookie'
 
 const navItems = [
   { key: 'projects', href: '/projects' as const },
@@ -17,8 +19,33 @@ const navItems = [
 
 export default function Navigation({ locale }: { locale: string }) {
   const t = useTranslations('nav')
+  const currentLocale = useLocale()
+  const router = useRouter()
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
+
+  const handleLocale = useCallback((nextLocale: string) => {
+    document.cookie = [
+      `${LOCALE_COOKIE}=${nextLocale}`,
+      `path=/`,
+      `max-age=${LOCALE_COOKIE_MAX_AGE}`,
+      `SameSite=Lax`,
+    ].join('; ')
+
+    let basePath = pathname
+    for (const loc of routing.locales) {
+      if (loc !== routing.defaultLocale && pathname.startsWith(`/${loc}`)) {
+        basePath = pathname.slice(`/${loc}`.length) || '/'
+        break
+      }
+    }
+
+    if (nextLocale === routing.defaultLocale) {
+      router.push(basePath)
+    } else {
+      router.push(`/${nextLocale}${basePath}`)
+    }
+  }, [pathname, router])
   // null = use default white; string = colour from project theme provider
   const [navLinkColor, setNavLinkColor] = useState<string | null>(null)
 
@@ -85,7 +112,10 @@ export default function Navigation({ locale }: { locale: string }) {
 
           {/* Right: locale switcher + mobile hamburger */}
           <div className="flex items-center gap-4 w-auto md:w-[35%] justify-end">
-            <LocaleSwitcher />
+            {/* Language switcher — desktop only */}
+            <span className="hidden md:flex items-center">
+              <LocaleSwitcher />
+            </span>
 
             {/* Mobile menu toggle */}
             <button
@@ -127,6 +157,30 @@ export default function Navigation({ locale }: { locale: string }) {
               </Link>
             ))}
           </nav>
+
+          {/* Language switcher — mobile overlay */}
+          <div className="mt-auto px-8 pb-12 flex items-center gap-4">
+            {routing.locales.map((loc, i) => (
+              <span key={loc} className="flex items-center gap-4">
+                <button
+                  onClick={() => { handleLocale(loc); setMenuOpen(false) }}
+                  className={`font-cadiz text-sm tracking-widest uppercase transition-colors duration-200 ${
+                    currentLocale === loc
+                      ? 'text-white font-semibold'
+                      : 'text-white/40 hover:text-white/70'
+                  }`}
+                  aria-label={`Switch to ${loc.toUpperCase()}`}
+                  aria-current={currentLocale === loc ? 'true' : undefined}
+                  disabled={currentLocale === loc}
+                >
+                  {loc.toUpperCase()}
+                </button>
+                {i < routing.locales.length - 1 && (
+                  <span className="text-white/20 text-xs">·</span>
+                )}
+              </span>
+            ))}
+          </div>
         </div>
       )}
     </>
