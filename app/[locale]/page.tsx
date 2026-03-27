@@ -85,7 +85,6 @@ const FALLBACK_TESTIMONIAL_IMAGE =
  * Rendered as plain <img> tags (not next/image) so height:20px + width:auto
  * work without fighting Next.js dimension constraints.
  * filter:brightness(0) renders all logos as dark ink on the beige strip.
- * Note: logo-est.png is actually a WebP file — referenced as .webp.
  */
 const PRESS_LOGOS: { name: string; src: string }[] = [
   { name: 'Architectural Digest logo',             src: '/logos/logo-ad.png'              },
@@ -93,7 +92,7 @@ const PRESS_LOGOS: { name: string; src: string }[] = [
   { name: 'Elle Decoration magazine logo',         src: '/logos/logo-elle-decoration.png' },
   { name: 'Yellowtrace design publication logo',   src: '/logos/logo-yellowtrace.png'     },
   { name: 'Domino home magazine logo',             src: '/logos/logo-domino.png'          },
-  { name: 'Est Living design magazine logo',       src: '/logos/logo-est.webp'            },
+  { name: 'Est Living design magazine logo',       src: '/logos/logo-est.png'             },
   { name: 'Livingetc interior design magazine logo', src: '/logos/logo-livingetc.png'     },
   { name: 'Homes and Gardens magazine logo',       src: '/logos/logo-homes-gardens.png'   },
 ]
