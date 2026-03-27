@@ -5,6 +5,14 @@ import { useTranslations } from 'next-intl'
 import type { FormQuestion } from '@/lib/sanity/queries'
 
 /**
+ * fieldIds that are always rendered as hardcoded contact fields above the
+ * dynamic question list.  Any CMS question whose fieldId matches one of these
+ * (case-insensitive) is silently skipped to prevent duplicates when Sanity
+ * Studio has those fields in the formQuestions array.
+ */
+const RESERVED_FIELD_IDS = new Set(['firstname', 'lastname', 'email'])
+
+/**
  * Hardcoded fallback questions — rendered only when Sanity is unreachable
  * and no CMS questions are provided.  Mirrors the original static form.
  */
@@ -104,7 +112,7 @@ export default function InquireForm({
     ? (legacyBudgetOptions ?? (t.raw('budgetOptions') as string[]))
     : ([] as string[])
 
-  const questions: FormQuestion[] = useLegacy
+  const questions: FormQuestion[] = (useLegacy
     ? FALLBACK_QUESTIONS.map((q) => {
         // Hydrate labels + options from translation keys for the legacy fallback
         if (q.fieldId === 'phone')       return { ...q, label: t('formPhone') }
@@ -123,6 +131,8 @@ export default function InquireForm({
         return q
       })
     : (formQuestions ?? [])
+  // Strip any CMS question that duplicates a hardcoded contact field
+  ).filter((q) => !RESERVED_FIELD_IDS.has(q.fieldId.toLowerCase()))
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6" noValidate>
