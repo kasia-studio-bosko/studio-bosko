@@ -84,15 +84,15 @@ const PROJECT_TYPES_DE = [
 
 const PROJECT_TYPES_PL = [
   {
-    title: 'Złożona renowacja',
+    title: 'Kapitalny remont z nadzorem',
     body: 'Dom jest często Twoim najcenniejszym dobrem. Wiemy, jak uwolnić potencjał każdej nieruchomości i zwiększyć jej wartość dla Ciebie i Twojej rodziny. Przez przemyślane planowanie architektoniczne, indywidualną kurację i profesjonalną realizację nasze wnętrza są zarówno funkcjonalne, jak i wysokiej jakości. Dzięki doświadczeniu, nastawieniu na rozwiązania i zaufanej międzynarodowej sieci rzemieślników jesteśmy gotowi realizować projekty w całej Europie.',
   },
   {
-    title: 'Modernizacja wnętrza',
+    title: 'Metamorfoza wnętrza',
     body: 'Od doboru materiałów po finalny styling — wnosimy taktylną energię do przestrzeni przez emocjonalne zestawienia faktur i radosne palety. Nasze doświadczenie pozwala na precyzyjne określenie zakresu i decyzje, które pomagają uniknąć kosztownych błędów. Czasem przeprojektowanie części przestrzeni robi ogromną różnicę. Dodajemy osobowość do już dobrej substancji — żeby miejsce mogło być niepowtarzalnie Twoje.',
   },
   {
-    title: 'Pełna kuration',
+    title: 'Kompleksowa aranżacja',
     body: 'Dobieramy i pozyskujemy wszystko w Twoim imieniu — od sofy, przez oświetlenie, po dzieła sztuki i elementy dekoracyjne. Może to oznaczać połączenie wybranych istniejących przedmiotów z nowymi znaleziskami zamawianymi lokalnie lub pozyskiwanymi globalnie, tworząc unikalne kompozycje w całym domu. Pracując w nowo wybudowanych lub nabytych przestrzeniach, przygotowujemy kompletny schemat aranżacji i dekoracji oparty na zdefiniowanym kierunku twórczym i zajmujemy się całą realizacją zakupów.',
   },
 ]
