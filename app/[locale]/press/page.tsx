@@ -7,6 +7,10 @@ import { getAllPressItems, getPressPageContent, type PressItem } from '@/lib/san
 import { urlFor } from '@/lib/sanity/client'
 import PageNavTheme from '@/components/PageNavTheme'
 
+// ISR: re-fetch Sanity press data every hour so cover images and
+// new press entries appear without a full redeploy.
+export const revalidate = 3600
+
 export async function generateMetadata({
   params,
 }: {

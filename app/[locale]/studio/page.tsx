@@ -9,6 +9,10 @@ import { urlFor } from '@/lib/sanity/client'
 import { ptToStrings } from '@/lib/sanity/utils'
 import PageNavTheme from '@/components/PageNavTheme'
 
+// ISR: re-fetch Sanity studio page data every hour so image or copy
+// changes in the CMS appear without a full redeploy.
+export const revalidate = 3600
+
 export async function generateMetadata({
   params,
 }: {

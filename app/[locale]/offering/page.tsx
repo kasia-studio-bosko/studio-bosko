@@ -9,6 +9,9 @@ import { urlFor } from '@/lib/sanity/client'
 import { ptToStrings } from '@/lib/sanity/utils'
 import PageNavTheme from '@/components/PageNavTheme'
 
+// ISR: re-fetch Sanity offering page data every hour.
+export const revalidate = 3600
+
 export async function generateMetadata({
   params,
 }: {

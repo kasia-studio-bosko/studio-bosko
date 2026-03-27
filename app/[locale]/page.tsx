@@ -7,6 +7,9 @@ import { urlFor } from '@/lib/sanity/client'
 import HeroCarousel, { type CarouselSlide } from '@/components/HeroCarousel'
 import PageNavTheme from '@/components/PageNavTheme'
 
+// ISR: re-fetch Sanity homepage data (carousel, testimonial, copy) every hour.
+export const revalidate = 3600
+
 export async function generateMetadata({
   params,
 }: {
