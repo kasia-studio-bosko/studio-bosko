@@ -55,17 +55,17 @@ export default async function Footer({ locale }: { locale: string }) {
 
       {/* ── Wordmark — edge-to-edge, bottom flush ────────────────── */}
       {/*
-        viewBox "40 45 2830 310" crops the SVG's internal whitespace so the
-        letterforms sit flush with the left/right edges of the footer.
-        (Full canvas is "0 0 2948 397" but the S starts at x≈56 and the
-        last O ends at x≈2831, leaving ~7% dead space on left and ~4% on right.)
-        w-full h-auto drives fluid width with the correct aspect ratio.
-        leading-none + block eliminate any line-height gap below the SVG.
+        viewBox crops the SVG canvas to the actual letterform bounds.
+        Tracing the outer O path: 2 cubic bezier segments place the
+        rightmost vertex at x≈2891 (not ~2831 as the inner O sub-path
+        suggests). viewBox right edge = 40+2870 = 2910, leaving ~9px
+        breathing at 1440 px — symmetric with the ~8px on the left.
+        Full canvas: "0 0 2948 397".  S leftmost stroke: x≈56. O right: x≈2891.
       */}
       <Link href="/" aria-label="Studio Bosko — home" className="block leading-none">
         <LogoSvg
           color="#5fbf83"
-          viewBox="40 45 2830 310"
+          viewBox="40 45 2870 310"
           className="w-full h-auto block"
         />
       </Link>
