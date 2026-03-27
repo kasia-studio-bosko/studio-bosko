@@ -159,8 +159,8 @@ export default async function HomePage({
 
   return (
     <>
-      {/* Mint green nav over the dark hero carousel */}
-      <PageNavTheme color="#60bf83" />
+      {/* White nav links, mint green logo — over the dark hero carousel */}
+      <PageNavTheme color="#ffffff" logoColor="#60bf83" />
 
       {/* ── 1. Full-bleed hero carousel ────────────────────────────────────── */}
       <section

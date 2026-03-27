@@ -46,12 +46,15 @@ export default function Navigation({ locale }: { locale: string }) {
       router.push(`/${nextLocale}${basePath}`)
     }
   }, [pathname, router])
-  // null = use default white; string = colour from project theme provider
+  // null = use component defaults; string = colour from ProjectThemeProvider / PageNavTheme
   const [navLinkColor, setNavLinkColor] = useState<string | null>(null)
+  const [navLogoColor, setNavLogoColor] = useState<string | null>(null)
 
   const readNavColor = useCallback(() => {
-    const v = document.documentElement.style.getPropertyValue('--nav-link-color').trim()
-    setNavLinkColor(v || null)
+    const link = document.documentElement.style.getPropertyValue('--nav-link-color').trim()
+    const logo = document.documentElement.style.getPropertyValue('--nav-logo-color').trim()
+    setNavLinkColor(link || null)
+    setNavLogoColor(logo || null)
   }, [])
 
   useEffect(() => {
@@ -99,11 +102,11 @@ export default function Navigation({ locale }: { locale: string }) {
             ))}
           </nav>
 
-          {/* Center: logo — color driven by navLinkColor from ProjectThemeProvider / PageNavTheme */}
+          {/* Center: logo — logoColor takes priority, then linkColor, then brand mint */}
           <div className="flex-1 flex justify-center">
             <Link href="/" aria-label="Studio Bosko — home">
               <LogoSvg
-                color={navLinkColor ?? '#5fbf83'}
+                color={navLogoColor ?? navLinkColor ?? '#5fbf83'}
                 height={31}
                 className="transition-[fill] duration-200"
               />
