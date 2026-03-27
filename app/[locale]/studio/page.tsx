@@ -118,7 +118,7 @@ export default async function StudioPage({
             className="relative"
             style={{ minHeight: 'min(calc(44vw * 738 / 578), 580px)' }}
           >
-            {/* Left — label + headline, pushed to the bottom */}
+            {/* Left — headline, pushed to the bottom */}
             <div
               className="flex flex-col justify-end pr-8 md:pr-16"
               style={{
@@ -126,9 +126,6 @@ export default async function StudioPage({
                 minHeight: 'min(calc(44vw * 738 / 578), 580px)',
               }}
             >
-              <ScrollReveal>
-                <p className="label-serif mb-5">Studio Bosko</p>
-              </ScrollReveal>
               <ScrollReveal delay={80}>
                 <h1
                   className="font-signifier font-light text-balance text-[#2d1d17]"

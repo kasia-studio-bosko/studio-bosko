@@ -65,9 +65,6 @@ export default async function InquirePage({
       <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
         {/* Left: form */}
         <div className="flex flex-col justify-center page-container lg:px-[var(--page-padding-x)] py-16 lg:py-20">
-          <ScrollReveal>
-            <p className="label-serif text-[#ede8e2]/50 mb-4">Studio Bosko</p>
-          </ScrollReveal>
           <ScrollReveal delay={100}>
             <h1 className="font-signifier font-light text-[30px] leading-[42px] text-balance mb-4" style={{ letterSpacing: '-0.2px' }}>
               {heroHeading}

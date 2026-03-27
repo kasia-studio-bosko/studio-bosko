@@ -93,9 +93,6 @@ export default async function PressPage({
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="section-spacing" aria-label="Press hero">
         <div className="page-container max-w-3xl">
-          <ScrollReveal>
-            <p className="label-serif mb-4">Studio Bosko</p>
-          </ScrollReveal>
           <ScrollReveal delay={100}>
             <h1 className="font-signifier font-light text-[30px] leading-[42px] text-balance mb-8" style={{ letterSpacing: '-0.2px' }}>
               {heroHeading}

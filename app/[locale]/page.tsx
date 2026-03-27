@@ -111,10 +111,10 @@ export default async function HomePage({
     getHomepageContent(locale),
   ])
 
-  // Content — the CMS has heroHeadline/heroBody stored in swapped fields;
-  // map so the H1 always gets the short tagline and the paragraph gets the longer copy.
-  const introH1        = sanity?.heroBody     ?? t('introH1')    // short: "Interior design studio based in…"
-  const introBody      = sanity?.heroHeadline ?? t('introBody')  // long:  "Personality-driven interiors…"
+  // Always use translation values for H1 and body — Sanity CMS fields are ignored here
+  // to ensure the correct short/long split regardless of how CMS content is stored.
+  const introH1        = t('introH1')    // short: "Interior design studio based in Berlin and working across Europe."
+  const introBody      = t('introBody')  // long:  "Personality-driven interiors layered with character…"
   const offeringBodyFull = sanity?.offeringBody ?? t('offeringBodyFull')
 
   // Testimonial — Sanity first, translation fallback
@@ -202,9 +202,10 @@ export default async function HomePage({
           <p className="font-cadiz text-[11px] tracking-[0.2em] uppercase text-[#2d1d17]/50 mb-3">
             {t('selectedWorkSubheading')}
           </p>
-          <h2 className="font-signifier font-normal text-[50px] text-[#2d1d17] mb-6 leading-[60px]">
+          {/* Presentational only — aria-hidden parent means this is invisible to screen readers */}
+          <p className="font-signifier font-normal text-[50px] text-[#2d1d17] mb-6 leading-[60px]">
             {sanity?.selectedWorkLabel ?? t('selectedWork')}
-          </h2>
+          </p>
           <Link
             href="/projects"
             className="font-cadiz text-sm text-[#2d1d17]/60 hover:text-[#2d1d17] transition-colors duration-200"
