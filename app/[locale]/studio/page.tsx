@@ -118,36 +118,14 @@ export default async function StudioPage({
         aria-label="Studio hero"
       >
         <div className="page-container">
+          {/* Mobile: portrait above text, stacked; Desktop: portrait absolute top-right */}
           <div
-            className="relative"
-            style={{ minHeight: 'min(calc(44vw * 738 / 578), 580px)' }}
+            className="relative md:min-h-[min(calc(44vw*738/578),580px)]"
           >
-            {/* Left — headline, pushed to the bottom */}
+            {/* Portrait — full-width in-flow on mobile, absolute top-right on desktop */}
             <div
-              className="flex flex-col justify-end pr-8 md:pr-16"
-              style={{
-                width: '53%',
-                minHeight: 'min(calc(44vw * 738 / 578), 580px)',
-              }}
-            >
-              <ScrollReveal delay={80}>
-                <h1
-                  className="font-signifier font-light text-balance text-[#2d1d17]"
-                  style={{
-                    fontSize: 'clamp(28px, 3.2vw, 46px)',
-                    lineHeight: 1.18,
-                    letterSpacing: '-0.3px',
-                  }}
-                >
-                  {headline}
-                </h1>
-              </ScrollReveal>
-            </div>
-
-            {/* Right — Kasia portrait, top-aligned */}
-            <div
-              className="absolute top-0 right-0 overflow-hidden bg-[#d4cbc0]"
-              style={{ width: '44%', aspectRatio: '578 / 738' }}
+              className="relative w-full mb-8 overflow-hidden bg-[#d4cbc0] md:absolute md:top-0 md:right-0 md:w-[44%] md:mb-0"
+              style={{ aspectRatio: '578 / 738' }}
             >
               <Image
                 src={kasiaPortraitUrl}
@@ -159,6 +137,24 @@ export default async function StudioPage({
                 priority
               />
             </div>
+
+            {/* Headline — below portrait on mobile, bottom-left on desktop */}
+            <div
+              className="flex flex-col md:justify-end md:pr-16 md:w-[53%] md:min-h-[min(calc(44vw*738/578),580px)]"
+            >
+              <ScrollReveal delay={80}>
+                <h1
+                  className="font-signifier font-light text-balance text-[#2d1d17]"
+                  style={{
+                    fontSize: 'clamp(24px, 3.2vw, 46px)',
+                    lineHeight: 1.18,
+                    letterSpacing: '-0.3px',
+                  }}
+                >
+                  {headline}
+                </h1>
+              </ScrollReveal>
+            </div>
           </div>
         </div>
       </section>
@@ -167,8 +163,7 @@ export default async function StudioPage({
           FULL-BLEED STUDIO PHOTO — 400px tall, centred crop, parallax
       ───────────────────────────────────────────────────────────────────── */}
       <div
-        className="relative w-full overflow-hidden bg-[#d4cbc0] mt-10 md:mt-14"
-        style={{ height: '400px' }}
+        className="relative w-full overflow-hidden bg-[#d4cbc0] mt-10 md:mt-14 h-[240px] md:h-[400px]"
       >
         <ParallaxImage
           src={kasiaStudioUrl}

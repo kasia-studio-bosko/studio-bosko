@@ -279,8 +279,8 @@ export default async function ProjectPage({ params }: Props) {
 
       {/* ── Full-bleed cover image ────────────────────────────────────────── */}
       <section
-        className="relative w-full overflow-hidden"
-        style={{ height: 'min(85vh, 900px)', backgroundColor: theme.bg }}
+        className="relative w-full overflow-hidden aspect-[3/2] md:aspect-auto md:h-[85vh] md:max-h-[900px]"
+        style={{ backgroundColor: theme.bg }}
         aria-label="Project hero"
       >
         <Image
@@ -406,7 +406,7 @@ export default async function ProjectPage({ params }: Props) {
           aria-label="Project gallery"
         >
           {/* Large breathing room between rows — the bg colour is the design element */}
-          <div className="flex flex-col" style={{ gap: 'clamp(80px, 12vw, 180px)' }}>
+          <div className="flex flex-col" style={{ gap: 'clamp(48px, 10vw, 180px)' }}>
 
             {galleryRows.map((row, ri) => {
 
@@ -441,7 +441,7 @@ export default async function ProjectPage({ params }: Props) {
                 const src = img.asset._ref ? urlFor(img).auto('format').url() : heroSrc
                 return (
                   <ScrollReveal key={ri} delay={60}>
-                    <div style={{ paddingLeft: 0, paddingRight: '38%' }}>
+                    <div className="md:pr-[38%]">
                       <div className="relative w-full overflow-hidden"
                         style={{ aspectRatio: `${w} / ${h}`, backgroundColor: theme.bg }}>
                         <Image src={src} alt={img.alt ?? `${data.title} — photo ${ri + 1}`}
@@ -464,7 +464,7 @@ export default async function ProjectPage({ params }: Props) {
                 const src = img.asset._ref ? urlFor(img).auto('format').url() : heroSrc
                 return (
                   <ScrollReveal key={ri} delay={60}>
-                    <div style={{ paddingLeft: '38%', paddingRight: 0 }}>
+                    <div className="md:pl-[38%]">
                       <div className="relative w-full overflow-hidden"
                         style={{ aspectRatio: `${w} / ${h}`, backgroundColor: theme.bg }}>
                         <Image src={src} alt={img.alt ?? `${data.title} — photo ${ri + 1}`}

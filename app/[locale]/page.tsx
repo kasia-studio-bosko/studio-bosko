@@ -182,10 +182,10 @@ export default async function HomePage({
       <section className="bg-[#705305] py-20 md:py-28 w-full" aria-label="Introduction">
         <div className="max-w-[1440px] mx-auto px-8 md:px-16">
           <div className="md:w-[58%]">
-            <h1 className="font-signifier font-light text-[30px] leading-[42px] text-[#e1cd3c] mb-6" style={{ letterSpacing: '-0.2px' }}>
+            <h1 className="font-signifier font-light text-[22px] leading-[32px] md:text-[30px] md:leading-[42px] text-[#e1cd3c] mb-6" style={{ letterSpacing: '-0.2px' }}>
               {introH1}
             </h1>
-            <p className="font-signifier font-light text-[30px] leading-[42px] text-[#e1cd3c]/80 mb-10" style={{ letterSpacing: '-0.6px' }}>
+            <p className="font-signifier font-light text-[18px] leading-[28px] md:text-[30px] md:leading-[42px] text-[#e1cd3c]/80 mb-10" style={{ letterSpacing: '-0.6px' }}>
               {introBody}
             </p>
             <Link
@@ -224,7 +224,7 @@ export default async function HomePage({
             <p className="font-cadiz text-[11px] tracking-[0.2em] uppercase text-[#2d1d17]/50 mb-3">
               {t('selectedWorkSubheading')}
             </p>
-            <h2 className="font-signifier font-normal text-[50px] text-[#2d1d17] mb-4 leading-[60px]">
+            <h2 className="font-signifier font-normal text-[32px] leading-[40px] md:text-[50px] md:leading-[60px] text-[#2d1d17] mb-4">
               {sanity?.selectedWorkLabel ?? t('selectedWork')}
             </h2>
             <Link
@@ -239,8 +239,7 @@ export default async function HomePage({
             <Link
               key={project.slug}
               href={{ pathname: '/project/[slug]', params: { slug: project.slug } }}
-              className="block relative group overflow-hidden"
-              style={{ height: '82vh' }}
+              className="block relative group overflow-hidden aspect-[3/2] md:aspect-auto md:h-[82vh]"
             >
               <Image
                 src={project.coverImage}
@@ -271,7 +270,7 @@ export default async function HomePage({
         aria-label="Offering"
       >
         <div className="max-w-[1440px] mx-auto">
-          <h2 className="font-signifier font-normal text-[50px] leading-[60px] text-[#e1cd3c] mb-8">
+          <h2 className="font-signifier font-normal text-[30px] leading-[38px] md:text-[50px] md:leading-[60px] text-[#e1cd3c] mb-8">
             {sanity?.offeringHeadline ?? 'Offering'}
           </h2>
           <p className="font-signifier font-light text-[20px] md:text-[24px] leading-relaxed text-[#e1cd3c]/80 max-w-3xl mb-10">
@@ -340,7 +339,7 @@ export default async function HomePage({
 
         {/* Right: quote */}
         <div className="w-full md:w-1/2 bg-[#60bf83] flex flex-col justify-center px-10 md:px-14 lg:px-20 py-16">
-          <blockquote className="font-signifier font-light text-[30px] leading-[42px] text-white mb-8" style={{ letterSpacing: '-0.6px' }}>
+          <blockquote className="font-signifier font-light text-[22px] leading-[32px] md:text-[30px] md:leading-[42px] text-white mb-8" style={{ letterSpacing: '-0.6px' }}>
             {testimonialQuote}
           </blockquote>
           <p className="font-cadiz text-sm text-white/70 tracking-wide">
@@ -355,7 +354,7 @@ export default async function HomePage({
         aria-label="Start a project"
       >
         <div className="max-w-[1440px] mx-auto">
-          <p className="font-signifier font-light text-[30px] leading-[42px] text-[#e1cd3c] max-w-2xl mb-10" style={{ letterSpacing: '-0.6px' }}>
+          <p className="font-signifier font-light text-[22px] leading-[32px] md:text-[30px] md:leading-[42px] text-[#e1cd3c] max-w-2xl mb-10" style={{ letterSpacing: '-0.6px' }}>
             {ctaBody}
           </p>
           <Link
