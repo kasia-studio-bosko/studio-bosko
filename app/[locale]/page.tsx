@@ -94,8 +94,9 @@ const PRESS_LOGOS: { name: string; src: string }[] = [
   { name: 'Domino home magazine logo',             src: '/logos/logo-domino.png'          },
   { name: 'Est Living design magazine logo',       src: '/logos/logo-est.png'             },
   { name: 'Livingetc interior design magazine logo', src: '/logos/logo-livingetc.png'     },
-  { name: 'Homes and Gardens magazine logo',       src: '/logos/logo-homes-gardens.png'   },
   { name: 'BauNetz architecture publication logo', src: '/logos/logo-BauNetz.png'         },
+  // Homes & Gardens removed — logo-homes-gardens.png is 600×600 (square icon, not a wordmark).
+  // Replace the file with a horizontal wordmark PNG and re-add this entry.
 ]
 
 export default async function HomePage({
