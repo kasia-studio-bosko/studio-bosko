@@ -1,6 +1,6 @@
-import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
+import LogoSvg from './LogoSvg'
 
 export default async function Footer({ locale }: { locale: string }) {
   const tNav = await getTranslations({ locale, namespace: 'nav' })
@@ -55,20 +55,18 @@ export default async function Footer({ locale }: { locale: string }) {
 
       {/* ── Wordmark — edge-to-edge, bottom flush ────────────────── */}
       {/*
-        No horizontal or bottom padding: left/right/bottom edges of the
-        logo align exactly with the viewport edges.
-        w-full + h-auto scales the SVG proportionally at every breakpoint.
-        block removes the default inline line-height gap beneath the image.
-        width/height match the SVG viewBox (2948 × 397) for correct aspect ratio.
+        viewBox "40 45 2830 310" crops the SVG's internal whitespace so the
+        letterforms sit flush with the left/right edges of the footer.
+        (Full canvas is "0 0 2948 397" but the S starts at x≈56 and the
+        last O ends at x≈2831, leaving ~7% dead space on left and ~4% on right.)
+        w-full h-auto drives fluid width with the correct aspect ratio.
+        leading-none + block eliminate any line-height gap below the SVG.
       */}
-      <Link href="/" aria-label="Studio Bosko — home" className="block">
-        <Image
-          src="/logo.svg"
-          alt="Studio Bosko"
-          width={2948}
-          height={397}
+      <Link href="/" aria-label="Studio Bosko — home" className="block leading-none">
+        <LogoSvg
+          color="#5fbf83"
+          viewBox="40 45 2830 310"
           className="w-full h-auto block"
-          priority={false}
         />
       </Link>
     </footer>

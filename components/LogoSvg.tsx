@@ -1,24 +1,36 @@
 /**
  * LogoSvg — inline SVG so `fill` colour can be set precisely via prop.
- * Using <Image src="/logo.svg"> only allows CSS filter hacks which give
- * wrong results on the green (#5fbf83) source SVG.
+ *
+ * height prop (nav usage):  pass a px number → inline style controls size.
+ * No height prop (footer):  omit it and drive sizing via className (w-full h-auto).
+ *
+ * viewBox prop lets callers crop the SVG's internal whitespace:
+ *   default "0 0 2948.03 396.85" — full canvas (nav)
+ *   "40 45 2830 310"              — crops to letterform edges (footer wordmark)
  */
 export default function LogoSvg({
   color = '#5fbf83',
   className = '',
-  height = 31,
+  height,
+  viewBox = '0 0 2948.03 396.85',
 }: {
   color?: string
   className?: string
+  /** Explicit px height for fixed-size usage (nav). Omit for fluid CSS sizing. */
   height?: number
+  viewBox?: string
 }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 2948.03 396.85"
+      viewBox={viewBox}
       aria-label="Studio Bosko"
       role="img"
-      style={{ height, width: 'auto', fill: color, display: 'block' }}
+      style={{
+        ...(height !== undefined ? { height, width: 'auto' } : {}),
+        fill: color,
+        display: 'block',
+      }}
       className={className}
     >
       <path d="M219.62,66.04l3.11,62.16h-4.27c-24.86-37.69-42.73-51.29-66.82-51.29s-39.24,16.32-39.24,38.85c0,59.44,115.78,50.89,115.78,137.54,0,48.95-41.57,85.08-97.52,85.08-19.81,0-46.24-4.66-67.22-10.88l-6.6-81.59h5.44c21.37,41.19,40.02,71.88,71.1,71.88,25.65,0,46.23-20.98,46.23-47.79,0-61-113.83-49.73-113.83-135.59,0-47.79,36.91-76.93,88.19-76.93,19.03,0,41.57,3.11,65.66,8.55Z"/>
