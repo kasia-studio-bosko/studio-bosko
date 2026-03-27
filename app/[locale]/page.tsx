@@ -82,19 +82,19 @@ const FALLBACK_TESTIMONIAL_IMAGE =
 
 /**
  * Only publications that have a logo file in /public/logos/.
- * Rendered as plain <img> tags (not next/image) so height:20px + width:auto
- * work without fighting Next.js dimension constraints.
+ * Rendered as plain <img> tags so height + width:auto work without Next.js constraints.
  * filter:brightness(0) renders all logos as dark ink on the beige strip.
+ * height defaults to 20px; override per logo when the file has extra padding.
  */
-const PRESS_LOGOS: { name: string; src: string }[] = [
-  { name: 'Architectural Digest logo',             src: '/logos/logo-ad.png'              },
-  { name: 'Vogue magazine logo',                   src: '/logos/logo-vogue.png'           },
-  { name: 'Elle Decoration magazine logo',         src: '/logos/logo-elle-decoration.png' },
-  { name: 'Yellowtrace design publication logo',   src: '/logos/logo-yellowtrace.png'     },
-  { name: 'Domino home magazine logo',             src: '/logos/logo-domino.png'          },
-  { name: 'Est Living design magazine logo',       src: '/logos/logo-est.png'             },
-  { name: 'Livingetc interior design magazine logo', src: '/logos/logo-livingetc.png'     },
-  { name: 'BauNetz architecture publication logo', src: '/logos/logo-BauNetz.png'         },
+const PRESS_LOGOS: { name: string; src: string; height?: number }[] = [
+  { name: 'Architectural Digest logo',               src: '/logos/logo-ad.png'              },
+  { name: 'Vogue magazine logo',                     src: '/logos/logo-vogue.png'           },
+  { name: 'Elle Decoration magazine logo',           src: '/logos/logo-elle-decoration.png' },
+  { name: 'Yellowtrace design publication logo',     src: '/logos/logo-yellowtrace.png'     },
+  { name: 'Domino home magazine logo',               src: '/logos/logo-domino.png'          },
+  { name: 'Est Living design magazine logo',         src: '/logos/logo-est.png'             },
+  { name: 'Livingetc interior design magazine logo', src: '/logos/logo-livingetc.png'       },
+  { name: 'BauNetz architecture publication logo',   src: '/logos/logo-BauNetz.png', height: 32 },
   // Homes & Gardens removed — logo-homes-gardens.png is 600×600 (square icon, not a wordmark).
   // Replace the file with a horizontal wordmark PNG and re-add this entry.
 ]
@@ -308,7 +308,7 @@ export default async function HomePage({
                 <img
                   src={logo.src}
                   alt={logo.name}
-                  style={{ height: '20px', width: 'auto', filter: 'brightness(0)', display: 'block' }}
+                  style={{ height: `${logo.height ?? 20}px`, width: 'auto', filter: 'brightness(0)', display: 'block' }}
                 />
               </span>
             ))
