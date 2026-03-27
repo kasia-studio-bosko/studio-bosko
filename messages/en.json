@@ -146,12 +146,7 @@
     "heroBody": "Studio Bosko has been named AD100 for 2025 and featured in print and online across international publications and platforms. Browse our archive of stories and features.",
     "featuredIn": "Featured in",
     "readArticle": "Read",
-    "featuredItems": [
-      { "publication": "Domino", "issue": "Home Front / Fall 2025", "image": "https://framerusercontent.com/images/yOS6IPw7UnX1byUBBlGhaPuQE.webp" },
-      { "publication": "AD Spain", "issue": "AD Spain / January 2026", "image": "https://framerusercontent.com/images/zzMQ5CKV47O2UDZmALsM1sXk0vA.png" },
-      { "publication": "Vogue Poland", "issue": "VOGUE Poland / October 2025", "image": "https://framerusercontent.com/images/9OJJz2lgse9DPsi7HVQNv0AuaVc.png" },
-      { "publication": "AD Germany", "issue": "AD Germany / March 2025", "image": "https://framerusercontent.com/images/pPRFObEDAdHJISGOKhSHlHovL2s.png" }
-    ],
+    "featuredItems": [],
     "archiveItems": [
       { "publication": "Domino", "issue": "Home Front / Fall 2025" },
       { "publication": "&Living", "issue": "June 2025" },

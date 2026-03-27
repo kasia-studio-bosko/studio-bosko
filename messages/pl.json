@@ -146,12 +146,7 @@
     "heroBody": "Studio Bosko zostało wyróżnione tytułem AD100 2025 i ukazało się w drukowanych i internetowych publikacjach na całym świecie. Przeglądaj nasze archiwum.",
     "featuredIn": "W mediach",
     "readArticle": "Czytaj",
-    "featuredItems": [
-      { "publication": "Domino", "issue": "Home Front / Jesień 2025", "image": "https://framerusercontent.com/images/yOS6IPw7UnX1byUBBlGhaPuQE.webp" },
-      { "publication": "AD Spain", "issue": "AD Spain / Styczeń 2026", "image": "https://framerusercontent.com/images/zzMQ5CKV47O2UDZmALsM1sXk0vA.png" },
-      { "publication": "Vogue Poland", "issue": "VOGUE Poland / Październik 2025", "image": "https://framerusercontent.com/images/9OJJz2lgse9DPsi7HVQNv0AuaVc.png" },
-      { "publication": "AD Germany", "issue": "AD Germany / Marzec 2025", "image": "https://framerusercontent.com/images/pPRFObEDAdHJISGOKhSHlHovL2s.png" }
-    ],
+    "featuredItems": [],
     "archiveItems": [
       { "publication": "Domino", "issue": "Home Front / Jesień 2025" },
       { "publication": "&Living", "issue": "Czerwiec 2025" },
