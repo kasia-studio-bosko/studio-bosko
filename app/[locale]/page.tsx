@@ -95,6 +95,7 @@ const PRESS_LOGOS: { name: string; src: string }[] = [
   { name: 'Est Living design magazine logo',       src: '/logos/logo-est.png'             },
   { name: 'Livingetc interior design magazine logo', src: '/logos/logo-livingetc.png'     },
   { name: 'Homes and Gardens magazine logo',       src: '/logos/logo-homes-gardens.png'   },
+  { name: 'BauNetz architecture publication logo', src: '/logos/logo-BauNetz.png'         },
 ]
 
 export default async function HomePage({
