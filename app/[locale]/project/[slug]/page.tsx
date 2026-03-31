@@ -248,6 +248,35 @@ export default async function ProjectPage({ params }: Props) {
     image: heroSrc,
   }
 
+  const projectsLabel: Record<string, string> = { en: 'Projects', de: 'Projekte', pl: 'Projekty' }
+  const slugPrefixBreadcrumb: Record<string, string> = { en: 'project', de: 'projekt', pl: 'projekt' }
+  const projectsSlug: Record<string, string> = { en: 'projects', de: 'projekte', pl: 'projekty' }
+  const localePrefix = locale === 'en' ? '' : `/${locale}`
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Studio Bosko',
+        item: siteUrl,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: projectsLabel[locale] ?? 'Projects',
+        item: `${siteUrl}${localePrefix}/${projectsSlug[locale] ?? 'projects'}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: data.title,
+        item: `${siteUrl}${localePrefix}/${slugPrefixBreadcrumb[locale] ?? 'project'}/${slug}`,
+      },
+    ],
+  }
+
   const description = data.description
   const descriptionFallback =
     'descriptionFallback' in data ? (data as typeof FALLBACK_PROJECT).descriptionFallback : null
@@ -275,6 +304,10 @@ export default async function ProjectPage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
       {/* ── Full-bleed cover image ────────────────────────────────────────── */}

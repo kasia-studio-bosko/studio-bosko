@@ -8,6 +8,7 @@ import { getStudioPageContent } from '@/lib/sanity/queries'
 import { urlFor } from '@/lib/sanity/client'
 import { ptToStrings } from '@/lib/sanity/utils'
 import PageNavTheme from '@/components/PageNavTheme'
+import PersonSchema from '@/components/PersonSchema'
 
 // ISR: re-fetch Sanity studio page data every hour so image or copy
 // changes in the CMS appear without a full redeploy.
@@ -109,6 +110,7 @@ export default async function StudioPage({
   return (
     <>
       <PageNavTheme color="#2d1d17" />
+      <PersonSchema />
       {/* ─────────────────────────────────────────────────────────────────────
           HERO — headline lower-left + Kasia portrait upper-right
       ───────────────────────────────────────────────────────────────────── */}
