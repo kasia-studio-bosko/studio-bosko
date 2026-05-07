@@ -9,6 +9,7 @@ import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import FooterReveal from '@/components/FooterReveal'
 import SchemaOrg from '@/components/SchemaOrg'
+import GoogleAnalytics from '@/components/GoogleAnalytics'
 import '../globals.css'
 
 const inter = Inter({
@@ -96,6 +97,7 @@ export default async function LocaleLayout({
         <link rel="dns-prefetch" href="https://framerusercontent.com" />
       </head>
       <body className="bg-[#d4cbc0] text-[#2d1d17] font-cadiz antialiased">
+        <GoogleAnalytics />
         <NextIntlClientProvider messages={messages}>
           <SchemaOrg locale={locale} />
           <Navigation locale={locale} />
