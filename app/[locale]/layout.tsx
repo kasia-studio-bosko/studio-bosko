@@ -95,9 +95,9 @@ export default async function LocaleLayout({
       <head>
         <link rel="preconnect" href="https://framerusercontent.com" />
         <link rel="dns-prefetch" href="https://framerusercontent.com" />
+        <GoogleAnalytics />
       </head>
       <body className="bg-[#d4cbc0] text-[#2d1d17] font-cadiz antialiased">
-        <GoogleAnalytics />
         <NextIntlClientProvider messages={messages}>
           <SchemaOrg locale={locale} />
           <Navigation locale={locale} />
