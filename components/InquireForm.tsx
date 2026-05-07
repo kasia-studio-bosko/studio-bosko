@@ -2,6 +2,7 @@
 
 import { useState, FormEvent } from 'react'
 import { useTranslations } from 'next-intl'
+import { useRouter } from '@/i18n/navigation'
 import type { FormQuestion } from '@/lib/sanity/queries'
 
 /**
@@ -48,6 +49,7 @@ export default function InquireForm({
   budgetOptions:  legacyBudgetOptions,
 }: InquireFormProps = {}) {
   const t = useTranslations('inquire')
+  const router = useRouter()
 
   const [firstName,     setFirstName]     = useState('')
   const [lastName,      setLastName]      = useState('')
@@ -68,27 +70,14 @@ export default function InquireForm({
         body: JSON.stringify({ firstName, lastName, email, ...dynamicFields }),
       })
       if (res.ok) {
-        setStatus('success')
-        setFirstName('')
-        setLastName('')
-        setEmail('')
-        setDynamicFields({})
+        router.push('/thankyou')
+        return
       } else {
         setStatus('error')
       }
     } catch {
       setStatus('error')
     }
-  }
-
-  if (status === 'success') {
-    return (
-      <div className="py-16">
-        <p className="font-signifier font-light text-2xl text-[#ede8e2] tracking-tight">
-          {t('formSuccess')}
-        </p>
-      </div>
-    )
   }
 
   const inputClass =

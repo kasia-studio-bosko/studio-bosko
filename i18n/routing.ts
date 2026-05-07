@@ -42,6 +42,11 @@ export const routing = defineRouting({
       de: '/impressum',
       pl: '/impressum',
     },
+    '/thankyou': {
+      en: '/thankyou',
+      de: '/danke',
+      pl: '/dziekujemy',
+    },
   },
 })
 
