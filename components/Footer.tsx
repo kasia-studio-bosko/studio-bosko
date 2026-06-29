@@ -43,6 +43,13 @@ export default async function Footer({ locale }: { locale: string }) {
           </a>
           {' · '}
           <Link
+            href="/faq"
+            className="hover:text-white transition-colors duration-200"
+          >
+            FAQ
+          </Link>
+          {' · '}
+          <Link
             href="/impressum"
             className="hover:text-white transition-colors duration-200"
           >

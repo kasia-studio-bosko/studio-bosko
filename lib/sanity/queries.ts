@@ -70,6 +70,18 @@ export interface ProjectsPageSeo {
   seoDescription?: string
 }
 
+export interface FaqItem {
+  question: string
+  answer: PortableTextContent
+}
+
+export interface FaqPageContent {
+  heading?: string
+  faqItems?: FaqItem[]
+  seoTitle?: string
+  seoDescription?: string
+}
+
 export interface ImpressumContent {
   body?: PortableTextContent
   seoTitle?: string
@@ -217,6 +229,42 @@ export const getProjectsPageSeo = cache(async (locale = 'en'): Promise<ProjectsP
         $locale == "de" => seoDescriptionDe,
         $locale == "pl" => seoDescriptionPl,
         seoDescriptionEn
+      )
+    }`,
+    { locale }
+  )
+})
+
+/** Fetch the FAQ page content for a given locale. */
+export const getFaqPageContent = cache(async (locale = 'en'): Promise<FaqPageContent | null> => {
+  return sanityClient.fetch(
+    `*[_type == "faqPage" && _id == "faqPage"][0] {
+      "heading": select(
+        $locale == "de" => coalesce(heading_de, heading_en),
+        $locale == "pl" => coalesce(heading_pl, heading_en),
+        heading_en
+      ),
+      "faqItems": faqItems[]{
+        "question": select(
+          $locale == "de" => coalesce(question_de, question_en),
+          $locale == "pl" => coalesce(question_pl, question_en),
+          question_en
+        ),
+        "answer": select(
+          $locale == "de" => coalesce(answer_de, answer_en),
+          $locale == "pl" => coalesce(answer_pl, answer_en),
+          answer_en
+        )
+      },
+      "seoTitle": select(
+        $locale == "de" => coalesce(seoTitle_de, seoTitle_en),
+        $locale == "pl" => coalesce(seoTitle_pl, seoTitle_en),
+        seoTitle_en
+      ),
+      "seoDescription": select(
+        $locale == "de" => coalesce(seoDescription_de, seoDescription_en),
+        $locale == "pl" => coalesce(seoDescription_pl, seoDescription_en),
+        seoDescription_en
       )
     }`,
     { locale }

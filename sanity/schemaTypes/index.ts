@@ -8,6 +8,7 @@ import { studioPageSchema }   from './studioPage'
 import { offeringPageSchema } from './offeringPage'
 import { pressPageSchema }    from './pressPage'
 import { inquirePageSchema }  from './inquirePage'
+import { faqPageSchema }      from './faqPage'
 
 export const schemaTypes = [
   // Content documents
@@ -23,4 +24,5 @@ export const schemaTypes = [
   pageContentSchema,
   projectsPageSchema,
   impressumSchema,
+  faqPageSchema,
 ]
