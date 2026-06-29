@@ -75,6 +75,41 @@ export const offeringPageSchema = defineType({
       }],
     }),
 
+    // ── Our Process ───────────────────────────────────────────────────────────
+    defineField({ name: 'processHeading_en', title: 'Process Section Heading',       type: 'string', group: 'en' }),
+    defineField({ name: 'processHeading_de', title: 'Abschnittsüberschrift Prozess', type: 'string', group: 'de' }),
+    defineField({ name: 'processHeading_pl', title: 'Nagłówek sekcji procesu',       type: 'string', group: 'pl' }),
+
+    defineField({ name: 'processIntro_en', title: 'Process Intro',  type: 'array', of: [blockContent], group: 'en' }),
+    defineField({ name: 'processIntro_de', title: 'Prozess Intro',  type: 'array', of: [blockContent], group: 'de' }),
+    defineField({ name: 'processIntro_pl', title: 'Intro procesu',  type: 'array', of: [blockContent], group: 'pl' }),
+
+    defineField({
+      name: 'processPhases',
+      title: 'Process Phases',
+      type: 'array',
+      of: [{
+        type: 'object',
+        title: 'Phase',
+        fields: [
+          defineField({ name: 'title_en', title: 'Title (EN)',            type: 'string' }),
+          defineField({ name: 'title_de', title: 'Title (DE)',            type: 'string' }),
+          defineField({ name: 'title_pl', title: 'Title (PL)',            type: 'string' }),
+          defineField({ name: 'description_en', title: 'Description (EN)', type: 'text', rows: 3 }),
+          defineField({ name: 'description_de', title: 'Description (DE)', type: 'text', rows: 3 }),
+          defineField({ name: 'description_pl', title: 'Description (PL)', type: 'text', rows: 3 }),
+          defineField({ name: 'duration_en', title: 'Duration (EN)',      type: 'string' }),
+          defineField({ name: 'duration_de', title: 'Duration (DE)',      type: 'string' }),
+          defineField({ name: 'duration_pl', title: 'Duration (PL)',      type: 'string' }),
+        ],
+        preview: { select: { title: 'title_en' } },
+      }],
+    }),
+
+    defineField({ name: 'processClosingLine_en', title: 'Process Closing Line',    type: 'array', of: [blockContent], group: 'en' }),
+    defineField({ name: 'processClosingLine_de', title: 'Abschlusszeile Prozess',  type: 'array', of: [blockContent], group: 'de' }),
+    defineField({ name: 'processClosingLine_pl', title: 'Zdanie zamykające proces', type: 'array', of: [blockContent], group: 'pl' }),
+
     // ── Tagline ────────────────────────────────────────────────────────────
     defineField({ name: 'tagline_en', title: 'Tagline',      type: 'string', group: 'en' }),
     defineField({ name: 'tagline_de', title: 'Tagline (DE)', type: 'string', group: 'de' }),

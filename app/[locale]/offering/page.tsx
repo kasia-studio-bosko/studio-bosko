@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import ScrollReveal from '@/components/ScrollReveal'
 import ParallaxImage from '@/components/ParallaxImage'
+import { PortableText } from 'next-sanity'
 import { getOfferingPageContent } from '@/lib/sanity/queries'
 import { urlFor } from '@/lib/sanity/client'
 import { ptToStrings } from '@/lib/sanity/utils'
@@ -136,6 +137,13 @@ export default async function OfferingPage({
   const projectTypes = (sanity?.projectTypes && sanity.projectTypes.length > 0)
     ? sanity.projectTypes
     : (FALLBACK_PROJECT_TYPES[locale] ?? PROJECT_TYPES_EN)
+
+  // Our process — Sanity only (no translation fallback; section hidden when empty)
+  const processHeading    = sanity?.processHeading ?? 'Our process'
+  const processIntro      = sanity?.processIntro
+  const processPhases     = sanity?.processPhases ?? []
+  const processClosingLine = sanity?.processClosingLine
+  const hasProcess = processIntro || processPhases.length > 0
 
   // Testimonial — Sanity first, translation fallback
   const testimonialQuote       = sanity?.testimonialQuote  ?? t('testimonialQuote')
@@ -313,6 +321,84 @@ export default async function OfferingPage({
           </div>
         </ScrollReveal>
       </div>
+
+      {/* ─────────────────────────────────────────────────────────────────────
+          OUR PROCESS — label left | intro + phases + closing right
+      ───────────────────────────────────────────────────────────────────── */}
+      {hasProcess && (
+        <section className="section-spacing" aria-label="Our process">
+          <div className="page-container">
+            <div className="grid grid-cols-1 md:grid-cols-[41%_1fr] gap-12 md:gap-16">
+
+              {/* Left — section label */}
+              <ScrollReveal>
+                <p className="label-serif pt-1">{processHeading}</p>
+              </ScrollReveal>
+
+              {/* Right — intro, phases, closing */}
+              <div>
+
+                {/* Intro rich text */}
+                {Array.isArray(processIntro) && processIntro.length > 0 && (
+                  <ScrollReveal delay={80}>
+                    <div className="font-cadiz text-base md:text-[17px] leading-relaxed text-[#2d1d17]/80 space-y-5 mb-12 [&>p]:mb-0">
+                      <PortableText value={processIntro} />
+                    </div>
+                  </ScrollReveal>
+                )}
+
+                {/* Phases */}
+                {processPhases.length > 0 && (
+                  <ol className="space-y-10">
+                    {processPhases.map((phase, i) => (
+                      <ScrollReveal key={phase.title ?? i} delay={100 + i * 80}>
+                        <li className="grid grid-cols-[2rem_1fr] gap-4 items-start">
+                          {/* Phase number */}
+                          <span
+                            className="font-cadiz text-xs tracking-[0.12em] text-[#2d1d17]/35 pt-1 tabular-nums"
+                            aria-hidden="true"
+                          >
+                            {String(i + 1).padStart(2, '0')}
+                          </span>
+
+                          <div>
+                            <h3
+                              className="font-signifier font-light text-[#2d1d17] mb-2"
+                              style={{ fontSize: 'clamp(18px, 1.8vw, 24px)', lineHeight: 1.25 }}
+                            >
+                              {phase.title}
+                            </h3>
+                            {phase.description && (
+                              <p className="font-cadiz text-[15px] leading-relaxed text-[#2d1d17]/70 mb-2">
+                                {phase.description}
+                              </p>
+                            )}
+                            {phase.duration && (
+                              <p className="font-cadiz text-xs tracking-[0.1em] uppercase text-[#2d1d17]/40">
+                                {phase.duration}
+                              </p>
+                            )}
+                          </div>
+                        </li>
+                      </ScrollReveal>
+                    ))}
+                  </ol>
+                )}
+
+                {/* Closing line */}
+                {Array.isArray(processClosingLine) && processClosingLine.length > 0 && (
+                  <ScrollReveal delay={180}>
+                    <div className="font-signifier font-light italic text-base md:text-[17px] leading-relaxed text-[#2d1d17]/65 mt-12 space-y-3 [&>p]:mb-0">
+                      <PortableText value={processClosingLine} />
+                    </div>
+                  </ScrollReveal>
+                )}
+
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ─────────────────────────────────────────────────────────────────────
           PROJECT TYPES — label left | vertical stack right

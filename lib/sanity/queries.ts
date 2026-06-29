@@ -313,11 +313,21 @@ export interface OfferingProjectType {
   body: string
 }
 
+export interface ProcessPhase {
+  title: string
+  description: string
+  duration?: string
+}
+
 export interface OfferingPageContent {
   heroHeadline?: string
   offeringBody?: PortableTextContent
   scopeItems?: { label: string }[]
   noItems?: { label: string }[]
+  processHeading?: string
+  processIntro?: PortableTextContent
+  processPhases?: ProcessPhase[]
+  processClosingLine?: PortableTextContent
   tagline?: string
   projectTypes?: OfferingProjectType[]
   testimonialQuote?: string
@@ -442,6 +452,34 @@ export const getOfferingPageContent = cache(async (locale = 'en'): Promise<Offer
           label_en
         )
       },
+      ${localField('processHeading')},
+      "processIntro": select(
+        $locale == "de" => coalesce(processIntro_de, processIntro_en),
+        $locale == "pl" => coalesce(processIntro_pl, processIntro_en),
+        processIntro_en
+      ),
+      "processPhases": processPhases[]{
+        "title": select(
+          $locale == "de" => coalesce(title_de, title_en),
+          $locale == "pl" => coalesce(title_pl, title_en),
+          title_en
+        ),
+        "description": select(
+          $locale == "de" => coalesce(description_de, description_en),
+          $locale == "pl" => coalesce(description_pl, description_en),
+          description_en
+        ),
+        "duration": select(
+          $locale == "de" => coalesce(duration_de, duration_en),
+          $locale == "pl" => coalesce(duration_pl, duration_en),
+          duration_en
+        )
+      },
+      "processClosingLine": select(
+        $locale == "de" => coalesce(processClosingLine_de, processClosingLine_en),
+        $locale == "pl" => coalesce(processClosingLine_pl, processClosingLine_en),
+        processClosingLine_en
+      ),
       ${localField('tagline')},
       "projectTypes": projectTypes[]{
         "title": select(
