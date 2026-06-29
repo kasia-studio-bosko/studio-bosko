@@ -237,21 +237,79 @@ export default async function ProjectPage({ params }: Props) {
     : 'https://framerusercontent.com/images/yfc2vkVeKbvCu6ku142CbqwMx0g.jpg'
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://bosko.studio'
+  const slugPrefixSchema: Record<string, string> = { en: 'project', de: 'projekt', pl: 'projekt' }
+  const localePrefix = locale === 'en' ? '' : `/${locale}`
+  const projectUrl = `${siteUrl}${localePrefix}/${slugPrefixSchema[locale] ?? 'project'}/${slug}`
+
+  // Build image list: cover first, then up to 6 gallery images that have real refs
+  const galleryImageUrls = (data.gallery ?? [])
+    .filter((img) => img.asset?._ref)
+    .slice(0, 6)
+    .map((img) => urlFor(img).width(1200).auto('format').url())
+  const allImages = [
+    ...(data.coverImage?.asset?._ref ? [heroSrc] : []),
+    ...galleryImageUrls,
+  ]
+
   const projectSchema = {
     '@context': 'https://schema.org',
-    '@type': 'CreativeWork',
+    '@type': ['CreativeWork', 'VisualArtwork'],
+    '@id': `${projectUrl}#project`,
     name: data.title,
+    headline: data.metaTitle ?? data.title,
     description: data.seoIntro,
-    creator: { '@type': 'Organization', name: 'Studio Bosko', url: siteUrl },
-    locationCreated: { '@type': 'Place', name: data.location },
+    url: projectUrl,
+    image: allImages.length > 1 ? allImages : allImages[0] ?? heroSrc,
+    artMedium: 'Interior Design',
+    artform: data.scope?.join(', ') ?? 'Interior Design',
+    locationCreated: {
+      '@type': 'Place',
+      name: data.location,
+    },
     dateCreated: data.year,
-    image: heroSrc,
+    keywords: [
+      'interior design',
+      data.category?.toLowerCase(),
+      data.location,
+      ...(data.scope ?? []),
+    ].filter(Boolean).join(', '),
+    creator: {
+      '@type': 'Organization',
+      '@id': `${siteUrl}/#organization`,
+      name: 'Studio Bosko',
+      url: siteUrl,
+    },
+    author: {
+      '@type': 'Person',
+      '@id': `${siteUrl}/#kasia-kronberger`,
+      name: 'Kasia Kronberger',
+    },
+    ...(data.photographer ? {
+      contributor: {
+        '@type': 'Person',
+        name: data.photographer,
+        jobTitle: 'Photographer',
+      },
+    } : {}),
+    ...(data.size ? {
+      size: `${data.size} m²`,
+    } : {}),
+    ...(data.pressMentions && data.pressMentions.length > 0 ? {
+      mentions: data.pressMentions.map((pub: string) => ({
+        '@type': 'PublicationEvent',
+        publishedBy: { '@type': 'Organization', name: pub },
+      })),
+    } : {}),
+    isPartOf: {
+      '@type': 'CollectionPage',
+      name: 'Studio Bosko — Projects',
+      url: `${siteUrl}${localePrefix}/projects`,
+    },
   }
 
   const projectsLabel: Record<string, string> = { en: 'Projects', de: 'Projekte', pl: 'Projekty' }
   const slugPrefixBreadcrumb: Record<string, string> = { en: 'project', de: 'projekt', pl: 'projekt' }
   const projectsSlug: Record<string, string> = { en: 'projects', de: 'projekte', pl: 'projekty' }
-  const localePrefix = locale === 'en' ? '' : `/${locale}`
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
