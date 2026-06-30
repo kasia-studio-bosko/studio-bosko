@@ -492,12 +492,12 @@ export default async function OfferingPage({
               className="font-signifier font-normal mb-8 text-balance text-[#2d1d17]"
               style={{ fontSize: 'clamp(36px, 4vw, 54px)', lineHeight: 1.15 }}
             >
-              {t('cta')}
+              Interested in working with us?
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={100}>
             <Link href={{ pathname: '/inquire' }} className="btn-primary">
-              {t('reachOut')} →
+              Book a complimentary consultation →
             </Link>
           </ScrollReveal>
         </div>
