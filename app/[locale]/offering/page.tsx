@@ -388,7 +388,7 @@ export default async function OfferingPage({
                 {/* Closing line */}
                 {Array.isArray(processClosingLine) && processClosingLine.length > 0 && (
                   <ScrollReveal delay={180}>
-                    <div className="font-signifier font-light italic text-base md:text-[17px] leading-relaxed text-[#2d1d17]/65 mt-12 space-y-3 [&>p]:mb-0">
+                    <div className="font-cadiz text-base md:text-[17px] leading-relaxed text-[#2d1d17]/80 mt-12 space-y-5 [&>p]:mb-0">
                       <PortableText value={processClosingLine} />
                     </div>
                   </ScrollReveal>
@@ -420,8 +420,8 @@ export default async function OfferingPage({
               {projectTypes.map(({ title, body }, i) => (
                 <ScrollReveal key={title} delay={i * 100}>
                   <h2
-                    className="font-signifier font-normal text-[#2d1d17] mb-4"
-                    style={{ fontSize: 'clamp(28px, 3vw, 42px)', lineHeight: 1.2 }}
+                    className="font-signifier font-light text-[#2d1d17] mb-3"
+                    style={{ fontSize: 'clamp(18px, 1.8vw, 24px)', lineHeight: 1.25 }}
                   >
                     {title}
                   </h2>
