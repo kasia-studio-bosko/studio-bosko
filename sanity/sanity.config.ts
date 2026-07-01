@@ -15,7 +15,7 @@ export default defineConfig({
 
   plugins: [
     structureTool({
-      structure: (S) =>
+      structure: (S, context) =>
         S.list()
           .title('Studio Bosko CMS')
           .items([
@@ -100,7 +100,7 @@ export default defineConfig({
               title: 'Press',
               icon: () => '📰',
               S,
-              context: { currentUser: null, getClient: () => null } as never,
+              context,
             }),
           ]),
     }),
