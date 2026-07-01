@@ -32,6 +32,17 @@ export default defineConfig({
 
             S.divider(),
 
+            // ── Press entries (drag-to-reorder) ───────────────────────────
+            orderableDocumentListDeskItem({
+              type: 'press',
+              title: 'Press Entries',
+              icon: () => '📰',
+              S,
+              context,
+            }),
+
+            S.divider(),
+
             // ── Pages (singletons) ────────────────────────────────────────────
             S.listItem()
               .title('Pages')
@@ -62,7 +73,7 @@ export default defineConfig({
                           .documentId('offeringPage')
                       ),
                     S.listItem()
-                      .title('📰 Press')
+                      .title('📰 Press Page (hero text)')
                       .child(
                         S.document()
                           .schemaType('pressPage')
@@ -91,17 +102,6 @@ export default defineConfig({
                       ),
                   ])
               ),
-
-            S.divider(),
-
-            // ── Press (drag-to-reorder) ────────────────────────────────────
-            orderableDocumentListDeskItem({
-              type: 'press',
-              title: 'Press',
-              icon: () => '📰',
-              S,
-              context,
-            }),
           ]),
     }),
     visionTool(),
