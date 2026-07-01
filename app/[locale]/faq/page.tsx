@@ -101,7 +101,7 @@ export default async function FaqPage({ params }: Props) {
             <dl className="max-w-[740px] divide-y divide-[#2d1d17]/10">
               {faqItems.map((item, i) => (
                 <ScrollReveal key={item.question ?? i} delay={i * 60}>
-                  <div className="py-14 md:py-16 first:pt-0 last:pb-0">
+                  <div className="pt-14 pb-16 md:pt-16 md:pb-20 first:pt-0 last:pb-0">
                     <dt
                       className="font-signifier font-light text-[#2d1d17] mb-6"
                       style={{
