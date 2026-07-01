@@ -1,4 +1,5 @@
 import { defineType, defineField } from 'sanity'
+import { orderRankField, orderRankOrdering } from '@sanity/orderable-document-list'
 
 /**
  * Press / media coverage entry.
@@ -19,6 +20,7 @@ export const pressSchema = defineType({
   ],
 
   fields: [
+    orderRankField({ type: 'press' }),
     defineField({
       name: 'publication',
       title: 'Publication name',
@@ -100,14 +102,7 @@ export const pressSchema = defineType({
   },
 
   orderings: [
-    {
-      title: 'Display order',
-      name: 'orderAsc',
-      by: [
-        { field: 'order', direction: 'asc' },
-        { field: 'date',  direction: 'desc' },
-      ],
-    },
+    orderRankOrdering,
     {
       title: 'Date (newest first)',
       name: 'dateDesc',

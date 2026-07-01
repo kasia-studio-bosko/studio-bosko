@@ -23,6 +23,7 @@
     "@headlessui/react": "^2.1.2",
     "@sanity/client": "^6.21.3",
     "@sanity/image-url": "^1.0.2",
+    "@sanity/orderable-document-list": "^2.0.4",
     "@sanity/vision": "^3.57.1",
     "framer-motion": "^11.3.28",
     "next": "14.2.29",

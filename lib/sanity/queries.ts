@@ -203,7 +203,7 @@ export async function getAllProjectSlugs(): Promise<string[]> {
 /** Fetch all press items ordered by display order then date. */
 export const getAllPressItems = cache(async (): Promise<PressItem[]> => {
   return sanityClient.fetch(
-    `*[_type == "press"] | order(coalesce(order, 999) asc, date desc) {
+    `*[_type == "press"] | order(orderRank asc, coalesce(order, 999) asc, date desc) {
       _id,
       publication,
       issue,

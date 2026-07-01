@@ -1,6 +1,7 @@
 import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
+import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list'
 import { schemaTypes } from './schemaTypes'
 
 export default defineConfig({
@@ -93,19 +94,14 @@ export default defineConfig({
 
             S.divider(),
 
-            // ── Press ─────────────────────────────────────────────────────────
-            S.listItem()
-              .title('Press')
-              .icon(() => '📰')
-              .child(
-                S.documentList()
-                  .title('Press Items')
-                  .filter('_type == "press"')
-                  .defaultOrdering([
-                    { field: 'order', direction: 'asc' },
-                    { field: 'date',  direction: 'desc' },
-                  ])
-              ),
+            // ── Press (drag-to-reorder) ────────────────────────────────────
+            orderableDocumentListDeskItem({
+              type: 'press',
+              title: 'Press',
+              icon: () => '📰',
+              S,
+              context: { currentUser: null, getClient: () => null } as never,
+            }),
           ]),
     }),
     visionTool(),
