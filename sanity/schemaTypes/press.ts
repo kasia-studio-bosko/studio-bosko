@@ -15,7 +15,6 @@ export const pressSchema = defineType({
 
   groups: [
     { name: 'content',  title: 'Content',  default: true },
-    { name: 'media',    title: 'Media' },
     { name: 'settings', title: 'Settings' },
   ],
 
@@ -49,14 +48,14 @@ export const pressSchema = defineType({
       group: 'content',
     }),
 
-    // ── Media tab ─────────────────────────────────────────────────────────────
+    // ── Cover image ───────────────────────────────────────────────────────────
     defineField({
       name: 'coverImage',
       title: 'Cover / feature image',
       description: 'Upload the magazine cover or feature spread. Shown on the Press page when "Featured" is enabled.',
       type: 'image',
       options: { hotspot: true },
-      group: 'media',
+      group: 'content',
       fields: [
         defineField({
           name: 'alt',
