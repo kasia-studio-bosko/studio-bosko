@@ -98,10 +98,10 @@ export default async function FaqPage({ params }: Props) {
 
           {/* Q&A list */}
           {faqItems.length > 0 ? (
-            <dl className="max-w-[740px] divide-y divide-[#2d1d17]/10">
+            <dl className="max-w-[740px] divide-y divide-[#2d1d17]/10 [&>*:first-child>div]:pt-0 [&>*:last-child>div]:pb-0">
               {faqItems.map((item, i) => (
                 <ScrollReveal key={item.question ?? i} delay={i * 60}>
-                  <div className="pt-14 pb-20 md:pt-16 md:pb-28 first:pt-0 last:pb-0">
+                  <div className="pt-14 pb-14 md:pt-16 md:pb-16">
                     <dt
                       className="font-signifier font-light text-[#2d1d17] mb-6"
                       style={{
