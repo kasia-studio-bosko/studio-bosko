@@ -345,10 +345,7 @@ export interface StudioPageContent {
   aboutHeading?: string
   aboutBody?: PortableTextContent
   ethosBullets?: { text: string }[]
-  kasiaPhoto1?: SanityImageRef
-  kasiaPhoto2?: SanityImageRef
-  studioPhoto1?: SanityImageRef
-  studioPhoto2?: SanityImageRef
+  pageImages?: SanityImageRef[]
   testimonialImage?: SanityImageRef
   yellowtraceQuote?: string
   yellowtraceAttribution?: string
@@ -381,9 +378,7 @@ export interface OfferingPageContent {
   testimonialQuote?: string
   testimonialAuthor?: string
   testimonialImage?: SanityImageRef
-  image1?: SanityImageRef
-  image2?: SanityImageRef
-  image3?: SanityImageRef
+  pageImages?: SanityImageRef[]
   seoTitle?: string
   seoDescription?: string
 }
@@ -463,10 +458,7 @@ export const getStudioPageContent = cache(async (locale = 'en'): Promise<StudioP
           text_en
         )
       },
-      kasiaPhoto1,
-      kasiaPhoto2,
-      studioPhoto1,
-      studioPhoto2,
+      pageImages[] { _key, asset, alt, hotspot, crop },
       testimonialImage,
       ${localField('yellowtraceQuote')},
       yellowtraceAttribution,
@@ -544,9 +536,7 @@ export const getOfferingPageContent = cache(async (locale = 'en'): Promise<Offer
       ${localField('testimonialQuote')},
       testimonialAuthor,
       testimonialImage,
-      image1,
-      image2,
-      image3,
+      pageImages[] { _key, asset, alt, hotspot, crop },
       ${localField('seoTitle')},
       ${localField('seoDescription')}
     }`,

@@ -151,30 +151,18 @@ export const offeringPageSchema = defineType({
       fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
     }),
 
-    // ── Page Images ───────────────────────────────────────────────────────
+    // ── Page Images (drag to reorder) ────────────────────────────────────
     defineField({
-      name: 'image1',
-      title: 'Image 1 — Bookshelf (hero right)',
-      type: 'image',
+      name: 'pageImages',
+      title: 'Page Images',
+      description: 'Drag to reorder. Position 1 = hero right image, Position 2 = full-bleed image (below headline), Position 3 = floor plan / scope image.',
+      type: 'array',
       group: 'media',
-      options: { hotspot: true },
-      fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
-    }),
-    defineField({
-      name: 'image2',
-      title: 'Image 2 — Moodboard (full-bleed)',
-      type: 'image',
-      group: 'media',
-      options: { hotspot: true },
-      fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
-    }),
-    defineField({
-      name: 'image3',
-      title: 'Image 3 — Floor Plan',
-      type: 'image',
-      group: 'media',
-      options: { hotspot: true },
-      fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
+      of: [{
+        type: 'image',
+        options: { hotspot: true },
+        fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
+      }],
     }),
 
     // ── SEO ───────────────────────────────────────────────────────────────

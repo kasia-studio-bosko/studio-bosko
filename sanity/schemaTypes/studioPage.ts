@@ -63,38 +63,18 @@ export const studioPageSchema = defineType({
       }],
     }),
 
-    // ── Photos ────────────────────────────────────────────────────────────
+    // ── Page Images (drag to reorder) ────────────────────────────────────
     defineField({
-      name: 'kasiaPhoto1',
-      title: 'Kasia Portrait (hero, right)',
-      type: 'image',
+      name: 'pageImages',
+      title: 'Page Images',
+      description: 'Drag to reorder. Position 1 = hero portrait (right of headline), Position 2 = full-bleed parallax, Position 3 = detail photo after About, Position 4 = detail photo after Ethos.',
+      type: 'array',
       group: 'media',
-      options: { hotspot: true },
-      fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
-    }),
-    defineField({
-      name: 'kasiaPhoto2',
-      title: 'Kasia Studio (full-bleed parallax)',
-      type: 'image',
-      group: 'media',
-      options: { hotspot: true },
-      fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
-    }),
-    defineField({
-      name: 'studioPhoto1',
-      title: 'Studio Photo 1 (furniture detail)',
-      type: 'image',
-      group: 'media',
-      options: { hotspot: true },
-      fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
-    }),
-    defineField({
-      name: 'studioPhoto2',
-      title: 'Studio Photo 2 (altbau / second detail)',
-      type: 'image',
-      group: 'media',
-      options: { hotspot: true },
-      fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
+      of: [{
+        type: 'image',
+        options: { hotspot: true },
+        fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
+      }],
     }),
     defineField({
       name: 'testimonialImage',

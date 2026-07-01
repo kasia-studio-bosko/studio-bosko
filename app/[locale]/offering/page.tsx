@@ -149,18 +149,11 @@ export default async function OfferingPage({
   const testimonialQuote       = sanity?.testimonialQuote  ?? t('testimonialQuote')
   const testimonialAttribution = sanity?.testimonialAuthor ?? t('testimonialAttribution')
 
-  // Images — Sanity first, fallback to Framer-hosted URLs
-  const bookselfUrl = sanity?.image1?.asset?._ref
-    ? urlFor(sanity.image1).auto('format').url()
-    : FALLBACK_BOOKSHELF
-
-  const moodboardUrl = sanity?.image2?.asset?._ref
-    ? urlFor(sanity.image2).auto('format').url()
-    : FALLBACK_MOODBOARD
-
-  const floorplanUrl = sanity?.image3?.asset?._ref
-    ? urlFor(sanity.image3).auto('format').url()
-    : FALLBACK_FLOORPLAN
+  // Images — pageImages array (positions 0–2) with per-slot fallbacks
+  const imgs = sanity?.pageImages ?? []
+  const bookselfUrl  = imgs[0]?.asset?._ref ? urlFor(imgs[0]).auto('format').url() : FALLBACK_BOOKSHELF
+  const moodboardUrl = imgs[1]?.asset?._ref ? urlFor(imgs[1]).auto('format').url() : FALLBACK_MOODBOARD
+  const floorplanUrl = imgs[2]?.asset?._ref ? urlFor(imgs[2]).auto('format').url() : FALLBACK_FLOORPLAN
 
   const hallwayUrl = sanity?.testimonialImage?.asset?._ref
     ? urlFor(sanity.testimonialImage).auto('format').url()
@@ -215,7 +208,7 @@ export default async function OfferingPage({
             >
               <Image
                 src={bookselfUrl}
-                alt={sanity?.image1?.alt ?? 'Curated bookshelf — Studio Bosko'}
+                alt={imgs[0]?.alt ?? 'Curated bookshelf — Studio Bosko'}
                 fill
                 sizes="(max-width: 768px) 100vw, 44vw"
                 className="object-cover"
@@ -236,7 +229,7 @@ export default async function OfferingPage({
       >
         <ParallaxImage
           src={moodboardUrl}
-          alt={sanity?.image2?.alt ?? 'Interior design moodboard — Studio Bosko'}
+          alt={imgs[1]?.alt ?? 'Interior design moodboard — Studio Bosko'}
           sizes="100vw"
           speed={0.25}
         />
@@ -311,7 +304,7 @@ export default async function OfferingPage({
           <div className="md:ml-[41%]">
             <Image
               src={floorplanUrl}
-              alt={sanity?.image3?.alt ?? 'Interior design floor plan — Studio Bosko'}
+              alt={imgs[2]?.alt ?? 'Interior design floor plan — Studio Bosko'}
               width={731}
               height={577}
               sizes="(max-width: 768px) 100vw, 56vw"

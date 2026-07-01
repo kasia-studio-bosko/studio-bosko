@@ -86,22 +86,12 @@ export default async function StudioPage({
   const testimonialQuote       = sanity?.yellowtraceQuote  ?? t('testimonialQuote')
   const testimonialAttribution = sanity?.yellowtraceAttribution ?? t('testimonialAttribution')
 
-  // Images — Sanity first, fallback to Framer-hosted URLs
-  const kasiaPortraitUrl = sanity?.kasiaPhoto1?.asset?._ref
-    ? urlFor(sanity.kasiaPhoto1).auto('format').url()
-    : FALLBACK_KASIA_PORTRAIT
-
-  const kasiaStudioUrl = sanity?.kasiaPhoto2?.asset?._ref
-    ? urlFor(sanity.kasiaPhoto2).auto('format').url()
-    : FALLBACK_KASIA_STUDIO
-
-  const furnitureDetailUrl = sanity?.studioPhoto1?.asset?._ref
-    ? urlFor(sanity.studioPhoto1).auto('format').url()
-    : FALLBACK_FURNITURE_DETAIL
-
-  const altbauUrl = sanity?.studioPhoto2?.asset?._ref
-    ? urlFor(sanity.studioPhoto2).auto('format').url()
-    : FALLBACK_ALTBAU
+  // Images — pageImages array (positions 0–3) with per-slot fallbacks
+  const imgs = sanity?.pageImages ?? []
+  const kasiaPortraitUrl  = imgs[0]?.asset?._ref ? urlFor(imgs[0]).auto('format').url() : FALLBACK_KASIA_PORTRAIT
+  const kasiaStudioUrl    = imgs[1]?.asset?._ref ? urlFor(imgs[1]).auto('format').url() : FALLBACK_KASIA_STUDIO
+  const furnitureDetailUrl = imgs[2]?.asset?._ref ? urlFor(imgs[2]).auto('format').url() : FALLBACK_FURNITURE_DETAIL
+  const altbauUrl         = imgs[3]?.asset?._ref ? urlFor(imgs[3]).auto('format').url() : FALLBACK_ALTBAU
 
   const testimonialImageUrl = sanity?.testimonialImage?.asset?._ref
     ? urlFor(sanity.testimonialImage).auto('format').url()
@@ -131,7 +121,7 @@ export default async function StudioPage({
             >
               <Image
                 src={kasiaPortraitUrl}
-                alt={sanity?.kasiaPhoto1?.alt ?? 'Kasia Kronberger, founder of Studio Bosko'}
+                alt={imgs[0]?.alt ?? 'Kasia Kronberger, founder of Studio Bosko'}
                 fill
                 sizes="(max-width: 768px) 100vw, 44vw"
                 className="object-cover"
@@ -169,7 +159,7 @@ export default async function StudioPage({
       >
         <ParallaxImage
           src={kasiaStudioUrl}
-          alt={sanity?.kasiaPhoto2?.alt ?? 'Kasia Kronberger at work in the studio'}
+          alt={imgs[1]?.alt ?? 'Kasia Kronberger at work in the studio'}
           sizes="100vw"
           speed={0.25}
         />
@@ -211,7 +201,7 @@ export default async function StudioPage({
             >
               <Image
                 src={furnitureDetailUrl}
-                alt={sanity?.studioPhoto1?.alt ?? 'Bespoke furniture detail — Studio Bosko'}
+                alt={imgs[2]?.alt ?? 'Bespoke furniture detail — Studio Bosko'}
                 fill
                 sizes="(max-width: 768px) 100vw, 57vw"
                 className="object-cover"
@@ -269,7 +259,7 @@ export default async function StudioPage({
             >
               <Image
                 src={altbauUrl}
-                alt={sanity?.studioPhoto2?.alt ?? 'Altbau renovation — Studio Bosko Berlin'}
+                alt={imgs[3]?.alt ?? 'Altbau renovation — Studio Bosko Berlin'}
                 fill
                 sizes="(max-width: 768px) 100vw, 57vw"
                 className="object-cover"
