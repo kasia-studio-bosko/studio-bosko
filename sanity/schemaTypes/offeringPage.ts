@@ -46,6 +46,7 @@ export const offeringPageSchema = defineType({
       name: 'scopeItems',
       title: 'Scope Items (what we do)',
       type: 'array',
+      group: ['en', 'de', 'pl'],
       of: [{
         type: 'object',
         title: 'Scope Item',
@@ -73,6 +74,7 @@ export const offeringPageSchema = defineType({
       name: 'noItems',
       title: "No Items (what we don't do)",
       type: 'array',
+      group: ['en', 'de', 'pl'],
       of: [{
         type: 'object',
         title: 'No Item',
@@ -113,6 +115,7 @@ export const offeringPageSchema = defineType({
       name: 'processPhases',
       title: 'Process Phases',
       type: 'array',
+      group: ['en', 'de', 'pl'],
       of: [{
         type: 'object',
         title: 'Phase',
@@ -163,6 +166,7 @@ export const offeringPageSchema = defineType({
       name: 'projectTypes',
       title: 'Project Types',
       type: 'array',
+      group: ['en', 'de', 'pl'],
       of: [{
         type: 'object',
         title: 'Project Type',

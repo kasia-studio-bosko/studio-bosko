@@ -64,6 +64,7 @@ export const studioPageSchema = defineType({
       name: 'ethosBullets',
       title: 'Ethos Bullets',
       type: 'array',
+      group: ['en', 'de', 'pl'],
       of: [{
         type: 'object',
         title: 'Bullet',
