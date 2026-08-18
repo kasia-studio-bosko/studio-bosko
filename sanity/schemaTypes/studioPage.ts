@@ -46,6 +46,19 @@ export const studioPageSchema = defineType({
     defineField({ name: 'aboutBody_de', title: 'Über uns Text', type: 'array', of: [blockContent], group: 'de' }),
     defineField({ name: 'aboutBody_pl', title: 'Tekst o nas', type: 'array', of: [blockContent], group: 'pl' }),
 
+    // ── Ethos Heading / Body / Subheading ────────────────────────────────
+    defineField({ name: 'ethosHeading_en', title: 'Ethos Heading',      type: 'string', group: 'en' }),
+    defineField({ name: 'ethosHeading_de', title: 'Haltung-Überschrift', type: 'string', group: 'de' }),
+    defineField({ name: 'ethosHeading_pl', title: 'Nagłówek filozofii',  type: 'string', group: 'pl' }),
+
+    defineField({ name: 'ethosBody_en', title: 'Ethos Body',   type: 'text', rows: 3, group: 'en' }),
+    defineField({ name: 'ethosBody_de', title: 'Haltung Text', type: 'text', rows: 3, group: 'de' }),
+    defineField({ name: 'ethosBody_pl', title: 'Tekst filozofii', type: 'text', rows: 3, group: 'pl' }),
+
+    defineField({ name: 'ethosSubheading_en', title: 'Ethos Subheading',    type: 'string', group: 'en' }),
+    defineField({ name: 'ethosSubheading_de', title: 'Haltung-Unterzeile',  type: 'string', group: 'de' }),
+    defineField({ name: 'ethosSubheading_pl', title: 'Podtytuł filozofii',  type: 'string', group: 'pl' }),
+
     // ── Ethos Bullets ─────────────────────────────────────────────────────
     defineField({
       name: 'ethosBullets',
@@ -62,6 +75,11 @@ export const studioPageSchema = defineType({
         preview: { select: { title: 'text_en' } },
       }],
     }),
+
+    // ── Offering CTA ───────────────────────────────────────────────────────
+    defineField({ name: 'ctaOffering_en', title: 'Offering CTA',   type: 'string', group: 'en' }),
+    defineField({ name: 'ctaOffering_de', title: 'Angebots-CTA',   type: 'string', group: 'de' }),
+    defineField({ name: 'ctaOffering_pl', title: 'CTA oferty',     type: 'string', group: 'pl' }),
 
     // ── Page Images (drag to reorder) ────────────────────────────────────
     defineField({
@@ -90,7 +108,9 @@ export const studioPageSchema = defineType({
     defineField({ name: 'yellowtraceQuote_de', title: 'Yellowtrace Zitat',    type: 'text', rows: 4, group: 'de' }),
     defineField({ name: 'yellowtraceQuote_pl', title: 'Yellowtrace Cytat',    type: 'text', rows: 4, group: 'pl' }),
 
-    defineField({ name: 'yellowtraceAttribution', title: 'Yellowtrace Attribution', type: 'string' }),
+    defineField({ name: 'yellowtraceAttribution_en', title: 'Yellowtrace Attribution', type: 'string', group: 'en' }),
+    defineField({ name: 'yellowtraceAttribution_de', title: 'Yellowtrace Quelle (DE)', type: 'string', group: 'de' }),
+    defineField({ name: 'yellowtraceAttribution_pl', title: 'Yellowtrace Źródło (PL)', type: 'string', group: 'pl' }),
 
     // ── SEO ───────────────────────────────────────────────────────────────
     defineField({ name: 'seoTitle_en', title: 'SEO Title',        type: 'string', group: 'en' }),

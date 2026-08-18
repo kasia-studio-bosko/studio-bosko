@@ -219,12 +219,12 @@ export default async function StudioPage({
         <div className="page-container">
           <div className="md:ml-[36%] max-w-[660px]">
             <ScrollReveal>
-              <p className="label-serif mb-6">{t('ethosHeading')}</p>
+              <p className="label-serif mb-6">{sanity?.ethosHeading ?? t('ethosHeading')}</p>
               <p className="font-cadiz text-base md:text-[17px] leading-relaxed text-[#2d1d17]/80 mb-8">
-                {t('ethosBody')}
+                {sanity?.ethosBody ?? t('ethosBody')}
               </p>
               <p className="font-signifier font-light text-sm tracking-wide text-[#2d1d17]/55 mb-5">
-                {t('ethosSubheading')}
+                {sanity?.ethosSubheading ?? t('ethosSubheading')}
               </p>
               <ul className="space-y-4 mb-10">
                 {ethosBullets.map((item, i) => (
@@ -240,7 +240,7 @@ export default async function StudioPage({
             </ScrollReveal>
             <ScrollReveal delay={120}>
               <Link href={{ pathname: '/offering' }} className="btn-primary inline-flex">
-                {t('ctaOffering')} →
+                {sanity?.ctaOffering ?? t('ctaOffering')} →
               </Link>
             </ScrollReveal>
           </div>

@@ -344,7 +344,11 @@ export interface StudioPageContent {
   heroHeadline?: string
   aboutHeading?: string
   aboutBody?: PortableTextContent
+  ethosHeading?: string
+  ethosBody?: string
+  ethosSubheading?: string
   ethosBullets?: { text: string }[]
+  ctaOffering?: string
   pageImages?: SanityImageRef[]
   testimonialImage?: SanityImageRef
   yellowtraceQuote?: string
@@ -367,8 +371,11 @@ export interface ProcessPhase {
 export interface OfferingPageContent {
   heroHeadline?: string
   offeringBody?: PortableTextContent
+  scopeHeading?: string
   scopeItems?: { label: string }[]
+  noHeading?: string
   noItems?: { label: string }[]
+  reachOut?: string
   processHeading?: string
   processIntro?: PortableTextContent
   processPhases?: ProcessPhase[]
@@ -376,6 +383,7 @@ export interface OfferingPageContent {
   processCtaHeading?: string
   processCtaButton?: string
   tagline?: string
+  projectTypesHeading?: string
   projectTypes?: OfferingProjectType[]
   testimonialQuote?: string
   testimonialAuthor?: string
@@ -453,6 +461,9 @@ export const getStudioPageContent = cache(async (locale = 'en'): Promise<StudioP
         $locale == "pl" => coalesce(aboutBody_pl, aboutBody_en),
         aboutBody_en
       ),
+      ${localField('ethosHeading')},
+      ${localField('ethosBody')},
+      ${localField('ethosSubheading')},
       "ethosBullets": ethosBullets[]{
         "text": select(
           $locale == "de" => coalesce(text_de, text_en),
@@ -460,10 +471,11 @@ export const getStudioPageContent = cache(async (locale = 'en'): Promise<StudioP
           text_en
         )
       },
+      ${localField('ctaOffering')},
       pageImages[] { _key, asset, alt, hotspot, crop },
       testimonialImage,
       ${localField('yellowtraceQuote')},
-      yellowtraceAttribution,
+      ${localField('yellowtraceAttribution')},
       ${localField('seoTitle')},
       ${localField('seoDescription')}
     }`,
@@ -480,6 +492,7 @@ export const getOfferingPageContent = cache(async (locale = 'en'): Promise<Offer
         $locale == "pl" => coalesce(offeringBody_pl, offeringBody_en),
         offeringBody_en
       ),
+      ${localField('scopeHeading')},
       "scopeItems": scopeItems[]{
         "label": select(
           $locale == "de" => coalesce(label_de, label_en),
@@ -487,6 +500,7 @@ export const getOfferingPageContent = cache(async (locale = 'en'): Promise<Offer
           label_en
         )
       },
+      ${localField('noHeading')},
       "noItems": noItems[]{
         "label": select(
           $locale == "de" => coalesce(label_de, label_en),
@@ -494,6 +508,7 @@ export const getOfferingPageContent = cache(async (locale = 'en'): Promise<Offer
           label_en
         )
       },
+      ${localField('reachOut')},
       ${localField('processHeading')},
       "processIntro": select(
         $locale == "de" => coalesce(processIntro_de, processIntro_en),
@@ -525,6 +540,7 @@ export const getOfferingPageContent = cache(async (locale = 'en'): Promise<Offer
       ${localField('processCtaHeading')},
       ${localField('processCtaButton')},
       ${localField('tagline')},
+      ${localField('projectTypesHeading')},
       "projectTypes": projectTypes[]{
         "title": select(
           $locale == "de" => coalesce(title_de, title_en),
@@ -538,7 +554,7 @@ export const getOfferingPageContent = cache(async (locale = 'en'): Promise<Offer
         )
       },
       ${localField('testimonialQuote')},
-      testimonialAuthor,
+      ${localField('testimonialAuthor')},
       testimonialImage,
       pageImages[] { _key, asset, alt, hotspot, crop },
       ${localField('seoTitle')},

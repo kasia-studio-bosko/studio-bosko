@@ -58,6 +58,11 @@ export const offeringPageSchema = defineType({
       }],
     }),
 
+    // ── Scope Heading ──────────────────────────────────────────────────────
+    defineField({ name: 'scopeHeading_en', title: 'Scope Heading',      type: 'string', group: 'en' }),
+    defineField({ name: 'scopeHeading_de', title: 'Umfang-Überschrift',  type: 'string', group: 'de' }),
+    defineField({ name: 'scopeHeading_pl', title: 'Nagłówek zakresu',    type: 'string', group: 'pl' }),
+
     // ── No Items ───────────────────────────────────────────────────────────
     defineField({
       name: 'noItems',
@@ -74,6 +79,16 @@ export const offeringPageSchema = defineType({
         preview: { select: { title: 'label_en' } },
       }],
     }),
+
+    // ── No Heading ─────────────────────────────────────────────────────────
+    defineField({ name: 'noHeading_en', title: 'No Heading',       type: 'string', group: 'en' }),
+    defineField({ name: 'noHeading_de', title: 'Nicht-Überschrift', type: 'string', group: 'de' }),
+    defineField({ name: 'noHeading_pl', title: 'Nagłówek wykluczeń', type: 'string', group: 'pl' }),
+
+    // ── Reach Out CTA ──────────────────────────────────────────────────────
+    defineField({ name: 'reachOut_en', title: 'Reach Out CTA',   type: 'string', group: 'en' }),
+    defineField({ name: 'reachOut_de', title: 'Kontakt-CTA',     type: 'string', group: 'de' }),
+    defineField({ name: 'reachOut_pl', title: 'CTA kontaktu',    type: 'string', group: 'pl' }),
 
     // ── Our Process ───────────────────────────────────────────────────────────
     defineField({ name: 'processHeading_en', title: 'Process Section Heading',       type: 'string', group: 'en' }),
@@ -123,6 +138,11 @@ export const offeringPageSchema = defineType({
     defineField({ name: 'tagline_de', title: 'Tagline (DE)', type: 'string', group: 'de' }),
     defineField({ name: 'tagline_pl', title: 'Tagline (PL)', type: 'string', group: 'pl' }),
 
+    // ── Project Types Heading ─────────────────────────────────────────────
+    defineField({ name: 'projectTypesHeading_en', title: 'Project Types Heading',  type: 'string', group: 'en' }),
+    defineField({ name: 'projectTypesHeading_de', title: 'Projektarten-Überschrift', type: 'string', group: 'de' }),
+    defineField({ name: 'projectTypesHeading_pl', title: 'Nagłówek rodzajów projektów', type: 'string', group: 'pl' }),
+
     // ── Project Types ─────────────────────────────────────────────────────
     defineField({
       name: 'projectTypes',
@@ -148,7 +168,9 @@ export const offeringPageSchema = defineType({
     defineField({ name: 'testimonialQuote_de', title: 'Zitat (DE)',            type: 'text', rows: 4, group: 'de' }),
     defineField({ name: 'testimonialQuote_pl', title: 'Cytat (PL)',            type: 'text', rows: 4, group: 'pl' }),
 
-    defineField({ name: 'testimonialAuthor', title: 'Testimonial Author', type: 'string' }),
+    defineField({ name: 'testimonialAuthor_en', title: 'Testimonial Author',    type: 'string', group: 'en' }),
+    defineField({ name: 'testimonialAuthor_de', title: 'Testimonial-Autor',     type: 'string', group: 'de' }),
+    defineField({ name: 'testimonialAuthor_pl', title: 'Autor referencji',      type: 'string', group: 'pl' }),
 
     defineField({
       name: 'testimonialImage',

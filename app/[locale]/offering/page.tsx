@@ -125,15 +125,19 @@ export default async function OfferingPage({
   const mainBody1 = bodyParas[0] ?? t('mainBody1')
 
   // Scope & No items — Sanity first, translation fallback
+  const scopeHeading = sanity?.scopeHeading ?? t('scopeHeading')
   const scopeItems = sanity?.scopeItems?.map((s) => s.label).filter(Boolean) as string[] ??
     (t.raw('scopeItems') as string[])
+  const noHeading = sanity?.noHeading ?? t('noHeading')
   const noItems = sanity?.noItems?.map((n) => n.label).filter(Boolean) as string[] ??
     (t.raw('noItems') as string[])
+  const reachOut = sanity?.reachOut ?? t('reachOut')
 
   // Tagline — Sanity first, translation fallback
   const tagline = sanity?.tagline ?? t('tagline')
 
   // Project types — Sanity first, fallback to locale-specific hardcoded data
+  const projectTypesHeading = sanity?.projectTypesHeading ?? t('projectTypesHeading')
   const projectTypes = (sanity?.projectTypes && sanity.projectTypes.length > 0)
     ? sanity.projectTypes
     : (FALLBACK_PROJECT_TYPES[locale] ?? PROJECT_TYPES_EN)
@@ -246,7 +250,7 @@ export default async function OfferingPage({
 
             {/* Left — section label */}
             <ScrollReveal>
-              <p className="label-serif pt-1">{t('scopeHeading').replace(':', '')}</p>
+              <p className="label-serif pt-1">{scopeHeading.replace(':', '')}</p>
             </ScrollReveal>
 
             {/* Right — body text + scope list + exclusions + CTA */}
@@ -270,7 +274,7 @@ export default async function OfferingPage({
 
               <ScrollReveal delay={140}>
                 <p className="font-signifier font-light text-sm tracking-wide text-[#2d1d17]/55 mb-3">
-                  {t('noHeading')}
+                  {noHeading}
                 </p>
                 <ul className="space-y-2 mb-6">
                   {noItems.map((item) => (
@@ -290,7 +294,7 @@ export default async function OfferingPage({
 
               <ScrollReveal delay={180}>
                 <Link href={{ pathname: '/inquire' }} className="btn-primary inline-flex">
-                  {t('reachOut')} →
+                  {reachOut} →
                 </Link>
               </ScrollReveal>
             </div>
@@ -407,7 +411,7 @@ export default async function OfferingPage({
 
             {/* Left — section label */}
             <ScrollReveal>
-              <p className="label-serif pt-1">{t('projectTypesHeading')}</p>
+              <p className="label-serif pt-1">{projectTypesHeading}</p>
             </ScrollReveal>
 
             {/* Right — vertical stack of project types */}
