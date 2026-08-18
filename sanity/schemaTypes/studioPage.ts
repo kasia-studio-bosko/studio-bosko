@@ -67,10 +67,15 @@ export const studioPageSchema = defineType({
       of: [{
         type: 'object',
         title: 'Bullet',
+        groups: [
+          { name: 'en', title: '🇬🇧 English', default: true },
+          { name: 'de', title: '🇩🇪 Deutsch' },
+          { name: 'pl', title: '🇵🇱 Polski' },
+        ],
         fields: [
-          defineField({ name: 'text_en', title: 'English', type: 'string' }),
-          defineField({ name: 'text_de', title: 'Deutsch', type: 'string' }),
-          defineField({ name: 'text_pl', title: 'Polski',  type: 'string' }),
+          defineField({ name: 'text_en', title: 'English', type: 'string', group: 'en' }),
+          defineField({ name: 'text_de', title: 'Deutsch', type: 'string', group: 'de' }),
+          defineField({ name: 'text_pl', title: 'Polski',  type: 'string', group: 'pl' }),
         ],
         preview: { select: { title: 'text_en' } },
       }],
