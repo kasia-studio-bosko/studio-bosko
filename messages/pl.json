@@ -99,7 +99,7 @@
       "Projektowanie, specyfikacja materiałów i wykończeń",
       "Dokumentacja wykonawcza i specyfikacje mebli na wymiar",
       "Dobór i zakup mebli",
-      "Pozyskiwanie sztuki i kuration wnętrz",
+      "Pozyskiwanie sztuki i kuratorski dobór wnętrz",
       "Planowanie budżetu i nadzór autorski"
     ],
     "noHeading": "Czego nie robimy:",
@@ -195,7 +195,7 @@
     "formLastName": "Nazwisko",
     "formAddress": "Adres projektu",
     "serviceLabel": "Jakie usługi Studio Bosko Cię interesują?",
-    "serviceOptions": ["Renowacja i aranżacja", "Aranżacja i kuration sztuki"],
+    "serviceOptions": ["Renowacja i aranżacja", "Aranżacja i kuratorski dobór sztuki"],
     "budgetLabel": "Jaki jest Twój planowany budżet inwestycyjny?",
     "budgetOptions": ["Poniżej 50 000 €", "50 000–100 000 €", "100 000–150 000 €", "150 000–250 000 €", "Powyżej 250 000 €", "Do ustalenia"],
     "messageLabel": "Opowiedz nam o swoim projekcie",
