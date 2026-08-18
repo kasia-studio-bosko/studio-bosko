@@ -110,6 +110,14 @@ export const offeringPageSchema = defineType({
     defineField({ name: 'processClosingLine_de', title: 'Abschlusszeile Prozess',  type: 'array', of: [blockContent], group: 'de' }),
     defineField({ name: 'processClosingLine_pl', title: 'Zdanie zamykające proces', type: 'array', of: [blockContent], group: 'pl' }),
 
+    defineField({ name: 'processCtaHeading_en', title: 'Process CTA Heading',      type: 'string', group: 'en' }),
+    defineField({ name: 'processCtaHeading_de', title: 'Prozess-CTA-Überschrift',  type: 'string', group: 'de' }),
+    defineField({ name: 'processCtaHeading_pl', title: 'Nagłówek CTA procesu',     type: 'string', group: 'pl' }),
+
+    defineField({ name: 'processCtaButton_en', title: 'Process CTA Button',        type: 'string', group: 'en' }),
+    defineField({ name: 'processCtaButton_de', title: 'Prozess-CTA-Button',        type: 'string', group: 'de' }),
+    defineField({ name: 'processCtaButton_pl', title: 'Przycisk CTA procesu',      type: 'string', group: 'pl' }),
+
     // ── Tagline ────────────────────────────────────────────────────────────
     defineField({ name: 'tagline_en', title: 'Tagline',      type: 'string', group: 'en' }),
     defineField({ name: 'tagline_de', title: 'Tagline (DE)', type: 'string', group: 'de' }),

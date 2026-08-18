@@ -29,7 +29,7 @@
     "inquireHeading": "Projekt starten",
     "inquireBody": "Wir nehmen pro Jahr eine begrenzte Anzahl von Projekten an, um jedem Kunden unsere volle Aufmerksamkeit zu widmen.",
     "inquireCta": "Kontakt aufnehmen",
-    "heroCtaSeeIfFit": "Schauen Sie, ob wir zusammenpassen",
+    "heroCtaSeeIfFit": "Schau, ob wir zusammenpassen",
     "selectedWork": "Ausgewählte Projekte",
     "selectedWorkSubheading": "Aktuelle Innenräume",
     "seeAllProjects": "Alle Projekte",
@@ -39,8 +39,8 @@
     "offeringCtaLearn": "Unser Angebot entdecken",
     "testimonialQuote": "\"Dank der Rundum-Betreuung durch Studio Bosko konnten wir uns zurücklehnen und unser schönes Zuhause genießen. Anfangs waren wir unsicher, ob Innenarchitektur den Aufwand wert ist — heute zweifeln wir keine Sekunde daran, dass sie den Wert unserer Wohnung gesteigert und unser Wohlbefinden verbessert hat.\"",
     "testimonialAttribution": "Lana, Hausbesitzerin und Tech-Managerin",
-    "ctaBodyFull": "Wir nehmen jährlich eine begrenzte Anzahl an Projekten an. Wenn Sie an einer Renovierung oder einem neuen Zuhause arbeiten — wir freuen uns, davon zu hören.",
-    "ctaConsultation": "Erzählen Sie uns von Ihrem Projekt"
+    "ctaBodyFull": "Wir nehmen jährlich eine begrenzte Anzahl an Projekten an. Wenn du an einer Renovierung oder einem neuen Zuhause arbeitest — wir freuen uns, davon zu hören.",
+    "ctaConsultation": "Erzähl uns von deinem Projekt"
   },
   "studio": {
     "metaTitle": "Über Studio Bosko — Innenarchitektin Kasia Kronberger, Berlin",
@@ -61,13 +61,13 @@
     "aboutBody3": "Unter der Leitung von Kasia Kronberger vereint Studio Bosko strukturelle Präzision mit intuitiver Kuration. Kasias Hintergrund umfasst Business und Trendforschung sowie internationale Designerfahrung in London, Florenz, Barcelona und Brüssel. Ihre Arbeit trägt eine globale Sensibilität — Handwerkskunst der Gegenwart trifft historische Referenzen und bewusste Spannung. Räume, die Gespräche auslösen: reich an Persönlichkeit, gewollten Kontrasten und emotionaler Dichte — ohne je inszeniert zu wirken.",
     "ethosHeading": "Haltung",
     "ethosBody": "Design ist für uns nie Oberfläche oder Spektakel — sondern Selbstausdruck und Entwicklung. Das Zuhause ist oft unser wertvollstes Gut. Die besten Interieurs sind jene, die Charakter atmen.",
-    "ctaOffering": "Was wir für Sie tun können",
+    "ctaOffering": "Was wir für dich tun können",
     "ethosSubheading": "So gehen wir an jedes Projekt heran:",
     "ethosPoints": [
-      "Wir denken Funktionalität von Anfang an mit — Durchfluss, Stauraum und Alltagstauglichkeit stehen von Beginn an im Fokus, damit der Raum Ihren Lebensstil mühelos trägt.",
+      "Wir denken Funktionalität von Anfang an mit — Durchfluss, Stauraum und Alltagstauglichkeit stehen von Beginn an im Fokus, damit der Raum deinen Lebensstil mühelos trägt.",
       "Wir kuratieren für visuelles Interesse und emotionale Wirkung — zwischen Raffinesse und Verspieltheit, zwischen Alt und Neu.",
-      "Wir schaffen Zuhause, die Ihre Geschichte erzählen — durch Materialien, Farben und die Art, wie Licht sich im Raum bewegt.",
-      "Wir sind Ihr vertrauter Berater — wir begleiten Sie durch die Komplexität und helfen Ihnen, Entscheidungen mit Klarheit und Lösungsinstinkt zu treffen."
+      "Wir schaffen Zuhause, die deine Geschichte erzählen — durch Materialien, Farben und die Art, wie Licht sich im Raum bewegt.",
+      "Wir sind dein vertrauter Berater — wir begleiten dich durch die Komplexität und helfen dir, Entscheidungen mit Klarheit und Lösungsinstinkt zu treffen."
     ],
     "testimonialQuote": "Eines der beeindruckendsten Merkmale von [Studio Bosko] ist, wie es schafft, sowohl gewagt als auch harmonisch zu sein. (…) Die Balance entsteht durch konsequente Kuration von Möbeln und Kunst — das Alte mit dem Neuen, das Klassische mit dem Nischigen. Das Markenzeichen von Studio Bosko.",
     "testimonialAttribution": "Yellowtrace"
@@ -78,7 +78,7 @@
     "heroHeading": "Unsere Leistungen",
     "heroSubheading": "Ganzheitliche Innenarchitektur für Wohnräume",
     "service1Title": "Konzept & Vision",
-    "service1Body": "Wir beginnen jedes Projekt mit einem gründlichen Briefing-Prozess — um zu verstehen, wie Sie leben, was Sie lieben und wie sich Ihr Zuhause anfühlen soll. Daraus entwickeln wir ein klares Designkonzept: eine räumliche Vision, Materialpalette und Stimmung, die alle Entscheidungen leitet.",
+    "service1Body": "Wir beginnen jedes Projekt mit einem gründlichen Briefing-Prozess — um zu verstehen, wie du lebst, was du liebst und wie sich dein Zuhause anfühlen soll. Daraus entwickeln wir ein klares Designkonzept: eine räumliche Vision, Materialpalette und Stimmung, die alle Entscheidungen leitet.",
     "service2Title": "Designentwicklung",
     "service2Body": "Wir entwickeln detaillierte Grundrisse, Möbellayouts, Lichtplanung, Materialspezifikationen und maßgefertigte Schreinerzeichnungen. Jedes Element wird im Verhältnis zum Ganzen betrachtet.",
     "service3Title": "Beschaffung & Sourcing",
@@ -89,10 +89,10 @@
     "service5Body": "Wir stylen und richten den fertiggestellten Raum ein — platzieren jedes Objekt, Kunstwerk und jede Pflanze — und übergeben ein Zuhause, das vom ersten Tag an bewohnbar ist.",
     "processHeading": "Wie wir arbeiten",
     "processBody": "Jedes Projekt ist einzigartig, aber unser Prozess ist konsistent: gründlich am Anfang, präzise in der Mitte, persönlich am Ende.",
-    "cta": "Ihr Projekt beginnen",
+    "cta": "Dein Projekt beginnen",
     "ctaBody": "Wir nehmen pro Jahr eine begrenzte Anzahl von Projekten an.",
     "headline": "Full-Service Innenarchitektur — mit Sitz in Berlin und Warschau, tätig in ganz Europa.",
-    "mainBody1": "Wir spezialisieren uns auf vollständige Wohnprojekte und begleiten jeden Prozessschritt mit Sorgfalt und Klarheit. Sie brauchen einen Partner, der Ihren persönlichen Stil versteht und ihn in ein unverwechselbares, zeitloses Interieur übersetzt — ohne operativen Aufwand Ihrerseits. Mit unserem Gespür für emotionale Zusammenhänge und unternehmerischem Denken übersetzen wir Visionen in Wirklichkeit.",
+    "mainBody1": "Wir spezialisieren uns auf vollständige Wohnprojekte und begleiten jeden Prozessschritt mit Sorgfalt und Klarheit. Du brauchst einen Partner, der deinen persönlichen Stil versteht und ihn in ein unverwechselbares, zeitloses Interieur übersetzt — ohne operativen Aufwand deinerseits. Mit unserem Gespür für emotionale Zusammenhänge und unternehmerischem Denken übersetzen wir Visionen in Wirklichkeit.",
     "scopeHeading": "Unser Leistungsumfang umfasst:",
     "scopeItems": [
       "Innenarchitektur und Raumplanung",
@@ -113,15 +113,15 @@
     "projectTypes": [
       {
         "title": "Komplexe Renovierung",
-        "body": "Das Zuhause ist oft Ihr wertvollstes Gut. Wir wissen, wie wir das Potenzial jeder Immobilie freisetzen und ihren Wert für Sie und Ihre Familie steigern können. Durch durchdachte Architekturplanung, maßgeschneiderte Kuration und professionelle Umsetzung sind unsere Interieurs sowohl funktional als auch hochkarätig gestaltet. Dank unserer Erfahrung, unserem lösungsorientierten Ansatz und einem vertrauensvollen internationalen Netzwerk aus Handwerkern realisieren wir Projekte in ganz Europa."
+        "body": "Das Zuhause ist oft dein wertvollstes Gut. Wir wissen, wie wir das Potenzial jeder Immobilie freisetzen und ihren Wert für dich und deine Familie steigern können. Durch durchdachte Architekturplanung, maßgeschneiderte Kuration und professionelle Umsetzung sind unsere Interieurs sowohl funktional als auch hochkarätig gestaltet. Dank unserer Erfahrung, unserem lösungsorientierten Ansatz und einem vertrauensvollen internationalen Netzwerk aus Handwerkern realisieren wir Projekte in ganz Europa."
       },
       {
         "title": "Interieur-Aufwertung",
-        "body": "Von der Materialwahl bis zum finalen Styling bringen wir taktile Energie in einen Raum — durch emotionale Materialkombinationen und lebendige Paletten. Unsere Erfahrung ermöglicht präzise Umfangsdefinitionen und Entscheidungen, die kostspielige Fehler vermeiden. Manchmal verändert die Neugestaltung von Teilen des Raums alles. Wir verleihen bereits guter Substanz Persönlichkeit — damit der Ort am Ende unverwechselbar Ihres ist."
+        "body": "Von der Materialwahl bis zum finalen Styling bringen wir taktile Energie in einen Raum — durch emotionale Materialkombinationen und lebendige Paletten. Unsere Erfahrung ermöglicht präzise Umfangsdefinitionen und Entscheidungen, die kostspielige Fehler vermeiden. Manchmal verändert die Neugestaltung von Teilen des Raums alles. Wir verleihen bereits guter Substanz Persönlichkeit — damit der Ort am Ende unverwechselbar deins ist."
       },
       {
         "title": "Full-Scope-Kuration",
-        "body": "Wir kuratieren und beschaffen alles in Ihrem Namen — vom Sofa über Leuchten bis hin zu Kunstwerken und Dekorationselementen. Das kann bedeuten, ausgewählte Bestandsstücke mit neuen Funden zu vereinen — lokal in Auftrag gegeben oder weltweit beschafft — um einzigartige Kompositionen im gesamten Zuhause zu schaffen. Bei Neubauten oder neu erworbenen Räumen erarbeiten wir ein vollständiges Einrichtungs- und Dekorationskonzept auf Basis einer definierten kreativen Ausrichtung und übernehmen die gesamte Beschaffung."
+        "body": "Wir kuratieren und beschaffen alles in deinem Namen — vom Sofa über Leuchten bis hin zu Kunstwerken und Dekorationselementen. Das kann bedeuten, ausgewählte Bestandsstücke mit neuen Funden zu vereinen — lokal in Auftrag gegeben oder weltweit beschafft — um einzigartige Kompositionen im gesamten Zuhause zu schaffen. Bei Neubauten oder neu erworbenen Räumen erarbeiten wir ein vollständiges Einrichtungs- und Dekorationskonzept auf Basis einer definierten kreativen Ausrichtung und übernehmen die gesamte Beschaffung."
       }
     ],
     "testimonialQuote": "Studio Bosko hat mein Apartment-Redesign gerettet. Als Expat in Deutschland war die Vorstellung, ein Renovierungsprojekt anzugehen, überwältigend — aber Kasias außergewöhnliches Designgespür und ihr starkes Netzwerk an Handwerkern haben den Prozess reibungslos und angenehm gemacht.",
@@ -143,7 +143,7 @@
     "metaTitle": "Presse — Studio Bosko in internationalen Designpublikationen",
     "metaDescription": "Studio Bosko in Elle Decoration UK, Architectural Digest Polska, Vogue Poland, Yellowtrace, AD Spain und weiteren Medien.",
     "heroHeading": "Presse",
-    "heroBody": "Studio Bosko wurde 2025 mit dem AD100-Titel ausgezeichnet und ist in internationalen Print- und Onlinepublikationen vertreten. Entdecken Sie unser Archiv.",
+    "heroBody": "Studio Bosko wurde 2025 mit dem AD100-Titel ausgezeichnet und ist in internationalen Print- und Onlinepublikationen vertreten. Entdecke unser Archiv.",
     "featuredIn": "Vorgestellt in",
     "readArticle": "Lesen",
     "featuredItems": [],
@@ -172,33 +172,33 @@
       { "publication": "Design Alive", "issue": "Oktober 2023" },
       { "publication": "Architectural Digest", "issue": "Oktober 2023" }
     ],
-    "ctaHeading": "Starten Sie ein Projekt mit Studio Bosko",
+    "ctaHeading": "Starte ein Projekt mit Studio Bosko",
     "ctaButton": "Anfragen →"
   },
   "inquire": {
     "metaTitle": "Innenarchitektur-Projekt anfragen | Studio Bosko",
-    "metaDescription": "Starten Sie ein Gespräch mit Studio Bosko. Wir nehmen neue Wohnprojekte in Berlin, Warschau, Wien und ganz Europa für Frühjahr 2026 an.",
+    "metaDescription": "Starte ein Gespräch mit Studio Bosko. Wir nehmen neue Wohnprojekte in Berlin, Warschau, Wien und ganz Europa für Frühjahr 2026 an.",
     "heroHeading": "Wir freuen uns auf Anfragen für Frühjahr 2026 und darüber hinaus.",
-    "heroBody": "Danke für Ihr Interesse. Teilen Sie uns unten die Details mit — wir melden uns innerhalb von 24–48 Stunden.",
-    "formName": "Ihr Name",
+    "heroBody": "Danke für dein Interesse. Teile uns unten die Details mit — wir melden uns innerhalb von 24–48 Stunden.",
+    "formName": "Dein Name",
     "formEmail": "E-Mail-Adresse",
     "formPhone": "Telefonnummer",
     "formBudget": "Projektbudget",
     "formTimeline": "Gewünschter Zeitplan",
     "formLocation": "Projektstandort",
-    "formDescription": "Erzählen Sie uns von Ihrem Projekt",
-    "formDescriptionPlaceholder": "Beschreiben Sie Ihren Raum, Ihre Wünsche und alles andere, was relevant erscheint.",
+    "formDescription": "Erzähl uns von deinem Projekt",
+    "formDescriptionPlaceholder": "Beschreib deinen Raum, deine Wünsche und alles andere, was relevant erscheint.",
     "formSubmit": "Anfrage senden",
     "formSuccess": "Vielen Dank — wir melden uns in Kürze.",
-    "formError": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.",
+    "formError": "Etwas ist schiefgelaufen. Bitte versuche es erneut oder schreib uns direkt.",
     "formFirstName": "Vorname",
     "formLastName": "Nachname",
     "formAddress": "Projektadresse",
-    "serviceLabel": "Welche Leistungen von Studio Bosko interessieren Sie?",
+    "serviceLabel": "Welche Leistungen von Studio Bosko interessieren dich?",
     "serviceOptions": ["Renovierung & Einrichtung", "Einrichtung & Kunstkuration"],
-    "budgetLabel": "Wie hoch ist Ihr geplantes Investitionsbudget?",
+    "budgetLabel": "Wie hoch ist dein geplantes Investitionsbudget?",
     "budgetOptions": ["Unter 50.000 €", "50.000–100.000 €", "100.000–150.000 €", "150.000–250.000 €", "Über 250.000 €", "Auf Anfrage"],
-    "messageLabel": "Erzählen Sie uns von Ihrem Projekt",
+    "messageLabel": "Erzähl uns von deinem Projekt",
     "submitButton": "Anfrage senden"
   },
   "project": {
@@ -220,7 +220,7 @@
   "notFound": {
     "eyebrow": "404",
     "heading": "Seite nicht gefunden",
-    "body": "Die gesuchte Seite existiert nicht oder wurde möglicherweise verschoben. Lassen Sie uns Sie woanders hinführen.",
+    "body": "Die gesuchte Seite existiert nicht oder wurde möglicherweise verschoben. Lass uns dich woanders hinführen.",
     "backHome": "Zur Startseite",
     "viewProjects": "Projekte ansehen"
   },

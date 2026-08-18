@@ -373,6 +373,8 @@ export interface OfferingPageContent {
   processIntro?: PortableTextContent
   processPhases?: ProcessPhase[]
   processClosingLine?: PortableTextContent
+  processCtaHeading?: string
+  processCtaButton?: string
   tagline?: string
   projectTypes?: OfferingProjectType[]
   testimonialQuote?: string
@@ -520,6 +522,8 @@ export const getOfferingPageContent = cache(async (locale = 'en'): Promise<Offer
         $locale == "pl" => coalesce(processClosingLine_pl, processClosingLine_en),
         processClosingLine_en
       ),
+      ${localField('processCtaHeading')},
+      ${localField('processCtaButton')},
       ${localField('tagline')},
       "projectTypes": projectTypes[]{
         "title": select(

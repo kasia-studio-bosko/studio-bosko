@@ -143,6 +143,8 @@ export default async function OfferingPage({
   const processIntro      = sanity?.processIntro
   const processPhases     = sanity?.processPhases ?? []
   const processClosingLine = sanity?.processClosingLine
+  const processCtaHeading = sanity?.processCtaHeading ?? 'Interested in working with us?'
+  const processCtaButton  = sanity?.processCtaButton ?? 'Book a complimentary consultation'
   const hasProcess = processIntro || processPhases.length > 0
 
   // Testimonial — Sanity first, translation fallback
@@ -485,12 +487,12 @@ export default async function OfferingPage({
               className="font-signifier font-normal mb-8 text-balance text-[#2d1d17]"
               style={{ fontSize: 'clamp(36px, 4vw, 54px)', lineHeight: 1.15 }}
             >
-              Interested in working with us?
+              {processCtaHeading}
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={100}>
             <Link href={{ pathname: '/inquire' }} className="btn-primary">
-              Book a complimentary consultation →
+              {processCtaButton} →
             </Link>
           </ScrollReveal>
         </div>
