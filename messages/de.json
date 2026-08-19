@@ -207,7 +207,9 @@
     "location": "Standort",
     "year": "Jahr",
     "scope": "Leistungsumfang",
-    "photographer": "Fotografie"
+    "photographer": "Fotografie",
+    "ctaHeading": "Interesse an einer Zusammenarbeit?",
+    "ctaButton": "Projekt starten"
   },
   "footer": {
     "tagline": "Innenarchitektur Studio",

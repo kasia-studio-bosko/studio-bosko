@@ -207,7 +207,9 @@
     "location": "Location",
     "year": "Year",
     "scope": "Scope",
-    "photographer": "Photography"
+    "photographer": "Photography",
+    "ctaHeading": "Interested in working together?",
+    "ctaButton": "Start a project"
   },
   "footer": {
     "tagline": "Interior Design Studio",

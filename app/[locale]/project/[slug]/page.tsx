@@ -678,12 +678,12 @@ export default async function ProjectPage({ params }: Props) {
               className="font-signifier font-normal text-balance mb-8"
               style={{ fontSize: 'clamp(36px, 4vw, 54px)', lineHeight: 1.15 }}
             >
-              Interested in working together?
+              {t('ctaHeading')}
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={100}>
             <Link href={{ pathname: '/inquire' }} className="btn-primary-dark">
-              Start a project →
+              {t('ctaButton')} →
             </Link>
           </ScrollReveal>
         </div>

@@ -207,7 +207,9 @@
     "location": "Lokalizacja",
     "year": "Rok",
     "scope": "Zakres",
-    "photographer": "Fotografia"
+    "photographer": "Fotografia",
+    "ctaHeading": "Chcesz z nami współpracować?",
+    "ctaButton": "Rozpocznij projekt"
   },
   "footer": {
     "tagline": "Studio Projektowania Wnętrz",
