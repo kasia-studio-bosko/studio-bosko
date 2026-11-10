@@ -1,6 +1,6 @@
 {
   "nav": {
-    "projects": "Projekty",
+    "projects": "Realizacje",
     "studio": "Studio",
     "offering": "Oferta",
     "press": "Prasa",
@@ -129,9 +129,9 @@
     "reachOut": "Zapytaj o projekt"
   },
   "projects": {
-    "metaTitle": "Projekty wnętrz — Berlin, Warszawa i Europa | Studio Bosko",
+    "metaTitle": "Wybrane realizacje | Studio Bosko",
     "metaDescription": "Portfolio realizacji Studio Bosko — renowacje penthousey, ekskluzywne nowe inwestycje i kompleksowe projekty aranżacji w Berlinie, Warszawie i Wiedniu.",
-    "heroHeading": "Projekty",
+    "heroHeading": "Wybrane realizacje",
     "heroSubheading": "Realizacje projektów wnętrz w Berlinie, Warszawie i w Europie",
     "filterAll": "Wszystkie",
     "filterResidential": "Mieszkalne",

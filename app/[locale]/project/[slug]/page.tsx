@@ -307,7 +307,7 @@ export default async function ProjectPage({ params }: Props) {
     },
   }
 
-  const projectsLabel: Record<string, string> = { en: 'Projects', de: 'Projekte', pl: 'Projekty' }
+  const projectsLabel: Record<string, string> = { en: 'Projects', de: 'Projekte', pl: 'Realizacje' }
   const slugPrefixBreadcrumb: Record<string, string> = { en: 'project', de: 'projekt', pl: 'projekt' }
   const projectsSlug: Record<string, string> = { en: 'projects', de: 'projekte', pl: 'projekty' }
   const breadcrumbSchema = {

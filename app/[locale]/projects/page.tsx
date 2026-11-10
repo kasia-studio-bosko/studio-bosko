@@ -27,6 +27,21 @@ export async function generateMetadata({
   return {
     title: { absolute: title },
     description,
+    // Page-level openGraph/twitter replace the layout's, so repeat its shared fields
+    openGraph: {
+      title,
+      description,
+      siteName: 'Studio Bosko',
+      locale: locale === 'de' ? 'de_DE' : locale === 'pl' ? 'pl_PL' : 'en_GB',
+      type: 'website',
+      images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      site: '@studiobosko',
+      title,
+      description,
+    },
     alternates: {
       canonical: `${siteUrl}${path}`,
       languages: {
@@ -97,7 +112,7 @@ export default async function ProjectsPage({
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="section-spacing" aria-label="Projects hero">
+      <section className="section-spacing" aria-label={t('heroHeading')}>
         <div className="page-container">
           <ScrollReveal>
             <p className="label-serif mb-4">Studio Bosko</p>
@@ -116,7 +131,7 @@ export default async function ProjectsPage({
       </section>
 
       {/* ── Projects grid — full-bleed 2-col ─────────────────────────────── */}
-      <section aria-label="Projects grid">
+      <section aria-label={t('heroHeading')}>
         <div className="grid grid-cols-1 sm:grid-cols-2">
           {projects.map((project, i) => (
             <ScrollReveal key={project.slug} delay={Math.min(i * 60, 300)}>
