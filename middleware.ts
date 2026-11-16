@@ -53,6 +53,6 @@ export const config = {
   // - /cms                     (embedded Sanity Studio — no locale needed)
   // - files with an extension  (static assets)
   matcher: [
-    '/((?!api|_next|_vercel|cms|.*\\..*).*)' ,
+    '/((?!api|_next|_vercel|cms|proposal|.*\\..*).*)' ,
   ],
 }

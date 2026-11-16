@@ -2,6 +2,8 @@ import createNextIntlPlugin from 'next-intl/plugin'
 
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts')
 
+const PROPOSALS_ORIGIN = process.env.PROPOSALS_ORIGIN || 'https://bosko-proposals.pages.dev'
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -52,6 +54,16 @@ const nextConfig = {
         permanent: true,
       },
     ]
+  },
+
+  // Client proposals live in a separate private project (Cloudflare Pages)
+  // and are shown under bosko.studio/proposal/…
+  async rewrites() {
+    return {
+      beforeFiles: [
+        { source: '/proposal/:path*', destination: `${PROPOSALS_ORIGIN}/proposal/:path*` },
+      ],
+    }
   },
 
   async headers() {
