@@ -77,6 +77,12 @@ const nextConfig = {
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
         ],
       },
+      // Proposals embed their own agreement PDF in a frame (same site only).
+      // Last match wins, so this overrides DENY above for /proposal only.
+      {
+        source: '/proposal/:path*',
+        headers: [{ key: 'X-Frame-Options', value: 'SAMEORIGIN' }],
+      },
     ]
   },
 }
