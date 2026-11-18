@@ -39,6 +39,8 @@ export async function generateMetadata({
   }
 }
 
+export const revalidate = 3600
+
 const FALLBACK_SIDE_IMAGE = 'https://framerusercontent.com/images/BLcEb8zhESV8vCYUNx12PnA9d5c.jpg'
 
 export default async function InquirePage({
