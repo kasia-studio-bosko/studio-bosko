@@ -8,12 +8,12 @@ export default function SchemaOrg({ locale }: { locale: string }) {
     '@context': 'https://schema.org',
     '@graph': [
       {
-        '@type': ['ProfessionalService', 'Organization'],
+        '@type': ['ProfessionalService', 'LocalBusiness', 'Organization'],
         '@id': `${siteUrl}/#organization`,
         name: 'Studio Bosko',
         alternateName: 'Bosko Studio',
         description:
-          'Berlin-based interior design studio by Kasia Kronberger, specialising in full-scope residential and hospitality projects across Europe. Known for bold colour, bespoke joinery, and deeply considered curation.',
+          'High-end interior designer in Berlin, led by Kasia Kronberger and named to the AD100 Polska 2025 list. Full-scope residential and hospitality interior design, complex renovations, bespoke joinery and art curation in Berlin, Warsaw, Vienna and across Europe.',
         url: siteUrl,
         logo: {
           '@type': 'ImageObject',
@@ -32,17 +32,28 @@ export default function SchemaOrg({ locale }: { locale: string }) {
           knowsLanguage: ['en', 'de', 'pl'],
           sameAs: [
             'https://www.instagram.com/studio.bosko/',
-            'https://www.architecturaldigest.com/story/ad100-2025',
+            'https://architecturaldigest.pl/ad100-2025-lista-najwazniejszych-architektow-i-projektantow-z-polski-i-ze-swiata/',
           ],
         },
         address: {
           '@type': 'PostalAddress',
+          streetAddress: 'Waldemarstraße 37',
+          postalCode: '10999',
           addressLocality: 'Berlin',
           addressRegion: 'Berlin',
           addressCountry: 'DE',
         },
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: 52.5036931,
+          longitude: 13.4196177,
+        },
+        telephone: '+49 1515 5515832',
+        hasMap: 'https://maps.google.com/?cid=16133170296611053217',
         areaServed: [
           { '@type': 'City',    name: 'Berlin'  },
+          { '@type': 'City',    name: 'Warsaw'  },
+          { '@type': 'City',    name: 'Vienna'  },
           { '@type': 'Country', name: 'Germany' },
           { '@type': 'Country', name: 'Poland'  },
           { '@type': 'Country', name: 'Austria' },
@@ -92,7 +103,8 @@ export default function SchemaOrg({ locale }: { locale: string }) {
         ],
         sameAs: [
           'https://www.instagram.com/studio.bosko/',
-          'https://www.architecturaldigest.com/story/ad100-2025',
+          'https://maps.google.com/?cid=16133170296611053217',
+          'https://architecturaldigest.pl/ad100-2025-lista-najwazniejszych-architektow-i-projektantow-z-polski-i-ze-swiata/',
         ],
         priceRange: '€€€€',
         email: 'hello@bosko.studio',
@@ -111,14 +123,6 @@ export default function SchemaOrg({ locale }: { locale: string }) {
         name: 'Studio Bosko',
         publisher: { '@id': `${siteUrl}/#organization` },
         inLanguage: ['en', 'de', 'pl'],
-        potentialAction: {
-          '@type': 'SearchAction',
-          target: {
-            '@type': 'EntryPoint',
-            urlTemplate: `${siteUrl}/projects`,
-          },
-          'query-input': 'required name=search_term_string',
-        },
       },
     ],
   }
